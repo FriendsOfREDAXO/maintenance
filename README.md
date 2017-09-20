@@ -34,9 +34,13 @@ if ($addon->getConfig('frontend_aktiv') == 'Variable') {
 [KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
 
 ## Credits
+Danke an: 
 [Christian Gehrke](https://github.com/chrison94)
 
 **Ursprung**
+
 Basiert auf out5-Plugin: Wartungsarbeiten 
+
 https://github.com/FriendsOfREDAXO/out5
+
 [concedra.de / Oliver Kreischer](http://concedra.de)
