@@ -24,7 +24,11 @@ if ($addon->getConfig('frontend_aktiv') == 'Variable') {
 }
 ```
 
-### Autor
+## Search_it und Maintenance-Mode 
+
+Bei aktivierter Sperre fügt man einfach die IP des Servers hinzu, schon kann search_it wieder crawlen. ;-) 
+
+## Autor
 
 **Friends Of REDAXO**
 
