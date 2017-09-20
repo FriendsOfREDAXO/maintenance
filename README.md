@@ -1,5 +1,7 @@
 # Maintenance-Mode 
 
+![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/maintenance/assets/Maintenance.png)
+
 Das AddOn ermöglicht die Sperrung des Frontends und des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. 
 
 ## Funktionen: 
