@@ -1,14 +1,22 @@
 # Alle hier gesetzten Werte können über $addon->getProperty($key) abgefragt werden
 
 package: maintenance
-version: '0.0.1'
+version: '1.0.0'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
-title: 'Maintenance mode'
+title: 'Maintenance'
 nav_icon: fa-share
 kurzbeschreibung: 'Umleitung der Frontendseite auf eine beliebige URL wenn der Besucher nicht im Backend angemeldet ist oder nicht der hintelegten IP entspricht'
 umgebung: Frontend
 
 page:
-    title: 'Maintenance mode'
+    title: 'Maintenance'
+    block: system
     icon: 'rex-icon fa-exclamation-triangle'
+    subpages:
+        frontend:
+            title: 'Frontend'
+        backend:
+            title: 'Backend'
+        help:
+            title: 'translate:Help'

@@ -1,2 +1,18 @@
-perm_general_maintenance[] = Maintenance mode
+//Config
 maintenance_title = Maintenance mode
+Help = Hilfe
+
+//Frontend
+URL = Deaktiviere Webseite
+IP = IP
+deakt-front = Frontend sperren?
+redirectUrl = Weiterleitung zu
+ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
+ipAkt = Ihre aktuelle IP:
+
+//Backend
+deakt-reda = Redakteure ausschließen?
+redirectUrl = Weiterleitung zu
+
+//Minimal-Version
+

@@ -1,0 +1,16 @@
+//Config
+maintenance_title = Maintenance mode
+Help = Help
+
+//Frontend
+URL = Disable website
+IP = IP
+deakt-front = Disable frontend?
+redirectUrl = Redirect-URL
+
+//Backend
+deakt-reda = Disable editors?
+redirectUrl = Redirect-URL
+
+//Minimal-Version
+

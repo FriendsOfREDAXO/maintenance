@@ -3,7 +3,6 @@
 Geplant:
 - Sperren des Frontends und / oder des Backends
 - Minimalversion der Website
-- Als Einstellungsseite unter /system
 
 ### Autor
 
