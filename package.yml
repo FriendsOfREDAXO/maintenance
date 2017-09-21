@@ -1,5 +1,3 @@
-# Alle hier gesetzten Werte können über $addon->getProperty($key) abgefragt werden
-
 package: maintenance
 version: '1.0.1'
 author: Friends Of REDAXO
