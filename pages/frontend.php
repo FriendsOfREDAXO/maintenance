@@ -40,11 +40,9 @@ $content .=  '
 $formElements = [];
 
 $n1['label'] = '<label for="rex-maintenance-ip">'.$this->i18n('IP').'</label>';
-<<<<<<< Updated upstream
 $n1['field'] = $this->i18n("ipErk").'<input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
-=======
 $n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
->>>>>>> Stashed changes
+
 $formElements[] = $n1;
 $n = [];
 $n['label'] = '<label for="rex-maintenance-redirectUrl">'.$this->i18n('redirectUrl').'</label>';
