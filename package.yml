@@ -15,8 +15,8 @@ page:
     icon: 'rex-icon fa-exclamation-triangle'
     subpages:
         frontend:
-            title: 'Frontend'
+            { title: 'Frontend', icon: rex-icon fa-laptop }
         backend:
-            title: 'Backend'
+            { title: 'Backend', icon: rex-icon fa-stack-overflow }
         help:
-            title: 'translate:Help'
+            { title: 'translate:Help', icon: rex-icon fa-info-circle }

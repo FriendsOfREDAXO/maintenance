@@ -14,12 +14,20 @@ Das AddOn ermöglicht die Sperrung des Frontends und des Backends bei Wartungsar
 - Redakteure können ausgesperrt werden
 - Umleitung zu einer festgelegten URL
 
+<<<<<<< Updated upstream
 Die Konfigurationswert "Variable" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. 
+=======
+Die Konfigurationswert "Selfmade" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. 
+>>>>>>> Stashed changes
 
 Beispiel-Code: 
 ``` php
 $addon = rex_addon::get('maintenance');
+<<<<<<< Updated upstream
 if ($addon->getConfig('frontend_aktiv') == 'Variable') {
+=======
+if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
+>>>>>>> Stashed changes
 // z.B. anderes Template laden, Umleiten zu einer reduzierten Version usw. 
 }
 ```

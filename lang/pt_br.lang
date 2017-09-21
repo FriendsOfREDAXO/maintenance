@@ -5,12 +5,14 @@ Help = Help
 //Frontend
 URL = Disable website
 IP = IP
-deakt-front = Disable frontend?
+deakt-front = Mode
 redirectUrl = Redirect-URL
+ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
+ipAkt = Current IP:
+Frontend_Sperren = inactive
+Eigene_Loesung = own solution
+Frontend_entsperren = unlock Frontend
 
 //Backend
 deakt-reda = Disable editors?
 redirectUrl = Redirect-URL
-
-//Minimal-Version
-

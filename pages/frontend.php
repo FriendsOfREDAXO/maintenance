@@ -40,7 +40,11 @@ $content .=  '
 $formElements = [];
 
 $n1['label'] = '<label for="rex-maintenance-ip">'.$this->i18n('IP').'</label>';
+<<<<<<< Updated upstream
 $n1['field'] = $this->i18n("ipErk").'<input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
+=======
+$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
+>>>>>>> Stashed changes
 $formElements[] = $n1;
 $n = [];
 $n['label'] = '<label for="rex-maintenance-redirectUrl">'.$this->i18n('redirectUrl').'</label>';
@@ -54,9 +58,9 @@ $select = new rex_select();
 $select->setId('deakt-front');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[frontend_aktiv]');
-$select->addOption('Aktivieren', 'Aktivieren');
-$select->addOption('Variable', 'Variable');
-$select->addOption('Deaktivieren', 'Deaktivieren');
+$select->addOption($this->i18n('Frontend_entsperren'), 'Deaktivieren');
+$select->addOption($this->i18n('Frontend_Sperren'), 'Aktivieren');
+$select->addOption($this->i18n('Eigene_Loesung'), 'Selfmade');
 
 $select->setSelected($this->getConfig('frontend_aktiv'));
 $n['field'] = $select->get();

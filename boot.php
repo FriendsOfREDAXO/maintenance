@@ -24,23 +24,23 @@ if (!rex::isBackend()) {
 			rex_response::sendRedirect($url);
   		}
   	} 
-  	if ($addon->getConfig('frontend_aktiv') == 'Variable') {
+  	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
   		$session = rex_backend_login::hasSession();
-		$variable ='';
+		$selfmade ='';
   		if ($this->getConfig('ip')!='' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
 			$ipcheck="failed";
-			$variable = "aktiv"; 
+			$selfmade = "aktiv"; 
   		}
   		if (!$session or $ipcheck =='failed') {
-			$variable = "aktiv";
+			$selfmade = "aktiv";
   		}
   		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$variable = "inaktiv"; 
+			$selfmade = "inaktiv"; 
   		}
   		if ($session) {
-			$variable = "inaktiv";
+			$selfmade = "inaktiv";
   		}
-  		if ($variable=='aktiv') {
+  		if ($selfmade=='aktiv') {
 			$check = $this->getConfig('frontend_aktiv');
     		$this->setConfig('frontend_aktiv', $check);
   		}

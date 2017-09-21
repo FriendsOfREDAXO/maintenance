@@ -5,14 +5,14 @@ Help = Hilfe
 //Frontend
 URL = Deaktiviere Webseite
 IP = IP
-deakt-front = Frontend sperren?
+deakt-front = Modus
 redirectUrl = Weiterleitung zu
 ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
 ipAkt = Ihre aktuelle IP:
+Frontend_Sperren = Frontend sperren
+Eigene_Loesung = Eigene Lösung
+Frontend_entsperren = Inaktiv
 
 //Backend
 deakt-reda = Redakteure ausschließen?
 redirectUrl = Weiterleitung zu
-
-//Minimal-Version
-
