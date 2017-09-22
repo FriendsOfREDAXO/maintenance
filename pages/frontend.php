@@ -3,11 +3,13 @@
 $addon = rex_addon::get('maintenance');
 $maintenance_functions = new maintenance_functions();
 $content = '';
-$i = 0;
 
 if (rex_post('config-submit', 'boolean')) {
     $addon->setConfig(rex_post('config', [
         ['url', 'string'],
+    ]));
+    $addon->setConfig(rex_post('config', [
+    	['blockSession', 'string'],
     ]));
 	$addon->setConfig(rex_post('config', [
         ['ip', 'string'],
@@ -31,6 +33,9 @@ if (rex_post('config-submit', 'boolean')) {
 		$content .=	rex_view::warning('Falscher Link');
 		$addon->setConfig('redirect_frontend', '');
 	}
+$newURL = rex_url::currentBackendPage();
+// Umleitung auf die aktuelle Seite auslösen
+rex_response::sendRedirect($newURL);
 }			
 $content .=  '
 <div class="rex-form">
@@ -49,6 +54,18 @@ $n['label'] = '<label for="rex-maintenance-redirectUrl">'.$this->i18n('redirectU
 $n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_frontend]" placeholder="https://example.com" value="' . $addon->getConfig('redirect_frontend') . '"/>';
 $formElements[] = $n;
 
+$n = [];
+$n['label'] = '<label for="blocken">' . $this->i18n('blockSession') . '</label>';
+$select = new rex_select();
+$select->setId('blockSession');
+$select->setAttribute('class', 'form-control selectpicker');
+$select->setName('config[blockSession]');
+$select->addOption($this->i18n('session_Inaktiv'), 'Inaktiv');
+$select->addOption($this->i18n('session_Redakteure'), 'Redakteure');
+
+$select->setSelected($this->getConfig('blockSession'));
+$n['field'] = $select->get() .'</br><i>Sollen Redakteure trotz Backend-Session aus dem Frontend ausgesperrt werden?</i>';
+$formElements[] = $n;
 
 $n = [];
 $n['label'] = '<label for="frontend">' . $this->i18n('deakt-front') . '</label>';

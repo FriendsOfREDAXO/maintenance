@@ -22,7 +22,9 @@ if (rex_post('config-submit', 'boolean')) {
 		$content .=	rex_view::warning('Falscher Link');
 		$addon->setConfig('redirect_backend', '');
 	}
-
+$newURL = rex_url::currentBackendPage();
+// Umleitung auf die aktuelle Seite auslösen
+rex_response::sendRedirect($newURL);
 }			
  
 $content .=  '

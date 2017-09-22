@@ -12,6 +12,10 @@ ipAkt = Ihre aktuelle IP:
 Frontend_Sperren = Frontend sperren
 Eigene_Loesung = Eigene Lösung
 Frontend_entsperren = Inaktiv
+blockSession = Eingeloggte User ausperren
+session_Inaktiv = Inaktiv
+session_Redakteure = Redakteure zusätzlich ausperren
+
 
 //Backend
 deakt-reda = Redakteure ausschließen?

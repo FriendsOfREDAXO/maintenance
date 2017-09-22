@@ -9,9 +9,13 @@ deakt-front = Mode
 redirectUrl = Redirect-URL
 ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
 ipAkt = Current IP:
-Frontend_Sperren = inactive
+Frontend_Sperren = Active
 Eigene_Loesung = own solution
 Frontend_entsperren = unlock Frontend
+blockSession = Locking out logged-in users
+session_Inaktiv = inactive
+session_Redakteure = Additional locking of editors
+
 
 //Backend
 deakt-reda = Disable editors?

@@ -9,6 +9,7 @@ umgebung: Frontend
 
 page:
     title: 'Maintenance'
+    perm: maintenance[]
     block: system
     icon: 'rex-icon fa-exclamation-triangle'
     subpages:

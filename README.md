@@ -8,7 +8,7 @@ Das AddOn ermöglicht die Sperrung des Frontends und des Backends bei Wartungsar
 *Frontend-Sperre*
 - Umleitung des Frontends zu einer festgelegten URL
 - Freigabe des Frontends für hinterlegte IP-Adressen
-- Zugang zum Frontend, wenn in REDAXO eingeloggt
+- Zugang zum Frontend, wenn in REDAXO eingeloggt (auswählbar ob erlauben oder nicht)
 
 *Backend*
 - Redakteure können ausgesperrt werden
@@ -23,6 +23,13 @@ if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
 // z.B. anderes Template laden, Umleiten zu einer reduzierten Version usw. 
 }
 ```
+
+*Farblegende (auch durch Hover über Maintenance-Symbol ersichtlich)* 
+- Rot: Der Modus "Frontend-Sperre" ist aktiv!
+- Grün: Der Modus "Eigene Lösung" ist aktiv! 
+- Gelb: Der Modus "Backend-Sperre" ist aktiv!
+
+
 
 ## Search_it und Maintenance-Mode 
 
