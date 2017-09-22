@@ -2,7 +2,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/maintenance/assets/Maintenance.png)
 
-Das AddOn ermöglicht die Sperrung des Frontends und des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. 
+Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. 
 
 ## Funktionen: 
 *Frontend-Sperre*
@@ -24,15 +24,18 @@ if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
 }
 ```
 
-*Farblegende (auch durch Hover über Maintenance-Symbol ersichtlich)* 
+## Anzeige des aktuellen Status im REDAXO-Hauptmenü
+Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf dem Symbol erhält man den passenden Text (title-attribut). 
+
+*Farblegende* 
+- Standard: Alle Funktionen sind deaktiviert. 
 - Rot: Der Modus "Frontend-Sperre" ist aktiv!
-- Grün: Der Modus "Eigene Lösung" ist aktiv! 
 - Gelb: Der Modus "Backend-Sperre" ist aktiv!
-
-
+- Grün: Der Modus "Eigene Lösung" ist aktiv! 
 
 ## Search_it und Maintenance-Mode 
 
+Ist die Frontendsperre aktiviert, kann Search_it den Index nicht erstellen. 
 Bei aktivierter Sperre fügt man einfach die IP des Servers in den Frontendeinstellungen hinzu, schon kann search_it wieder crawlen. ;-) 
 
 ## Autor
