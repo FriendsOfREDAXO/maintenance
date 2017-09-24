@@ -96,7 +96,6 @@ if(rex::isBackend()) {
 rex_view::addJsFile($this->getAssetsUrl('dist/bootstrap-tokenfield.js'));
 rex_view::addJsFile($this->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
-rex_view::addCssFile($this->getAssetsUrl('dist/css/tokenfield-typeahead.css'));
 rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
 
