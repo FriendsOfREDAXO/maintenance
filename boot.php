@@ -1,24 +1,25 @@
 <?php
-/**
- * This file is part of the maintenance package.
- *
- * @author (c) Friends Of REDAXO
- * @author <friendsof@redaxo.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 $addon = rex_addon::get('maintenance');
 if (!rex::isBackend()) {
 	$ips = "";
 	$ips = explode (", ", $this->getConfig('ip'));
 	if ($addon->getConfig('frontend_aktiv') == 'Aktivieren') {
 		$session = rex_backend_login::hasSession();
-		$redirect ='';
+		$redirect ='inaktiv';
 		if (rex_backend_login::createUser()) {
 		    $admin = rex::getUser()->isAdmin();
 		}
+		
+		if (!$session) {
+  			$redirect = "aktiv";
+  		}
+		if ($this->getConfig('ip')!='' && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+			$redirect = "aktiv"; 
+  		}
+  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+			$redirect = "inaktiv"; 
+  		} 
+  	
 		if($addon->getConfig('blockSession') == 'Inaktiv') {
 			$redirect = 'inaktiv';
 		}
@@ -28,19 +29,13 @@ if (!rex::isBackend()) {
 		if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
 			$redirect = 'inaktiv';
 		}
-  		if (!$session) {
-  			$redirect = "aktiv";
-  		}
-		if ($this->getConfig('ip')!='' && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = "aktiv"; 
-  		}
-  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = "inaktiv"; 
-  		} 
-  		if ($redirect=='aktiv') {
+		
+		if ($redirect=='aktiv') {
 			$url = $this->getConfig('redirect_frontend');
 			rex_response::sendRedirect($url);
 	  	}
+		
+  	
 	}
   	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
   		$session = rex_backend_login::hasSession();
@@ -108,5 +103,3 @@ rex_view::addJsFile($this->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
-
-
