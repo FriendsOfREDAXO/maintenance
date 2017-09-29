@@ -9,33 +9,28 @@ if (!rex::isBackend()) {
 		if (rex_backend_login::createUser()) {
 		    $admin = rex::getUser()->isAdmin();
 		}
-		
-		if (!$session) {
-  			$redirect = "aktiv";
-  		}
-		if ($this->getConfig('ip')!='' && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = "aktiv"; 
-  		}
-  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = "inaktiv"; 
-  		} 
-  	
 		if($addon->getConfig('blockSession') == 'Inaktiv') {
 			$redirect = 'inaktiv';
 		}
+		if($addon->getConfig('blockSession') == 'Inaktiv' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+			$redirect = 'inaktiv';
+		}	
 		if ($addon->getConfig('blockSession') == "Redakteure" && $admin == false && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
 			$redirect = 'aktiv';
 		}
 		if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
 			$redirect = 'inaktiv';
 		}
-		
-		if ($redirect=='aktiv') {
+  		if (!$session) {
+  			$redirect = "aktiv";
+  		}
+  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+			$redirect = "inaktiv"; 
+  		} 
+  		if ($redirect=='aktiv') {
 			$url = $this->getConfig('redirect_frontend');
 			rex_response::sendRedirect($url);
 	  	}
-		
-  	
 	}
   	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
   		$session = rex_backend_login::hasSession();
@@ -103,3 +98,5 @@ rex_view::addJsFile($this->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
+
