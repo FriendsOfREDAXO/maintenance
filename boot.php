@@ -10,57 +10,73 @@
  */
 $addon = rex_addon::get('maintenance');
 if (!rex::isBackend()) {
-	$ips = "";
-	$ips = explode (", ", $this->getConfig('ip'));
-	if ($addon->getConfig('frontend_aktiv') == 'Aktivieren') {
-		$session = rex_backend_login::hasSession();
-		$redirect ='inaktiv';
-		if (rex_backend_login::createUser()) {
-		    $admin = rex::getUser()->isAdmin();
+	// Festlegen des Sicherheitscodes
+	$code = $code2 = '';
+	$code = $addon->getConfig('secret');
+	// GET-Parameter abfragen
+	$code2 = rex_request('secret', 'string', 0);
+	// speichert den Code in der Session
+	if ($code2) {
+	  $_SESSION['secret'] = $code2;
+	}
+	else {
+		$_SESSION['secret'] = 'failed';
+	}
+	// Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
+	if ($_SESSION['secret'] !== $code) { 
+		$ips = "";
+		$admin = "";
+		$ips = explode (", ", $this->getConfig('ip'));
+		if ($addon->getConfig('frontend_aktiv') == 'Aktivieren') {
+			$session = rex_backend_login::hasSession();
+			$redirect ='inaktiv';
+			if (rex_backend_login::createUser()) {
+			    $admin = rex::getUser()->isAdmin();
+			}
+			if($addon->getConfig('blockSession') == 'Inaktiv') {
+				$redirect = 'inaktiv';
+			}
+			if($addon->getConfig('blockSession') == 'Inaktiv' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+				$redirect = 'inaktiv';
+			}	
+			if ($addon->getConfig('blockSession') == "Redakteure" && $admin == false && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+				$redirect = 'aktiv';
+			}
+			if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
+				$redirect = 'inaktiv';
+			}
+	  		if (!$session) {
+	  			$redirect = "aktiv";
+	  		}
+	  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+				$redirect = "inaktiv"; 
+	  		} 
+	  		if ($redirect=='aktiv') {
+				$url = $this->getConfig('redirect_frontend');
+				rex_response::sendRedirect($url);
+		  	}
 		}
-		if($addon->getConfig('blockSession') == 'Inaktiv') {
-			$redirect = 'inaktiv';
-		}
-		if($addon->getConfig('blockSession') == 'Inaktiv' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = 'inaktiv';
-		}	
-		if ($addon->getConfig('blockSession') == "Redakteure" && $admin == false && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = 'aktiv';
-		}
-		if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
-			$redirect = 'inaktiv';
-		}
-  		if (!$session) {
-  			$redirect = "aktiv";
-  		}
-  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$redirect = "inaktiv"; 
-  		} 
-  		if ($redirect=='aktiv') {
-			$url = $this->getConfig('redirect_frontend');
-			rex_response::sendRedirect($url);
+	  	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
+	  		$session = rex_backend_login::hasSession();
+			$selfmade ='';
+	  		if ($this->getConfig('ip')!='' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+				$selfmade = "aktiv"; 
+	  		}
+	  		if (!$session) {
+				$selfmade = "aktiv";
+	  		}
+	  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+				$selfmade = "inaktiv"; 
+	  		}
+	  		if ($session) {
+				$selfmade = "inaktiv";
+	  		}
+	  		if ($selfmade=='aktiv') {
+				$check = $this->getConfig('frontend_aktiv');
+	    		$this->setConfig('frontend_aktiv', $check);
+	  		}
 	  	}
 	}
-  	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
-  		$session = rex_backend_login::hasSession();
-		$selfmade ='';
-  		if ($this->getConfig('ip')!='' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$selfmade = "aktiv"; 
-  		}
-  		if (!$session) {
-			$selfmade = "aktiv";
-  		}
-  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
-			$selfmade = "inaktiv"; 
-  		}
-  		if ($session) {
-			$selfmade = "inaktiv";
-  		}
-  		if ($selfmade=='aktiv') {
-			$check = $this->getConfig('frontend_aktiv');
-    		$this->setConfig('frontend_aktiv', $check);
-  		}
-  	}
 }
 
 if(rex::isBackend()) {

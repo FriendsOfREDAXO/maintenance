@@ -15,6 +15,9 @@ Frontend_entsperren = Inaktiv
 blockSession = Eingeloggte User ausperren
 session_Inaktiv = Inaktiv
 session_Redakteure = Redakteure zusätzlich ausperren
+secret = Geheime-URL
+secret-secret = Tragen Sie hier ein beliebiges Wort ein, welches an den Link angehängt werden soll, um die Seite aufzurufen, trotz Sperre
+secret-example = Beispiel:
 
 
 //Backend

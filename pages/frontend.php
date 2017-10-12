@@ -18,6 +18,9 @@ if (rex_post('config-submit', 'boolean')) {
         ['url', 'string'],
     ]));
     $addon->setConfig(rex_post('config', [
+        ['secret', 'string'],
+    ]));
+    $addon->setConfig(rex_post('config', [
     	['blockSession', 'string'],
     ]));
 	$addon->setConfig(rex_post('config', [
@@ -53,9 +56,16 @@ $content .=  '
 
 $formElements = [];
 
+$n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">'.$this->i18n('secret').'</label>';
+$n2['field'] = $this->i18n("secret-secret").'<input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . $addon->getConfig('secret') . '"/>';
+$n2['field'] = $this->i18n("secret-secret").'</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . $addon->getConfig('secret') . '"/><i>'.$this->i18n("secret-example").' meine-website.de/?secret=EingetragenesWort</i>';
+
+$formElements[] = $n2;
+
+
 $n1['label'] = '<label for="rex-maintenance-ip">'.$this->i18n('IP').'</label>';
-$n1['field'] = $this->i18n("ipErk").'<input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
-$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
+$n1['field'] = $this->i18n("ipErk").'<input class="form-control" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
+$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
 
 $formElements[] = $n1;
 $n = [];

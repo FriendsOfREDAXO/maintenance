@@ -15,4 +15,5 @@ if (!$this->hasConfig()) {
     $this->setConfig('redirect_backend', '');
     $this->setConfig('backend_aktiv', '0');
     $this->setConfig('blockSession', 'Inaktiv');
+    $this->setConfig('secret', '');
 }

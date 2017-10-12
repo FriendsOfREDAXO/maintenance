@@ -8,6 +8,7 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 *Frontend-Sperre*
 - Umleitung des Frontends zu einer festgelegten URL
 - Freigabe des Frontends für hinterlegte IP-Adressen
+- Freigabe des Frontends durch eine geheime URL
 - Zugang zum Frontend, wenn in REDAXO eingeloggt (auswählbar ob erlauben oder nicht)
 
 *Backend*

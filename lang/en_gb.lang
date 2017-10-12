@@ -15,6 +15,9 @@ Frontend_entsperren = unlock Frontend
 blockSession = Locking out logged-in users
 session_Inaktiv = inactive
 session_Redakteure = Additional locking of editors
+secret = Secret-URL
+secret-secret = Enter any word that you want to append to the link to access the page, even if it is locked.
+secret-example = Example:
 
 
 //Backend
