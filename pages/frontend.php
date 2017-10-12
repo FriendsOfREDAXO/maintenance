@@ -32,40 +32,27 @@ if (rex_post('config-submit', 'boolean')) {
     $addon->setConfig(rex_post('config', [
         ['redirect_frontend', 'string'],
     ]));
-    $ips = explode (", ", $this->getConfig('ip'));
-	foreach($ips as $ip) {
-		if($maintenance_functions->CheckIp($ip) === false) {
-			echo rex_view::warning('Falsche IP: '. $ip);
-		}
-	}
-    if($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === true) {
-		$content .= rex_view::info('Änderung gespeichert');
-	}
-	if($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === false) {
-		$content .=	rex_view::warning('Falscher Link');
-		$addon->setConfig('redirect_frontend', '');
-	}
-$newURL = rex_url::currentBackendPage();
-// Umleitung auf die aktuelle Seite auslösen
-rex_response::sendRedirect($newURL);
-}			
+	$ips = explode (", ", $this->getConfig('ip'));
+      
+    $content .= rex_view::info('Änderung gespeichert');
+
+}	
+
 $content .=  '
 <div class="rex-form">
     <form action="' . rex_url::currentBackendPage() . '" method="post">
         <fieldset>';
 
 $formElements = [];
-
+$n2 = [];
 $n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">'.$this->i18n('secret').'</label>';
-$n2['field'] = $this->i18n("secret-secret").'<input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . $addon->getConfig('secret') . '"/>';
 $n2['field'] = $this->i18n("secret-secret").'</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . $addon->getConfig('secret') . '"/><i>'.$this->i18n("secret-example").' meine-website.de/?secret=EingetragenesWort</i>';
 
 $formElements[] = $n2;
 
-
+$n1 = [];
 $n1['label'] = '<label for="rex-maintenance-ip">'.$this->i18n('IP').'</label>';
-$n1['field'] = $this->i18n("ipErk").'<input class="form-control" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
-$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
+$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
 
 $formElements[] = $n1;
 $n = [];
