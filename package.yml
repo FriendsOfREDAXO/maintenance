@@ -1,5 +1,5 @@
 package: maintenance
-version: '1.2.0'
+version: '1.2.1-b'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
 title: 'Maintenance'
