@@ -38,6 +38,25 @@ if (rex_post('config-submit', 'boolean')) {
 
 }	
 
+
+$ips = explode (", ", $this->getConfig('ip'));
+	foreach($ips as $ip) {
+		if($maintenance_functions->CheckIp($ip) === false) {
+			echo rex_view::warning('Falsche IP: '. $ip);
+		}
+	}
+
+  if($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === true) {
+		$content .= rex_view::info('Änderung gespeichert');
+	}
+	if($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === false) {
+		$content .=	rex_view::warning('Falscher Link');
+		$addon->setConfig('redirect_frontend', '');
+	}
+
+
+
+
 $content .=  '
 <div class="rex-form">
     <form action="' . rex_url::currentBackendPage() . '" method="post">
