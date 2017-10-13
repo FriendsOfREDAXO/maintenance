@@ -47,7 +47,7 @@ $ips = explode (", ", $this->getConfig('ip'));
 	}
 
   if($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === true) {
-		$content .= rex_view::info('Änderung gespeichert');
+		
 	}
 	if($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === false) {
 		$content .=	rex_view::warning('Falscher Link');
