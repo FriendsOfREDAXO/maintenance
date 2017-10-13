@@ -9,21 +9,20 @@
  * file that was distributed with this source code.
  */
 $addon = rex_addon::get('maintenance');
+$code = $code2 = '';
 if (!rex::isBackend()) {
-	// Festlegen des Sicherheitscodes
-	$code = $code2 = '';
-	$code = $addon->getConfig('secret');
-	// GET-Parameter abfragen
-	$code2 = rex_request('secret', 'string', 0);
-	// speichert den Code in der Session
-	if ($code2) {
-	  $_SESSION['secret'] = $code2;
-	}
-	else {
-		$_SESSION['secret'] = 'failed';
-	}
-	// Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
-	if ($_SESSION['secret'] !== $code) { 
+session_start(); 
+// Festlegen des Sicherheitscodes
+$code = $this->getConfig('secret');
+// GET-Parameter abfragen
+$code2 = rex_request('secret', 'string', 0);
+// speichert den Code in der Session
+if ($code2) {
+  $_SESSION['secret'] = $code2;
+}
+// Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
+if ($_SESSION['secret'] !== $code and !rex_backend_login::hasSession()) {
+
 		$ips = "";
 		$admin = "";
 		$ips = explode (", ", $this->getConfig('ip'));
