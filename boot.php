@@ -14,18 +14,22 @@ if (!rex::isBackend()) {
 session_start(); 
 
 // Festlegen des Sicherheitscodes
-$code = $this->getConfig('secret');
+
 // GET-Parameter abfragen
 $code2 = rex_request('secret', 'string', 0);
 
 // speichert den Code in der Session
 if ($code2) {
-  $_SESSION['secret'] = $code2;
+	$code = $this->getConfig('secret');
+	if($code == $code2) {
+		$_SESSION['secret'] = $code2;
+	}
 }
 
-// Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
-if ($_SESSION['secret'] !== $code) {
 
+// Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
+if (!isset($_SESSION['secret'])) {
+	
 		$ips = "";
 		$admin = "";
 		$ips = explode (", ", $this->getConfig('ip'));
