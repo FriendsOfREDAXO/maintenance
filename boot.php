@@ -23,7 +23,7 @@ if ($code2) {
   $_SESSION['secret'] = $code2;
 }
 else {
-	$_SESSION['secret'] = "false";
+	$_SESSION['secret'] = false;
 }
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
 if ($_SESSION['secret'] !== $code) {
