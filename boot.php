@@ -10,7 +10,7 @@
  */
 $addon = rex_addon::get('maintenance');
 if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren') {
-// Festlegen des Sicherheitscodes
+session_start();
 // GET-Parameter abfragen
 $code2 = rex_request('secret', 'string', 0);
 
@@ -18,7 +18,6 @@ $code2 = rex_request('secret', 'string', 0);
 if ($code2) {
 	$code = $this->getConfig('secret');
 	if($code == $code2) {
-		session_start();
 		$_SESSION['secret'] = $code2;
 	}
 }
