@@ -8,17 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-$secret='';
 $addon = rex_addon::get('maintenance');
-if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren') and $this->setConfig('secret)!='') {
+$secret='';
+if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $addon->getConfig('secret')!='') {
 session_start();
 
 if (isset($_SESSION['secret']))
 {
 $secret = $_SESSION['secret'];
 }
-
-else {
 
 // GET-Parameter abfragen
 $code2 = rex_request('secret', 'string', 0);
@@ -30,12 +28,11 @@ if ($code2) {
 		$_SESSION['secret'] = $code2;
 		$secret = $_SESSION['secret'];
 	}
-   }
 }
 
+
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
-if ($secret='') {
-	
+if ($secret=='') {
 		$ips = "";
 		$admin = "";
 		$ips = explode (", ", $this->getConfig('ip'));
