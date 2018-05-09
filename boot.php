@@ -9,8 +9,7 @@
  * file that was distributed with this source code.
  */
 $addon = rex_addon::get('maintenance');
-
-if (!rex::isBackend()) {
+if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren') {
 session_start(); 
 
 // Festlegen des Sicherheitscodes
