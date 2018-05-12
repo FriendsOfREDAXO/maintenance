@@ -29,10 +29,12 @@ if ($code2) {
 		$secret = $_SESSION['secret'];
 	}
 }
+}
+
 
 
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
-if ($secret=='') {
+if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $secret=='') {
 		$ips = "";
 		$admin = "";
 		$ips = explode (", ", $this->getConfig('ip'));
@@ -86,7 +88,7 @@ if ($secret=='') {
 	  		}
 	  	}
 	}
-}
+
 
 if(rex::isBackend()) {
 	$user = rex::getUser();
