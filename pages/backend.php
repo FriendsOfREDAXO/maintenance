@@ -43,7 +43,7 @@ $formElements = [];
 
 $n = [];
 $n['label'] = '<label for="redirectUrl">'.$this->i18n('redirectUrl').'</label>';
-$n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_backend]" placeholder="https://example.com" value="' . $addon->getConfig('redirect_backend') . '"/>';
+$n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_backend]" placeholder="https://example.tld" value="' . rex_escape($addon->getConfig('redirect_backend')) . '"/>';
 $formElements[] = $n;
 
 $n2 = [];
@@ -81,9 +81,4 @@ $fragment->setVar('class', 'edit');
 $fragment->setVar('title', 'Maintenance-Settings');
 $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');
-
-
-
-
-
 ?>
