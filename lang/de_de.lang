@@ -1,25 +1,25 @@
 //Config
 maintenance_title = Maintenance mode
-Help = Hilfe
+maintenance_Help = Hilfe
 
 //Frontend
-URL = Deaktiviere Webseite
-IP = IP
-deakt-front = Modus
-redirectUrl = Weiterleitung zu
-ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
-ipAkt = Ihre aktuelle IP:
-Frontend_Sperren = Frontend sperren
-Eigene_Loesung = Eigene Lösung
-Frontend_entsperren = Inaktiv
-blockSession = Eingeloggte User ausperren
-session_Inaktiv = Inaktiv
-session_Redakteure = Redakteure zusätzlich ausperren
-secret = Geheime-URL
-secret-secret = Tragen Sie hier ein beliebiges Wort ein, welches an den Link angehängt werden soll, um die Seite aufzurufen, trotz Sperre
-secret-example = Beispiel:
+maintenance_URL = Deaktiviere Webseite
+maintenance_IP = IP
+maintenance_deakt-front = Modus
+maintenance_redirectUrl = Weiterleitung zu
+maintenance_ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
+maintenance_ipAkt = Ihre aktuelle IP:
+maintenance_Frontend_Sperren = Frontend sperren
+maintenance_Eigene_Loesung = Eigene Lösung
+maintenance_Frontend_entsperren = Inaktiv
+maintenance_blockSession = Eingeloggte User ausperren
+maintenance_session_Inaktiv = Inaktiv
+maintenance_session_Redakteure = Redakteure zusätzlich ausperren
+maintenance_secret = Geheime-URL
+maintenance_secret-secret = Tragen Sie hier ein beliebiges Wort ein, welches an den Link angehängt werden soll, um die Seite aufzurufen, trotz Sperre
+maintenance_secret-example = Beispiel:
 
 
 //Backend
-deakt-reda = Redakteure ausschließen?
-redirectUrl = Weiterleitung zu
+maintenance_deakt-reda = Redakteure ausschließen?
+maintenance_redirectUrl = Weiterleitung zu
