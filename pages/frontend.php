@@ -65,18 +65,18 @@ $content .=  '
 $formElements = [];
 $n2 = [];
 $n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">'.$this->i18n('secret').'</label>';
-$n2['field'] = $this->i18n("secret-secret").'</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . $addon->getConfig('secret') . '"/><i>'.$this->i18n("secret-example").' meine-website.de/?secret=EingetragenesWort</i>';
+$n2['field'] = $this->i18n("secret-secret").'</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . rex_escape($addon->getConfig('secret')) . '"/><i>'.$this->i18n("secret-example").' meine-website.de/?secret=EingetragenesWort</i>';
 
 $formElements[] = $n2;
 
 $n1 = [];
 $n1['label'] = '<label for="rex-maintenance-ip">'.$this->i18n('IP').'</label>';
-$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . $addon->getConfig('ip') . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
+$n1['field'] = $this->i18n("ipErk").'</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>'.$this->i18n("ipAkt").$_SERVER['REMOTE_ADDR'].'</i>';
 
 $formElements[] = $n1;
 $n = [];
 $n['label'] = '<label for="rex-maintenance-redirectUrl">'.$this->i18n('redirectUrl').'</label>';
-$n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_frontend]" placeholder="https://example.com" value="' . $addon->getConfig('redirect_frontend') . '"/>';
+$n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_frontend]" placeholder="https://example.com" value="' . rex_escape($addon->getConfig('redirect_frontend')) . '"/>';
 $formElements[] = $n;
 
 $n = [];
