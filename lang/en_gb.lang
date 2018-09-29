@@ -1,25 +1,24 @@
 //Config
 maintenance_title = Maintenance mode
-Help = Help
+maintenance_Help = Help
 
 //Frontend
-URL = Disable website
+maintenance_URL = Disable website
 IP = IP
-deakt-front = Mode
-redirectUrl = Redirect-URL
-ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
-ipAkt = Current IP:
-Frontend_Sperren = Active
-Eigene_Loesung = own solution
-Frontend_entsperren = unlock Frontend
-blockSession = Locking out logged-in users
-session_Inaktiv = inactive
-session_Redakteure = Additional locking of editors
-secret = Secret-URL
-secret-secret = Enter any word that you want to append to the link to access the page, even if it is locked.
-secret-example = Example:
-
+maintenance_deakt-front = Mode
+maintenance_redirectUrl = Redirect-URL
+maintenance_ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
+maintenance_ipAkt = Current IP:
+maintenance_Frontend_Sperren = Active
+maintenance_Eigene_Loesung = own solution
+maintenance_Frontend_entsperren = unlock Frontend
+maintenance_blockSession = Locking out logged-in users
+maintenance_session_Inaktiv = inactive
+maintenance_session_Redakteure = Additional locking of editors
+maintenance_secret = Secret-URL
+maintenance_secret-secret = Enter any word that you want to append to the link to access the page, even if it is locked.
+maintenance_secret-example = Example:
 
 //Backend
-deakt-reda = Disable editors?
-redirectUrl = Redirect-URL
+maintenance_deakt-reda = Disable editors?
+maintenance_redirectUrl = Redirect-URL
