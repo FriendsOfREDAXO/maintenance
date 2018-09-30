@@ -64,7 +64,6 @@ if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  		} 
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_frontend');
-				rex_response::setStatus(HTTP_SERVICE_UNAVAILABLE);
 				rex_response::sendRedirect($url);
 		  	}
 		}
@@ -105,7 +104,6 @@ if(rex::isBackend()) {
 	  		}
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_backend');
-				rex_response::setStatus(HTTP_SERVICE_UNAVAILABLE);
 				rex_response::sendRedirect($url);
 	  		}
 		}
