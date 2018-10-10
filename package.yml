@@ -1,5 +1,5 @@
 package: maintenance
-version: '1.3.0'
+version: '2.0.0-dev'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
 title: 'Maintenance'
@@ -20,4 +20,4 @@ page:
         help:
             { title: 'translate:Help', icon: rex-icon fa-info-circle }
 requires:
-    redaxo: ^5.6.0
+    redaxo: ^5.7.0
