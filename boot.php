@@ -64,6 +64,7 @@ if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  		} 
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_frontend');
+                                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
 				rex_response::sendRedirect($url);
 		  	}
 		}
@@ -104,6 +105,7 @@ if(rex::isBackend()) {
 	  		}
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_backend');
+                                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
 				rex_response::sendRedirect($url);
 	  		}
 		}
@@ -134,3 +136,4 @@ rex_view::addJsFile($this->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
