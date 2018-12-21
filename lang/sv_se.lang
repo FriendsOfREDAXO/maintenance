@@ -1,0 +1,25 @@
+//Config
+maintenance_title = Maintenance mode
+maintenance_Help = Hjälp
+
+//Frontend
+maintenance_URL = Deaktiverad webbsajt
+maintenance_IP = IP
+maintenance_deakt-front = Spärra frontend?
+maintenance_redirectUrl = Vidarebefordring till
+maintenance_ipErk = Ange här IP-adresserna som fortfarande ska ha tillgång till frontenden. När du har skrivit en IP-adress trycker du på Enter för att komma till nästa
+maintenance_ipAkt = Er aktuella IP:
+maintenance_Frontend_Sperren = Spärra frontend
+maintenance_Eigene_Loesung = Egen lösning
+maintenance_Frontend_entsperren = Inaktiv
+maintenance_blockSession = Låsa ut inloggade användare
+maintenance_session_Inaktiv = Inaktiv
+maintenance_session_Redakteure = Lås ut redaktörer
+maintenance_secret = Secret-URL
+maintenance_secret-secret = Skriv här något ord som ska bifogas länken för att öppna sidan, trots låset
+maintenance_secret-example = Exempel:
+
+
+//Backend
+maintenance_deakt-reda = Inaktivera redaktörer?
+maintenance_redirectUrl = Vidarebefordring till
