@@ -1,0 +1,25 @@
+//Config
+maintenance_title = Modo de mantenimiento
+maintenance_Help = Ayuda
+
+//Frontend
+maintenance_URL = Deshabilitar sitio
+maintenance_IP = IP
+maintenance_deakt-front = ¿Bloquear frontend?
+maintenance_redirectUrl = Redirigir URL
+maintenance_ipErk = Ingrese aquí las direcciones IP que deben seguir teniendo acceso a la interfaz. Después  ingresar una dirección IP, presione Entrar para ingresar la siguiente
+maintenance_ipAkt = IP actual:
+maintenance_Frontend_Sperren = Activo
+maintenance_Eigene_Loesung = Solución propia
+maintenance_Frontend_entsperren = Inactivo
+maintenance_blockSession = Bloquear usuarios conectados
+maintenance_session_Inaktiv = Inactivo
+maintenance_session_Redakteure = Bloqueo adicional de editores
+maintenance_secret = URL secreta
+maintenance_secret-secret = Introducir cualquier palabra que se van a añadir al enlace para abrir la pági pesar de la prohibición
+maintenance_secret-example = Ejemplo:
+
+
+//Backend
+maintenance_deakt-reda = ¿Inhabilitar editores?
+maintenance_redirectUrl = Redirigir URL
