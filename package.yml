@@ -20,4 +20,4 @@ page:
         help:
             { title: 'translate:Help', icon: rex-icon fa-info-circle }
 requires:
-    redaxo: ^5.7.0
+    redaxo: ^5.7.0-beta1
