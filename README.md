@@ -46,13 +46,12 @@ Bei aktivierter Sperre fügt man einfach die IP des Servers in den Frontendeinst
 * http://www.redaxo.org
 * https://github.com/FriendsOfREDAXO
 
-**Projekt-Lead**
-
-[KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
 
 ## Credits
-Danke an: 
-[Christian Gehrke](https://github.com/chrison94)
+
+Lead bis: 2.0:[Thomas Skerbis](https://github.com/skerbis)
+
+Danke an: [Christian Gehrke](https://github.com/chrison94)
 
 **Ursprung**
 
