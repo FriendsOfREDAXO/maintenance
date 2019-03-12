@@ -1,11 +1,11 @@
 package: maintenance
-version: '2.0.0-beta1'
+version: '2.0.0'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
 title: 'Maintenance'
 nav_icon: fa-share
 kurzbeschreibung: 'Umleitung der Frontendseite auf eine beliebige URL wenn der Besucher nicht im Backend angemeldet ist oder nicht der hintelegten IP entspricht'
-umgebung: Fronend
+umgebung: Frontend
 
 page:
     title: 'Maintenance'
