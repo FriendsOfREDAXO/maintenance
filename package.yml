@@ -1,11 +1,11 @@
 package: maintenance
-version: '2.0.0'
+version: '2.0.0-beta1'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
 title: 'Maintenance'
 nav_icon: fa-share
 kurzbeschreibung: 'Umleitung der Frontendseite auf eine beliebige URL wenn der Besucher nicht im Backend angemeldet ist oder nicht der hintelegten IP entspricht'
-umgebung: Frontend
+umgebung: Fronend
 
 page:
     title: 'Maintenance'
@@ -18,6 +18,6 @@ page:
         backend:
             { title: 'Backend', icon: rex-icon fa-stack-overflow }
         help:
-            { title: 'translate:Help', icon: rex-icon fa-info-circle }
+            { title: 'translate:Help', subPath: README.md }
 requires:
-    redaxo: ^5.7.0-beta1
+    redaxo: ^5.7.0-beta3
