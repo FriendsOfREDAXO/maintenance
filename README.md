@@ -4,20 +4,21 @@
 
 Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. 
 
-## Funktionen: 
-*Frontend-Sperre*
+## Funktionen:
+
+### Frontend-Sperre*
 - Umleitung des Frontends zu einer festgelegten URL
 - Freigabe des Frontends für hinterlegte IP-Adressen
 - Freigabe des Frontends durch eine geheime URL
 - Zugang zum Frontend, wenn in REDAXO eingeloggt (auswählbar ob erlauben oder nicht)
 
-*Backend*
+### Backend
 - Redakteure können ausgesperrt werden
 - Umleitung zu einer festgelegten URL
 
 Der Konfigurationswert "Selfmade" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. 
 
-Beispiel-Code: 
+### Beispiel-Code: 
 ``` php
 $addon = rex_addon::get('maintenance');
 if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
@@ -28,7 +29,7 @@ if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
 Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf dem Symbol erhält man den passenden Text (title-attribut). 
 
-*Farblegende* 
+### Farblegende
 - Standard: Alle Funktionen sind deaktiviert. 
 - Rot: Der Modus "Frontend-Sperre" ist aktiv!
 - Gelb: Der Modus "Backend-Sperre" ist aktiv!
@@ -46,12 +47,13 @@ Bei aktivierter Sperre fügt man einfach die IP des Servers in den Frontendeinst
 * http://www.redaxo.org
 * https://github.com/FriendsOfREDAXO
 
+**Projekt-Lead**
+
+[KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
 
 ## Credits
-
-Lead: [Thomas Skerbis](https://github.com/skerbis)
-
-Danke an: [Christian Gehrke](https://github.com/chrison94)
+Danke an: 
+[Christian Gehrke](https://github.com/chrison94)
 
 **Ursprung**
 
@@ -60,3 +62,4 @@ Basiert auf out5-Plugin: Wartungsarbeiten
 https://github.com/FriendsOfREDAXO/out5
 
 [concedra.de / Oliver Kreischer](http://concedra.de)
+
