@@ -10,7 +10,7 @@
  */
 $addon = rex_addon::get('maintenance');
 $secret='';
-if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $addon->getConfig('secret')!='') {
+if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $addon->getConfig('secret')!='') {
 session_start();
 
 if (isset($_SESSION['secret']))
@@ -34,7 +34,7 @@ if ($code2) {
 
 
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
-if (!rex::isBackend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $secret=='') {
+if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $secret=='') {
 		$ips = "";
 		$admin = "";
 		$ips = explode (", ", $this->getConfig('ip'));
