@@ -24,7 +24,7 @@ $code2 = rex_request('secret', 'string', 0);
 // speichert den Code in der Session
 if ($code2) {
 	$code = $this->getConfig('secret');
-	if($code == $code2) {
+	if($code === $code2) {
 		$_SESSION['secret'] = $code2;
 		$secret = $_SESSION['secret'];
 	}
