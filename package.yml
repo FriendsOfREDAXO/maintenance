@@ -20,4 +20,4 @@ page:
         help:
             { title: 'translate:Help', subPath: README.md }
 requires:
-    redaxo: ^5.7.0-beta3
+    redaxo: ^5.7.0
