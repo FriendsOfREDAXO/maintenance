@@ -8,6 +8,7 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 
 ### Frontend-Sperre*
 - Umleitung des Frontends zu einer festgelegten URL
+- Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
 - Freigabe des Frontends für hinterlegte IP-Adressen
 - Freigabe des Frontends durch eine geheime URL
 - Zugang zum Frontend, wenn in REDAXO eingeloggt (auswählbar ob erlauben oder nicht)
@@ -15,6 +16,7 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 ### Backend
 - Redakteure können ausgesperrt werden
 - Umleitung zu einer festgelegten URL
+- Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
 
 Der Konfigurationswert "Selfmade" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. 
 
