@@ -61,9 +61,9 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_frontend');
 				$mpage = new rex_fragment();
-		                $mpage = mpage->parse('quick_articles.php');
+		        $mpage = $mpage->parse('maintenance_page.php');
 				rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
-                                if ($url!='') {
+                if ($url!='') {
 					rex_response::sendRedirect($url);
 				}
 				else {
@@ -109,9 +109,9 @@ if(rex::isBackend()) {
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_frontend');
 				$mpage = new rex_fragment();
-		                $mpage = mpage->parse('quick_articles.php');
-                                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
-                                if ($url!='') {
+		                $mpage = $mpage->parse('maintenance_page.php');
+                        rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
+                        if ($url!='') {
 					rex_response::sendRedirect($url);
 				}
 				else {
@@ -146,3 +146,4 @@ rex_view::addJsFile($this->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
