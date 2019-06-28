@@ -11,8 +11,8 @@
 $addon = rex_addon::get('maintenance');
 $secret='';
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $addon->getConfig('secret')!='') {
-
-if (isset(rex_session('secret')))
+rex_login::startSession(); 
+if (rex_session('secret')!='')
 {
 $secret = rex_session('secret');
 }
@@ -21,9 +21,9 @@ $secret = rex_session('secret');
 $checksecret = rex_request('secret', 'string', 0);
 
 // speichert den Code in der Session
-if ($code2) {
+if ($checksecret) {
 	$code = $this->getConfig('secret');
-	if($code === $code2) {
+	if($code === $checksecret) {
 		rex_set_session('secret',$checksecret);
 		$secret = rex_session('secret');
 	}
@@ -132,4 +132,3 @@ rex_view::addJsFile($this->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
-
