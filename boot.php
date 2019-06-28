@@ -47,10 +47,10 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 			if($addon->getConfig('blockSession') == 'Inaktiv') {
 				$redirect = 'inaktiv';
 			}
-			if($addon->getConfig('blockSession') == 'Inaktiv' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+			if($addon->getConfig('blockSession') == 'Inaktiv' && in_array(rex_server('REMOTE_ADDR'),$ips)) {
 				$redirect = 'inaktiv';
 			}	
-			if ($addon->getConfig('blockSession') == "Redakteure" && $admin == false && !in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+			if ($addon->getConfig('blockSession') == "Redakteure" && $admin == false && !in_array(rex_server('REMOTE_ADDR'),$ips)) {
 				$redirect = 'aktiv';
 			}
 			if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
@@ -59,7 +59,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  		if (!$session) {
 	  			$redirect = "aktiv";
 	  		}
-	  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+	  		if (in_array(rex_server('REMOTE_ADDR'),$ips)) {
 				$redirect = "inaktiv"; 
 	  		} 
 	  		if ($redirect=='aktiv') {
@@ -71,13 +71,13 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
 	  		$session = rex_backend_login::hasSession();
 			$selfmade ='';
-	  		if ($this->getConfig('ip')!='' && in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+	  		if ($this->getConfig('ip')!='' && in_array(rex_server('REMOTE_ADDR'),$ips)) {
 				$selfmade = "aktiv"; 
 	  		}
 	  		if (!$session) {
 				$selfmade = "aktiv";
 	  		}
-	  		if (in_array($_SERVER['REMOTE_ADDR'],$ips)) {
+	  		if (in_array(rex_server('REMOTE_ADDR'),$ips)) {
 				$selfmade = "inaktiv"; 
 	  		}
 	  		if ($session) {
