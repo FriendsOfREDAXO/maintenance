@@ -6,12 +6,12 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 
 ## Funktionen:
 
-### Frontend-Sperre*
+### Frontend-Sperre
 - Umleitung des Frontends zu einer festgelegten URL
-- Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
 - Freigabe des Frontends für hinterlegte IP-Adressen
 - Freigabe des Frontends durch eine geheime URL
 - Zugang zum Frontend, wenn in REDAXO eingeloggt (auswählbar ob erlauben oder nicht)
+- Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
 
 ### Backend
 - Redakteure können ausgesperrt werden
@@ -19,6 +19,12 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 - Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
 
 Der Konfigurationswert "Nur Config-Wert setzen" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. Es wird nur ein Config-Wert erstellt. Alle weiteren Angaben entfallen.  
+
+### Eigene Maintenance-Seite
+
+Will man keine Umleitung einrichten und stattdessen eine gestaltete Seite anzeigen kann man das Fragment überschreiben und so eine individuelle Info hinterlegen.  
+
+Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php` anlegen. Dort kann die gestaltete Seite hinterlegt werden. Das Fragment kann so auch leicht erweitert werden um z.B. den Text per AddOn **Sprog** zu verändern. 
 
 ### Beispiel-Code: 
 ``` php
