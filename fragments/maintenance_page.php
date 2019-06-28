@@ -32,10 +32,11 @@
         }
         .maintenance-error-title {
             margin: 0;
-            font-size: 50px;
+            font-size: 40px;
             font-weight: 700;
             color: #5b98d7;
             text-shadow: 0 4px 2px rgba(255, 255, 255, 1);
+            line-height: 1.2em;
         }
         .maintenance-error-message {
             padding: 0 20px;
@@ -45,10 +46,11 @@
 <body>
     <div class="maintenance-container">
         <div class="maintenance-error">
-            <p class="maintenance-error-title">Mainetance / Wartung</p>
+            <p class="maintenance-error-title">Mainetance<br>Wartung</p>
             <p class="maintenance-error-message">This website is temporarily unavailable</p>
             <p class="maintenance-error-message">Diese Website ist temporär nicht erreichbar</p>
         </div>
     </div>
 </body>
 </html>'
+
