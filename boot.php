@@ -11,28 +11,24 @@
 $addon = rex_addon::get('maintenance');
 $secret='';
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $addon->getConfig('secret')!='') {
-session_start();
 
-if (isset($_SESSION['secret']))
+if (isset(rex_session('secret')))
 {
-$secret = $_SESSION['secret'];
+$secret = rex_session('secret');
 }
 
 // GET-Parameter abfragen
-$code2 = rex_request('secret', 'string', 0);
+$checksecret = rex_request('secret', 'string', 0);
 
 // speichert den Code in der Session
 if ($code2) {
 	$code = $this->getConfig('secret');
 	if($code === $code2) {
-		$_SESSION['secret'] = $code2;
-		$secret = $_SESSION['secret'];
+		rex_set_session('secret',$checksecret);
+		$secret = rex_session('secret');
 	}
 }
 }
-
-
-
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt. 
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' and $secret=='') {
 		$ips = "";
