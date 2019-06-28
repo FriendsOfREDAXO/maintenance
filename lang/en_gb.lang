@@ -6,7 +6,7 @@ maintenance_Help = Help
 maintenance_URL = Disable website
 maintenance_IP = IP
 maintenance_deakt-front = Mode
-maintenance_redirectUrl = Redirect-URL
+maintenance_redirectUrl = Redirect-URL (optional)
 maintenance_ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
 maintenance_ipAkt = Current IP:
 maintenance_Frontend_Sperren = Active
@@ -21,4 +21,3 @@ maintenance_secret-example = Example:
 
 //Backend
 maintenance_deakt-reda = Disable editors?
-maintenance_redirectUrl = Redirect-URL
