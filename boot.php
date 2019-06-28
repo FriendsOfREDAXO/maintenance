@@ -60,8 +60,15 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  		} 
 	  		if ($redirect=='aktiv') {
 				$url = $this->getConfig('redirect_frontend');
-                                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
-				rex_response::sendRedirect($url);
+				$mpage = new rex_fragment();
+		                $mpage = mpage->parse('quick_articles.php');
+				rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
+                                if ($url!='') {
+					rex_response::sendRedirect($url);
+				}
+				else {
+					echo $mpage; die();
+				}
 		  	}
 		}
 	  	if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
@@ -81,7 +88,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv')!='Deaktivieren' an
 	  		}
 	  		if ($selfmade=='aktiv') {
 				$check = $this->getConfig('frontend_aktiv');
-	    		$this->setConfig('frontend_aktiv', $check);
+	    		        $this->setConfig('frontend_aktiv', $check);
 	  		}
 	  	}
 	}
@@ -100,9 +107,16 @@ if(rex::isBackend()) {
 				$redirect = "inaktiv";
 	  		}
 	  		if ($redirect=='aktiv') {
-				$url = $this->getConfig('redirect_backend');
+				$url = $this->getConfig('redirect_frontend');
+				$mpage = new rex_fragment();
+		                $mpage = mpage->parse('quick_articles.php');
                                 rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
-				rex_response::sendRedirect($url);
+                                if ($url!='') {
+					rex_response::sendRedirect($url);
+				}
+				else {
+					echo $mpage; die();
+				}
 	  		}
 		}
 	}
