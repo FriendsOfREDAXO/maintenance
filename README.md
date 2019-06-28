@@ -18,7 +18,7 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 - Umleitung zu einer festgelegten URL
 - Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
 
-Der Konfigurationswert "Selfmade" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. 
+Der Konfigurationswert "Nur Config-Wert setzen" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. Es wird nur ein Config-Wert erstellt. Alle weiteren Angaben entfallen.  
 
 ### Beispiel-Code: 
 ``` php
