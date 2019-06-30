@@ -20,13 +20,13 @@ Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartu
 
 Der Konfigurationswert "Nur Config-Wert setzen" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. Es wird nur ein Config-Wert erstellt. Alle weiteren Angaben entfallen.  
 
-### Eigene Maintenance-Seite
+### Eigene Maintenance-Seiten
 
 Will man keine Umleitung einrichten und stattdessen eine gestaltete Seite anzeigen kann man das Fragment überschreiben und so eine individuelle Info hinterlegen.  
 
-Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php` anlegen. Dort kann die gestaltete Seite hinterlegt werden. Das Fragment kann so auch leicht erweitert werden um z.B. den Text per AddOn **Sprog** zu verändern. 
+Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text oder Logo anlegen. 
 
-### Beispiel-Code: 
+### Auslesen des Config-Wertes: 
 ``` php
 $addon = rex_addon::get('maintenance');
 if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
