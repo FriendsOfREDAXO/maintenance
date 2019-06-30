@@ -1,4 +1,4 @@
-# Maintenance-Mode / Wartungsmodus
+# Maintenance mode / Wartungsmodus
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/maintenance/assets/Maintenance.png)
 
