@@ -107,9 +107,9 @@ if(rex::isBackend()) {
 				$redirect = "inaktiv";
 	  		}
 	  		if ($redirect=='aktiv') {
-				$url = $this->getConfig('redirect_frontend');
+				$url = $this->getConfig('redirect_backend');
 				$mpage = new rex_fragment();
-		                $mpage = $mpage->parse('maintenance_page.php');
+		                $mpage = $mpage->parse('maintenance_page_be.php');
                         rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                         if ($url!='') {
 					rex_response::sendRedirect($url);
