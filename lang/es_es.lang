@@ -10,6 +10,7 @@ maintenance_redirectUrl = Redirigir URL (facultativo)
 maintenance_ipErk = Ingrese aquí las direcciones IP que deben seguir teniendo acceso a la interfaz. Después  ingresar una dirección IP, presione Entrar para ingresar la siguiente
 maintenance_ipAkt = IP actual:
 maintenance_Frontend_Sperren = Activo
+maintenance_Eigene_Loesung = Establecer solo el valor de configuración
 maintenance_Frontend_entsperren = Inactivo
 maintenance_blockSession = Bloquear usuarios conectados
 maintenance_session_Inaktiv = Inactivo
