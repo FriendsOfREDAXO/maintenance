@@ -9,6 +9,7 @@ maintenance_deakt-front = Spärra frontend?
 maintenance_redirectUrl = Vidarebefordring till
 maintenance_ipErk = Ange här IP-adresserna som fortfarande ska ha tillgång till frontenden. När du har skrivit en IP-adress trycker du på Enter för att komma till nästa
 maintenance_ipAkt = Er aktuella IP:
+maintenance_ipServer = Aktuella Server IP:
 maintenance_Frontend_Sperren = Spärra frontend
 maintenance_Eigene_Loesung = Sätta bara config-värde
 maintenance_Frontend_entsperren = Inaktiv
