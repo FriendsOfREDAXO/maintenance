@@ -83,7 +83,7 @@ $formElements[] = $n2;
 
 $n1 = [];
 $n1['label'] = '<label for="rex-maintenance-ip">' . $this->i18n('IP') . '</label>';
-$n1['field'] = $this->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $this->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i>';
+$n1['field'] = $this->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $this->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i><br/><i>' . $this->i18n('ipServer') . $_SERVER['SERVER_ADDR'] . '</i>';
 
 $formElements[] = $n1;
 $n = [];
