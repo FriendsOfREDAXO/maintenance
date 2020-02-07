@@ -21,3 +21,6 @@ page:
             { title: 'translate:Help', subPath: README.md }
 requires:
     redaxo: ^5.7.0
+    php:
+        version: '^7.1' 
+        
