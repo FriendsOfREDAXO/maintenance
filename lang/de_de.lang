@@ -9,6 +9,7 @@ maintenance_deakt-front = Modus
 maintenance_redirectUrl = Weiterleitung zu (optional) 
 maintenance_ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
 maintenance_ipAkt = Ihre aktuelle IP:
+maintenance_ipServer = Aktuelle IP des Servers:
 maintenance_Frontend_Sperren = Frontend sperren
 maintenance_Eigene_Loesung = Nur Config-Wert setzen
 maintenance_Frontend_entsperren = Inaktiv
