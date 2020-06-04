@@ -7,7 +7,7 @@ class rex_maintenance_command_off extends rex_console_command
 {
     protected function configure()
     {
-        $this->setAliases(['frontend:off'])
+        $this->setAliases(['frontend:on'])
             ->setDescription('Sets frontend maintenance mode off');
     }
 
