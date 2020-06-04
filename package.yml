@@ -1,5 +1,5 @@
 package: maintenance
-version: '2.2.1-dev'
+version: '2.3.0'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
 title: 'Maintenance'
@@ -24,3 +24,8 @@ requires:
     php:
         version: '^7.1' 
         
+console_commands:
+       maintenance:on: rex_maintenance_command_on
+       frontend:on: rex_maintenance_command_on
+       maintenance:off: rex_maintenance_command_off
+       frontend:off: rex_maintenance_command_off
