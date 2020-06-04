@@ -48,6 +48,15 @@ Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf 
 Ist die Frontendsperre aktiviert, kann Search_it den Index nicht erstellen. 
 Bei aktivierter Sperre fügt man einfach die IP des Servers in den Frontendeinstellungen hinzu, schon kann search_it wieder crawlen. ;-) 
 
+## Konsole
+
+Aktivieren der Frontendsperre 
+
+Mit `maintenance:on` oder `frontend:off`
+
+Deaktivieren mit `maintenance:off` oder `frontend:on`
+
+
 ## Autor
 
 **Friends Of REDAXO**
