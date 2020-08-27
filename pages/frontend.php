@@ -21,6 +21,7 @@ if (rex_post('config-submit', 'boolean'))
     $addon->setConfig(rex_post('config', [['ip', 'string'], ]));
     $addon->setConfig(rex_post('config', [['frontend_aktiv', 'string'], ]));
     $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'], ]));
+    $addon->setConfig(rex_post('config', [['type', 'string'], ]));
     $ips = explode(", ", $this->getConfig('ip'));
 
     $content .= rex_view::info('Änderung gespeichert');
@@ -77,9 +78,32 @@ $formElements = [];
 
 $n2 = [];
 $n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">' . $this->i18n('secret') . '</label>';
-$n2['field'] = $this->i18n("secret-secret") . '</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . rex_escape($addon->getConfig('secret')) . '"/><i>' . $this->i18n("secret-example") . ' meine-website.de/?secret=EingetragenesWort</i>';
+$n2['field'] = $this->i18n("secret-secret") . '</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . rex_escape($addon->getConfig('secret')) . '"/>';
 
 $formElements[] = $n2;
+
+$n = [];
+$n['label'] = '<label for="type">' . $this->i18n('type') . '</label>';
+$select = new rex_select();
+$select->setId('type');
+$select->setAttribute('class', 'form-control selectpicker');
+$select->setName('config[type]');
+$select->addOption($this->i18n('type_url') , 'URL');
+$select->addOption($this->i18n('type_pw') , 'PW');
+
+$select->setSelected($this->getConfig('type'));
+$n['field'] = $select->get() . '</br>';
+
+$secretLink = '<i>' . $this->i18n("secret-example") . ' ' . rex::getServer() . '?secret=EingetragenesWort</i>';
+if ($addon->getConfig('secret'))
+{
+    $secretLink = '<i><a href="' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '" target="_blank">' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '</a></i>';
+}
+
+$n['field'] .= '<div id="type-default"><i>' . $this->i18n('type_description') . '</i></div>';
+$n['field'] .= '<div id="type-url" style="display: none;"><i>' . $secretLink . '</i></div>';
+$n['field'] .= '<div id="type-pw" style="display: none;"><i>' . $this->i18n('type_description_pw') . '</i></div>';
+$formElements[] = $n;
 
 $n1 = [];
 $n1['label'] = '<label for="rex-maintenance-ip">' . $this->i18n('IP') . '</label>';
@@ -138,15 +162,40 @@ echo $fragment->parse('core/page/section.php');
 ?>
 <script>  
 $('#showform').toggle(
-        $('#deakt-front').find("option[value='Aktivieren']").is(":checked")
-    );
-    
+    $('#deakt-front').find("option[value='Aktivieren']").is(":checked")
+);
 
-      $('#deakt-front').change(function(){
-        if ($(this).val() == 'Aktivieren') {
-            $('#showform').slideDown();
-        } else {
-            $('#showform').slideUp();
-        }
-    });
-    </script>
+
+$('#deakt-front').change(function() {
+    if ($(this).val() == 'Aktivieren') {
+        $('#showform').slideDown();
+    } else {
+        $('#showform').slideUp();
+    }
+});
+
+if ($("#type option:selected").val() == 'PW') {
+    $('#type-default').hide();
+    $('#type-pw').show();
+    $('#type-url').hide();
+}
+
+if ($("#type option:selected").val() == 'URL') {
+    $('#type-default').hide();
+    $('#type-pw').hide();
+    $('#type-url').show();
+}
+
+$('#type').change(function() {
+    if ($(this).val() == 'URL') {
+        $('#type-default').hide();
+        $('#type-pw').hide();
+        $('#type-url').show();
+    }
+    if ($(this).val() == 'PW') {
+        $('#type-default').hide();
+        $('#type-pw').show();
+        $('#type-url').hide();
+    }
+});
+</script>
