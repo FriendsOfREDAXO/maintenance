@@ -122,21 +122,21 @@ if(rex::isBackend()) {
 	}
 	if($addon->getConfig('backend_aktiv') == '1') {
 		rex_extension::register('OUTPUT_FILTER',function(rex_extension_point $magic){
-			$header = '<i class="rex-icon fa-exclamation-triangle">';
+			$header = '<i class="maintenance rex-icon fa-exclamation-triangle">';
 			$replace = '<i title="Mode: Lock Backend" class="rex-icon fa-exclamation-triangle aktivieren_backend">';
 			$magic->setSubject(str_replace($header, $replace, $magic->getSubject()));
 		});
 	}
 	if($addon->getConfig('frontend_aktiv') == 'Aktivieren') {
 		rex_extension::register('OUTPUT_FILTER',function(rex_extension_point $ep){
-			$suchmuster = '<i class="rex-icon fa-exclamation-triangle">';
+			$suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
 			$ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle aktivieren_frontend">';
 			$ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject()));
 		});
 	}
 	if($addon->getConfig('frontend_aktiv') == 'Selfmade') {
 	    rex_extension::register('OUTPUT_FILTER',function(rex_extension_point $ep){
-			$suchmuster = '<i class="rex-icon fa-exclamation-triangle">';
+			$suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
 			$ersetzen = '<i title="Mode: Own Solution" class="rex-icon fa-exclamation-triangle selfmade_frontend">';
 			$ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject()));
 	    });
