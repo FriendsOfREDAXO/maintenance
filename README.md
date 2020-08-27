@@ -41,7 +41,7 @@ Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf 
 - Standard: Alle Funktionen sind deaktiviert. 
 - Rot: Der Modus "Frontend-Sperre" ist aktiv!
 - Gelb: Der Modus "Backend-Sperre" ist aktiv!
-- Grün: Der Modus "Eigene Lösung" ist aktiv! 
+- Orange: Der Modus "Eigene Lösung" ist aktiv! 
 
 ## Search_it und Maintenance-Mode 
 
