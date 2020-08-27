@@ -16,9 +16,16 @@ maintenance_Frontend_entsperren = Inaktiv
 maintenance_blockSession = Eingeloggte User ausperren
 maintenance_session_Inaktiv = Inaktiv
 maintenance_session_Redakteure = Redakteure zusätzlich ausperren
-maintenance_secret = Geheime-URL
-maintenance_secret-secret = Tragen Sie hier ein beliebiges Wort ein, welches an den Link angehängt werden soll, um die Seite aufzurufen, trotz Sperre
+maintenance_secret = Passwort
+maintenance_secret-secret = Tragen Sie hier ein beliebiges Wort ein, das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt wird.
 maintenance_secret-example = Beispiel:
+maintenance_type = Art des Seitenaufrufs
+maintenance_type_url = Aufruf per Geheim-URL mit Passwort-Parameter
+maintenance_type_pw = Aufruf per Passworteingabe durch den User
+maintenance_type_description = Aufruf per Geheim-URL: Die Seite kann mit einem Link geöffnet werden (Bsp.: https://www.domain.de/?secret=passwort)<br>Aufruf per Passwort: Der User muss vor Betreten der Seite einmalig das Passwort eingeben
+maintenance_type_description_pw = Der User muss vor Betreten der Seite einmalig das oben festgelegte Passwort eingeben.
+maintenance_pw-prompt = Passworteingabe
+maintenance_enter = Website betreten
 
 
 //Backend
