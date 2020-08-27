@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -66,13 +66,13 @@
 <body>
     <div class="maintenance-container">
         <div class="maintenance-error">
-            <p class="maintenance-error-title"><?= rex_addon::get('maintenance')->i18n('pw-prompt'); ?></p>
-            <form action="/" method="post">
-            <input name="secret" class="maintenance-pw-input" type="password" placeholder="<?= rex_addon::get('maintenance')->i18n('secret'); ?>"/><br>
-            <button type="submit" class="maintenance-pw-btn"><?= rex_addon::get('maintenance')->i18n('enter'); ?></button>
+            <p class="maintenance-error-title">Login</p>
+            <form action="<?= rex_url::base(); ?>" method="post">
+            <input name="secret" class="maintenance-pw-input" type="password" placeholder="**********"/><br>
+            <button type="submit" class="maintenance-pw-btn">Enter</button>
             </form>
         </div>
     </div>
 </body>
-</html>'
+</html>
 
