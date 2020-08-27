@@ -11,7 +11,7 @@ page:
     title: 'Maintenance'
     perm: maintenance[]
     block: system
-    icon: 'rex-icon fa-exclamation-triangle'
+    icon: 'maintenance rex-icon fa-exclamation-triangle'
     subpages:
         frontend:
             { title: 'Frontend', icon: rex-icon fa-laptop }
