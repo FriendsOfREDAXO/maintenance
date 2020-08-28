@@ -2,7 +2,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/maintenance/assets/Maintenance.png)
 
-Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. 
+Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. Die Sperrung kann wahlweise über einen speziellen Link oder Passworteingabe aufgehoben werden. 
 
 ## Funktionen:
 
@@ -24,7 +24,7 @@ Der Konfigurationswert "Nur Config-Wert setzen" steht zur Verfügung um ggf. sel
 
 Will man keine Umleitung einrichten und stattdessen eine gestaltete Seite anzeigen kann man das Fragment überschreiben und so eine individuelle Info hinterlegen.  
 
-Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text oder Logo anlegen. 
+Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`, `maintenance_page_pw_form.php` (Mit Passworteingabe)  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text, Logo oder komplett anderer Gestaltung anlegen. 
 
 ### Auslesen des Config-Wertes: 
 ``` php
@@ -50,6 +50,7 @@ Bei aktivierter Sperre fügt man einfach die IP des Servers in den Frontendeinst
 
 ## Konsole
 
+Es wird die im Backend ausgewählte Sperrseite angezeigt. 
 Aktivieren der Frontendsperre 
 
 Mit `maintenance:on` oder `frontend:off`
