@@ -27,16 +27,6 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
 		rex_set_session('secret', $checksecret);
         $secret = rex_session('secret');
 	}
-	// Wenn Type PW-Eingabe ist, und es noch keine Session gibt
-	if($addon->getConfig('type') == 'PW' && !$secret) {
-		$mpage = new rex_fragment();
-		//$mpage->setVar('clang', rex_clang::getCurrent()->getCode()); // toDo: Frontendsprache mit übergeben, um Übersetzung im Fragment anzuzeigen (Bisher: "Universelles" Wording)
-        $mpage = $mpage->parse('maintenance_page_pw_form.php');
-		echo $mpage;
-		unset($mpage);
-        die();
-		}
-		
 
     // speichert den Code in der Session
     if ($checksecret)
@@ -90,9 +80,16 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         if ($redirect == 'aktiv')
         {
             $url = $this->getConfig('redirect_frontend');
-            $mpage = new rex_fragment();
+			$mpage = new rex_fragment();
+			if($addon->getConfig('type') == 'PW') 
+		    {	
+		    $mpage = $mpage->parse('maintenance_page_pw_form.php');
+		    }
+			else
+			{
             $mpage = $mpage->parse('maintenance_page.php');
-            rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
+			}
+			rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
             if ($url != '')
             {
                 rex_response::sendRedirect($url);
@@ -199,4 +196,5 @@ if (rex::isBackend())
     rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
     rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
 
