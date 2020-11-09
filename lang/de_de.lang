@@ -30,3 +30,5 @@ maintenance_enter = Website betreten
 
 //Backend
 maintenance_deakt-reda = Redakteure ausschließen?
+
+perm_general_maintenance[] = Maintenance-Einstellungen verwalten
