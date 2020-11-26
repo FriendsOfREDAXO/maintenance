@@ -82,26 +82,6 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
             }
         }
     }
-    if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
-        $session = rex_backend_login::hasSession();
-        $selfmade = '';
-        if ($this->getConfig('ip') != '' && in_array(rex_server('REMOTE_ADDR'), $ips)) {
-            $selfmade = "aktiv";
-        }
-        if (!$session) {
-            $selfmade = "aktiv";
-        }
-        if (in_array(rex_server('REMOTE_ADDR'), $ips)) {
-            $selfmade = "inaktiv";
-        }
-        if ($session) {
-            $selfmade = "inaktiv";
-        }
-        if ($selfmade == 'aktiv') {
-            $check = $this->getConfig('frontend_aktiv');
-            $this->setConfig('frontend_aktiv', $check);
-        }
-    }
 }
 
 if (rex::isBackend()) {
@@ -141,13 +121,6 @@ if (rex::isBackend()) {
         rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
             $suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
             $ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle aktivieren_frontend">';
-            $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject()));
-        });
-    }
-    if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
-        rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
-            $suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
-            $ersetzen = '<i title="Mode: Own Solution" class="rex-icon fa-exclamation-triangle selfmade_frontend">';
             $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject()));
         });
     }
