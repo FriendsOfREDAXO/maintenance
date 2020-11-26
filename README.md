@@ -26,14 +26,6 @@ Will man keine Umleitung einrichten und stattdessen eine gestaltete Seite anzeig
 
 Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`, `maintenance_page_pw_form.php` (Mit Passworteingabe)  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text, Logo oder komplett anderer Gestaltung anlegen. 
 
-### Auslesen des Config-Wertes: 
-``` php
-$addon = rex_addon::get('maintenance');
-if ($addon->getConfig('frontend_aktiv') == 'Selfmade') {
-// z.B. anderes Template laden, Umleiten zu einer reduzierten Version usw. 
-}
-```
-
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
 Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf dem Symbol erhält man den passenden Text (title-attribut). 
 
