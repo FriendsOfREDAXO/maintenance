@@ -24,7 +24,7 @@ Der Konfigurationswert "Nur Config-Wert setzen" steht zur Verfügung um ggf. sel
 
 Will man keine Umleitung einrichten und stattdessen eine gestaltete Seite anzeigen kann man das Fragment überschreiben und so eine individuelle Info hinterlegen.  
 
-Hierzu einfach im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`, `maintenance_page_pw_form.php` (Mit Passworteingabe)  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text, Logo oder komplett anderer Gestaltung anlegen. 
+Hierzu im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`, `maintenance_page_pw_form.php` (Mit Passworteingabe)  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text, Logo oder komplett anderer Gestaltung anlegen. 
 
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
 Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf dem Symbol erhält man den passenden Text (title-attribut). 
@@ -33,7 +33,6 @@ Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf 
 - Standard: Alle Funktionen sind deaktiviert. 
 - Rot: Der Modus "Frontend-Sperre" ist aktiv!
 - Gelb: Der Modus "Backend-Sperre" ist aktiv!
-- Orange: Der Modus "Eigene Lösung" ist aktiv! 
 
 ## Search_it und Maintenance-Mode 
 
