@@ -62,7 +62,7 @@ $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[frontend_aktiv]');
 $select->addOption($this->i18n('Frontend_entsperren') , 'Deaktivieren');
 $select->addOption($this->i18n('Frontend_Sperren') , 'Aktivieren');
-$select->addOption($this->i18n('Eigene_Loesung') , 'Selfmade');
+
 
 $select->setSelected($this->getConfig('frontend_aktiv'));
 $n['field'] = $select->get();
