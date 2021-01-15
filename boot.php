@@ -73,10 +73,12 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
             } else {
                 $mpage = $mpage->parse('maintenance_page.php');
             }
-            rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
+            
             if ($url != '') {
+                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                 rex_response::sendRedirect($url);
             } else {
+                header('HTTP/1.1 ' . rex_response::HTTP_SERVICE_UNAVAILABLE);
                 echo $mpage;
                 die();
             }
@@ -100,10 +102,12 @@ if (rex::isBackend()) {
                 $url = $this->getConfig('redirect_backend');
                 $mpage = new rex_fragment();
                 $mpage = $mpage->parse('maintenance_page_be.php');
-                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
+               
                 if ($url != '') {
+                    rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                     rex_response::sendRedirect($url);
                 } else {
+                    header('HTTP/1.1 ' . rex_response::HTTP_SERVICE_UNAVAILABLED);
                     echo $mpage;
                     die();
                 }
