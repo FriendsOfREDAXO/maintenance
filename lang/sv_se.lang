@@ -19,7 +19,16 @@ maintenance_session_Redakteure = Lås ut redaktörer
 maintenance_secret = Secret-URL
 maintenance_secret-secret = Skriv här något ord som ska bifogas länken för att öppna sidan, trots låset
 maintenance_secret-example = Exempel:
+maintenance_type = Typ av sidvy
+maintenance_type_url = Åtkomst via hemlig URL med lösenordsparametrar
+maintenance_type_pw = Åtkomst genom att ange ett lösenord av användaren.
+maintenance_type_description = Åtkomst via hemlig URL: Sidan kan öppnas med en länk (t.ex.: https://www.domain.de/?secret=passwort) <br> Åtkomst via lösenord: Användaren måste ange lösenordet en gång innan man kan går in på sidan.
+maintenance_type_description_pw = Användaren måste ange lösenordet som anges ovan en gång innan han går in på webbplatsen.
+maintenance_pw-prompt = Lösenordsinmatning
+maintenance_enter = Gå in på webbplatsen
 
 
 //Backend
 maintenance_deakt-reda = Inaktivera redaktörer?
+
+perm_general_maintenance[] = Förvalta Maintenance inställningarna
