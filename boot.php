@@ -38,8 +38,9 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
 }
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt.
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' and $secret == '') {
-    $ips = "";
-    $admin = "";
+    $ips = [];
+    $domains = [];
+    $admin = false;
     $ips = explode(", ", $this->getConfig('ip'));
     $domains = explode(", ", $this->getConfig('domains'));
 
@@ -64,7 +65,10 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         if (!$session) {
             $redirect = "aktiv";
         }
-        if (in_array($_SERVER['SERVER_NAME'], $domains))
+
+        $current_domain = str_replace("www.", "", $_SERVER['SERVER_NAME']);
+
+        if (in_array($current_domain, $domains))
         {
              $redirect = 'inaktiv';
         }
@@ -140,5 +144,7 @@ if (rex::isBackend()) {
     rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
     rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
+
 
 
