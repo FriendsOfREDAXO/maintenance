@@ -19,6 +19,7 @@ if (rex_post('config-submit', 'boolean'))
     $addon->setConfig(rex_post('config', [['secret', 'string'], ]));
     $addon->setConfig(rex_post('config', [['blockSession', 'string'], ]));
     $addon->setConfig(rex_post('config', [['ip', 'string'], ]));
+    $addon->setConfig(rex_post('config', [['domains', 'string'], ]));
     $addon->setConfig(rex_post('config', [['frontend_aktiv', 'string'], ]));
     $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'], ]));
     $addon->setConfig(rex_post('config', [['type', 'string'], ]));
@@ -27,7 +28,7 @@ if (rex_post('config-submit', 'boolean'))
     $content .= rex_view::info('Änderung gespeichert');
 
 }
-
+$domains = explode(", ", $this->getConfig('domains'));
 $ips = explode(", ", $this->getConfig('ip'));
 foreach ($ips as $ip)
 {
@@ -108,8 +109,15 @@ $formElements[] = $n;
 $n1 = [];
 $n1['label'] = '<label for="rex-maintenance-ip">' . $this->i18n('IP') . '</label>';
 $n1['field'] = $this->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $this->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i><br/><i>' . $this->i18n('ipServer') . $_SERVER['SERVER_ADDR'] . '</i>';
-
 $formElements[] = $n1;
+
+
+$n1 = [];
+$n1['label'] = '<label for="rex-maintenance-domains">' . $this->i18n('domains') . '</label>';
+$n1['field'] = $this->i18n("domainsErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-domains" name="config[domains]" value="' . rex_escape($addon->getConfig('domains')) . '"/>';
+$formElements[] = $n1;
+
+
 $n = [];
 $n['label'] = '<label for="rex-maintenance-redirectUrl">' . $this->i18n('redirectUrl') . '</label>';
 $n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_frontend]" placeholder="https://example.com" value="' . rex_escape($addon->getConfig('redirect_frontend')) . '"/>';
@@ -199,3 +207,4 @@ $('#type').change(function() {
     }
 });
 </script>
+
