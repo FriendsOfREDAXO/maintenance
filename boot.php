@@ -64,7 +64,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         if (!$session) {
             $redirect = "aktiv";
         }
-        if (in_array(rex_server('REMOTE_SERVER_NAME'), $domains))
+        if (in_array($_SERVER['SERVER_NAME'], $domains))
         {
              $redirect = 'inaktiv';
         }
@@ -140,4 +140,5 @@ if (rex::isBackend()) {
     rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
     rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
 
