@@ -5,6 +5,8 @@ maintenance_Help = Hilfe
 //Frontend
 maintenance_URL = Deaktiviere Webseite
 maintenance_IP = IP
+maintenance_domains = Domains sperren
+maintenance_domainsErk = Tragen Sie hier die Domains ein, die nicht gesperrt werden sollen. Enter um weitere Domains einzugeben. (auch mit www.)
 maintenance_deakt-front = Modus
 maintenance_redirectUrl = Weiterleitung zu (optional) 
 maintenance_ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
@@ -32,3 +34,4 @@ maintenance_enter = Website betreten
 maintenance_deakt-reda = Redakteure ausschließen?
 
 perm_general_maintenance[] = Maintenance-Einstellungen verwalten
+
