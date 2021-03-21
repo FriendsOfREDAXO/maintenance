@@ -5,6 +5,8 @@ maintenance_Help = Help
 //Frontend
 maintenance_URL = Disable website
 maintenance_IP = IP
+maintenance_domains = Exclude domains
+maintenance_domainsErk = Enter here the domains which should not be blocked. Press Enter to add more domains (also with www.)
 maintenance_deakt-front = Mode
 maintenance_redirectUrl = Redirect-URL (optional)
 maintenance_ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
