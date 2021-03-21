@@ -41,6 +41,8 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
     $ips = "";
     $admin = "";
     $ips = explode(", ", $this->getConfig('ip'));
+    $domains = explode(", ", $this->getConfig('domains'));
+
     if ($addon->getConfig('frontend_aktiv') == 'Aktivieren') {
         $session = rex_backend_login::hasSession();
         $redirect = 'inaktiv';
@@ -62,6 +64,11 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         if (!$session) {
             $redirect = "aktiv";
         }
+        if (in_array(rex_server('REMOTE_SERVER_NAME'), $domains) && count($domains > 0))
+        {
+             $redirect = 'inaktiv';
+        }
+
         if (in_array(rex_server('REMOTE_ADDR'), $ips)) {
             $redirect = "inaktiv";
         }
@@ -133,3 +140,4 @@ if (rex::isBackend()) {
     rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
     rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
+
