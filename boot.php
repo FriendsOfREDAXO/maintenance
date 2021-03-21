@@ -64,7 +64,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         if (!$session) {
             $redirect = "aktiv";
         }
-        if (in_array(rex_server('REMOTE_SERVER_NAME'), $domains) && count($domains > 0))
+        if (in_array(rex_server('REMOTE_SERVER_NAME'), $domains))
         {
              $redirect = 'inaktiv';
         }
