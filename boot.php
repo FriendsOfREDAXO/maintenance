@@ -40,7 +40,6 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' and $secret == '') {
     $ips = [];
     $domains = [];
-    $admin = false;
     $ips = explode(", ", $this->getConfig('ip'));
     $domains = explode(", ", $this->getConfig('domains'));
 
@@ -62,6 +61,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
             $redirect = 'inaktiv';
         }
+		else {
         if (!$session) {
             $redirect = "aktiv";
         }
@@ -72,10 +72,12 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         {
              $redirect = 'inaktiv';
         }
-
+		
         if (in_array(rex_server('REMOTE_ADDR'), $ips)) {
             $redirect = "inaktiv";
         }
+		}	
+		
         if ($redirect == 'aktiv') {
             $url = $this->getConfig('redirect_frontend');
             $mpage = new rex_fragment();
@@ -144,7 +146,3 @@ if (rex::isBackend()) {
     rex_view::addCssFile($this->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
     rex_view::addCssFile($this->getAssetsUrl('css/maintenance.css'));
 }
-
-
-
-
