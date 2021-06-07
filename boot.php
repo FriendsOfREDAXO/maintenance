@@ -120,7 +120,7 @@ if (rex::isBackend()) {
                     rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                     rex_response::sendRedirect($url);
                 } else {
-                    header('HTTP/1.1 ' . rex_response::HTTP_SERVICE_UNAVAILABLED);
+                    header('HTTP/1.1 ' . rex_response::HTTP_SERVICE_UNAVAILABLE);
                     echo $mpage;
                     die();
                 }
