@@ -108,7 +108,7 @@ if (rex::isBackend()) {
             if ($session == false) {
                 $redirect = "aktiv";
             }
-            if ($session == true) {
+            if ($session == true || rex::getImpersonator()) {
                 $redirect = "inaktiv";
             }
             if ($redirect == 'aktiv') {
