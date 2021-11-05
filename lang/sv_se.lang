@@ -5,6 +5,8 @@ maintenance_Help = Hjälp
 //Frontend
 maintenance_URL = Deaktiverad webbsajt (valfritt)
 maintenance_IP = IP
+maintenance_domains = Uteslutar domäner
+maintenance_domainsErk = Ange domänerna här som inte ska blockeras. Retur-tangent för att lägga till fler domäner. (utan www.)
 maintenance_deakt-front = Spärra frontend?
 maintenance_redirectUrl = Vidarebefordring till
 maintenance_ipErk = Ange här IP-adresserna som fortfarande ska ha tillgång till frontenden. När du har skrivit en IP-adress trycker du på Enter för att komma till nästa
@@ -32,3 +34,4 @@ maintenance_enter = Gå in på webbplatsen
 maintenance_deakt-reda = Inaktivera redaktörer?
 
 perm_general_maintenance[] = Förvalta Maintenance inställningarna
+
