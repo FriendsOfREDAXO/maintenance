@@ -18,7 +18,7 @@ class rex_maintenance_command_off extends rex_console_command
         $addon = rex_addon::get('maintenance');
         $addon->setConfig('frontend_aktiv', 'Deaktivieren');
         $io->success('maintenance mode disabled');
-        return 1;
+        return 0;
     }
 }
 
