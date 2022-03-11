@@ -19,7 +19,7 @@ if (!$this->hasConfig()) {
     $this->setConfig('secret', '');
 }
 
-// Write maintenance to system addOns system config
+// Write maintenance to setup addOns system config
 $config_file = rex_path::coreData('config.yml');
 if ($config = rex_file::get($config_file)) {
     $data = rex_string::yamlDecode($config);
