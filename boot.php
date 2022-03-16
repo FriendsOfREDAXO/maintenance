@@ -9,6 +9,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+// stop if Setup is active
+if (rex::isSetup()) return;
 $addon = rex_addon::get('maintenance');
 $secret = '';
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' and $addon->getConfig('secret') != '') {
