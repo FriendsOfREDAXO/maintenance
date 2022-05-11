@@ -68,9 +68,9 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
             $redirect = "aktiv";
         }
 
-        $current_domain = str_replace("www.", "", $_SERVER['SERVER_NAME']);
+       $current_domain = str_replace("www.", "", $_SERVER['HTTP_HOST']);		
 
-        if (in_array($current_domain, $domains))
+        if (in_array($current_domain, $domains) OR in_array($current_domain2, $domains))
         {
              $redirect = 'inaktiv';
         }
