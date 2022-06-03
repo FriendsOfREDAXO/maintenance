@@ -62,24 +62,31 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
         }
         if ($addon->getConfig('blockSession') == "Redakteure" && $admin == true) {
             $redirect = 'inaktiv';
-        }
-		else {
-        if (!$session) {
-            $redirect = "aktiv";
+        } else {
+            if (!$session) {
+                $redirect = "aktiv";
+            }
+
+
+            $current_domain = '';
+            if (rex_server('SERVER_NAME') != '') {
+                $current_domain =  str_replace("www.", "", rex_server('SERVER_NAME'));
+            } elseif (rex_server('HTTP_HOST') != '') {
+                $current_domain =  str_replace("www.", "", rex_server('HTTP_HOST'));
+            }
+            if ($current_domain == '')
+            {
+                throw new LogicException('Maintenance-AddOn: No Domain found, SERVERNAME OR HTTP_HOST not defined');   
+            }
+            if (in_array($current_domain, $domains)) {
+                $redirect = 'inaktiv';
+            }
+
+            if (in_array(rex_server('REMOTE_ADDR'), $ips)) {
+                $redirect = "inaktiv";
+            }
         }
 
-       $current_domain = str_replace("www.", "", $_SERVER['HTTP_HOST']);		
-
-        if (in_array($current_domain, $domains))
-        {
-             $redirect = 'inaktiv';
-        }
-		
-        if (in_array(rex_server('REMOTE_ADDR'), $ips)) {
-            $redirect = "inaktiv";
-        }
-		}	
-		
         if ($redirect == 'aktiv') {
             $url = $this->getConfig('redirect_frontend');
             $mpage = new rex_fragment();
@@ -88,7 +95,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
             } else {
                 $mpage = $mpage->parse('maintenance_page.php');
             }
-            
+
             if ($url != '') {
                 rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                 rex_response::sendRedirect($url);
@@ -117,7 +124,7 @@ if (rex::isBackend()) {
                 $url = $this->getConfig('redirect_backend');
                 $mpage = new rex_fragment();
                 $mpage = $mpage->parse('maintenance_page_be.php');
-               
+
                 if ($url != '') {
                     rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                     rex_response::sendRedirect($url);
