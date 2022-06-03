@@ -76,7 +76,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
             }
             if ($current_domain == '')
             {
-                throw new LogicException('Maintenance-AddOn: No Domain found, SERVERNAME OR HTTP_HOST not defined');   
+                throw new LogicException('Maintenance-AddOn: No Domain found, SERVER_NAME OR HTTP_HOST not defined');   
             }
             if (in_array($current_domain, $domains)) {
                 $redirect = 'inaktiv';
