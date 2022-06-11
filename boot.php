@@ -13,6 +13,8 @@
 if (rex::isSetup()) return;
 $addon = rex_addon::get('maintenance');
 $secret = '';
+$responsecode = $addon->getConfig('responsecode');
+
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' and $addon->getConfig('secret') != '') {
     rex_login::startSession();
     if (rex_session('secret') != '') {
@@ -100,12 +102,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
                 rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                 rex_response::sendRedirect($url);
             } else {
-                if ($addon->getConfig('responsecode') == '503') {
-                    header('HTTP/1.1 ' . rex_response::HTTP_SERVICE_UNAVAILABLE);
-                }
-                if ($addon->getConfig('responsecode') == '403') {
-                    header('HTTP/1.1 ' . rex_response::HTTP_FORBIDDEN);
-                }
+                header('HTTP/1.1 ' . $responsecode);
                 echo $mpage;
                 die();
             }
@@ -134,12 +131,8 @@ if (rex::isBackend()) {
                     rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                     rex_response::sendRedirect($url);
                 } else {
-                    if ($addon->getConfig('responsecode') == '503') {
-                        header('HTTP/1.1 ' . rex_response::HTTP_SERVICE_UNAVAILABLE);
-                    }
-                    if ($addon->getConfig('responsecode') == '403') {
-                        header('HTTP/1.1 ' . rex_response::HTTP_FORBIDDEN);
-                    }
+
+                    header('HTTP/1.1 ' . $responsecode);
                     echo $mpage;
                     die();
                 }
