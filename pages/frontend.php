@@ -15,6 +15,7 @@ $content = '';
 
 if (rex_post('config-submit', 'boolean'))
 {
+echo $addon->getConfig('responsecode') ;
     $addon->setConfig(rex_post('config', [['url', 'string'], ]));
     $addon->setConfig(rex_post('config', [['secret', 'string'], ]));
     $addon->setConfig(rex_post('config', [['blockSession', 'string'], ]));
@@ -23,6 +24,7 @@ if (rex_post('config-submit', 'boolean'))
     $addon->setConfig(rex_post('config', [['frontend_aktiv', 'string'], ]));
     $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'], ]));
     $addon->setConfig(rex_post('config', [['type', 'string'], ]));
+    $addon->setConfig(rex_post('config', [['responsecode', 'string'], ]));
     $ips = explode(", ", $this->getConfig('ip'));
 
     $content .= rex_view::info('Änderung gespeichert');
@@ -111,6 +113,19 @@ $n1['label'] = '<label for="rex-maintenance-ip">' . $this->i18n('IP') . '</label
 $n1['field'] = $this->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $this->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i><br/><i>' . $this->i18n('ipServer') . $_SERVER['SERVER_ADDR'] . '</i>';
 $formElements[] = $n1;
 
+
+$n = [];
+$n['label'] = '<label for="responsecode">' . $this->i18n('responsecode') . '</label>';
+$select = new rex_select();
+$select->setId('responsecode');
+$select->setAttribute('class', 'form-control selectpicker');
+$select->setName('config[responsecode]');
+$select->addOption($this->i18n('responsecode-503') , '503');
+$select->addOption($this->i18n('responsecode-403') , '403');
+
+$select->setSelected($this->getConfig('responsecode'));
+$n['field'] = $select->get() . '</br>';
+$formElements[] = $n;
 
 $n1 = [];
 $n1['label'] = '<label for="rex-maintenance-domains">' . $this->i18n('domains') . '</label>';
