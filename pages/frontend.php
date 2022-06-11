@@ -15,7 +15,6 @@ $content = '';
 
 if (rex_post('config-submit', 'boolean'))
 {
-echo $addon->getConfig('responsecode') ;
     $addon->setConfig(rex_post('config', [['url', 'string'], ]));
     $addon->setConfig(rex_post('config', [['secret', 'string'], ]));
     $addon->setConfig(rex_post('config', [['blockSession', 'string'], ]));
