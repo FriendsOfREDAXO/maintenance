@@ -28,6 +28,9 @@ maintenance_type_description = Aufruf per Geheim-URL: Die Seite kann mit einem L
 maintenance_type_description_pw = Der User muss vor Betreten der Seite einmalig das oben festgelegte Passwort eingeben.
 maintenance_pw-prompt = Passworteingabe
 maintenance_enter = Website betreten
+maintenance_responsecode = Gewünschter Response Code
+maintenance_responsecode-403 = 403 - HTTP_FORBIDDEN
+maintenance_responsecode-503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen)
 
 
 //Backend
