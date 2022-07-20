@@ -11,6 +11,26 @@
  */
 // stop if Setup is active
 if (rex::isSetup()) return;
+
+$addon_nv_betheme = rex_addon::get('nv_betheme');
+$media = rex_get('rex_media_file','string','');
+
+//Whitelist für Addon nv_betheme Backend Login Bilder
+if ($addon_nv_betheme->isAvailable() && $media) {
+    
+     $whitelist = [];
+     $whitelist[] = $addon_nv_betheme->getConfig('login_background_image') ? $addon_nv_betheme->getConfig('login_background_image') : '';
+     $whitelist[] = $addon_nv_betheme->getConfig('login_branding_image') ? $addon_nv_betheme->getConfig('login_branding_image') : '';
+    
+     array_filter($whitelist);
+    
+     if (count($whitelist) > 0) {
+        if (in_array($media,$whitelist)) {
+            return;
+        }
+     }
+}
+
 $addon = rex_addon::get('maintenance');
 $secret = '';
 $responsecode = $addon->getConfig('responsecode');
