@@ -50,6 +50,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') != 'Deaktivieren' 
     if ($addon->getConfig('frontend_aktiv') == 'Aktivieren') {
         $session = rex_backend_login::hasSession();
         $redirect = 'inaktiv';
+        $admin = false; 
         if (rex_backend_login::createUser()) {
             $admin = rex::getUser()->isAdmin();
         }
