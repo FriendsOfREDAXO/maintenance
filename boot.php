@@ -44,8 +44,8 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren' and $secret === '') {
     $ips = [];
     $domains = [];
-    $ips = explode(", ", $addon->getConfig('ip'));
-    $domains = explode(", ", $addon->getConfig('domains'));
+    $ips = explode(", ",  $addon->getConfig('ip'));
+    $domains = explode(", ",  $addon->getConfig('domains'));
 
     if ($addon->getConfig('frontend_aktiv') === 'Aktivieren') {
         $session = rex_backend_login::hasSession();
