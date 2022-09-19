@@ -10,7 +10,7 @@
  */
 class maintenance_functions { 
 	
-	public function checkUrl($url): bool {
+	public function checkUrl(string $url): bool {
 		if ($url) {
 			if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) { 
 				return false;	
@@ -18,7 +18,7 @@ class maintenance_functions {
 			return true;
 		}
 	}
-	public function checkIp($ip): bool {
+	public function checkIp(string $ip): bool {
 		if($ip){
 			if (filter_var($ip, FILTER_VALIDATE_IP)) {
 	    		return true;
