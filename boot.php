@@ -32,7 +32,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
     }
 
     // speichert den Code in der Session
-    if ($checksecret) {
+    if ($checksecret !== 0) {
         $code = $addon->getConfig('secret');
         if ($code === $checksecret) {
             rex_set_session('secret', $checksecret);
