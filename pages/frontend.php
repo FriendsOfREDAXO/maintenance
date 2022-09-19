@@ -24,13 +24,13 @@ if (rex_post('config-submit', 'boolean'))
     $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'], ]));
     $addon->setConfig(rex_post('config', [['type', 'string'], ]));
     $addon->setConfig(rex_post('config', [['responsecode', 'string'], ]));
-    $ips = explode(", ", $this->getConfig('ip'));
+    $ips = explode(", ", $addon->getConfig('ip'));
 
     $content .= rex_view::info('Änderung gespeichert');
 
 }
-$domains = explode(", ", $this->getConfig('domains'));
-$ips = explode(", ", $this->getConfig('ip'));
+$domains = explode(", ", $addon->getConfig('domains'));
+$ips = explode(", ", $addon->getConfig('ip'));
 foreach ($ips as $ip)
 {
     if ($maintenance_functions->CheckIp($ip) === false)
@@ -39,11 +39,11 @@ foreach ($ips as $ip)
     }
 }
 
-if ($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === true)
+if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === true)
 {
 
 }
-if ($maintenance_functions->checkUrl($this->getConfig('redirect_frontend')) === false)
+if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === false)
 {
     $content .= rex_view::warning('Falscher Link');
     $addon->setConfig('redirect_frontend', '');
@@ -57,16 +57,16 @@ $content .= '
 $formElements = [];
 
 $n = [];
-$n['label'] = '<label for="frontend">' . $this->i18n('deakt-front') . '</label>';
+$n['label'] = '<label for="frontend">' . $addon->i18n('deakt-front') . '</label>';
 $select = new rex_select();
 $select->setId('deakt-front');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[frontend_aktiv]');
-$select->addOption($this->i18n('Frontend_entsperren') , 'Deaktivieren');
-$select->addOption($this->i18n('Frontend_Sperren') , 'Aktivieren');
+$select->addOption($addon->i18n('Frontend_entsperren') , 'Deaktivieren');
+$select->addOption($addon->i18n('Frontend_Sperren') , 'Aktivieren');
 
 
-$select->setSelected($this->getConfig('frontend_aktiv'));
+$select->setSelected($addon->getConfig('frontend_aktiv'));
 $n['field'] = $select->get();
 $formElements[] = $n;
 
@@ -79,74 +79,74 @@ $content .= '<div id="showform">';
 $formElements = [];
 
 $n2 = [];
-$n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">' . $this->i18n('secret') . '</label>';
-$n2['field'] = $this->i18n("secret-secret") . '</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . rex_escape($addon->getConfig('secret')) . '"/>';
+$n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">' . $addon->i18n('secret') . '</label>';
+$n2['field'] = $addon->i18n("secret-secret") . '</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . rex_escape($addon->getConfig('secret')) . '"/>';
 
 $formElements[] = $n2;
 
 $n = [];
-$n['label'] = '<label for="type">' . $this->i18n('type') . '</label>';
+$n['label'] = '<label for="type">' . $addon->i18n('type') . '</label>';
 $select = new rex_select();
 $select->setId('type');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[type]');
-$select->addOption($this->i18n('type_url') , 'URL');
-$select->addOption($this->i18n('type_pw') , 'PW');
+$select->addOption($addon->i18n('type_url') , 'URL');
+$select->addOption($addon->i18n('type_pw') , 'PW');
 
-$select->setSelected($this->getConfig('type'));
+$select->setSelected($addon->getConfig('type'));
 $n['field'] = $select->get() . '</br>';
 
-$secretLink = '<i>' . $this->i18n("secret-example") . ' ' . rex::getServer() . '?secret=EingetragenesWort</i>';
+$secretLink = '<i>' . $addon->i18n("secret-example") . ' ' . rex::getServer() . '?secret=EingetragenesWort</i>';
 if ($addon->getConfig('secret'))
 {
     $secretLink = '<i><a href="' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '" target="_blank">' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '</a></i>';
 }
 
-$n['field'] .= '<div id="type-default"><i>' . $this->i18n('type_description') . '</i></div>';
+$n['field'] .= '<div id="type-default"><i>' . $addon->i18n('type_description') . '</i></div>';
 $n['field'] .= '<div id="type-url" style="display: none;"><i>' . $secretLink . '</i></div>';
-$n['field'] .= '<div id="type-pw" style="display: none;"><i>' . $this->i18n('type_description_pw') . '</i></div>';
+$n['field'] .= '<div id="type-pw" style="display: none;"><i>' . $addon->i18n('type_description_pw') . '</i></div>';
 $formElements[] = $n;
 
 $n1 = [];
-$n1['label'] = '<label for="rex-maintenance-ip">' . $this->i18n('IP') . '</label>';
-$n1['field'] = $this->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $this->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i><br/><i>' . $this->i18n('ipServer') . $_SERVER['SERVER_ADDR'] . '</i>';
+$n1['label'] = '<label for="rex-maintenance-ip">' . $addon->i18n('IP') . '</label>';
+$n1['field'] = $addon->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $addon->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i><br/><i>' . $addon->i18n('ipServer') . $_SERVER['SERVER_ADDR'] . '</i>';
 $formElements[] = $n1;
 
 
 $n = [];
-$n['label'] = '<label for="responsecode">' . $this->i18n('responsecode') . '</label>';
+$n['label'] = '<label for="responsecode">' . $addon->i18n('responsecode') . '</label>';
 $select = new rex_select();
 $select->setId('responsecode');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[responsecode]');
-$select->addOption($this->i18n('responsecode-503') , '503');
-$select->addOption($this->i18n('responsecode-403') , '403');
+$select->addOption($addon->i18n('responsecode-503') , '503');
+$select->addOption($addon->i18n('responsecode-403') , '403');
 
-$select->setSelected($this->getConfig('responsecode'));
+$select->setSelected($addon->getConfig('responsecode'));
 $n['field'] = $select->get() . '</br>';
 $formElements[] = $n;
 
 $n1 = [];
-$n1['label'] = '<label for="rex-maintenance-domains">' . $this->i18n('domains') . '</label>';
-$n1['field'] = $this->i18n("domainsErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-domains" name="config[domains]" value="' . rex_escape($addon->getConfig('domains')) . '"/>';
+$n1['label'] = '<label for="rex-maintenance-domains">' . $addon->i18n('domains') . '</label>';
+$n1['field'] = $addon->i18n("domainsErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-domains" name="config[domains]" value="' . rex_escape($addon->getConfig('domains')) . '"/>';
 $formElements[] = $n1;
 
 
 $n = [];
-$n['label'] = '<label for="rex-maintenance-redirectUrl">' . $this->i18n('redirectUrl') . '</label>';
+$n['label'] = '<label for="rex-maintenance-redirectUrl">' . $addon->i18n('redirectUrl') . '</label>';
 $n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_frontend]" placeholder="https://example.com" value="' . rex_escape($addon->getConfig('redirect_frontend')) . '"/>';
 $formElements[] = $n;
 
 $n = [];
-$n['label'] = '<label for="blocken">' . $this->i18n('blockSession') . '</label>';
+$n['label'] = '<label for="blocken">' . $addon->i18n('blockSession') . '</label>';
 $select = new rex_select();
 $select->setId('blockSession');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[blockSession]');
-$select->addOption($this->i18n('session_Inaktiv') , 'Inaktiv');
-$select->addOption($this->i18n('session_Redakteure') , 'Redakteure');
+$select->addOption($addon->i18n('session_Inaktiv') , 'Inaktiv');
+$select->addOption($addon->i18n('session_Redakteure') , 'Redakteure');
 
-$select->setSelected($this->getConfig('blockSession'));
+$select->setSelected($addon->getConfig('blockSession'));
 $n['field'] = $select->get() . '</br><i>Sollen Redakteure trotz Backend-Session aus dem Frontend ausgesperrt werden?</i>';
 $formElements[] = $n;
 
