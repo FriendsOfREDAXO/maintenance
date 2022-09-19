@@ -19,13 +19,5 @@ class maintenance_functions {
 		}
 		return false;
 	}
-	public function checkIp(string $ip): bool {
-		if($ip !== ''){
-			if (filter_var($ip, FILTER_VALIDATE_IP)) {
-	    		return true;
-			}
-		}
-		return false;
-	}
 }
 ?>
