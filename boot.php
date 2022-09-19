@@ -50,13 +50,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
     if ($addon->getConfig('frontend_aktiv') === 'Aktivieren') {
         $session = rex_backend_login::hasSession();
         $redirect = 'inaktiv';
-        $admin = false;
-        if (rex_backend_login::createUser()) {
-            $admin = rex::getUser()->isAdmin();
-        }
-        if ($addon->getConfig('blockSession') === 'Inaktiv') {
-            $redirect = 'inaktiv';
-        }
+        $admin = rex_backend_login::createUser()?->isAdmin() ?? false;
         if ($addon->getConfig('blockSession') === 'Inaktiv' && in_array(rex_server('REMOTE_ADDR'), $ips)) {
             $redirect = 'inaktiv';
         }
@@ -114,7 +108,7 @@ if (rex::isBackend()) {
     $user = rex::getUser();
     if ($user) {
         if ($addon->getConfig('backend_aktiv') === '1') {
-            $session = rex::getUser()->isAdmin();
+            $session = rex_backend_login::createUser()?->isAdmin() ?? false;
             $redirect = '';
             if ($session === false) {
                 $redirect = "aktiv";
