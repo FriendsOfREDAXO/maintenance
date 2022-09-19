@@ -36,9 +36,9 @@ foreach ($ips as $ip) {
     }
 }
 
-if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === true) {
+if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === true) {
 }
-if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === false) {
+if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === false) {
     $content .= rex_view::warning('Falscher Link');
     $addon->setConfig('redirect_frontend', '');
 }
