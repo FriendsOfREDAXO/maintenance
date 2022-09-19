@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the maintenance package.
  *
@@ -13,38 +14,31 @@ $addon = rex_addon::get('maintenance');
 $maintenance_functions = new maintenance_functions();
 $content = '';
 
-if (rex_post('config-submit', 'boolean'))
-{
-    $addon->setConfig(rex_post('config', [['url', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['secret', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['blockSession', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['ip', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['domains', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['frontend_aktiv', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['type', 'string'], ]));
-    $addon->setConfig(rex_post('config', [['responsecode', 'string'], ]));
+if (rex_post('config-submit', 'boolean')) {
+    $addon->setConfig(rex_post('config', [['url', 'string'],]));
+    $addon->setConfig(rex_post('config', [['secret', 'string'],]));
+    $addon->setConfig(rex_post('config', [['blockSession', 'string'],]));
+    $addon->setConfig(rex_post('config', [['ip', 'string'],]));
+    $addon->setConfig(rex_post('config', [['domains', 'string'],]));
+    $addon->setConfig(rex_post('config', [['frontend_aktiv', 'string'],]));
+    $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'],]));
+    $addon->setConfig(rex_post('config', [['type', 'string'],]));
+    $addon->setConfig(rex_post('config', [['responsecode', 'string'],]));
     $ips = explode(", ", $addon->getConfig('ip'));
 
     $content .= rex_view::info('Änderung gespeichert');
-
 }
 $domains = explode(", ", $addon->getConfig('domains'));
 $ips = explode(", ", $addon->getConfig('ip'));
-foreach ($ips as $ip)
-{
-    if ($maintenance_functions->CheckIp($ip) === false)
-    {
+foreach ($ips as $ip) {
+    if ($maintenance_functions->CheckIp($ip) === false) {
         echo rex_view::warning('Falsche IP: ' . $ip);
     }
 }
 
-if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === true)
-{
-
+if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === true) {
 }
-if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === false)
-{
+if ($maintenance_functions->checkUrl($addon->getConfig('redirect_frontend')) === false) {
     $content .= rex_view::warning('Falscher Link');
     $addon->setConfig('redirect_frontend', '');
 }
@@ -62,8 +56,8 @@ $select = new rex_select();
 $select->setId('deakt-front');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[frontend_aktiv]');
-$select->addOption($addon->i18n('Frontend_entsperren') , 'Deaktivieren');
-$select->addOption($addon->i18n('Frontend_Sperren') , 'Aktivieren');
+$select->addOption($addon->i18n('Frontend_entsperren'), 'Deaktivieren');
+$select->addOption($addon->i18n('Frontend_Sperren'), 'Aktivieren');
 
 
 $select->setSelected($addon->getConfig('frontend_aktiv'));
@@ -90,15 +84,14 @@ $select = new rex_select();
 $select->setId('type');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[type]');
-$select->addOption($addon->i18n('type_url') , 'URL');
-$select->addOption($addon->i18n('type_pw') , 'PW');
+$select->addOption($addon->i18n('type_url'), 'URL');
+$select->addOption($addon->i18n('type_pw'), 'PW');
 
 $select->setSelected($addon->getConfig('type'));
 $n['field'] = $select->get() . '</br>';
 
 $secretLink = '<i>' . $addon->i18n("secret-example") . ' ' . rex::getServer() . '?secret=EingetragenesWort</i>';
-if ($addon->getConfig('secret'))
-{
+if ($addon->getConfig('secret')) {
     $secretLink = '<i><a href="' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '" target="_blank">' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '</a></i>';
 }
 
@@ -109,7 +102,7 @@ $formElements[] = $n;
 
 $n1 = [];
 $n1['label'] = '<label for="rex-maintenance-ip">' . $addon->i18n('IP') . '</label>';
-$n1['field'] = $addon->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $addon->i18n("ipAkt") . $_SERVER['REMOTE_ADDR'] . '</i><br/><i>' . $addon->i18n('ipServer') . $_SERVER['SERVER_ADDR'] . '</i>';
+$n1['field'] = $addon->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $addon->i18n("ipAkt") . rex_server('REMOTE_ADDR') . '</i><br/><i>' . $addon->i18n('ipServer') . rex_server('SERVER_ADDR') . '</i>';
 $formElements[] = $n1;
 
 
@@ -119,8 +112,8 @@ $select = new rex_select();
 $select->setId('responsecode');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[responsecode]');
-$select->addOption($addon->i18n('responsecode-503') , '503');
-$select->addOption($addon->i18n('responsecode-403') , '403');
+$select->addOption($addon->i18n('responsecode-503'), '503');
+$select->addOption($addon->i18n('responsecode-403'), '403');
 
 $select->setSelected($addon->getConfig('responsecode'));
 $n['field'] = $select->get() . '</br>';
@@ -143,8 +136,8 @@ $select = new rex_select();
 $select->setId('blockSession');
 $select->setAttribute('class', 'form-control selectpicker');
 $select->setName('config[blockSession]');
-$select->addOption($addon->i18n('session_Inaktiv') , 'Inaktiv');
-$select->addOption($addon->i18n('session_Redakteure') , 'Redakteure');
+$select->addOption($addon->i18n('session_Inaktiv'), 'Inaktiv');
+$select->addOption($addon->i18n('session_Redakteure'), 'Redakteure');
 
 $select->setSelected($addon->getConfig('blockSession'));
 $n['field'] = $select->get() . '</br><i>Sollen Redakteure trotz Backend-Session aus dem Frontend ausgesperrt werden?</i>';
@@ -182,42 +175,42 @@ $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');
 
 ?>
-<script>  
-$('#showform').toggle(
-    $('#deakt-front').find("option[value='Aktivieren']").is(":checked")
-);
+<script>
+    $('#showform').toggle(
+        $('#deakt-front').find("option[value='Aktivieren']").is(":checked")
+    );
 
 
-$('#deakt-front').change(function() {
-    if ($(this).val() === 'Aktivieren') {
-        $('#showform').slideDown();
-    } else {
-        $('#showform').slideUp();
-    }
-});
+    $('#deakt-front').change(function() {
+        if ($(this).val() === 'Aktivieren') {
+            $('#showform').slideDown();
+        } else {
+            $('#showform').slideUp();
+        }
+    });
 
-if ($("#type option:selected").val() === 'PW') {
-    $('#type-default').hide();
-    $('#type-pw').show();
-    $('#type-url').hide();
-}
-
-if ($("#type option:selected").val() === 'URL') {
-    $('#type-default').hide();
-    $('#type-pw').hide();
-    $('#type-url').show();
-}
-
-$('#type').change(function() {
-    if ($(this).val() === 'URL') {
-        $('#type-default').hide();
-        $('#type-pw').hide();
-        $('#type-url').show();
-    }
-    if ($(this).val() === 'PW') {
+    if ($("#type option:selected").val() === 'PW') {
         $('#type-default').hide();
         $('#type-pw').show();
         $('#type-url').hide();
     }
-});
+
+    if ($("#type option:selected").val() === 'URL') {
+        $('#type-default').hide();
+        $('#type-pw').hide();
+        $('#type-url').show();
+    }
+
+    $('#type').change(function() {
+        if ($(this).val() === 'URL') {
+            $('#type-default').hide();
+            $('#type-pw').hide();
+            $('#type-url').show();
+        }
+        if ($(this).val() === 'PW') {
+            $('#type-default').hide();
+            $('#type-pw').show();
+            $('#type-url').hide();
+        }
+    });
 </script>
