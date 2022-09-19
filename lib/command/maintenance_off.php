@@ -5,13 +5,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class rex_maintenance_command_off extends rex_console_command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setAliases(['frontend:on'])
             ->setDescription('Sets frontend maintenance mode off');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getStyle($input, $output);
         $io->title('Maintenance AddOn');
