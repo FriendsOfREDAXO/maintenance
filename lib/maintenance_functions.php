@@ -11,20 +11,21 @@
 class maintenance_functions { 
 	
 	public function checkUrl(string $url): bool {
-		if ($url) {
+		if ($url !== '') {
 			if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) { 
 				return false;	
 			}
 			return true;
 		}
+		return false;
 	}
 	public function checkIp(string $ip): bool {
-		if($ip){
+		if($ip !== ''){
 			if (filter_var($ip, FILTER_VALIDATE_IP)) {
 	    		return true;
 			}
-			return false;
 		}
+		return false;
 	}
 }
 ?>
