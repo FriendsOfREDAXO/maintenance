@@ -189,36 +189,35 @@ $('#showform').toggle(
 
 
 $('#deakt-front').change(function() {
-    if ($(this).val() == 'Aktivieren') {
+    if ($(this).val() === 'Aktivieren') {
         $('#showform').slideDown();
     } else {
         $('#showform').slideUp();
     }
 });
 
-if ($("#type option:selected").val() == 'PW') {
+if ($("#type option:selected").val() === 'PW') {
     $('#type-default').hide();
     $('#type-pw').show();
     $('#type-url').hide();
 }
 
-if ($("#type option:selected").val() == 'URL') {
+if ($("#type option:selected").val() === 'URL') {
     $('#type-default').hide();
     $('#type-pw').hide();
     $('#type-url').show();
 }
 
 $('#type').change(function() {
-    if ($(this).val() == 'URL') {
+    if ($(this).val() === 'URL') {
         $('#type-default').hide();
         $('#type-pw').hide();
         $('#type-url').show();
     }
-    if ($(this).val() == 'PW') {
+    if ($(this).val() === 'PW') {
         $('#type-default').hide();
         $('#type-pw').show();
         $('#type-url').hide();
     }
 });
 </script>
-
