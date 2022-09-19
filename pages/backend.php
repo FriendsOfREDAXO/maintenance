@@ -42,13 +42,13 @@ $content .=  '
 $formElements = [];
 
 $n = [];
-$n['label'] = '<label for="redirectUrl">'.$this->i18n('redirectUrl').'</label>';
+$n['label'] = '<label for="redirectUrl">'.$addon->i18n('redirectUrl').'</label>';
 $n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_backend]" placeholder="https://example.tld" value="' . rex_escape($addon->getConfig('redirect_backend')) . '"/>';
 $formElements[] = $n;
 
 $n2 = [];
-$n2['label'] = '<label for="redakteure_ausschließen">' . $this->i18n('deakt-reda') . '</label>';
-$n2['field'] = '<input type="checkbox" id="rex-maintenance-aktiv" name="config[backend_aktiv]"' . (!empty($this->getConfig('backend_aktiv')) && $this->getConfig('backend_aktiv') == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$n2['label'] = '<label for="redakteure_ausschließen">' . $addon->i18n('deakt-reda') . '</label>';
+$n2['field'] = '<input type="checkbox" id="rex-maintenance-aktiv" name="config[backend_aktiv]"' . (!empty($addon->getConfig('backend_aktiv')) && $addon->getConfig('backend_aktiv') == '1' ? ' checked="checked"' : '') . ' value="1" />';
 $formElements[] = $n2;
 
 $fragment = new rex_fragment();
