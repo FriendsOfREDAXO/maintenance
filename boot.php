@@ -44,9 +44,15 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
 if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren' and $secret === '') {
     $ips = [];
     $domains = [];
-    $ips = explode(", ",  $addon->getConfig('ip'));
-    $domains = explode(", ",  $addon->getConfig('domains'));
+    $iplist = $addon->getConfig('ip');
+    if (is_string($iplist)) {
+        $ips = explode(", ",  $iplist);
+    }
 
+    $domainlist = $addon->getConfig('domains');
+    if (is_string($domainlist)) {
+        $domains = explode(", ", $domainlist);
+    }
     if ($addon->getConfig('frontend_aktiv') === 'Aktivieren') {
         $session = rex_backend_login::hasSession();
         $redirect = 'inaktiv';
@@ -69,9 +75,9 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
 
 
             $current_domain = '';
-            if (rex_server('SERVER_NAME') !== '') {
+            if (is_string(rex_server('SERVER_NAME'))) {
                 $current_domain =  str_replace("www.", "", rex_server('SERVER_NAME'));
-            } elseif (rex_server('HTTP_HOST') !== '') {
+            } elseif (is_string(rex_server('HTTP_HOST'))) {
                 $current_domain =  str_replace("www.", "", rex_server('HTTP_HOST'));
             }
             if ($current_domain === '') {
@@ -95,7 +101,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
                 $mpage = $mpage->parse('maintenance_page.php');
             }
 
-            if ($url !== '') {
+            if (is_string($url) && $url !== '') {
                 rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                 rex_response::sendRedirect($url);
             } else {
@@ -111,7 +117,7 @@ if (rex::isBackend()) {
     $user = rex::getUser();
     if ($user !== null) {
         if ($addon->getConfig('backend_aktiv') === '1') {
-              $session= false;
+            $session = false;
             if (rex_backend_login::createUser() !== null) {
                 $session = rex::requireUser()->isAdmin();
             }
@@ -127,7 +133,7 @@ if (rex::isBackend()) {
                 $mpage = new rex_fragment();
                 $mpage = $mpage->parse('maintenance_page_be.php');
 
-                if ($url !== '') {
+                if (is_string($url) && $url !== '') {
                     rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
                     rex_response::sendRedirect($url);
                 } else {
@@ -143,14 +149,20 @@ if (rex::isBackend()) {
         rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $magic) {
             $header = '<i class="maintenance rex-icon fa-exclamation-triangle">';
             $replace = '<i title="Mode: Lock Backend" class="rex-icon fa-exclamation-triangle aktivieren_backend">';
-            $magic->setSubject(str_replace($header, $replace, $magic->getSubject()));
+            $subject = $magic->getSubject();
+            if (is_string($subject)) {
+                $magic->setSubject(str_replace($header, $replace, $subject));
+            }
         });
     }
     if ($addon->getConfig('frontend_aktiv') === 'Aktivieren') {
         rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
             $suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
             $ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle aktivieren_frontend">';
-            $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject()));
+            $subject = $ep->getSubject();
+            if (is_string($subject)) {
+                $ep->setSubject(str_replace($suchmuster, $ersetzen, $subject));
+            }
         });
     }
     rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
