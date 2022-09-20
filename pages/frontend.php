@@ -14,6 +14,8 @@ $addon = rex_addon::get('maintenance');
 $maintenance_functions = new maintenance_functions();
 $content = '';
 
+
+
 if (rex_post('config-submit', 'boolean')) {
     $addon->setConfig(rex_post('config', [['url', 'string'],]));
     $addon->setConfig(rex_post('config', [['secret', 'string'],]));
@@ -24,25 +26,37 @@ if (rex_post('config-submit', 'boolean')) {
     $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'],]));
     $addon->setConfig(rex_post('config', [['type', 'string'],]));
     $addon->setConfig(rex_post('config', [['responsecode', 'string'],]));
-    $ips = explode(", ", $addon->getConfig('ip'));
-
     $content .= rex_view::info('Änderung gespeichert');
 }
-$domains = explode(", ", $addon->getConfig('domains'));
-$ips = explode(", ", $addon->getConfig('ip'));
+
+$iplist = $addon->getConfig('ip');
+$ips = [];
+if (is_string($iplist)) {
+    $ips = explode(", ", $iplist);
+}
+
+
+$domainlist = $addon->getConfig('domains');
+$domains = [];
+if (is_string($domainlist)) {
+    $domains = explode(", ", $domainlist);
+}
+
+
 foreach ($ips as $ip) {
     if ($maintenance_functions->CheckIp($ip) === false) {
         echo rex_view::warning('Falsche IP: ' . $ip);
     }
 }
 
-if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === true) {
+if (is_string($addon->getConfig('redirect_frontend'))) {
+    if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === true) {
+    }
+    if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === false) {
+        $content .= rex_view::warning('Falscher Link');
+        $addon->setConfig('redirect_frontend', '');
+    }
 }
-if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === false) {
-    $content .= rex_view::warning('Falscher Link');
-    $addon->setConfig('redirect_frontend', '');
-}
-
 $content .= '
 <div class="rex-form">
     <form action="' . rex_url::currentBackendPage() . '" method="post">
