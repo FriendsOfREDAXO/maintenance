@@ -91,7 +91,7 @@ $select->setSelected($addon->getConfig('type'));
 $n['field'] = $select->get() . '</br>';
 
 $secretLink = '<i>' . $addon->i18n("secret-example") . ' ' . rex::getServer() . '?secret=EingetragenesWort</i>';
-if ($addon->getConfig('secret')) {
+if ($addon->getConfig('secret') !== null) {
     $secretLink = '<i><a href="' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '" target="_blank">' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '</a></i>';
 }
 
