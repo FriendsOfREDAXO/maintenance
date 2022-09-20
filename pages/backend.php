@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the maintenance package.
  *
@@ -15,25 +16,27 @@ $content = '';
 
 
 if (rex_post('config-submit', 'boolean')) {
-	$addon->setConfig(rex_post('config', [
+    $addon->setConfig(rex_post('config', [
         ['redirect_backend', 'string'],
     ]));
 
     $addon->setConfig(rex_post('config', [
         ['backend_aktiv', 'string'],
     ]));
-    if($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === true) {
-		$content .= rex_view::info('Änderung gespeichert');
-	}
-	if($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === false) {
-		$content .=	rex_view::warning('Falscher Link');
-		$addon->setConfig('redirect_backend', '');
-	}
-$newURL = rex_url::currentBackendPage();
-// Umleitung auf die aktuelle Seite auslösen
-rex_response::sendRedirect($newURL);
-}			
- 
+    if (is_string($addon->getConfig('redirect_backend'))) {
+        if ($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === true) {
+            $content .= rex_view::info('Änderung gespeichert');
+        }
+        if ($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === false) {
+            $content .=    rex_view::warning('Falscher Link');
+            $addon->setConfig('redirect_backend', '');
+        }
+    }
+    $newURL = rex_url::currentBackendPage();
+    // Umleitung auf die aktuelle Seite auslösen
+    rex_response::sendRedirect($newURL);
+}
+
 $content .=  '
 <div class="rex-form">
     <form action="' . rex_url::currentBackendPage() . '" method="post">
@@ -42,7 +45,7 @@ $content .=  '
 $formElements = [];
 
 $n = [];
-$n['label'] = '<label for="redirectUrl">'.$addon->i18n('redirectUrl').'</label>';
+$n['label'] = '<label for="redirectUrl">' . $addon->i18n('redirectUrl') . '</label>';
 $n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_backend]" placeholder="https://example.tld" value="' . rex_escape($addon->getConfig('redirect_backend')) . '"/>';
 $formElements[] = $n;
 
@@ -81,4 +84,3 @@ $fragment->setVar('class', 'edit');
 $fragment->setVar('title', 'Maintenance-Settings');
 $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');
-?>
