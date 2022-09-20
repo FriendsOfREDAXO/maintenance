@@ -51,13 +51,13 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
         $session = rex_backend_login::hasSession();
         $redirect = 'inaktiv';
         $admin = false;
-        if (rex_backend_login::createUser()) {
+        if (rex_backend_login::createUser() !== null) {
             $admin = rex::requireUser()->isAdmin();
         }
-        if ($addon->getConfig('blockSession') === 'Inaktiv' && in_array(rex_server('REMOTE_ADDR'), $ips)) {
+        if ($addon->getConfig('blockSession') === 'Inaktiv' && in_array(rex_server('REMOTE_ADDR'), $ips, true)) {
             $redirect = 'inaktiv';
         }
-        if ($addon->getConfig('blockSession') === "Redakteure" && $admin === false && !in_array(rex_server('REMOTE_ADDR'), $ips)) {
+        if ($addon->getConfig('blockSession') === "Redakteure" && $admin === false && !in_array(rex_server('REMOTE_ADDR'), $ips, true)) {
             $redirect = 'aktiv';
         }
         if ($addon->getConfig('blockSession') === "Redakteure" && $admin === true) {
@@ -77,11 +77,11 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
             if ($current_domain === '') {
                 throw new LogicException('Maintenance-AddOn: No Domain found, SERVER_NAME OR HTTP_HOST not defined');
             }
-            if (in_array($current_domain, $domains)) {
+            if (in_array($current_domain, $domains, true)) {
                 $redirect = 'inaktiv';
             }
 
-            if (in_array(rex_server('REMOTE_ADDR'), $ips)) {
+            if (in_array(rex_server('REMOTE_ADDR'), $ips, true)) {
                 $redirect = "inaktiv";
             }
         }
@@ -109,17 +109,17 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
 
 if (rex::isBackend()) {
     $user = rex::getUser();
-    if ($user) {
+    if ($user !== null) {
         if ($addon->getConfig('backend_aktiv') === '1') {
               $session= false;
-            if (rex_backend_login::createUser()) {
+            if (rex_backend_login::createUser() !== null) {
                 $session = rex::requireUser()->isAdmin();
             }
             $redirect = '';
             if ($session === false) {
                 $redirect = "aktiv";
             }
-            if ($session === true || rex::getImpersonator()) {
+            if ($session === true || rex::getImpersonator() !== null) {
                 $redirect = "inaktiv";
             }
             if ($redirect === 'aktiv') {
