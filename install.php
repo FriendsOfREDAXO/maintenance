@@ -10,15 +10,6 @@
  * file that was distributed with this source code.
  */
 $addon = rex_addon::get('maintenance');
-if (!$addon->hasConfig()) {
-    $addon->setConfig('ip', '');
-    $addon->setConfig('frontend_aktiv', 'Deaktivieren');
-    $addon->setConfig('redirect_frontend', '');
-    $addon->setConfig('redirect_backend', '');
-    $addon->setConfig('backend_aktiv', '0');
-    $addon->setConfig('blockSession', 'Inaktiv');
-    $addon->setConfig('secret', '');
-}
 
 // Write maintenance to setup addOns system config
 $config_file = rex_path::coreData('config.yml');
