@@ -151,7 +151,8 @@ if (rex::isBackend()) {
             $replace = '<i title="Mode: Lock Backend" class="rex-icon fa-exclamation-triangle aktivieren_backend">';
             $subject = $magic->getSubject();
             if (is_string($subject)) {
-                $magic->setSubject(str_replace($header, $replace, $subject));
+                $out = str_replace($header, $replace, $subject);
+                $magic->setSubject($out);
             }
         });
     }
@@ -161,7 +162,8 @@ if (rex::isBackend()) {
             $ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle aktivieren_frontend">';
             $subject = $ep->getSubject();
             if (is_string($subject)) {
-                $ep->setSubject(str_replace($suchmuster, $ersetzen, $subject));
+                $out = str_replace($suchmuster, $ersetzen, $subject);
+                $ep->setSubject($out);
             }
         });
     }
