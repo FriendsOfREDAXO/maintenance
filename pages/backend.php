@@ -22,10 +22,10 @@ if (rex_post('config-submit', 'boolean')) {
     $addon->setConfig(rex_post('config', [
         ['backend_aktiv', 'string'],
     ]));
-    if($checkLink->checkUrl($addon->getConfig('redirect_backend')) === true) {
+    if($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === true) {
 		$content .= rex_view::info('Änderung gespeichert');
 	}
-	if($checkLink->checkUrl($addon->getConfig('redirect_backend')) === false) {
+	if($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === false) {
 		$content .=	rex_view::warning('Falscher Link');
 		$addon->setConfig('redirect_backend', '');
 	}
@@ -48,7 +48,7 @@ $formElements[] = $n;
 
 $n2 = [];
 $n2['label'] = '<label for="redakteure_ausschließen">' . $addon->i18n('deakt-reda') . '</label>';
-$n2['field'] = '<input type="checkbox" id="rex-maintenance-aktiv" name="config[backend_aktiv]"' . (!empty($addon->getConfig('backend_aktiv')) && $addon->getConfig('backend_aktiv') == '1' ? ' checked="checked"' : '') . ' value="1" />';
+$n2['field'] = '<input type="checkbox" id="rex-maintenance-aktiv" name="config[backend_aktiv]"' . (!is_null($addon->getConfig('backend_aktiv')) && $addon->getConfig('backend_aktiv') === '1' ? ' checked="checked"' : '') . ' value="1" />';
 $formElements[] = $n2;
 
 $fragment = new rex_fragment();
