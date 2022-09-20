@@ -10,22 +10,22 @@
  */
 class maintenance_functions { 
 	
-	public function CheckUrl(string $url): bool {
+	public function CheckUrl(string $url): ?bool {
 		if ($url !== '') {
 			if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) { 
 				return false;	
 			}
 			return true;
 		}
-		return false;
+		return null;
 	}
-	public function CheckIp(string $ip): bool {
+	public function CheckIp(string $ip): ?bool {
 		if($ip !== ''){
 			if (filter_var($ip, FILTER_VALIDATE_IP)) {
 	    		return true;
 			}
 		}
-		return false;
+		return null;
 	}
 }
 ?>
