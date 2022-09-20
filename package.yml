@@ -32,3 +32,10 @@ console_commands:
 
 default_config:
       responsecode: 503
+      ip: ''
+      frontend_aktiv: 'Deaktivieren'
+      redirect_frontend: ''
+      redirect_backend: ''
+      backend_aktiv: '0'
+      blockSession: 'Inaktiv'
+      secret: ''
