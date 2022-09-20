@@ -20,12 +20,12 @@ class maintenance_functions {
 		return null;
 	}
 	public function CheckIp(string $ip): ?bool {
-		if($ip !== ''){
-			if (filter_var($ip, FILTER_VALIDATE_IP)) {
-	    		return true;
-			}
+		if($ip !== '' && filter_var($ip, FILTER_VALIDATE_IP) === FALSE){
+		return false; 	
 		}
-		return null;
+		else {
+			return true; 
+		}
+		
 	}
 }
-?>
