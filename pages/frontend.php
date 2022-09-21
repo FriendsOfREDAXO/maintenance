@@ -45,7 +45,7 @@ if (is_string($domainlist)) {
 
 foreach ($ips as $ip) {
     if ($maintenance_functions->CheckIp($ip) === false) {
-        echo rex_view::warning('Falsche IP: ' . $ip);
+        echo rex_view::warning($addon->i18n('invalid_ip').': ' . $ip);
     }
 }
 
@@ -53,7 +53,7 @@ if (is_string($addon->getConfig('redirect_frontend'))) {
     if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === true) {
     }
     if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === false) {
-        $content .= rex_view::warning('Falscher Link');
+        $content .= rex_view::warning($addon->i18n('invalid_link'));
         $addon->setConfig('redirect_frontend', '');
     }
 }
