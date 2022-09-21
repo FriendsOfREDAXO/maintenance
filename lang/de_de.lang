@@ -5,6 +5,8 @@ maintenance_Help = Hilfe
 //Frontend
 maintenance_URL = Deaktiviere Webseite
 maintenance_IP = IP
+maintenance_invalid_ip: Ungültige IP
+maintenance_invalid_link: Ungültiger Link
 maintenance_domains = Domains ausschließen
 maintenance_domainsErk = Tragen Sie hier die Domains ein, die nicht gesperrt werden sollen. Enter-Taste um weitere Domains hinzuzufügen. (ohne www.)
 maintenance_deakt-front = Modus
