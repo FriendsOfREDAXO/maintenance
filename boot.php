@@ -11,6 +11,9 @@
  */
 // stop if Setup is active
 if (rex::isSetup()) return;
+if (str_contains($req, 'sitemap.xml') === true && str_contains($req, 'secret='.$addon->getConfig('secret'))) {
+      return;
+}
 $addon = rex_addon::get('maintenance');
 $secret = '';
 $responsecode = $addon->getConfig('responsecode');
