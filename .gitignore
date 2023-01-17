@@ -1,2 +1,9 @@
 
 fragments/.DS_Store
+/node_modules/
+/tests_output/
+/.env
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/screens/
