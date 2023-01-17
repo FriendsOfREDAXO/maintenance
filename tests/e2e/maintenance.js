@@ -1,4 +1,4 @@
-describe('Activity Log', () => {
+describe('maintenance', () => {
     /**
      * login
      */
@@ -72,14 +72,14 @@ describe('Activity Log', () => {
         browser.assert.textContains('.maintenance-error-title', 'Maintenance');
         browser.assert.textContains('.maintenance-error-message', 'This website is temporarily unavailable');
 
-        browser.pause(1000);
+        browser.pause(500);
 
         /**
          * test maintenance secret
          */
         browser.navigateTo('/?secret=nightwatch_secret');
         browser.assert.not.elementPresent(".maintenance-container");
-        browser.pause(5000);
+        browser.pause(250);
     })
 
     /**
