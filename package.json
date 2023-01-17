@@ -1,0 +1,25 @@
+{
+  "name": "maintenance",
+  "version": "1.0.0",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "nightwatch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriendsOfREDAXO/maintenance.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FriendsOfREDAXO/maintenance/issues"
+  },
+  "homepage": "https://github.com/FriendsOfREDAXO/maintenance#readme",
+  "devDependencies": {
+    "geckodriver": "^3.0.2",
+    "nightwatch": "^2.6.10"
+  }
+}
