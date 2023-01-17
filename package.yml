@@ -39,3 +39,15 @@ default_config:
       backend_aktiv: '0'
       blockSession: 'Inaktiv'
       secret: ''
+
+installer_ignore:
+    - .git
+    - .github
+    - .gitignore
+    - node_modules
+    - tests
+    - tests_output
+    - nightwatch.conf.js
+    - package.json
+    - package-lock.json
+    - yarn.lock
