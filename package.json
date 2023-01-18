@@ -20,6 +20,7 @@
   "homepage": "https://github.com/FriendsOfREDAXO/maintenance#readme",
   "devDependencies": {
     "geckodriver": "^3.0.2",
-    "nightwatch": "^2.6.10"
+    "nightwatch": "^2.6.10",
+    "request": "^2.88.2"
   }
 }
