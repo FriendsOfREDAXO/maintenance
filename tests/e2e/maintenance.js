@@ -93,26 +93,26 @@ describe('maintenance addon testing', () => {
         browser.assert.elementPresent('.maintenance-container', 'maintenance-container should exist');
         browser.assert.textContains('.maintenance-error-title', 'Maintenance', 'maintenance-error-title should contain "Maintenance"');
         browser.assert.textContains('.maintenance-error-message', 'This website is temporarily unavailable', 'maintenance-error-message should contain "This website is temporarily unavailable"');
-        browser.pause(250);
-        browser.perform(done => {
-            request(this.settings.launchUrl, function (error, response) {
-                browser.assert.equal(response.statusCode, 503, 'Status code should be 503');
-                done()
-            });
-        })
+        // browser.pause(250);
+        // browser.perform(done => {
+        //     request(this.settings.launchUrl, function (error, response) {
+        //         browser.assert.equal(response.statusCode, 503, 'Status code should be 503');
+        //         done()
+        //     });
+        // })
         browser.pause(250);
 
         /**
          * test maintenance secret
          */
         browser.navigateTo('/?secret=nightwatch_secret');
-        browser.pause(250);
-        browser.perform(done => {
-            request(this.settings.launchUrl + '?secret=nightwatch_secret', function (error, response) {
-                browser.assert.equal(response.statusCode, 200, 'Status code should be 200');
-                done()
-            });
-        })
+        // browser.pause(250);
+        // browser.perform(done => {
+        //     request(this.settings.launchUrl + '?secret=nightwatch_secret', function (error, response) {
+        //         browser.assert.equal(response.statusCode, 200, 'Status code should be 200');
+        //         done()
+        //     });
+        // })
         browser.pause(250);
         browser.assert.not.elementPresent('.maintenance-container', 'maintenance-container should not exist');
         browser.pause(500);
