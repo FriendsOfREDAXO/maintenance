@@ -97,7 +97,7 @@ describe('maintenance addon testing', () => {
         browser.perform(async () => {
             try {
                 console.log(browser.launchUrl);
-                const response = await got(browser.launchUrl);
+                const response = await got(browser.launchUrl, { followRedirect: false });
                 browser.assert.equal(response.statusCode, 503, 'Status code should be 503');
             } catch (error) {
                 console.log(error);
