@@ -96,9 +96,11 @@ describe('maintenance addon testing', () => {
         browser.pause(250);
         browser.perform(async () => {
             try {
+                console.log(browser.launchUrl);
                 const response = await got(browser.launchUrl);
                 browser.assert.equal(response.statusCode, 503, 'Status code should be 503');
             } catch (error) {
+                console.log(error);
                 browser.assert.equal(error.response.statusCode, 503, 'Status code should be 503');
             }
             return true;
