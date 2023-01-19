@@ -1,4 +1,4 @@
-const request = require('request');
+const got = require('got');
 
 describe('maintenance addon testing', () => {
     /**
@@ -95,9 +95,12 @@ describe('maintenance addon testing', () => {
         browser.assert.textContains('.maintenance-error-message', 'This website is temporarily unavailable', 'maintenance-error-message should contain "This website is temporarily unavailable"');
         browser.pause(250);
         browser.perform(async () => {
-            await request(this.settings.launchUrl, function (error, response) {
+            try {
+                const response = await got(browser.launchUrl);
                 browser.assert.equal(response.statusCode, 503, 'Status code should be 503');
-            });
+            } catch (error) {
+                browser.assert.equal(error.response.statusCode, 503, 'Status code should be 503');
+            }
             return true;
         });
         browser.pause(250);
