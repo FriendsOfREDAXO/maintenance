@@ -13,6 +13,9 @@
 if (rex::isSetup()) return;
 
 $addon = rex_addon::get('maintenance');
+
+if ($addon->getConfig('frontend_aktiv') !== 'Deaktivieren')
+{    
 if (rex::isFrontend()){
 $req = $_SERVER['REQUEST_URI'];
     if (str_contains($req, 'sitemap.xml') === true && str_contains($req, 'secret='.$addon->getConfig('secret'))) {
@@ -27,6 +30,7 @@ if ($media !== '' && count($media_unblocklist) > 0) {
          if (in_array($media,$media_unblocklist)) {
              return;
   }
+}
 }
 
 $secret = '';
