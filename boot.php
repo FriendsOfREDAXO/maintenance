@@ -23,7 +23,7 @@ $req = $_SERVER['REQUEST_URI'];
 $media = rex_get('rex_media_file','string','');
 $media_unblock = [];
 $media_unblocklist = rex_extension::registerPoint(new rex_extension_point('MAINTENANCE_UNBLOCK_LIST', $media_unblock));
-if ($media !== '' && count($whitelist) > 0) {
+if ($media !== '' && count($media_unblocklist) > 0) {
          if (in_array($media,$media_unblocklist)) {
              return;
   }
