@@ -29,6 +29,9 @@ Hierzu im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maint
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
 Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf dem Symbol erhält man den passenden Text (title-attribut). 
 
+## Extensionpoint MAINTENANCE_MEDIA_UNBLOCK_LIST
+Über diesen Extension-Point kann ein Array mit Medien übergeben werden, die Maintenance nicht sperren soll. 
+
 ### Farblegende
 - Standard: Alle Funktionen sind deaktiviert. 
 - Rot: Der Modus "Frontend-Sperre" ist aktiv!

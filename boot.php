@@ -13,12 +13,26 @@
 if (rex::isSetup()) return;
 
 $addon = rex_addon::get('maintenance');
+
+if ($addon->getConfig('frontend_aktiv') !== 'Deaktivieren')
+{    
 if (rex::isFrontend()){
 $req = $_SERVER['REQUEST_URI'];
     if (str_contains($req, 'sitemap.xml') === true && str_contains($req, 'secret='.$addon->getConfig('secret'))) {
           return;
     }
 }
+
+$media = rex_get('rex_media_file','string','');
+$media_unblock = [];
+$media_unblocklist = rex_extension::registerPoint(new rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
+if ($media !== '' && count($media_unblocklist) > 0) {
+         if (in_array($media,$media_unblocklist)) {
+             return;
+  }
+}
+}
+
 $secret = '';
 $responsecode = $addon->getConfig('responsecode');
 
