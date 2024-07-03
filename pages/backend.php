@@ -16,7 +16,7 @@ $content = '';
 
 
 if (rex_post('config-submit', 'boolean')) {
-    rex_session('secret','');
+    rex_session('secret', '');
     $addon->setConfig(rex_post('config', [
         ['redirect_backend', 'string'],
     ]));

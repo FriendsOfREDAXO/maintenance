@@ -27,7 +27,7 @@ if (rex_post('config-submit', 'boolean')) {
     $addon->setConfig(rex_post('config', [['type', 'string'],]));
     $addon->setConfig(rex_post('config', [['responsecode', 'string'],]));
     $content .= rex_view::info('Änderung gespeichert');
-    rex_session('secret','');
+    rex_session('secret', '');
 }
 
 $iplist = $addon->getConfig('ip');

@@ -21,5 +21,3 @@ class rex_maintenance_command_off extends rex_console_command
         return 0;
     }
 }
-
-
