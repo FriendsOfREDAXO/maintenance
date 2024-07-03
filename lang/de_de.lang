@@ -1,42 +1,49 @@
 //Config
-maintenance_title = Maintenance mode
-maintenance_Help = Hilfe
-
-//Frontend
-maintenance_URL = Deaktiviere Webseite
-maintenance_IP = IP
-maintenance_invalid_ip: Ungültige IP
-maintenance_invalid_link: Ungültiger Link
-maintenance_domains = Domains ausschließen
-maintenance_domainsErk = Tragen Sie hier die Domains ein, die nicht gesperrt werden sollen. Enter-Taste um weitere Domains hinzuzufügen. (ohne www.)
-maintenance_deakt-front = Modus
-maintenance_redirectUrl = Weiterleitung zu (optional) 
-maintenance_ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
-maintenance_ipAkt = Ihre aktuelle IP:
-maintenance_ipServer = Aktuelle IP des Servers:
-maintenance_Frontend_Sperren = Frontend sperren
-maintenance_Eigene_Loesung = Nur Config-Wert setzen
-maintenance_Frontend_entsperren = Inaktiv
-maintenance_blockSession = Eingeloggte User ausperren
-maintenance_session_Inaktiv = Inaktiv
-maintenance_session_Redakteure = Redakteure zusätzlich ausperren
-maintenance_secret = Passwort
-maintenance_secret-secret = Tragen Sie hier ein beliebiges Wort ein, das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt wird.
-maintenance_secret-example = Beispiel:
-maintenance_type = Art des Seitenaufrufs
-maintenance_type_url = Aufruf per Geheim-URL mit Passwort-Parameter
-maintenance_type_pw = Aufruf per Passworteingabe durch den User
-maintenance_type_description = Aufruf per Geheim-URL: Die Seite kann mit einem Link geöffnet werden (Bsp.: https://www.domain.de/?secret=passwort)<br>Aufruf per Passwort: Der User muss vor Betreten der Seite einmalig das Passwort eingeben
-maintenance_type_description_pw = Der User muss vor Betreten der Seite einmalig das oben festgelegte Passwort eingeben.
-maintenance_pw-prompt = Passworteingabe
-maintenance_enter = Website betreten
-maintenance_responsecode = Gewünschter Response Code
-maintenance_responsecode-403 = 403 - HTTP_FORBIDDEN
-maintenance_responsecode-503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen)
+maintenance_title = Wartungsmodus
+maintenance_title_frontend = Website-Frontend
+maintenance_title_backend = REDAXO-Backend
+maintenance_docs = Hilfe
 
 
-//Backend
-maintenance_deakt-reda = Redakteure ausschließen?
+// Console-Commands
 
-perm_general_maintenance[] = Maintenance-Einstellungen verwalten
+maintenance_command_off_description = Schaltet den Wartungsmodus aus
+maintenance_command_on_description = Schaltet den Wartungsmodus ein
 
+maintenance_mode_deactivated = Wartungsmodus deaktiviert
+
+// Einstellungsseite Backend
+
+maintenance_settings_backend_title = Wartungsmodus-Einstellungen für das REDAXO-Backend
+maintenance_redirect_backend_to_url_label = Weiterleitung zu (optional)
+maintenance_block_backend_label = Wartungsmodus aktivieren
+
+// Einstellungsseite Frontend
+
+maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
+
+maintenance_block_frontend_label = Wartungsmodus aktivieren
+maintenance_block_frontend_false = Wartungsmodus deaktiviert
+maintenance_block_frontend_true = Wartungsmodus aktiviert
+
+maintenance_secret_label = Passwort
+maintenance_secret_description = Tragen Sie hier ein beliebiges Wort ein, das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt wird.
+
+maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
+maintenance_allowed_ips_description = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
+
+maintenance_allowed_domains_label = Liste erlaubter Domains
+maintenance_allowed_domains_description = Tragen Sie hier die Domains ein, die nicht gesperrt werden sollen. Enter-Taste um weitere Domains hinzuzufügen. (ohne www.)
+
+maintenance_redirect_frontend_url_label = Weiterleitung zu (optional)
+maintenance_redirect_frontend_url_notice = 
+
+maintenance_block_frontend_session_label = Eingeloggte User ausperren
+maintenance_block_frontend_session_notice =
+
+maintenance_block_frontend_rex_user_label = Redakteure zusätzlich ausperren
+maintenance_block_frontend_rex_user_notice =
+
+maintenance_http_response_code_label = Gewünschter Antwort-Header
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)

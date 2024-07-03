@@ -9,24 +9,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-// stop if Setup is active
+
+// Wenn sich REDAXO im Setup-Modus befindet, darf der Wartungsmodus nicht ausgeführt werden
 if (rex::isSetup()) {
     return;
 }
 
 $addon = rex_addon::get('maintenance');
 
-if ($addon->getConfig('frontend_aktiv') !== 'Deaktivieren') {
-    if (rex::isFrontend()) {
-        $req = $_SERVER['REQUEST_URI'];
-        if (str_contains($req, 'sitemap.xml') === true && str_contains($req, 'secret='.$addon->getConfig('secret'))) {
-            return;
-        }
+if (rex::isFrontend() && $addon->getConfig('block_frontend')) {
+
+    $req = $_SERVER['REQUEST_URI'];
+    if (str_contains($req, 'sitemap.xml') === true && str_contains($req, 'secret='.$addon->getConfig('secret'))) {
+        return;
     }
 
     $media = rex_get('rex_media_file', 'string', '');
     $media_unblock = [];
     $media_unblocklist = rex_extension::registerPoint(new rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
+
     if ($media !== '' && count($media_unblocklist) > 0) {
         if (in_array($media, $media_unblocklist)) {
             return;
@@ -37,14 +38,13 @@ if ($addon->getConfig('frontend_aktiv') !== 'Deaktivieren') {
 $secret = '';
 $responsecode = $addon->getConfig('responsecode');
 
-if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren' and $addon->getConfig('secret') !== '') {
+if (rex::isFrontend() && $addon->getConfig('block_frontend') and $addon->getConfig('secret') !== '') {
+
     rex_login::startSession();
-    if (rex_session('secret') !== '') {
-        $secret = rex_session('secret');
-    }
+    $secret = rex_session('secret', 'string', '');
 
     // GET-Parameter abfragen
-    $checksecret = rex_request('secret', 'string', 0);
+    $checksecret = rex_request('secret', 'string', false);
 
     //Überprüfen ob eingegebenes PW stimmt, wenn ja Session beschreiben, ansosnten unten PW-Fragment anzeigen
     if ($addon->getConfig('type') === 'PW' && $checksecret === $addon->getConfig('secret')) {
@@ -62,8 +62,9 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
         }
     }
 }
+
 // Ausgabe abbrechen, wenn der übermittelte Code nicht stimmt.
-if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren' and $secret === '') {
+if (rex::isFrontend() and $addon->getConfig('block_frontend') !== 'Deaktivieren' and $secret === '') {
     $ips = [];
     $domains = [];
     $iplist = $addon->getConfig('ip');
@@ -75,7 +76,7 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
     if (is_string($domainlist)) {
         $domains = explode(", ", $domainlist);
     }
-    if ($addon->getConfig('frontend_aktiv') === 'Aktivieren') {
+    if ($addon->getConfig('block_frontend') === 'Aktivieren') {
         $session = rex_backend_login::hasSession();
         $redirect = 'inaktiv';
         $admin = false;
@@ -138,20 +139,20 @@ if (rex::isFrontend() and $addon->getConfig('frontend_aktiv') !== 'Deaktivieren'
 if (rex::isBackend()) {
     $user = rex::getUser();
     if ($user !== null) {
-        if ($addon->getConfig('backend_aktiv') === '1') {
+        if ($addon->getConfig('block_backend') === '1') {
             $session = false;
             if (rex_backend_login::createUser() !== null) {
                 $session = rex::requireUser()->isAdmin();
             }
             $redirect = '';
             if ($session === false) {
-                $redirect = "aktiv";
+                $redirect = true;
             }
             if ($session === true || rex::getImpersonator() !== null) {
-                $redirect = "inaktiv";
+                $redirect = false;
             }
-            if ($redirect === 'aktiv') {
-                $url = $addon->getConfig('redirect_backend');
+            if ($redirect === true) {
+                $url = $addon->getConfig('redirect_backend_to_url');
                 $mpage = new rex_fragment();
                 $mpage = $mpage->parse('maintenance_page_be.php');
 
@@ -167,10 +168,10 @@ if (rex::isBackend()) {
             }
         }
     }
-    if ($addon->getConfig('backend_aktiv') === '1') {
+    if ($addon->getConfig('block_backend') === true) {
         rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $magic) {
             $header = '<i class="maintenance rex-icon fa-exclamation-triangle">';
-            $replace = '<i title="Mode: Lock Backend" class="rex-icon fa-exclamation-triangle aktivieren_backend">';
+            $replace = '<i title="Mode: Lock Backend" class="rex-icon fa-exclamation-triangle">';
             $subject = $magic->getSubject();
             if (is_string($subject)) {
                 $out = str_replace($header, $replace, $subject);
@@ -178,10 +179,10 @@ if (rex::isBackend()) {
             }
         });
     }
-    if ($addon->getConfig('frontend_aktiv') === 'Aktivieren') {
+    if ($addon->getConfig('block_frontend') === true) {
         rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
             $suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
-            $ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle aktivieren_frontend">';
+            $ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle">';
             $subject = $ep->getSubject();
             if (is_string($subject)) {
                 $out = str_replace($suchmuster, $ersetzen, $subject);

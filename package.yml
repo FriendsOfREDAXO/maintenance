@@ -1,28 +1,25 @@
 package: maintenance
-version: '2.9.3'
+version: '3.0.0-dev'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
-title: 'Maintenance'
-nav_icon: fa-share
-kurzbeschreibung: 'Umleitung der Frontendseite auf eine beliebige URL wenn der Besucher nicht im Backend angemeldet ist oder nicht der hintelegten IP entspricht'
-umgebung: Frontend
+title: translate:maintenance_title
 
 page:
-    title: 'Maintenance'
+    title: translate:maintenance_title
     perm: maintenance[]
     block: system
     icon: 'maintenance rex-icon fa-exclamation-triangle'
     subpages:
         frontend:
-            { title: 'Frontend', icon: rex-icon fa-laptop }
+            { title: translate:maintenance_title_frontend, icon: rex-icon fa-laptop }
         backend:
-            { title: 'Backend', icon: rex-icon fa-stack-overflow }
+            { title: translate:maintenance_title_backend, icon: rex-icon fa-stack-overflow }
         help:
-            { title: 'translate:Help', subPath: README.md }
+            { title: translate:maintenance_title_docs, subPath: README.md }
 requires:
-    redaxo: ^5.13.0
+    redaxo: ^5.17.0
     php:
-        version: '>=8.0' 
+        version: '>=8.2'
         
 console_commands:
        maintenance:on: rex_maintenance_command_on
@@ -31,13 +28,13 @@ console_commands:
        frontend:off: rex_maintenance_command_off
 
 default_config:
-      responsecode: 503
-      ip: ''
-      frontend_aktiv: 'Deaktivieren'
-      redirect_frontend: ''
-      redirect_backend: ''
-      backend_aktiv: '0'
-      blockSession: 'Inaktiv'
+      http_response_code: 503
+      allowed_ips: []
+      block_rex_user: false
+      block_frontend: true
+      block_backend: false
+      redirect_frontend: false
+      redirect_backend_to_url: ''
       secret: ''
 
 installer_ignore:

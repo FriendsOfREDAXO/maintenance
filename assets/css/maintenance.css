@@ -1,16 +1,13 @@
-.aktivieren_frontend {
+[data-maintenance="backend"] {
 	color: #d75452;
 	font-weight: bold;
 }
-.aktivieren_backend {
+[data-maintenance="frontend"] {
 	color: #ffff33;
 	font-weight: bold;
 }
 
-.selfmade_frontend {
+[data-maintenance="custom"] {
 	color: #EFC583;
 	font-weight: bold;
-}
-.FoR-help img {
-	max-width: 100%;
 }

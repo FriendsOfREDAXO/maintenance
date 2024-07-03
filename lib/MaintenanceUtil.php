@@ -8,10 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-class maintenance_functions
+
+namespace FriendsOfREDAXO\Maintenance;
+
+class MaintenanceUtil
 {
     
-    public function CheckUrl(string $url): ?bool
+    public function checkUrl(string $url): ?bool
     {
         if ($url !== '') {
             if (filter_var($url, FILTER_VALIDATE_URL) === false) {
@@ -21,7 +24,7 @@ class maintenance_functions
         }
         return null;
     }
-    public function CheckIp(string $ip): ?bool
+    public function checkIp(string $ip): ?bool
     {
         if($ip !== '' && filter_var($ip, FILTER_VALIDATE_IP) === false) {
             return false;
