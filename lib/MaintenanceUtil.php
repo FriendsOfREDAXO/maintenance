@@ -11,7 +11,7 @@
 
 namespace FriendsOfREDAXO\Maintenance;
 
-class MaintenanceUtil
+class Maintenance
 {
     
     public function checkUrl(string $url): ?bool

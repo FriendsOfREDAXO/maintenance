@@ -13,7 +13,6 @@
 use FriendsOfREDAXO\Maintenance\MaintenanceUtil;
 
 $addon = rex_addon::get('maintenance');
-$checkLink = new MaintenanceUtil();
 
 $form = rex_config_form::factory($addon->getName());
 
