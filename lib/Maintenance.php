@@ -12,7 +12,15 @@
 namespace FriendsOfREDAXO\Maintenance;
 
 use rex;
+use rex_extension;
+use rex_extension_point;
+use rex_fragment;
+use rex_login;
+use rex_request;
 use rex_response;
+use rex_session;
+use rex_yrewrite;
+use rex_server;
 
 class Maintenance extends \rex_addon
 {
