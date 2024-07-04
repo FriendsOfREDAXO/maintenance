@@ -138,7 +138,33 @@ if (rex::isFrontend() and $addon->getConfig('block_frontend') !== 'Deaktivieren'
 
 if (rex::isBackend()) {
     $user = rex::getUser();
-    if ($user !== null) {
+    if ($user) {
+
+        if ($addon->getConfig('block_backend') == true) {
+            rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
+                $header = '<i class="maintenance rex-icon fa-toggle-off">';
+                $replace = '<i title="Mode: Lock Backend" data-maintenance="backend" class="rex-icon fa-toggle-on">';
+                $subject = $ep->getSubject();
+                if (is_string($subject)) {
+                    $out = str_replace($header, $replace, $subject);
+                    $ep->setSubject($out);
+                }
+            });
+        }
+        if ($addon->getConfig('block_frontend') == true) {
+            rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
+                $suchmuster = '<i class="maintenance rex-icon fa-toggle-off">';
+                $ersetzen = '<i title="Mode: Lock Frontend" data-maintenance="frontend" class="rex-icon fa-toggle-on">';
+                $subject = $ep->getSubject();
+                if (is_string($subject)) {
+                    $out = str_replace($suchmuster, $ersetzen, $subject);
+                    $ep->setSubject($out);
+                }
+            });
+        }    
+
+
+
         if ($addon->getConfig('block_backend') === '1') {
             $session = false;
             if (rex_backend_login::createUser() !== null) {
@@ -167,28 +193,6 @@ if (rex::isBackend()) {
                 }
             }
         }
-    }
-    if ($addon->getConfig('block_backend') === true) {
-        rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $magic) {
-            $header = '<i class="maintenance rex-icon fa-exclamation-triangle">';
-            $replace = '<i title="Mode: Lock Backend" class="rex-icon fa-exclamation-triangle">';
-            $subject = $magic->getSubject();
-            if (is_string($subject)) {
-                $out = str_replace($header, $replace, $subject);
-                $magic->setSubject($out);
-            }
-        });
-    }
-    if ($addon->getConfig('block_frontend') === true) {
-        rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
-            $suchmuster = '<i class="maintenance rex-icon fa-exclamation-triangle">';
-            $ersetzen = '<i title="Mode: Lock Frontend" class="rex-icon fa-exclamation-triangle">';
-            $subject = $ep->getSubject();
-            if (is_string($subject)) {
-                $out = str_replace($suchmuster, $ersetzen, $subject);
-                $ep->setSubject($out);
-            }
-        });
     }
     rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
     rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));

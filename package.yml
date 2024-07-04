@@ -7,15 +7,21 @@ title: translate:maintenance_title
 page:
     title: translate:maintenance_title
     perm: maintenance[]
+    prio: 81
     block: system
-    icon: 'maintenance rex-icon fa-exclamation-triangle'
+    icon: 'maintenance rex-icon fa-toggle-off'
     subpages:
         frontend:
-            { title: translate:maintenance_title_frontend, icon: rex-icon fa-laptop }
+            title: translate:maintenance_frontend_title
+            icon: rex-icon fa-user
         backend:
-            { title: translate:maintenance_title_backend, icon: rex-icon fa-stack-overflow }
+            title: translate:maintenance_backend_title
+            icon: rex-icon fa-user-gear
         help:
-            { title: translate:maintenance_title_docs, subPath: README.md }
+            title: translate:maintenance_docs_title
+            subPath: README.md
+            icon: rex-icon fa-question-circle
+            itemClass: pull-right
 requires:
     redaxo: ^5.17.0
     php:
@@ -30,7 +36,7 @@ console_commands:
 default_config:
       http_response_code: 503
       allowed_ips: []
-      block_rex_user: false
+      block_frontend_rex_user: false
       block_frontend: true
       block_backend: false
       redirect_frontend: false
