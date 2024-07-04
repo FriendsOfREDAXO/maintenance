@@ -53,9 +53,9 @@ class Maintenance
     public static function isHostAllowed() : bool{
         $addon = \rex_addon::get('maintenance');
         $host = rex_server('HTTP_HOST', 'string', '');
-        $allowedHosts = $addon->getConfig('allowed_hosts');
+        $allowedHosts = $addon->getConfig('allowed_hosts', false);
 
-        if ($allowedHosts !== '') {
+        if ($allowedHosts) {
             $allowedHostsArray = explode(',', $allowedHosts);
             return in_array($host, $allowedHostsArray);
         }
@@ -66,13 +66,16 @@ class Maintenance
     public static function isYrewriteDomainAllowed() :bool {
         $addon = \rex_addon::get('maintenance');
 
-        $yrewrite_domain = \rex_yrewrite::getCurrentDomain()->getHost();
-        $allowedDomains = $addon->getConfig('allowed_domains');
+        if(\rex_yrewrite::getCurrentDomain()) {
+            $yrewrite_domain = \rex_yrewrite::getCurrentDomain()->getHost();
+            $allowedDomains = $addon->getConfig('allowed_domains');
 
-        if ($allowedDomains !== '') {
-            $allowedDomainsArray = explode(',', $allowedDomains);
-            return in_array($yrewrite_domain, $allowedDomainsArray);
+            if ($allowedDomains !== '') {
+                $allowedDomainsArray = explode(',', $allowedDomains);
+                return in_array($yrewrite_domain, $allowedDomainsArray);
+            }
         }
+
 
         return false;
     }
