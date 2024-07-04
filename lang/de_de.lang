@@ -1,4 +1,5 @@
-//Config
+// Addon-Package
+
 maintenance_title = Wartungsmodus
 maintenance_frontend_title = Website-Frontend
 maintenance_backend_title = REDAXO-Backend
