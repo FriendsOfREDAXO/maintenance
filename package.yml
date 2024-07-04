@@ -28,19 +28,18 @@ requires:
         version: '>=8.2'
         
 console_commands:
-       maintenance:on: rex_maintenance_command_on
-       frontend:on: rex_maintenance_command_on
-       maintenance:off: rex_maintenance_command_off
-       frontend:off: rex_maintenance_command_off
+       maintenance:frontend_disable: rex_maintenance_command_on
+       maintenance:frontend_enable: rex_maintenance_command_off
 
 default_config:
-      http_response_code: 503
-      allowed_ips: []
+      http_response_code: 503 # 503, 403
+      allowed_ips: false
+      authentification_mode: 'url'  # `url`, `password`
       block_frontend_rex_user: false
       block_frontend: true
       block_backend: false
-      redirect_frontend: false
-      redirect_backend_to_url: ''
+      redirect_frontend_to_url: '' # `https://example.com/maintenance.html`
+      redirect_backend_to_url: '' # `https://example.com/maintenance.html`
       secret: ''
 
 installer_ignore:
