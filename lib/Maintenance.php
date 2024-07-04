@@ -216,4 +216,23 @@ class Maintenance extends \rex_addon
             });
         }
     }
+
+    public static function showAnnouncement() :void
+    {
+        echo self::getAnnouncement();
+    }
+    
+    public static function getAnnouncement() :string
+    {
+        $addon = self::get('maintenance');
+
+        if($addon->getConfig('announcement_start_date') !== '') {
+            $start = strtotime($addon->getConfig('announcement_start_date'));
+            $end = strtotime($addon->getConfig('announcement_end_date'));
+            $now = time();
+            if($now >= $start && $now <= $end) {
+                return $addon->getConfig('announcement');
+            }
+        }
+    }
 }

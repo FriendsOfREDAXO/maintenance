@@ -13,9 +13,10 @@
 use FriendsOfREDAXO\Maintenance\MaintenanceUtil;
 
 $addon = rex_addon::get('maintenance');
-$maintenance_functions = new MaintenanceUtil();
 
 $form = rex_config_form::factory($addon->getName());
+
+$form->addFieldset($addon->i18n('maintenance_general_title'));
 
 // Aktivierung/Deaktivierung des Wartungsmodus im Frontend
 $field = $form->addSelectField('block_frontend');
@@ -45,9 +46,9 @@ $field->setNotice($addon->i18n('maintenance_secret_notice', bin2hex(random_bytes
 $field->setAttribute('type', 'password');
 
 // Ziel der Umleitung
-$field = $form->addTextField('redirect_frontend_url');
-$field->setLabel($addon->i18n('maintenance_redirect_frontend_url_label'));
-$field->setNotice($addon->i18n('maintenance_redirect_frontend_url_notice'));
+$field = $form->addTextField('redirect_frontend_to_url');
+$field->setLabel($addon->i18n('maintenance_redirect_frontend_to_url_label'));
+$field->setNotice($addon->i18n('maintenance_redirect_frontend_to_url_notice'));
 $field->setAttribute('type', 'url');
 
 // Antwortcode
@@ -57,7 +58,30 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_http_response_code_503'), '503');
 $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403');
 
-// Fieldset einfügen
+// Wartungsfenster-Ankündigung
+
+$form->addFieldset($addon->i18n('maintenance_announcement_title'));
+
+// Benachrichtigungstext
+$field = $form->addTextareaField('announcement');
+$field->setLabel($addon->i18n('maintenance_announcement_label'));
+$field->setNotice($addon->i18n('maintenance_announcement_notice'));
+if(rex_config::get('maintenance', 'editor') != '') {
+    $field->setAttribute('class', '###maintenance-settings-editor###');
+}
+
+// Start- und Endzeitpunkt der Wartungsankündigung
+$field = $form->addTextField('announcement_start_date');
+$field->setLabel($addon->i18n('maintenance_announcement_start_date_label'));
+$field->setNotice($addon->i18n('maintenance_announcement_start_date_notice'), date('Y-m-d\TH:i:s'));
+$field->setAttribute('type', 'datetime-local');
+
+$field = $form->addTextField('announcement_end_date');
+$field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
+$field->setNotice($addon->i18n('maintenance_announcement_end_date_notice'), date('Y-m-d\TH:i:s'));
+$field->setAttribute('type', 'datetime-local');
+
+// Ausnahmeregeln
 
 $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
 

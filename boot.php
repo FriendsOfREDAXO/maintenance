@@ -17,6 +17,7 @@ if (rex::isSetup()) {
 $addon = rex_addon::get('maintenance');
 
 
+
 if(rex::isFrontend()) {
     \FriendsOfREDAXO\Maintenance\Maintenance::checkFrontend();
 }
@@ -28,6 +29,17 @@ if(rex::isBackend()) {
 //    rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
 //    rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
 //    rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
+
     rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
+
+    // Easter Egg: Editor festlegen
+    if ('maintenance/frontend' == rex_be_controller::getCurrentPage()) {
+        rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
+            $suchmuster = 'class="###maintenance-settings-editor###"';
+            $ersetzen = rex_config::get('maintenance', 'editor');
+            $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject()));
+        });
+    }
+
 
 }

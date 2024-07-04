@@ -27,6 +27,8 @@ maintenance_redirect_backend_to_url_notice = URL angeben, zu der die Benutzer we
 
 maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
 
+maintenance_general_title = Allgemein
+
 maintenance_block_frontend_label = Wartungsmodus aktivieren
 maintenance_block_frontend_false = 🟢 Wartungsmodus deaktiviert
 maintenance_block_frontend_true = 🔴 Wartungsmodus aktiviert
@@ -46,8 +48,8 @@ maintenance_type_url = 🔗 Geheim-URL (Standard)
 maintenance_secret_label = Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
 
-maintenance_redirect_frontend_url_label = Weiterleitung zu (optional)
-maintenance_redirect_frontend_url_notice = URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
+maintenance_redirect_frontend_to_url_label = Weiterleitung zu (optional)
+maintenance_redirect_frontend_to_url_notice = URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
 
 maintenance_block_frontend_session_label = Eingeloggte User ausperren
 maintenance_block_frontend_session_notice =
@@ -56,6 +58,17 @@ maintenance_block_frontend_session_notice =
 maintenance_http_response_code_label = Gewünschter Antwort-Header
 maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
 maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)
+
+maintenance_announcement_title = Ankündigung der Wartungsarbeiten
+
+maintenance_announcement_label = Text
+maintenance_announcement_notice = Besucher*innen mitteilen, wann das Wartungsfenster den Wartungsmodus gesetzt wird. Ausgabe über <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+
+maintenance_announcement_start_date_label = Startdatum
+maintenance_announcement_start_date_notice = Datum, <strong>ab wann die Ankündigung gezeigt werden soll</strong>. Nicht, ab wann die Website in den Wartungsmodus wechseln soll. Aktuelle Serverzeit: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Enddatum
+maintenance_announcement_end_date_notice = Datum, bis wann die Ankündigung gezeigt werden soll. Aktuelle Serverzeit: <code>{0}</code>.
 
 maintenance_allowed_access_title = Ausnahmen
 
