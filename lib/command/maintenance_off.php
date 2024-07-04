@@ -2,12 +2,13 @@
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class rex_maintenance_command_off extends rex_console_command
+class rex_maintenance_command_deactivate extends rex_console_command
 {
     protected function configure(): void
     {
         $this->setAliases(['frontend:on'])
-            ->setDescription(rex_i18n::msg('maintenance_command_on_description'));
+            ->$this->setAliases(['maintenance:off'])
+            ->setDescription(rex_i18n::msg('maintenance_command_off_description'));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
