@@ -17,10 +17,26 @@ Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von 
   * IP-Adressen
   * Hosts
   * YRewrite-Domains (neu in Version 3.0.0)
+* Meldung und Zeitraum zur Ankündigung eines Wartungsfensters definieren (neu in Version 3.0.0)
 
-### REDAXO-Backend
+### Sperren des REDAXO-Backends
 
-* Sperren des Backends für alle Benutzer (außer Admins)
+* Sperren des REDAXO-Backends für alle Benutzer (außer Admins)
+
+### Wartungsmodus ankündigen
+
+Eine Meldung und Zeitraum zur Ankündigung eines Wartungsfensters definieren (neu in Version 3.0.0). Die Ausgabe erfolgt über `FriendsOfRedaxo\Maintenance\Maintenance::getAnnouncement()`, z.B.
+
+```php
+$announcement = FriendsOfRedaxo\Maintenance\Maintenance::getAnnouncement();
+if($announcement) {
+    echo '<div class="alert alert-danger">'.$announcement.'</div>';
+}
+```
+
+Eine für Nutzer*innen hilfreiche Meldung ist beispielsweise:
+
+> Geplante Wartungsarbeiten am 01.01.2022 von 00:00 bis 06:00 Uhr. In dieser Zeit ist die Website möglicherweise nicht erreichbar.
 
 ### Eigene HTML-Seite für den Wartungsmodus
 

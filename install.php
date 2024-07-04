@@ -35,3 +35,8 @@ if ($addon->getConfig('secret') === '')
 {
     $addon->setConfig('secret', bin2hex(random_bytes(16)));
 }
+
+if($addon->getConfig('announcement') === '') 
+{
+    $addon->setConfig('announcement', '<p>Geplante Wartungsarbeiten am 01.01.2022 von 00:00 bis 06:00 Uhr. In dieser Zeit ist die Website möglicherweise nicht erreichbar.</p>');
+}
