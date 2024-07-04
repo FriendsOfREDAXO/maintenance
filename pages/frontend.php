@@ -24,43 +24,31 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_block_frontend_false'), false);
 $select->addOption($addon->i18n('maintenance_block_frontend_true'), true);
 
-
-// Blockere auch für angemeldete REDAXO-Benutzer das Frontend 
-$field = $form->addSelectField('block_frontend_rex_user');
-$field->setLabel($addon->i18n('maintenance_block_frontend_rex_user_label'));
-$select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_true'), true);
-$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), false);
-
-
-// Passwort zum Umgehen des Wartungsmodus
-$field = $form->addTextField('secret');
-$field->setLabel($addon->i18n('maintenance_secret_label'));
-$field->setNotice($addon->i18n('maintenance_secret_notice'));
-
-// Erlaubte IP-Adressen
-$field = $form->addTextField('allowed_ips');
-$field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_ips_notice'));
-$field->setAttribute('class', 'form-control selectpicker');
-
-// Erlaubte Domains
-$field = $form->addTextField('allowed_domains');
-$field->setLabel($addon->i18n('maintenance_allowed_domains_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_domains_notice'));
-$field->setAttribute('class', 'form-control selectpicker');
-
-// Ziel der Umleitung
-$field = $form->addTextField('redirect_frontend_url');
-$field->setLabel($addon->i18n('maintenance_redirect_frontend_url_label'));
-$field->setNotice($addon->i18n('maintenance_redirect_frontend_url_notice'));
-
 // Umgehung der Wartung durch GET-Parameter (URL) oder Passwort
 $field = $form->addSelectField('type');
 $field->setLabel($addon->i18n('maintenance_type_label'));
 $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_type_url'), 'URL');
 $select->addOption($addon->i18n('maintenance_type_password'), 'password');
+
+// Blockere auch für angemeldete REDAXO-Benutzer das Frontend 
+$field = $form->addSelectField('block_frontend_rex_user');
+$field->setLabel($addon->i18n('maintenance_block_frontend_rex_user_label'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), false);
+$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), true);
+
+// Passwort zum Umgehen des Wartungsmodus
+$field = $form->addTextField('secret');
+$field->setLabel($addon->i18n('maintenance_secret_label'));
+$field->setNotice($addon->i18n('maintenance_secret_notice', bin2hex(random_bytes(16))));
+$field->setAttribute('type', 'password');
+
+// Ziel der Umleitung
+$field = $form->addTextField('redirect_frontend_url');
+$field->setLabel($addon->i18n('maintenance_redirect_frontend_url_label'));
+$field->setNotice($addon->i18n('maintenance_redirect_frontend_url_notice'));
+$field->setAttribute('type', 'url');
 
 // Antwortcode
 $field = $form->addSelectField('http_response_code');
@@ -69,51 +57,48 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_http_response_code_503'), '503');
 $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403');
 
+// Fieldset einfügen
+
+$form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
+
+// Erlaubte IP-Adressen
+$field = $form->addTextField('allowed_ips');
+$field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
+$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', $_SERVER['REMOTE_ADDR']));
+$field->setAttribute('class', 'form-control selectpicker');
+
+// Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
+if (rex_addon::get('yrewrite')->isAvailable()) {
+    $field = $form->addSelectField('allowed_yrewrite_domains');
+    $field->setAttribute('multiple', 'multiple');
+    /* Anzahl der sichtbaren Elemente erhöhen */
+    $field->setAttribute('size', count(rex_yrewrite::getDomains()));
+    $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
+    $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
+    $select = $field->getSelect();
+    foreach (rex_yrewrite::getDomains() as $key => $domain) {
+        $select->addOption($key, $key);
+    }
+} else {
+    $field = $form->addSelectField('allowed_yrewrite_domains');
+    /* Anzahl der sichtbaren Elemente erhöhen */
+    $field->setAttribute('disabled', 'disabled');
+    $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
+    $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
+    $select = $field->getSelect();
+    $select->addOption($addon->i18n('maintenance_yrewrite_not_installed'), '');
+}
+
+// Erlaubte Domains
+$field = $form->addTextField('allowed_domains');
+$field->setLabel($addon->i18n('maintenance_allowed_domains_label'));
+$field->setNotice($addon->i18n('maintenance_allowed_domains_notice'));
+$field->setAttribute('class', 'form-control selectpicker');
+
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
-$fragment->setVar('title', $addon->i18n('maintenance_settings'));
+$fragment->setVar('title', $addon->i18n('maintenance_settings_frontend_title'));
 $fragment->setVar('body', $form->get(), false);
 echo $fragment->parse('core/page/section.php');
 
 ?>
-<!--
-<script>
-    $('#showform').toggle(
-        $('#deakt-front').find("option[value='Aktivieren']").is(":checked")
-    );
-
-
-    $('#deakt-front').change(function() {
-        if ($(this).val() === 'Aktivieren') {
-            $('#showform').slideDown();
-        } else {
-            $('#showform').slideUp();
-        }
-    });
-
-    if ($("#type option:selected").val() === 'PW') {
-        $('#type-default').hide();
-        $('#type-pw').show();
-        $('#type-url').hide();
-    }
-
-    if ($("#type option:selected").val() === 'URL') {
-        $('#type-default').hide();
-        $('#type-pw').hide();
-        $('#type-url').show();
-    }
-
-    $('#type').change(function() {
-        if ($(this).val() === 'URL') {
-            $('#type-default').hide();
-            $('#type-pw').hide();
-            $('#type-url').show();
-        }
-        if ($(this).val() === 'PW') {
-            $('#type-default').hide();
-            $('#type-pw').show();
-            $('#type-url').hide();
-        }
-    });
-</script>
--->

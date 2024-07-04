@@ -1,8 +1,8 @@
 //Config
 maintenance_title = Wartungsmodus
-maintenance_title_frontend = Website-Frontend
-maintenance_title_backend = REDAXO-Backend
-maintenance_docs = Hilfe
+maintenance_frontend_title = Website-Frontend
+maintenance_backend_title = REDAXO-Backend
+maintenance_docs_title = Hilfe
 
 
 // Console-Commands
@@ -15,35 +15,55 @@ maintenance_mode_deactivated = Wartungsmodus deaktiviert
 // Einstellungsseite Backend
 
 maintenance_settings_backend_title = Wartungsmodus-Einstellungen für das REDAXO-Backend
-maintenance_redirect_backend_to_url_label = Weiterleitung zu (optional)
+
 maintenance_block_backend_label = Wartungsmodus aktivieren
+maintenance_block_backend_true = 🔴 Wartungsmodus aktiviert
+maintenance_block_backend_false = 🟢 Wartungsmodus deaktiviert
+
+maintenance_redirect_backend_to_url_label = Weiterleitung zu (optional)
+maintenance_redirect_backend_to_url_notice = URL angeben, zu der die Benutzer weitergeleitet werden, wenn das REDAXO-Backend im Wartungsmodus ist.
 
 // Einstellungsseite Frontend
 
 maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
 
 maintenance_block_frontend_label = Wartungsmodus aktivieren
-maintenance_block_frontend_false = Wartungsmodus deaktiviert
-maintenance_block_frontend_true = Wartungsmodus aktiviert
+maintenance_block_frontend_false = 🟢 Wartungsmodus deaktiviert
+maintenance_block_frontend_true = 🔴 Wartungsmodus aktiviert
+
+maintenance_block_frontend_rex_user_label = REDAXO-Benutzer zusätzlich ausperren
+maintenance_block_frontend_rex_user_false = 🆗 Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
+maintenance_block_frontend_rex_user_rex_user = 🚷 Auch REDAXO-Benutzer ausperren
+maintenance_block_frontend_rex_user_notice = Wenn aktiviert, haben nur Administratoren und Personen mit Password oder Link Zugriff auf das Frontend.
+
+maintenance_type_label = Authentifizierung
+maintenance_type_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
+
+maintenance_type_none = Keine Authentifizierung
+maintenance_type_password = 🔑 Passwort
+maintenance_type_url = 🔗 Geheim-URL (Standard)
 
 maintenance_secret_label = Passwort
-maintenance_secret_description = Tragen Sie hier ein beliebiges Wort ein, das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt wird.
-
-maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
-maintenance_allowed_ips_description = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
-
-maintenance_allowed_domains_label = Liste erlaubter Domains
-maintenance_allowed_domains_description = Tragen Sie hier die Domains ein, die nicht gesperrt werden sollen. Enter-Taste um weitere Domains hinzuzufügen. (ohne www.)
+maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
 
 maintenance_redirect_frontend_url_label = Weiterleitung zu (optional)
-maintenance_redirect_frontend_url_notice = 
+maintenance_redirect_frontend_url_notice = URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
 
 maintenance_block_frontend_session_label = Eingeloggte User ausperren
 maintenance_block_frontend_session_notice =
 
-maintenance_block_frontend_rex_user_label = Redakteure zusätzlich ausperren
-maintenance_block_frontend_rex_user_notice =
 
 maintenance_http_response_code_label = Gewünschter Antwort-Header
 maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
 maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)
+
+maintenance_allowed_access_title = Ausnahmen
+
+maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
+maintenance_allowed_ips_notice = IPv4-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Die aktuelle IP-Adresse lautet <code>{0}</code>.
+
+maintenance_allowed_domains_label = Liste erlaubter Domains
+maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werden sollen.
+
+maintenance_allowed_yrewrite_domains_label = Liste erlaubter YRewrite-Domains
+maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die nicht gesperrt werden sollen.
