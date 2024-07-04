@@ -37,7 +37,7 @@ class Maintenance
         
     }
 
-    public function isIpAllowed() : bool{
+    public static function isIpAllowed() : bool{
         $addon = \rex_addon::get('maintenance');
         $ip = rex_server('REMOTE_ADDR', 'string', '');
         $allowedIps = $addon->getConfig('allowed_ips');
@@ -50,7 +50,7 @@ class Maintenance
         return false;
     }
 
-    public function isHostAllowed() : bool{
+    public static function isHostAllowed() : bool{
         $addon = \rex_addon::get('maintenance');
         $host = rex_server('HTTP_HOST', 'string', '');
         $allowedHosts = $addon->getConfig('allowed_hosts');
@@ -63,7 +63,7 @@ class Maintenance
         return false;
     }
 
-    public function isYrewriteDomainAllowed() :bool {
+    public static function isYrewriteDomainAllowed() :bool {
         $addon = \rex_addon::get('maintenance');
 
         $yrewrite_domain = \rex_yrewrite::getCurrentDomain()->getHost();
@@ -77,7 +77,7 @@ class Maintenance
         return false;
     }
 
-    public function isSecretAllowed() :bool {
+    public static function isSecretAllowed() :bool {
         $addon = \rex_addon::get('maintenance');
 
         // Bereits mit richtigem Secret eingeloggt
@@ -96,7 +96,7 @@ class Maintenance
 
     }
 
-    public function isUserAllowed() {
+    public static function isUserAllowed() {
         $addon = \rex_addon::get('maintenance');
         \rex_backend_login::createUser();
         $user = rex::getUser();
