@@ -14,7 +14,7 @@ namespace FriendsOfREDAXO\Maintenance;
 use rex;
 use rex_response;
 
-class Maintenance extends \rex_addon
+class Maintenance
 {
     
     public function checkUrl(string $url): ?bool
@@ -38,8 +38,9 @@ class Maintenance extends \rex_addon
     }
 
     public function isIpAllowed() : bool{
+        $addon = \rex_addon::get('maintenance');
         $ip = rex_server('REMOTE_ADDR', 'string', '');
-        $allowedIps = $this->getConfig('allowed_ips');
+        $allowedIps = $addon->getConfig('allowed_ips');
 
         if ($allowedIps !== '') {
             $allowedIpsArray = explode(',', $allowedIps);
@@ -50,8 +51,9 @@ class Maintenance extends \rex_addon
     }
 
     public function isHostAllowed() : bool{
+        $addon = \rex_addon::get('maintenance');
         $host = rex_server('HTTP_HOST', 'string', '');
-        $allowedHosts = $this->getConfig('allowed_hosts');
+        $allowedHosts = $addon->getConfig('allowed_hosts');
 
         if ($allowedHosts !== '') {
             $allowedHostsArray = explode(',', $allowedHosts);
@@ -62,8 +64,10 @@ class Maintenance extends \rex_addon
     }
 
     public function isYrewriteDomainAllowed() :bool {
+        $addon = \rex_addon::get('maintenance');
+
         $yrewrite_domain = \rex_yrewrite::getCurrentDomain()->getHost();
-        $allowedDomains = $this->getConfig('allowed_domains');
+        $allowedDomains = $addon->getConfig('allowed_domains');
 
         if ($allowedDomains !== '') {
             $allowedDomainsArray = explode(',', $allowedDomains);
@@ -74,14 +78,15 @@ class Maintenance extends \rex_addon
     }
 
     public function isSecretAllowed() :bool {
+        $addon = \rex_addon::get('maintenance');
 
         // Bereits mit richtigem Secret eingeloggt
-        if(\rex_session('secret', 'string', false) === $this->getConfig('secret')) {
+        if(\rex_session('secret', 'string', false) === $addon->getConfig('secret')) {
             return true;
         }
         $secret = rex_request('secret', 'string', false);
 
-        if ($this->getConfig('type') === 'secret' && $secret === $this->getConfig('secret')) {
+        if ($addon->getConfig('type') === 'secret' && $secret === $addon->getConfig('secret')) {
             rex_set_session('secret', $secret);
             return true;
         }
@@ -92,6 +97,7 @@ class Maintenance extends \rex_addon
     }
 
     public function isUserAllowed() {
+        $addon = \rex_addon::get('maintenance');
         \rex_backend_login::createUser();
         $user = rex::getUser();
 
@@ -101,7 +107,7 @@ class Maintenance extends \rex_addon
         }
 
         // Eingeloggte REDAXO-Benutzer dürfen sich einloggen, wenn es in den Einstellungen erlaubt ist
-        if($user && $this->getConfig('allow_logged_in_users')) {
+        if($user && $addon->getConfig('allow_logged_in_users')) {
             return true;
         }
 
@@ -112,34 +118,34 @@ class Maintenance extends \rex_addon
     {
         /* @var $addon FriendsOfREDAXO\Maintenance\Maintenance */
         /* @var FriendsOfREDAXO\Maintenance\Maintenance $addon */
-        $addon = self::get('maintenance');
+        $addon = \rex_addon::get('maintenance');
         // Wenn Maintenance-Modus aktiviert ist und das Frontend blockiert werden soll
         if ($addon->getConfig('block_frontend')) {
 
             \rex_login::startSession();
 
             // Wenn die IP-Adresse erlaubt ist, Anfrage nicht sperren
-            if ($addon->isIpAllowed()) {
+            if (self::isIpAllowed()) {
                 return;
             }
 
             // Wenn die YRewrite-Domain erlaubt ist, Anfrage nicht sperren
-            if ($addon->isYrewriteDomainAllowed()) {
+            if (self::isYrewriteDomainAllowed()) {
                 return;
             }
 
             // Wenn die Host erlaubt ist, Anfrage nicht sperren
-            if ($addon->isHostAllowed()) {
+            if (self::isHostAllowed()) {
                 return;
             }
 
             // Wenn das Secret stimmt, Anfrage nicht sperren
-            if($addon->isSecretAllowed()) {
+            if(self::isSecretAllowed()) {
                 return;
             }
 
             // Wenn eingeloggte REDAXO-Benutzer erlaubt sind, oder der Benutzer Admin ist, Anfrage nicht sperren
-            if ($addon->isUserAllowed()) {
+            if (self::isUserAllowed()) {
                 return;
             }
 
@@ -180,7 +186,7 @@ class Maintenance extends \rex_addon
 
     public static function checkBackend()
     {
-        $addon = self::get('maintenance');
+        $addon = \rex_addon::get('maintenance');
         if ($addon->getConfig('block_backend') === true && rex::getUser() && !rex::getUser()->isAdmin()) {
             if ($addon->getConfig('redirect_backend_to_url') !== '') {
                 rex_response::sendRedirect($addon->getConfig('redirect_backend_to_url'));
@@ -191,7 +197,7 @@ class Maintenance extends \rex_addon
 
     public static function setIndicators()
     {
-        $addon = self::get('maintenance');
+        $addon = \rex_addon::get('maintenance');
 
         if ($addon->getConfig('block_backend')) {
             \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
@@ -224,7 +230,7 @@ class Maintenance extends \rex_addon
     
     public static function getAnnouncement() :string
     {
-        $addon = self::get('maintenance');
+        $addon = \rex_addon::get('maintenance');
 
         if($addon->getConfig('announcement_start_date') !== '') {
             $start = strtotime($addon->getConfig('announcement_start_date'));
