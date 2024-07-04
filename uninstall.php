@@ -7,3 +7,5 @@ if ($data && in_array('maintenance', $data['setup_addons'], true)) {
     $data['setup_addons'] = array_filter($data['setup_addons'], fn ($e) => $e !== 'maintenance');
     rex_file::putConfig($config_file, $data);
 }
+
+rex_config::removeNamespace('maintenance');
