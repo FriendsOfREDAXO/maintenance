@@ -111,7 +111,7 @@ class Maintenance extends \rex_addon
     public static function checkFrontend() : void
     {
         /* @var $addon FriendsOfREDAXO\Maintenance\Maintenance */
-        /* @var  FriendsOfREDAXO\Maintenance\Maintenance $addon */
+        /* @var FriendsOfREDAXO\Maintenance\Maintenance $addon */
         $addon = self::get('maintenance');
         // Wenn Maintenance-Modus aktiviert ist und das Frontend blockiert werden soll
         if ($addon->getConfig('block_frontend')) {
@@ -196,7 +196,7 @@ class Maintenance extends \rex_addon
         if ($addon->getConfig('block_backend')) {
             \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
                 $header = '<i class="maintenance rex-icon fa-toggle-off">';
-                $replace = '<i class="rex-icon fa-toggle-on">';
+                $replace = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="backend">';
                 $subject = $ep->getSubject();
                 if (is_string($subject)) {
                     $out = str_replace($header, $replace, $subject);
@@ -207,7 +207,7 @@ class Maintenance extends \rex_addon
         if ($addon->getConfig('block_frontend')) {
             \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
                 $suchmuster = '<i class="maintenance rex-icon fa-toggle-off">';
-                $ersetzen = '<i class="rex-icon fa-toggle-on">';
+                $ersetzen = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="frontend">';
                 $subject = $ep->getSubject();
                 if (is_string($subject)) {
                     $out = str_replace($suchmuster, $ersetzen, $subject);
