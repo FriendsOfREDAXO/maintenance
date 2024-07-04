@@ -143,7 +143,7 @@ if (rex::isBackend()) {
         if ($addon->getConfig('block_backend') == true) {
             rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
                 $header = '<i class="maintenance rex-icon fa-toggle-off">';
-                $replace = '<i title="Mode: Lock Backend" data-maintenance="backend" class="rex-icon fa-toggle-on">';
+                $replace = '<i data-maintenance="backend" class="rex-icon fa-toggle-on">';
                 $subject = $ep->getSubject();
                 if (is_string($subject)) {
                     $out = str_replace($header, $replace, $subject);
@@ -154,7 +154,7 @@ if (rex::isBackend()) {
         if ($addon->getConfig('block_frontend') == true) {
             rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
                 $suchmuster = '<i class="maintenance rex-icon fa-toggle-off">';
-                $ersetzen = '<i title="Mode: Lock Frontend" data-maintenance="frontend" class="rex-icon fa-toggle-on">';
+                $ersetzen = '<i data-maintenance="frontend" class="rex-icon fa-toggle-on">';
                 $subject = $ep->getSubject();
                 if (is_string($subject)) {
                     $out = str_replace($suchmuster, $ersetzen, $subject);
