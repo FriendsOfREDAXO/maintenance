@@ -1,13 +1,11 @@
 [data-maintenance="backend"] {
 	color: #d75452;
-	font-weight: bold;
 }
+
 [data-maintenance="frontend"] {
-	color: #ffff33;
-	font-weight: bold;
+	color: #d75452;
 }
 
 [data-maintenance="custom"] {
-	color: #EFC583;
-	font-weight: bold;
+	color: #d75452;
 }
