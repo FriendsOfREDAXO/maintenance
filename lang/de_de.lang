@@ -39,12 +39,12 @@ maintenance_block_frontend_rex_user_false = 🆗 Eingeloggte REDAXO-Benutzer hab
 maintenance_block_frontend_rex_user_rex_user = 🚷 Auch REDAXO-Benutzer ausperren
 maintenance_block_frontend_rex_user_notice = Wenn aktiviert, haben nur Administratoren und Personen mit Password oder Link Zugriff auf das Frontend.
 
-maintenance_type_label = Authentifizierung
-maintenance_type_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
+maintenance_authentification_mode_label = Authentifizierung
+maintenance_authentification_mode_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
 
-maintenance_type_none = Keine Authentifizierung
-maintenance_type_password = 🔑 Passwort
-maintenance_type_url = 🔗 Geheim-URL (Standard)
+maintenance_authentification_mode_none = Keine Authentifizierung
+maintenance_authentification_mode_password = 🔑 Passwort
+maintenance_authentification_mode_url = 🔗 Geheim-URL (Standard)
 
 maintenance_secret_label = Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
