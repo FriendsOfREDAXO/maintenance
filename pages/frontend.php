@@ -66,7 +66,7 @@ $form->addFieldset($addon->i18n('maintenance_announcement_title'));
 $field = $form->addTextAreaField('announcement');
 $field->setLabel($addon->i18n('maintenance_announcement_label'));
 $field->setNotice($addon->i18n('maintenance_announcement_notice'));
-if(rex_config::get('maintenance', 'editor') != '') {
+if(strval(rex_config::get('maintenance', 'editor')) !== '') { // @phpstan-ignore-line
     $field->setAttribute('class', '###maintenance-settings-editor###');
 }
 
@@ -88,7 +88,7 @@ $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
 // Erlaubte IP-Adressen
 $field = $form->addTextField('allowed_ips');
 $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', \rex_server('REMOTE_ADDR')));
+$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', \rex_server('REMOTE_ADDR', 'string', '')));
 $field->setAttribute('class', 'form-control selectpicker');
 
 // Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
