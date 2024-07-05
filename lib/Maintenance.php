@@ -194,7 +194,7 @@ class Maintenance
     {
         $addon = \rex_addon::get('maintenance');
         if (rex::getUser() instanceof \rex_user && !rex::getUser()->isAdmin()) {
-            if (strval($addon->getConfig('redirect_backend_to_url'))) {
+            if (strval($addon->getConfig('redirect_backend_to_url'))) { // @phpstan-ignore-line
                 rex_response::sendRedirect(strval($addon->getConfig('redirect_backend_to_url')));  // @phpstan-ignore-line
             }
             $mpage = new \rex_fragment();
