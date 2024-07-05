@@ -17,7 +17,7 @@ class rex_maintenance_command_activate extends rex_console_command
         $io = $this->getStyle($input, $output);
         $io->title('Maintenance AddOn');
         $addon = rex_addon::get('maintenance');
-        $addon->setConfig('block_frontend', true);
+        $addon->setConfig('block_frontend', 1);
         $io->success(rex_i18n::msg('maintenance_mode_activated'));
         return 0;
     }
