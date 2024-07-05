@@ -1,0 +1,83 @@
+// Extra pakket
+
+maintenance_title = Onderhoudsmodus
+maintenance_frontend_title = Frontend van de website
+maintenance_backend_title = REDAXO-backend
+maintenance_docs_title = Documentatie
+
+
+// Console commando's
+
+maintenance_command_off_description = Onderhoudsmodus uitschakelen
+maintenance_command_on_description = Onderhoudsmodus inschakelen
+
+maintenance_mode_deactivated = Onderhoudsmodus gedeactiveerd
+
+// Backend instellingenpagina
+
+maintenance_settings_backend_title = Instellingen voor de onderhoudsmodus voor het REDAXO-backend
+
+maintenance_block_backend_label = Onderhoudsmodus activeren
+maintenance_block_backend_true = 🔴 Onderhoudsmodus geactiveerd
+maintenance_block_backend_false = 🟢 Onderhoudsmodus gedeactiveerd
+
+maintenance_redirect_backend_to_url_label = Omleiden naar (optioneel)
+maintenance_redirect_backend_to_url_notice = Geef de URL op waarnaar gebruikers worden omgeleid wanneer het REDAXO-backend in onderhoudsmodus is.
+
+// Frontend instellingenpagina
+
+maintenance_settings_frontend_title = Instellingen voor de onderhoudsmodus voor de website frontend
+
+maintenance_general_title = Algemeen
+
+maintenance_block_frontend_label = Onderhoudsmodus activeren
+maintenance_block_frontend_false = 🟢 Onderhoudsmodus gedeactiveerd
+maintenance_block_frontend_true = 🔴 Onderhoudsmodus geactiveerd
+
+maintenance_block_frontend_rex_user_label = Ook REDAXO-gebruikers blokkeren
+maintenance_block_frontend_rex_user_false = 🆗 Geautoriseerde REDAXO-gebruikers hebben nog steeds toegang
+maintenance_block_frontend_rex_user_true = 🚷 Ook REDAXO-gebruikers blokkeren
+maintenance_block_frontend_rex_user_notice = Indien geactiveerd, hebben alleen beheerders en personen met een wachtwoord of link toegang tot de frontend.
+
+maintenance_type_label = Authenticatie
+maintenance_type_notice = Kies de authenticatiemethode voor toegang.
+
+maintenance_type_none = Geen authenticatie
+maintenance_type_password = 🔑 Wachtwoord
+maintenance_type_url = 🔗 Geheime URL (standaard)
+
+maintenance_secret_label = Geheim
+maintenance_secret_notice = Voer elke tekst in (wachtwoord, codewoord, bijvoorbeeld, <code>{0}</code>) die zal worden gebruikt voor toegang tot de site via de geheime URL of wachtwoordinvoer.
+
+maintenance_redirect_frontend_to_url_label = Omleiden naar (optioneel)
+maintenance_redirect_frontend_to_url_notice = Geef de URL op waarnaar bezoekers worden omgeleid wanneer de website in onderhoudsmodus is.
+
+maintenance_block_frontend_session_label = Geautoriseerde gebruikers blokkeren
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Gewenste antwoordheader
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (aanbevolen als de website tijdelijk niet beschikbaar is)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Toegang tot de bron is permanent verboden)
+
+maintenance_announcement_title = Onderhoudsaankondiging
+
+maintenance_announcement_label = Tekst
+maintenance_announcement_notice = Informeer bezoekers wanneer het onderhoudsvenster de onderhoudsmodus activeert. Output via <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+
+maintenance_announcement_start_date_label = Startdatum
+maintenance_announcement_start_date_notice = Datum vanaf <strong>wanneer de aankondiging moet worden getoond</strong>. Niet vanaf wanneer de website in onderhoudsmodus gaat. Huidige servertijd: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Einddatum
+maintenance_announcement_end_date_notice = Datum tot wanneer de aankondiging moet worden getoond. Huidige servertijd: <code>{0}</code>.
+
+maintenance_allowed_access_title = Uitzonderingen
+
+maintenance_allowed_ips_label = Lijst van toegestane IP-adressen
+maintenance_allowed_ips_notice = Voer de IP-adres(sen) IPv4 in die nog steeds toegang hebben tot de frontend. Uw huidige IP-adres: <code>{0}</code>.
+
+maintenance_allowed_domains_label = Lijst van toegestane domeinen
+maintenance_allowed_domains_notice = Voer de domeinen in die niet moeten worden geblokkeerd.
+
+maintenance_allowed_yrewrite_domains_label = Lijst van toegestane YRewrite-domeinen
+maintenance_allowed_yrewrite_domains_notice = Voer de YRewrite-domeinen in die niet moeten worden geblokkeerd.

@@ -1,0 +1,83 @@
+// Tillegg
+
+maintenance_title = Vedlikeholdsmodus
+maintenance_frontend_title = Nettstedets frontend
+maintenance_backend_title = REDAXO backend
+maintenance_docs_title = Dokumentasjon
+
+
+// Konsollkommandoer
+
+maintenance_command_off_description = Deaktiver vedlikeholdsmodus
+maintenance_command_on_description = Aktiver vedlikeholdsmodus
+
+maintenance_mode_deactivated = Vedlikeholdsmodus deaktivert
+
+// Backend innstillinger side
+
+maintenance_settings_backend_title = Innstillinger for vedlikeholdsmodus for REDAXO backend
+
+maintenance_block_backend_label = Aktiver vedlikeholdsmodus
+maintenance_block_backend_true = 🔴 Vedlikeholdsmodus aktivert
+maintenance_block_backend_false = 🟢 Vedlikeholdsmodus deaktivert
+
+maintenance_redirect_backend_to_url_label = Omdirigerings-URL (valgfritt)
+maintenance_redirect_backend_to_url_notice = Angi URL-en brukere vil bli omdirigert til når REDAXO backend er i vedlikeholdsmodus.
+
+// Frontend innstillinger side
+
+maintenance_settings_frontend_title = Innstillinger for vedlikeholdsmodus for nettstedets frontend
+
+maintenance_general_title = Generelt
+
+maintenance_block_frontend_label = Aktiver vedlikeholdsmodus
+maintenance_block_frontend_false = 🟢 Vedlikeholdsmodus deaktivert
+maintenance_block_frontend_true = 🔴 Vedlikeholdsmodus aktivert
+
+maintenance_block_frontend_rex_user_label = Blokker også REDAXO-brukere
+maintenance_block_frontend_rex_user_false = 🆗 Tillat tilgang for autoriserte REDAXO-brukere
+maintenance_block_frontend_rex_user_true = 🚷 Blokker også REDAXO-brukere
+maintenance_block_frontend_rex_user_notice = Hvis aktivert, bare administratorer og personer med tilgang via passord eller link kan få tilgang til frontend.
+
+maintenance_type_label = Autentisering
+maintenance_type_notice = Velg autentiseringsmetode for tilgang.
+
+maintenance_type_none = Ingen autentisering
+maintenance_type_password = 🔑 Passord
+maintenance_type_url = 🔗 Hemmelig URL (standard)
+
+maintenance_secret_label = Hemmelighet
+maintenance_secret_notice = Angi teksten (passord, hemmelig kode, etc. <code>{0}</code>) som vil bli brukt for tilgang til nettstedet via hemmelig URL eller ved å oppgi passord.
+
+maintenance_redirect_frontend_to_url_label = Omdirigerings-URL (valgfritt)
+maintenance_redirect_frontend_to_url_notice = Angi URL-en besøkende vil bli omdirigert til når nettstedet er i vedlikeholdsmodus.
+
+maintenance_block_frontend_session_label = Blokker autoriserte brukere
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Ønsket svarskode
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (anbefalt hvis nettstedet er midlertidig utilgjengelig)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Tilgang til ressursen er permanent forbudt)
+
+maintenance_announcement_title = Vedlikeholdsannonsering
+
+maintenance_announcement_label = Tekst
+maintenance_announcement_notice = Informer besøkende når vedlikeholdsvinduet aktiverer vedlikeholdsmodus. Bruk <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code> for å vise.
+
+maintenance_announcement_start_date_label = Startdato
+maintenance_announcement_start_date_notice = Datoen når annonseringen begynner å vises. Ikke når nettstedet går inn i vedlikeholdsmodus. Nåværende servertid: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Sluttdato
+maintenance_announcement_end_date_notice = Datoen når annonseringen slutter å vises. Nåværende servertid: <code>{0}</code>.
+
+maintenance_allowed_access_title = Unntak
+
+maintenance_allowed_ips_label = Liste over tillatte IP-adresser
+maintenance_allowed_ips_notice = Angi IP-adresse(r) IPv4 som fortsatt vil ha tilgang til frontend. Din nåværende IP-adresse: <code>{0}</code>.
+
+maintenance_allowed_domains_label = Liste over tillatte domener
+maintenance_allowed_domains_notice = Angi domenene som ikke vil bli blokkert.
+
+maintenance_allowed_yrewrite_domains_label = Liste over tillatte YRewrite-domener
+maintenance_allowed_yrewrite_domains_notice = Angi YRewrite-domener som ikke vil bli blokkert.
