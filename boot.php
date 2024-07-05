@@ -18,11 +18,12 @@ $addon = rex_addon::get('maintenance');
 
 
 
-if(rex::isFrontend()) {
+if(rex::isFrontend() && boolval($addon->getConfig('block_frontend'))) {
+
     \FriendsOfREDAXO\Maintenance\Maintenance::checkFrontend();
 }
 
-if(rex::isBackend()) {
+if(rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
     \FriendsOfREDAXO\Maintenance\Maintenance::checkBackend();
     \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
 
