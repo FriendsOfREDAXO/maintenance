@@ -125,4 +125,29 @@ $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
 $fragment->setVar('title', $addon->i18n('maintenance_settings_frontend_title'));
 $fragment->setVar('body', $form->get(), false);
+?>
+
+<div class="row">
+	<div class="col-lg-8">
+		<?= $fragment->parse('core/page/section.php') ?>
+	</div>
+	<div class="col-lg-4">
+		<?php
+
+$copy = '';
+$url = '' . rex::getServer() . '?secret=' . rex_config::get('maintenance', 'secret');
+$copy .= '<div class="hidden" id="maintenance-mode-url"><code>'.$url.'</code></div>';
+$copy .= '
+<clipboard-copy for="maintenance-mode-url" class="input-group">
+  <input type="text" value="' .$url .'" readonly class="form-control">
+  <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+</clipboad-copy>';
+
+$fragment = new rex_fragment();
+$fragment->setVar('class', 'info', false);
+$fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
+$fragment->setVar('body', $copy, false);
 echo $fragment->parse('core/page/section.php');
+?>
+	</div>
+</div>
