@@ -83,7 +83,6 @@ class Maintenance
             }
         }
 
-
         return false;
     }
 
@@ -93,7 +92,7 @@ class Maintenance
         $addon = \rex_addon::get('maintenance');
 
         // Bereits mit richtigem Secret eingeloggt
-        if(\rex_session('secret', 'string', false) === strval($addon->getConfig('secret'))) { // @phpstan-ignore-line 
+        if(\rex_session('secret', 'string', false) === strval($addon->getConfig('secret'))) { // @phpstan-ignore-line
             return true;
         }
         $secret = rex_request('secret', 'string', false);
@@ -103,7 +102,7 @@ class Maintenance
             return true;
         }
 
-        rex_set_session('secret', false);
+        \rex_unset_session('secret');
         return false;
 
     }
@@ -131,106 +130,100 @@ class Maintenance
     public static function checkFrontend() : void
     {
         $addon = \rex_addon::get('maintenance');
-        // Wenn Maintenance-Modus aktiviert ist und das Frontend blockiert werden soll
-        if (boolval($addon->getConfig('block_frontend'))) {
 
-            \rex_login::startSession();
+        \rex_login::startSession();
 
-            // Wenn die IP-Adresse erlaubt ist, Anfrage nicht sperren
-            if (self::isIpAllowed()) {
-                return;
-            }
-
-            // Wenn die YRewrite-Domain erlaubt ist, Anfrage nicht sperren
-            if (self::isYrewriteDomainAllowed()) {
-                return;
-            }
-
-            // Wenn die Host erlaubt ist, Anfrage nicht sperren
-            if (self::isHostAllowed()) {
-                return;
-            }
-
-            // Wenn das Secret stimmt, Anfrage nicht sperren
-            if(self::isSecretAllowed()) {
-                return;
-            }
-
-            // Wenn eingeloggte REDAXO-Benutzer erlaubt sind, oder der Benutzer Admin ist, Anfrage nicht sperren
-            if (self::isUserAllowed()) {
-                return;
-            }
-
-            // Wenn die Sitemap angefordert wird, Anfrage nicht sperren
-            $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
-            if (str_contains($REQUEST_URI, 'sitemap.xml') === true) {
-                return;
-            }
-
-            // EP zum Erlauben von Medien-Dateien
-            $media = rex_get('rex_media_file', 'string', '');
-            $media_unblock = [];
-            $media_unblocklist = \rex_extension::registerPoint(new \rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
-            // @phpstan-ignore-next-line
-            if (in_array($media, $media_unblocklist, true)) {
-                return;
-            }
-
-            // Alles, was bis hier hin nicht erlaubt wurde, blockieren wie in den Einstellungen gewählt
-            $redirect_url = strval($addon->getConfig('redirect_frontend_to_url')); // @phpstan-ignore-line
-            $responsecode = strval($addon->getConfig('http_response_code')); // @phpstan-ignore-line
-
-            $mpage = new \rex_fragment();
-            if(strval($addon->getConfig('authentification_mode')) === 'login') { // @phpstan-ignore-line
-                echo $mpage->parse('maintenance_page_pw_form.php');
-            } elseif ($redirect_url !== '') {
-                rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
-                rex_response::sendRedirect($redirect_url);
-            }
-            header('HTTP/1.1 ' . $responsecode);
-            echo $mpage->parse('maintenance_page.php');
-            die();
-
+        // Wenn die IP-Adresse erlaubt ist, Anfrage nicht sperren
+        if (self::isIpAllowed()) {
+            return;
         }
+
+        // Wenn die YRewrite-Domain erlaubt ist, Anfrage nicht sperren
+        if (self::isYrewriteDomainAllowed()) {
+            return;
+        }
+
+        // Wenn die Host erlaubt ist, Anfrage nicht sperren
+        if (self::isHostAllowed()) {
+            return;
+        }
+
+        // Wenn das Secret / Passwort stimmt, Anfrage nicht sperren
+        if(self::isSecretAllowed()) {
+            return;
+        }
+
+        // Wenn eingeloggte REDAXO-Benutzer erlaubt sind, oder der Benutzer Admin ist, Anfrage nicht sperren
+        if (self::isUserAllowed()) {
+            return;
+        }
+
+        // Wenn die Sitemap angefordert wird, Anfrage nicht sperren
+        $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
+        if (str_contains($REQUEST_URI, 'sitemap.xml') === true) {
+            return;
+        }
+
+        // EP zum Erlauben von Medien-Dateien
+        $media = rex_get('rex_media_file', 'string', '');
+        $media_unblock = [];
+        $media_unblocklist = \rex_extension::registerPoint(new \rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
+        // @phpstan-ignore-next-line
+        if (in_array($media, $media_unblocklist, true)) {
+            return;
+        }
+
+        // Alles, was bis hier hin nicht erlaubt wurde, blockieren wie in den Einstellungen gewählt
+        $redirect_url = strval($addon->getConfig('redirect_frontend_to_url')); // @phpstan-ignore-line
+        $responsecode = strval($addon->getConfig('http_response_code')); // @phpstan-ignore-line
+
+
+        $mpage = new \rex_fragment();
+        if(strval($addon->getConfig('authentification_mode')) === 'password') { // @phpstan-ignore-line
+            exit($mpage->parse('maintenance/frontend_password.php'));
+        } elseif ($redirect_url !== '') {
+            rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
+            rex_response::sendRedirect($redirect_url);
+        }
+        header('HTTP/1.1 ' . $responsecode);
+        exit($mpage->parse('maintenance/frontend.php'));
 
     }
 
     public static function checkBackend() :void
     {
         $addon = \rex_addon::get('maintenance');
-        if ($addon->getConfig('block_backend') === true && rex::getUser() instanceof \rex_user && !rex::getUser()->isAdmin()) {
-            if (boolval($addon->getConfig('redirect_backend_to_url'))) {
+        if (rex::getUser() instanceof \rex_user && !rex::getUser()->isAdmin()) {
+            if (strval($addon->getConfig('redirect_backend_to_url'))) {
                 rex_response::sendRedirect(strval($addon->getConfig('redirect_backend_to_url')));  // @phpstan-ignore-line
             }
+            $mpage = new \rex_fragment();
+            header('HTTP/1.1 ' . strval($addon->getConfig('http_response_code'))); // @phpstan-ignore-line
+            exit($mpage->parse('maintenance/backend.php'));
+
         }
     }
 
     public static function setIndicators() : void
     {
-        $addon = \rex_addon::get('maintenance');
-
-        if (boolval($addon->getConfig('block_backend'))) {
-            \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
-                $header = '<i class="maintenance rex-icon fa-toggle-off">';
-                $replace = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="backend">';
-                $subject = $ep->getSubject();
-                if (is_string($subject)) {
-                    $out = str_replace($header, $replace, $subject);
-                    $ep->setSubject($out);
-                }
-            });
-        }
-        if (boolval($addon->getConfig('block_frontend'))) {
-            \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
-                $suchmuster = '<i class="maintenance rex-icon fa-toggle-off">';
-                $ersetzen = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="frontend">';
-                $subject = $ep->getSubject();
-                if (is_string($subject)) {
-                    $out = str_replace($suchmuster, $ersetzen, $subject);
-                    $ep->setSubject($out);
-                }
-            });
-        }
+        \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
+            $header = '<i class="maintenance rex-icon fa-toggle-off">';
+            $replace = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="backend">';
+            $subject = $ep->getSubject();
+            if (is_string($subject)) {
+                $out = str_replace($header, $replace, $subject);
+                $ep->setSubject($out);
+            }
+        });
+        \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
+            $suchmuster = '<i class="maintenance rex-icon fa-toggle-off">';
+            $ersetzen = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="frontend">';
+            $subject = $ep->getSubject();
+            if (is_string($subject)) {
+                $out = str_replace($suchmuster, $ersetzen, $subject);
+                $ep->setSubject($out);
+            }
+        });
     }
 
     /** @api */
