@@ -27,9 +27,9 @@ if(rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
     \FriendsOfREDAXO\Maintenance\Maintenance::checkBackend();
     \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
 
-    //    rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
-    //    rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
-    //    rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
+    rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
+    rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
+    rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 
     rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
 
