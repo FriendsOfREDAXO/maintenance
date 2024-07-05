@@ -6,6 +6,7 @@ class rex_maintenance_command_deactivate extends rex_console_command
 {
     protected function configure(): void
     {
+        // @phpstan-ignore-next-line
         $this->setAliases(['frontend:on'])
             ->$this->setAliases(['maintenance:off'])
             ->setDescription(rex_i18n::msg('maintenance_command_off_description'));

@@ -33,11 +33,11 @@ console_commands:
 
 default_config:
       http_response_code: 503 # 503, 403
-      allowed_ips: false
+      allowed_ips: ''
       authentification_mode: 'url'  # `url`, `password`
-      block_frontend: false
-      block_frontend_rex_user: false
-      block_backend: false
+      block_frontend: 0
+      block_frontend_rex_user: 0
+      block_backend: 0
       redirect_frontend_to_url: '' # `https://example.com/maintenance.html`
       redirect_backend_to_url: '' # `https://example.com/maintenance.html`
       secret: ''

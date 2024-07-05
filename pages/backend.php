@@ -19,8 +19,8 @@ $form = rex_config_form::factory($addon->getName());
 $field = $form->addSelectField('block_backend');
 $field->setLabel($addon->i18n('maintenance_block_backend_label'));
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_backend_true'), true);
-$select->addOption($addon->i18n('maintenance_block_backend_false'), false);
+$select->addOption($addon->i18n('maintenance_block_backend_true'), 1);
+$select->addOption($addon->i18n('maintenance_block_backend_false'), 0);
 
 $field = $form->addTextField('redirect_backend_to_url');
 $field->setLabel($addon->i18n('maintenance_redirect_backend_to_url_label'));

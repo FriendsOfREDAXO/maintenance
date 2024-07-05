@@ -22,8 +22,8 @@ $form->addFieldset($addon->i18n('maintenance_general_title'));
 $field = $form->addSelectField('block_frontend');
 $field->setLabel($addon->i18n('maintenance_block_frontend_label'));
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_frontend_false'), false);
-$select->addOption($addon->i18n('maintenance_block_frontend_true'), true);
+$select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
+$select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
 
 // Umgehung der Wartung durch GET-Parameter (URL) oder Passwort
 $field = $form->addSelectField('type');
@@ -32,12 +32,12 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_type_url'), 'URL');
 $select->addOption($addon->i18n('maintenance_type_password'), 'password');
 
-// Blockere auch für angemeldete REDAXO-Benutzer das Frontend 
+// Blockere auch für angemeldete REDAXO-Benutzer das Frontend
 $field = $form->addSelectField('block_frontend_rex_user');
 $field->setLabel($addon->i18n('maintenance_block_frontend_rex_user_label'));
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), false);
-$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), true);
+$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0);
+$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1);
 
 // Passwort zum Umgehen des Wartungsmodus
 $field = $form->addTextField('secret');
@@ -63,7 +63,7 @@ $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403');
 $form->addFieldset($addon->i18n('maintenance_announcement_title'));
 
 // Benachrichtigungstext
-$field = $form->addTextareaField('announcement');
+$field = $form->addTextAreaField('announcement');
 $field->setLabel($addon->i18n('maintenance_announcement_label'));
 $field->setNotice($addon->i18n('maintenance_announcement_notice'));
 if(rex_config::get('maintenance', 'editor') != '') {
@@ -73,12 +73,12 @@ if(rex_config::get('maintenance', 'editor') != '') {
 // Start- und Endzeitpunkt der Wartungsankündigung
 $field = $form->addTextField('announcement_start_date');
 $field->setLabel($addon->i18n('maintenance_announcement_start_date_label'));
-$field->setNotice($addon->i18n('maintenance_announcement_start_date_notice'), date('Y-m-d\TH:i:s'));
+$field->setNotice($addon->i18n('maintenance_announcement_start_date_notice', date('Y-m-d H:i:s')));
 $field->setAttribute('type', 'datetime-local');
 
 $field = $form->addTextField('announcement_end_date');
 $field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
-$field->setNotice($addon->i18n('maintenance_announcement_end_date_notice'), date('Y-m-d\TH:i:s'));
+$field->setNotice($addon->i18n('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
 $field->setAttribute('type', 'datetime-local');
 
 // Ausnahmeregeln
@@ -88,19 +88,19 @@ $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
 // Erlaubte IP-Adressen
 $field = $form->addTextField('allowed_ips');
 $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', $_SERVER['REMOTE_ADDR']));
+$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', \rex_server('REMOTE_ADDR')));
 $field->setAttribute('class', 'form-control selectpicker');
 
 // Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
-if (rex_addon::get('yrewrite')->isAvailable()) {
+if (\rex_addon::get('yrewrite')->isAvailable()) {
     $field = $form->addSelectField('allowed_yrewrite_domains');
     $field->setAttribute('multiple', 'multiple');
     /* Anzahl der sichtbaren Elemente erhöhen */
-    $field->setAttribute('size', count(rex_yrewrite::getDomains()));
+    $field->setAttribute('size', count(\rex_yrewrite::getDomains()));
     $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
     $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
     $select = $field->getSelect();
-    foreach (rex_yrewrite::getDomains() as $key => $domain) {
+    foreach (\rex_yrewrite::getDomains() as $key => $domain) {
         $select->addOption($key, $key);
     }
 } else {
@@ -124,5 +124,3 @@ $fragment->setVar('class', 'edit');
 $fragment->setVar('title', $addon->i18n('maintenance_settings_frontend_title'));
 $fragment->setVar('body', $form->get(), false);
 echo $fragment->parse('core/page/section.php');
-
-?>

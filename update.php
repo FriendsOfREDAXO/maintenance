@@ -5,7 +5,7 @@
 $addon = rex_addon::get('maintenance');
 
 if ($addon->hasConfig('responsecode')) {
-    $addon->setConfig('http_response_code', $adonn->getConfig('responsecode'));
+    $addon->setConfig('http_response_code', $addon->getConfig('responsecode'));
 }
 
 if ($addon->hasConfig('ip')) {
@@ -13,7 +13,7 @@ if ($addon->hasConfig('ip')) {
 }
 
 if ($addon->hasConfig('frontend_aktiv')) {
-    $addon->setConfig('block_frontend', $addon->getConfig('frontend_aktiv') == 'Deaktivieren' ? false : true);
+    $addon->setConfig('block_frontend', $addon->getConfig('frontend_aktiv') == 'Deaktivieren' ? 0 : 1);
 }
 
 if ($addon->hasConfig('redirect_frontend')) {
@@ -25,11 +25,11 @@ if ($addon->hasConfig('redirect_backend')) {
 }
 
 if ($addon->hasConfig('backend_aktiv')) {
-    $addon->setConfig('block_backend', $addon->getConfig('backend_aktiv') == '1' ? true : false);
+    $addon->setConfig('block_backend', $addon->getConfig('backend_aktiv') == '1' ? 1 : 0);
 }
 
 if ($addon->hasConfig('blockSession')) {
-    $addon->setConfig('block_frontend_rex_user', $addon->getConfig('blockSession') == 'Inaktiv' ? false : true);
+    $addon->setConfig('block_frontend_rex_user', $addon->getConfig('blockSession') == 'Inaktiv' ? 0 : 1);
 }
 
 if ($addon->hasConfig('type')) {

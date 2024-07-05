@@ -16,7 +16,7 @@ $addon = rex_addon::get('maintenance');
  */
 $config_file = rex_path::coreData('config.yml');
 $data = rex_file::getConfig($config_file);
-if ($data && !in_array('maintenance', $data['setup_addons'], true)) {
+if (array_key_exists('setup_addons', $data) && !in_array('maintenance', $data['setup_addons'], true)) {
     $data['setup_addons'][] = 'maintenance';
     rex_file::putConfig($config_file, $data);
 }
@@ -24,19 +24,17 @@ if ($data && !in_array('maintenance', $data['setup_addons'], true)) {
 /* Eigene IP-Adresse in die erlaubten IP-Adressen hinzufügen, sofern nicht bereits vorhanden */
 $allowed_ips = $addon->getConfig('allowed_ips');
 $allowed_ips = explode(',', $allowed_ips);
-$ip = rex_server('REMOTE_ADDR');
+$ip = rex_server('REMOTE_ADDR', 'string', '');
 if (!in_array($ip, $allowed_ips, true)) {
     $allowed_ips[] = $ip;
     $addon->setConfig('allowed_ips', implode(',', $allowed_ips));
 }
 
 /* Bei Installation standardmäßig ein zufälliges Secret generieren */
-if ($addon->getConfig('secret') === '') 
-{
+if ($addon->getConfig('secret') === '') {
     $addon->setConfig('secret', bin2hex(random_bytes(16)));
 }
 
-if($addon->getConfig('announcement') === '') 
-{
+if($addon->getConfig('announcement') === '') {
     $addon->setConfig('announcement', '<p>Geplante Wartungsarbeiten am 01.01.2022 von 00:00 bis 06:00 Uhr. In dieser Zeit ist die Website möglicherweise nicht erreichbar.</p>');
 }
