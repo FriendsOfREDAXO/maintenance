@@ -96,7 +96,7 @@ $field->setAttribute('data-maintenance', 'tokenfield');
 if (\rex_addon::get('yrewrite')->isAvailable()) {
     $field = $form->addSelectField('allowed_yrewrite_domains');
     $field->setAttribute('multiple', 'multiple');
-    /* Anzahl der sichtbaren Elemente erhöhen */
+
     $field->setAttribute('size', count(\rex_yrewrite::getDomains()));
     $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
     $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
@@ -106,7 +106,7 @@ if (\rex_addon::get('yrewrite')->isAvailable()) {
     }
 } else {
     $field = $form->addSelectField('allowed_yrewrite_domains');
-    /* Anzahl der sichtbaren Elemente erhöhen */
+
     $field->setAttribute('disabled', 'disabled');
     $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
     $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
