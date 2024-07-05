@@ -26,11 +26,11 @@ $select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
 $select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
 
 // Umgehung der Wartung durch GET-Parameter (URL) oder Passwort
-$field = $form->addSelectField('type');
-$field->setLabel($addon->i18n('maintenance_type_label'));
+$field = $form->addSelectField('authentification_mode');
+$field->setLabel($addon->i18n('maintenance_authentification_mode_label'));
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_type_url'), 'URL');
-$select->addOption($addon->i18n('maintenance_type_password'), 'password');
+$select->addOption($addon->i18n('maintenance_authentification_mode_url'), 'URL');
+$select->addOption($addon->i18n('maintenance_authentification_mode_password'), 'password');
 
 // Blockere auch für angemeldete REDAXO-Benutzer das Frontend
 $field = $form->addSelectField('block_frontend_rex_user');
