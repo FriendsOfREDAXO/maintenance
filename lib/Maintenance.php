@@ -92,12 +92,12 @@ class Maintenance
         $addon = \rex_addon::get('maintenance');
 
         // Bereits mit richtigem Secret eingeloggt
-        if(\rex_session('secret', 'string', false) === strval($addon->getConfig('secret'))) { // @phpstan-ignore-line
+        if(\rex_session('secret', 'string', '') === strval($addon->getConfig('secret'))) { // @phpstan-ignore-line
             return true;
         }
-        $secret = rex_request('secret', 'string', false);
-
-        if ($addon->getConfig('type') === 'secret' && $secret === strval($addon->getConfig('secret'))) { // @phpstan-ignore-line
+        
+        $secret = rex_request('secret', 'string', '');
+        if ($addon->getConfig('authentification_mode') === 'URL' && $secret === strval($addon->getConfig('secret'))) { // @phpstan-ignore-line
             rex_set_session('secret', $secret);
             return true;
         }
