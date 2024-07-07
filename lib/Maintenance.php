@@ -206,24 +206,21 @@ class Maintenance
 
     public static function setIndicators() : void
     {
-        \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
-            $header = '<i class="maintenance rex-icon fa-toggle-off">';
-            $replace = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="backend">';
-            $subject = $ep->getSubject();
-            if (is_string($subject)) {
-                $out = str_replace($header, $replace, $subject);
-                $ep->setSubject($out);
-            }
-        });
-        \rex_extension::register('OUTPUT_FILTER', function (\rex_extension_point $ep) {
-            $suchmuster = '<i class="maintenance rex-icon fa-toggle-off">';
-            $ersetzen = '<i class="maintenance rex-icon fa-toggle-on" data-maintenance="frontend">';
-            $subject = $ep->getSubject();
-            if (is_string($subject)) {
-                $out = str_replace($suchmuster, $ersetzen, $subject);
-                $ep->setSubject($out);
-            }
-        });
+        $addon = \rex_addon::get('maintenance');
+        $page = $addon->getProperty('page');
+
+        if (boolval($addon->getConfig('block_backend'))) {
+            $page['title'] .= ' <span class="label label-info pull-right">B</span>';
+            $page['icon'] .= ' fa-toggle-on block_backend';
+            $addon->setProperty('page', $page);
+        }
+
+        if (boolval($addon->getConfig('block_frontend'))) {
+            $page['title'] .= ' <span class="label label-danger pull-right">F</span>';
+            $page['icon'] .= ' fa-toggle-on block_frontend';
+        }
+
+        $addon->setProperty('page', $page);
     }
 
     /** @api */

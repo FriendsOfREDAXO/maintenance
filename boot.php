@@ -21,12 +21,14 @@ $addon = rex_addon::get('maintenance');
 if(rex::isFrontend() && boolval($addon->getConfig('block_frontend'))) {
 
     \FriendsOfREDAXO\Maintenance\Maintenance::checkFrontend();
-}
 
+}
 if(rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
     \FriendsOfREDAXO\Maintenance\Maintenance::checkBackend();
-    \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
+}
 
+if(rex::isBackend()) {
+    \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
     rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
     rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
     rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
@@ -41,6 +43,5 @@ if(rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
             $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject())); // @phpstan-ignore-line
         });
     }
-
 
 }
