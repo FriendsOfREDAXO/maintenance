@@ -31,8 +31,8 @@ if (!in_array($ip, $allowed_ips, true)) {
 }
 
 /* Bei Installation standardmäßig ein zufälliges Secret generieren */
-if ($addon->getConfig('secret') === '') {
-    $addon->setConfig('secret', bin2hex(random_bytes(16)));
+if ($addon->getConfig('maintenance_secret') === '') {
+    $addon->setConfig('maintenance_secret', bin2hex(random_bytes(16)));
 }
 
 if($addon->getConfig('announcement') === '') {

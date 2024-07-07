@@ -36,6 +36,10 @@ if ($addon->hasConfig('type')) {
     $addon->setConfig('authentification_mode', $addon->getConfig('type') === 'Password' ? 'password' : 'URL');
 }
 
+if ($addon->hasConfig('secret')) {
+    $addon->setConfig('maintenance_secret', $addon->getConfig('maintenance_secret'));
+}
+
 $addon->removeConfig('responsecode');
 $addon->removeConfig('ip');
 $addon->removeConfig('frontend_aktiv');
@@ -44,3 +48,4 @@ $addon->removeConfig('redirect_backend');
 $addon->removeConfig('backend_aktiv');
 $addon->removeConfig('blockSession');
 $addon->removeConfig('type');
+$addon->removeConfig('secret');

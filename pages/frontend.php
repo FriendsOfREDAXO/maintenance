@@ -40,7 +40,7 @@ $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0)
 $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1);
 
 // Passwort zum Umgehen des Wartungsmodus
-$field = $form->addTextField('secret');
+$field = $form->addTextField('maintenance_secret');
 $field->setLabel($addon->i18n('maintenance_secret_label'));
 $field->setNotice($addon->i18n('maintenance_secret_notice', bin2hex(random_bytes(16))));
 $field->setAttribute('type', 'password');
@@ -135,7 +135,7 @@ $fragment->setVar('body', $form->get(), false);
 		<?php
 
 $copy = '';
-$url = '' . rex::getServer() . '?secret=' . rex_config::get('maintenance', 'secret');
+$url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
 $copy .= '<div class="hidden" id="maintenance-mode-url"><code>'.$url.'</code></div>';
 $copy .= '
 <clipboard-copy for="maintenance-mode-url" class="input-group">
