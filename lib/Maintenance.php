@@ -13,6 +13,7 @@
 namespace FriendsOfREDAXO\Maintenance;
 
 use rex;
+use rex_addon
 use rex_article;
 use rex_clang;
 use rex_response;
