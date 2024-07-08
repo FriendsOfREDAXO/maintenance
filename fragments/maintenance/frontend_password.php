@@ -68,7 +68,7 @@
         <div class="maintenance-error">
             <p class="maintenance-error-title">Login</p>
             <form action="<?= rex_url::base(); ?>" method="post">
-            <input name="secret" class="maintenance-pw-input" type="password" placeholder="**********"/><br>
+            <input name="maintenance_secret" class="maintenance-pw-input" type="password" placeholder="**********"/><br>
             <button type="submit" class="maintenance-pw-btn">Enter</button>
             </form>
         </div>
