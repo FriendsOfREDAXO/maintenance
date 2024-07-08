@@ -78,19 +78,18 @@ Deaktivieren mit `maintenance:off` oder `frontend:on`
 * <http://www.redaxo.org>
 * <https://github.com/FriendsOfREDAXO>
 
-### Projekt-Lead
+### Projekt-Team
 
-[KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
+* [Alexander Walther](https://github.com/alxndr-w)
+* [KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
 
 ## Credits
 
 Danke an:
 
+* [Thorben](https://github.com/eaCe)
 * [Christian Gehrke](https://github.com/chrison94)
-* [Alexander Walther](https://github.com/alxndr-w)
+* [Oliver Kreischer]([http://concedra.de)](https://github.com/olien)
+* u.v.a
 
-Maintenance basiert auf dem out5-Plugin: Wartungsarbeiten
 
-<https://github.com/FriendsOfREDAXO/out5>
-
-[concedra.de / Oliver Kreischer](http://concedra.de)
