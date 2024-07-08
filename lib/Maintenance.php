@@ -198,7 +198,9 @@ class Maintenance
     public static function checkBackend(): void
     {
         $addon = \rex_addon::get('maintenance');
-        if (rex::getUser() instanceof \rex_user && !rex::getUser()->isAdmin()) {
+         
+                
+        if (rex::getUser() instanceof \rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
             if (strval($addon->getConfig('redirect_backend_to_url'))) { // @phpstan-ignore-line
                 rex_response::sendRedirect(strval($addon->getConfig('redirect_backend_to_url')));  // @phpstan-ignore-line
             }
