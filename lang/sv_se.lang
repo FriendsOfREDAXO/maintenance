@@ -1,37 +1,83 @@
-//Config
-maintenance_title = Maintenance mode
-maintenance_Help = Hjälp
+// Tilläggspaket
 
-//Frontend
-maintenance_URL = Deaktiverad webbsajt (valfritt)
-maintenance_IP = IP
-maintenance_domains = Uteslutar domäner
-maintenance_domainsErk = Ange domänerna här som inte ska blockeras. Retur-tangent för att lägga till fler domäner. (utan www.)
-maintenance_deakt-front = Spärra frontend?
-maintenance_redirectUrl = Vidarebefordring till
-maintenance_ipErk = Ange här IP-adresserna som fortfarande ska ha tillgång till frontenden. När du har skrivit en IP-adress trycker du på Enter för att komma till nästa
-maintenance_ipAkt = Er aktuella IP:
-maintenance_ipServer = Aktuella Server IP:
-maintenance_Frontend_Sperren = Spärra frontend
-maintenance_Eigene_Loesung = Sätta bara config-värde
-maintenance_Frontend_entsperren = Inaktiv
-maintenance_blockSession = Låsa ut inloggade användare
-maintenance_session_Inaktiv = Inaktiv
-maintenance_session_Redakteure = Lås ut redaktörer
-maintenance_secret = Secret-URL
-maintenance_secret-secret = Skriv här något ord som ska bifogas länken för att öppna sidan, trots låset
-maintenance_secret-example = Exempel:
-maintenance_type = Typ av sidvy
-maintenance_type_url = Åtkomst via hemlig URL med lösenordsparametrar
-maintenance_type_pw = Åtkomst genom att ange ett lösenord av användaren.
-maintenance_type_description = Åtkomst via hemlig URL: Sidan kan öppnas med en länk (t.ex.: https://www.domain.de/?secret=passwort) <br> Åtkomst via lösenord: Användaren måste ange lösenordet en gång innan man kan går in på sidan.
-maintenance_type_description_pw = Användaren måste ange lösenordet som anges ovan en gång innan han går in på webbplatsen.
-maintenance_pw-prompt = Lösenordsinmatning
-maintenance_enter = Gå in på webbplatsen
+maintenance_title = Underhållsläge
+maintenance_frontend_title = Webbplatsens frontend
+maintenance_backend_title = REDAXO-backend
+maintenance_docs_title = Dokumentation
 
 
-//Backend
-maintenance_deakt-reda = Inaktivera redaktörer?
+// Konsolkommandon
 
-perm_general_maintenance[] = Förvalta Maintenance inställningarna
+maintenance_command_off_description = Inaktivera underhållsläge
+maintenance_command_on_description = Aktivera underhållsläge
 
+maintenance_mode_deactivated = Underhållsläge inaktiverat
+
+// Backend-inställningssida
+
+maintenance_settings_backend_title = Inställningar för REDAXO-backends underhållsläge
+
+maintenance_block_backend_label = Aktivera underhållsläge
+maintenance_block_backend_true = 🔴 Underhållsläge aktiverat
+maintenance_block_backend_false = 🟢 Underhållsläge inaktiverat
+
+maintenance_redirect_backend_to_url_label = Omdirigerings-URL (valfri)
+maintenance_redirect_backend_to_url_notice = Ange URL dit användare ska omdirigeras när REDAXO-backend är i underhållsläge.
+
+// Frontend-inställningssida
+
+maintenance_settings_frontend_title = Inställningar för webbplatsens frontends underhållsläge
+
+maintenance_general_title = Allmänt
+
+maintenance_block_frontend_label = Aktivera underhållsläge
+maintenance_block_frontend_false = 🟢 Underhållsläge inaktiverat
+maintenance_block_frontend_true = 🔴 Underhållsläge aktiverat
+
+maintenance_block_frontend_rex_user_label = Blockera även REDAXO-användare
+maintenance_block_frontend_rex_user_false = 🆗 Tillåt fortfarande åtkomst för auktoriserade REDAXO-användare
+maintenance_block_frontend_rex_user_true = 🚷 Blockera även REDAXO-användare
+maintenance_block_frontend_rex_user_notice = Om aktiverat, endast administratörer och personer med tillgång via lösenord eller länk kan nå frontenden.
+
+maintenance_type_label = Autentisering
+maintenance_type_notice = Välj metod för åtkomstautentisering.
+
+maintenance_type_none = Ingen autentisering
+maintenance_type_password = 🔑 Lösenord
+maintenance_type_url = 🔗 Hemlig URL (standard)
+
+maintenance_secret_label = Hemlighet
+maintenance_secret_notice = Ange texten (lösenord, kodord, etc. <code>{0}</code>) som ska användas för åtkomst till webbplatsen via hemlig URL eller lösenordsinmatning.
+
+maintenance_redirect_frontend_to_url_label = Omdirigerings-URL (valfri)
+maintenance_redirect_frontend_to_url_notice = Ange URL dit besökare ska omdirigeras när webbplatsen är i underhållsläge.
+
+maintenance_block_frontend_session_label = Blockera auktoriserade användare
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Önskad svarskod
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (rekommenderas om webbplatsen är tillfälligt otillgänglig)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Åtkomst till resursen är permanent förbjuden)
+
+maintenance_announcement_title = Underhållsmeddelande
+
+maintenance_announcement_label = Text
+maintenance_announcement_notice = Informera besökare när underhållsfönstret aktiverar underhållsläget. Använd <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code> för att visa.
+
+maintenance_announcement_start_date_label = Startdatum
+maintenance_announcement_start_date_notice = Datumet då meddelandet börjar visas. Inte när webbplatsen går in i underhållsläge. Aktuell servertid: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Slutdatum
+maintenance_announcement_end_date_notice = Datumet då meddelandet slutar visas. Aktuell servertid: <code>{0}</code>.
+
+maintenance_allowed_access_title = Undantag
+
+maintenance_allowed_ips_label = Lista över tillåtna IP-adresser
+maintenance_allowed_ips_notice = Ange IPv4 IP-adress(er) som fortfarande har tillgång till frontenden. Din nuvarande IP-adress: <code>{0}</code>.
+
+maintenance_allowed_domains_label = Lista över tillåtna domäner
+maintenance_allowed_domains_notice = Ange domäner som inte ska blockeras.
+
+maintenance_allowed_yrewrite_domains_label = Lista över tillåtna YRewrite-domäner
+maintenance_allowed_yrewrite_domains_notice = Ange YRewrite-domäner som inte ska blockeras.

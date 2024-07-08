@@ -1,44 +1,47 @@
 package: maintenance
-version: '2.9.3'
+version: '3.0.0-dev2'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
-title: 'Maintenance'
-nav_icon: fa-share
-kurzbeschreibung: 'Umleitung der Frontendseite auf eine beliebige URL wenn der Besucher nicht im Backend angemeldet ist oder nicht der hintelegten IP entspricht'
-umgebung: Frontend
+title: translate:maintenance_title
 
 page:
-    title: 'Maintenance'
+    title: translate:maintenance_title
     perm: maintenance[]
+    prio: 81
     block: system
-    icon: 'maintenance rex-icon fa-exclamation-triangle'
+    icon: 'maintenance rex-icon fa-toggle-off'
     subpages:
         frontend:
-            { title: 'Frontend', icon: rex-icon fa-laptop }
+            title: translate:maintenance_frontend_title
+            icon: rex-icon fa-user
         backend:
-            { title: 'Backend', icon: rex-icon fa-stack-overflow }
+            title: translate:maintenance_backend_title
+            icon: rex-icon fa-user-gear
         help:
-            { title: 'translate:Help', subPath: README.md }
+            title: translate:maintenance_docs_title
+            subPath: README.md
+            icon: rex-icon fa-question-circle
+            itemClass: pull-right
 requires:
-    redaxo: ^5.13.0
+    redaxo: ^5.17.0
     php:
-        version: '>=8.0' 
+        version: '>=8.2'
         
 console_commands:
-       maintenance:on: rex_maintenance_command_on
-       frontend:on: rex_maintenance_command_on
-       maintenance:off: rex_maintenance_command_off
-       frontend:off: rex_maintenance_command_off
+       maintenance:frontend_disable: rex_maintenance_command_on
+       maintenance:frontend_enable: rex_maintenance_command_off
 
 default_config:
-      responsecode: 503
-      ip: ''
-      frontend_aktiv: 'Deaktivieren'
-      redirect_frontend: ''
-      redirect_backend: ''
-      backend_aktiv: '0'
-      blockSession: 'Inaktiv'
+      http_response_code: 503 # 503, 403
+      allowed_ips: ''
+      authentification_mode: 'URL'  # `URL`, `password`
+      block_frontend: 0
+      block_frontend_rex_user: 0
+      block_backend: 0
+      redirect_frontend_to_url: '' # `https://example.com/maintenance.html`
+      redirect_backend_to_url: '' # `https://example.com/maintenance.html`
       secret: ''
+      editor: 'class="form-control redactor-editor--default"'
 
 installer_ignore:
     - .git

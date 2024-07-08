@@ -9,8 +9,7 @@
  * file that was distributed with this source code.
  */
 $addon = rex_addon::get('maintenance');
-echo rex_view::title($addon->i18n('title')); 
+echo rex_view::title($addon->i18n('title'));
 
 //include rex_be_controller::getCurrentPageObject()->getSubPath();
 rex_be_controller::includeCurrentPageSubPath();
-?>

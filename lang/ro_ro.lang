@@ -1,0 +1,83 @@
+// Pachet suplimentar
+
+maintenance_title = Modul de întreținere
+maintenance_frontend_title = Frontend-ul site-ului web
+maintenance_backend_title = Backend-ul REDAXO
+maintenance_docs_title = Documentație
+
+
+// Comenzi consolă
+
+maintenance_command_off_description = Dezactivează modul de întreținere
+maintenance_command_on_description = Activează modul de întreținere
+
+maintenance_mode_deactivated = Modul de întreținere dezactivat
+
+// Pagina de setări backend
+
+maintenance_settings_backend_title = Setările modului de întreținere pentru backend-ul REDAXO
+
+maintenance_block_backend_label = Activează modul de întreținere
+maintenance_block_backend_true = 🔴 Modul de întreținere activat
+maintenance_block_backend_false = 🟢 Modul de întreținere dezactivat
+
+maintenance_redirect_backend_to_url_label = URL de redirecționare (opțional)
+maintenance_redirect_backend_to_url_notice = Introduceți URL-ul către care utilizatorii vor fi redirecționați când backend-ul REDAXO este în modul de întreținere.
+
+// Pagina de setări frontend
+
+maintenance_settings_frontend_title = Setările modului de întreținere pentru frontend-ul site-ului web
+
+maintenance_general_title = General
+
+maintenance_block_frontend_label = Activează modul de întreținere
+maintenance_block_frontend_false = 🟢 Modul de întreținere dezactivat
+maintenance_block_frontend_true = 🔴 Modul de întreținere activat
+
+maintenance_block_frontend_rex_user_label = Blochează și utilizatorii REDAXO
+maintenance_block_frontend_rex_user_false = 🆗 Permite accesul utilizatorilor REDAXO autorizați
+maintenance_block_frontend_rex_user_true = 🚷 Blochează și utilizatorii REDAXO
+maintenance_block_frontend_rex_user_notice = Dacă este activat, doar administratorii și persoanele cu acces prin parolă sau link pot accesa frontend-ul.
+
+maintenance_type_label = Autentificare
+maintenance_type_notice = Alegeți metoda de autentificare pentru acces.
+
+maintenance_type_none = Fără autentificare
+maintenance_type_password = 🔑 Parolă
+maintenance_type_url = 🔗 URL secret (implicit)
+
+maintenance_secret_label = Secret
+maintenance_secret_notice = Introduceți textul (parola, codul secret, etc. <code>{0}</code>) care va fi folosit pentru accesul la site prin URL secret sau introducerea parolei.
+
+maintenance_redirect_frontend_to_url_label = URL de redirecționare (opțional)
+maintenance_redirect_frontend_to_url_notice = Introduceți URL-ul către care vizitatorii vor fi redirecționați când site-ul web este în modul de întreținere.
+
+maintenance_block_frontend_session_label = Blochează utilizatorii autorizați
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Codul de răspuns dorit
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (recomandat dacă site-ul web este temporar indisponibil)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Accesul la resursă este permanent interzis)
+
+maintenance_announcement_title = Anunț de întreținere
+
+maintenance_announcement_label = Text
+maintenance_announcement_notice = Informați vizitatorii când fereastra de întreținere activează modul de întreținere. Utilizați <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code> pentru a afișa.
+
+maintenance_announcement_start_date_label = Data de început
+maintenance_announcement_start_date_notice = Data când anunțul începe să fie afișat. Nu când site-ul web intră în modul de întreținere. Ora actuală a serverului: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Data de sfârșit
+maintenance_announcement_end_date_notice = Data când anunțul încetează să mai fie afișat. Ora actuală a serverului: <code>{0}</code>.
+
+maintenance_allowed_access_title = Excepții
+
+maintenance_allowed_ips_label = Lista de adrese IP permise
+maintenance_allowed_ips_notice = Introduceți adresa(e) IP IPv4 care vor avea în continuare acces la frontend. Adresa dvs. IP curentă: <code>{0}</code>.
+
+maintenance_allowed_domains_label = Lista de domenii permise
+maintenance_allowed_domains_notice = Introduceți domeniile care nu vor fi blocate.
+
+maintenance_allowed_yrewrite_domains_label = Lista de domenii YRewrite permise
+maintenance_allowed_yrewrite_domains_notice = Introduceți domeniile YRewrite care nu vor fi blocate.

@@ -1,0 +1,83 @@
+// Addon-Paket
+
+maintenance_title = Mode Maintenance
+maintenance_frontend_title = Frontend du site web
+maintenance_backend_title = Backend REDAXO
+maintenance_docs_title = Documentation
+
+
+// Commandes de la console
+
+maintenance_command_off_description = Désactive le mode maintenance
+maintenance_command_on_description = Active le mode maintenance
+
+maintenance_mode_deactivated = Maintenance désactivée
+
+// Page des paramètres Backend
+
+maintenance_settings_backend_title = Paramètres du mode maintenance pour le backend REDAXO
+
+maintenance_block_backend_label = Activer le mode maintenance
+maintenance_block_backend_true = 🔴 Mode maintenance activé
+maintenance_block_backend_false = 🟢 Mode maintenance désactivé
+
+maintenance_redirect_backend_to_url_label = Rediriger vers (optionnel)
+maintenance_redirect_backend_to_url_notice = Spécifiez l'URL vers laquelle les utilisateurs seront redirigés lorsque le backend REDAXO est en mode maintenance.
+
+// Page des paramètres Frontend
+
+maintenance_settings_frontend_title = Paramètres du mode maintenance pour le frontend du site web
+
+maintenance_general_title = Général
+
+maintenance_block_frontend_label = Activer le mode maintenance
+maintenance_block_frontend_false = 🟢 Mode maintenance désactivé
+maintenance_block_frontend_true = 🔴 Mode maintenance activé
+
+maintenance_block_frontend_rex_user_label = Exclure également les utilisateurs REDAXO
+maintenance_block_frontend_rex_user_false = 🆗 Les utilisateurs REDAXO connectés ont toujours accès
+maintenance_block_frontend_rex_user_true = 🚷 Exclure également les utilisateurs REDAXO
+maintenance_block_frontend_rex_user_notice = Si activé, seuls les administrateurs et les personnes ayant un mot de passe ou un lien auront accès au frontend.
+
+maintenance_type_label = Authentification
+maintenance_type_notice = Choisissez la méthode d'authentification pour accéder.
+
+maintenance_type_none = Aucune authentification
+maintenance_type_password = 🔑 Mot de passe
+maintenance_type_url = 🔗 URL secrète (par défaut)
+
+maintenance_secret_label = Mot de passe
+maintenance_secret_notice = Entrez ici n'importe quel texte (mot de passe, phrase secrète, par exemple, <code>{0}</code>) qui devrait être utilisé pour accéder au site via une URL secrète ou une saisie de mot de passe.
+
+maintenance_redirect_frontend_to_url_label = Rediriger vers (optionnel)
+maintenance_redirect_frontend_to_url_notice = Spécifiez l'URL vers laquelle les visiteurs seront redirigés lorsque le site web est en mode maintenance.
+
+maintenance_block_frontend_session_label = Exclure les utilisateurs connectés
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = En-tête de réponse souhaité
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (recommandé si le site web est temporairement indisponible)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (L'accès à une ressource est définitivement interdit)
+
+maintenance_announcement_title = Annonce de maintenance
+
+maintenance_announcement_label = Texte
+maintenance_announcement_notice = Informez les visiteurs quand la fenêtre de maintenance définira le mode maintenance. Sortie via <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+
+maintenance_announcement_start_date_label = Date de début
+maintenance_announcement_start_date_notice = Date à partir de <strong>quand l'annonce devrait être montrée</strong>. Pas à partir de quand le site web passera en mode maintenance. Heure actuelle du serveur : <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Date de fin
+maintenance_announcement_end_date_notice = Date jusqu'à quand l'annonce devrait être montrée. Heure actuelle du serveur : <code>{0}</code>.
+
+maintenance_allowed_access_title = Exceptions
+
+maintenance_allowed_ips_label = Liste des adresses IP autorisées
+maintenance_allowed_ips_notice = Entrez les adresses IPv4 qui devraient encore avoir accès au frontend. Votre adresse IP actuelle est <code>{0}</code>.
+
+maintenance_allowed_domains_label = Liste des domaines autorisés
+maintenance_allowed_domains_notice = Entrez les domaines qui ne devraient pas être bloqués.
+
+maintenance_allowed_yrewrite_domains_label = Liste des domaines YRewrite autorisés
+maintenance_allowed_yrewrite_domains_notice = Entrez les domaines YRewrite qui ne devraient pas être bloqués.

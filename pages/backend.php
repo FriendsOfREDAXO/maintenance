@@ -10,78 +10,28 @@
  * file that was distributed with this source code.
  */
 
+use FriendsOfREDAXO\Maintenance\MaintenanceUtil;
+
 $addon = rex_addon::get('maintenance');
-$checkLink = new maintenance_functions();
-$content = '';
 
+$form = rex_config_form::factory($addon->getName());
 
-if (rex_post('config-submit', 'boolean')) {
-    rex_session('secret','');
-    $addon->setConfig(rex_post('config', [
-        ['redirect_backend', 'string'],
-    ]));
+$field = $form->addSelectField('block_backend');
+$field->setLabel($addon->i18n('maintenance_block_backend_label'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_block_backend_true'), 1);
+$select->addOption($addon->i18n('maintenance_block_backend_false'), 0);
 
-    $addon->setConfig(rex_post('config', [
-        ['backend_aktiv', 'string'],
-    ]));
-    if (is_string($addon->getConfig('redirect_backend'))) {
-        if ($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === true) {
-            $content .= rex_view::info('Änderung gespeichert');
-        }
-        if ($checkLink->CheckUrl($addon->getConfig('redirect_backend')) === false) {
-            $content .=    rex_view::warning('Falscher Link');
-            $addon->setConfig('redirect_backend', '');
-        }
-    }
-    $newURL = rex_url::currentBackendPage();
-    // Umleitung auf die aktuelle Seite auslösen
-    rex_response::sendRedirect($newURL);
-}
+$field = $form->addTextField('redirect_backend_to_url');
+$field->setLabel($addon->i18n('maintenance_redirect_backend_to_url_label'));
+$field->setAttribute('type', 'url');
+$field->setNotice(rex_i18n::msg('maintenance_redirect_backend_to_url_notice'));
+$field->getValidator()->add('url', $addon->i18n('error_invalid_url'));
 
-$content .=  '
-<div class="rex-form">
-    <form action="' . rex_url::currentBackendPage() . '" method="post">
-        <fieldset>';
-
-$formElements = [];
-
-$n = [];
-$n['label'] = '<label for="redirectUrl">' . $addon->i18n('redirectUrl') . '</label>';
-$n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_backend]" placeholder="https://example.tld" value="' . rex_escape($addon->getConfig('redirect_backend')) . '"/>';
-$formElements[] = $n;
-
-$n2 = [];
-$n2['label'] = '<label for="redakteure_ausschließen">' . $addon->i18n('deakt-reda') . '</label>';
-$n2['field'] = '<input type="checkbox" id="rex-maintenance-aktiv" name="config[backend_aktiv]"' . (!is_null($addon->getConfig('backend_aktiv')) && $addon->getConfig('backend_aktiv') === '1' ? ' checked="checked"' : '') . ' value="1" />';
-$formElements[] = $n2;
-
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/form.php');
-
-$content .= '
-        </fieldset>
-
-        <fieldset class="rex-form-action">';
-
-$formElements = [];
-
-$n = [];
-$n['field'] = '<div class="btn-toolbar"><button id="rex-maintenance-save" type="submit" name="config-submit" class="btn btn-save rex-form-aligned" value="1">Einstellungen speichern</button></div>';
-$formElements[] = $n;
-
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/submit.php');
-
-$content .= '
-        </fieldset>
-
-    </form>
-</div>';
+$content = $form->get();
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
-$fragment->setVar('title', 'Maintenance-Settings');
+$fragment->setVar('title', $addon->i18n('maintenance_settings_backend_title'));
 $fragment->setVar('body', $content, false);
 echo $fragment->parse('core/page/section.php');

@@ -1,3 +1,3 @@
 $(document).on("rex:ready",function() {
-	$(".test").tokenfield();
+	$('[data-maintenance="tokenfield"]').tokenfield();
 });

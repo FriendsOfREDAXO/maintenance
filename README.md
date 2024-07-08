@@ -1,77 +1,96 @@
-# Maintenance mode / Wartungsmodus
+# Wartungsmodus (Maintenance mode) für REDAXO 5.x
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/maintenance/assets/Maintenance.png)
 
-Das AddOn ermöglicht die Sperrung des Frontends und/oder des Backends bei Wartungsarbeiten oder in der Entwicklungsphase. Die Sperrung kann wahlweise über einen speziellen Link oder Passworteingabe aufgehoben werden. 
+Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von REDAXO für Besucher und/oder Redakteure zu sperren. Zum Beispiel bei Wartungsarbeiten oder in der Entwicklungsphase.
 
-## Funktionen:
+## Funktionen
 
-### Frontend-Sperre
-- Umleitung des Frontends zu einer festgelegten URL
-- Freigabe des Frontends für hinterlegte IP-Adressen
-- Freigabe des Frontends durch ein Passwort (Aufruf über eine geheime URL oder eine Passworteingabe)
-- Zugang zum Frontend, wenn in REDAXO eingeloggt (auswählbar ob erlauben oder nicht)
-- Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
+### Sperren des Frontends
 
-### Backend
-- Redakteure können ausgesperrt werden
-- Umleitung zu einer festgelegten URL
-- Wird keine URL eingegeben, wird eine gestaltete Maintenance-Seite ausgegeben. Diese kann durch ein eigenes Fragment überschrieben werden. 
+* Wahl der Authentifizierung: Geheime URL oder Passwort
+* Optionales Sperren des Frontends auch für REDAXO-Benutzer (außer Admins)
+* Optionale Weiterleitung zu einer festgelegten URL, z.B. REDAXO-Login
+* Festlegen des HTTP-Statuscodes (z.B. 503 Service Unavailable)
+* Anpassen der Sperrseite durch eigenes Fragment (`maintenance_page.php`)
+* Definieren von Ausnahmen, die dennoch Zugriff erhalten, z.B. für
+  * IP-Adressen
+  * Hosts
+  * YRewrite-Domains (neu in Version 3.0.0)
+* Meldung und Zeitraum zur Ankündigung eines Wartungsfensters definieren (neu in Version 3.0.0)
 
-Der Konfigurationswert "Nur Config-Wert setzen" steht zur Verfügung um ggf. selbst eigene Lösungen in Templates und Modulen zu realisieren. Es wird nur ein Config-Wert erstellt. Alle weiteren Angaben entfallen.  
+### Sperren des REDAXO-Backends
 
-### Eigene Maintenance-Seiten
+* Sperren des REDAXO-Backends für alle Benutzer (außer Admins)
 
-Will man keine Umleitung einrichten und stattdessen eine gestaltete Seite anzeigen kann man das Fragment überschreiben und so eine individuelle Info hinterlegen.  
+### Wartungsmodus ankündigen
 
-Hierzu im Project-AddOn einen Ordner `fragments` erstellen und eine Datei `maintenance_page.php`, `maintenance_page_pw_form.php` (Mit Passworteingabe)  oder `maintenance_page_be.php`(für die Backend-Sperrung) mit eigenem Text, Logo oder komplett anderer Gestaltung anlegen. 
+Eine Meldung und Zeitraum zur Ankündigung eines Wartungsfensters definieren (neu in Version 3.0.0). Die Ausgabe erfolgt über `FriendsOfRedaxo\Maintenance\Maintenance::getAnnouncement()`, z.B.
+
+```php
+$announcement = FriendsOfRedaxo\Maintenance\Maintenance::getAnnouncement();
+if($announcement) {
+    echo '<div class="alert alert-danger">'.$announcement.'</div>';
+}
+```
+
+Eine für Nutzer*innen hilfreiche Meldung ist beispielsweise:
+
+> Geplante Wartungsarbeiten am 01.01.2022 von 00:00 bis 06:00 Uhr. In dieser Zeit ist die Website möglicherweise nicht erreichbar.
+
+### Eigene HTML-Seite für den Wartungsmodus
+
+Standardmäßig wird eine einfache HTML-Seite angezeigt, die den Wartungsmodus anzeigt.
+
+Diese kann durch eine eigene HTML-Seite ersetzt werden. Dazu muss im Projekt-AddOn ein Ordner `fragments` angelegt werden. In diesem Ordner kann eine Datei `maintenance_page.php` mit eigenem HTML-Code erstellt werden.
+
+So kann bspw. eigener Text, Logo oder komplett andere Gestaltung erfolgen.
 
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
-Das AddOn-Symbol erhält je nach Status eine andere Farbe. Durch Mouse-Over auf dem Symbol erhält man den passenden Text (title-attribut). 
+
+Das AddOn-Symbol erhält bei Aktivierung einer der Wartungsmodi eine Farbkennung.
+
+* Standard: Alle Funktionen sind deaktiviert.
+* Rot: Der Wartungsmodus ist für Frontend und/oder Backend aktiv!
 
 ## Extensionpoint MAINTENANCE_MEDIA_UNBLOCK_LIST
-Über diesen Extension-Point kann ein Array mit Medien übergeben werden, die Maintenance nicht sperren soll. 
 
-### Farblegende
-- Standard: Alle Funktionen sind deaktiviert. 
-- Rot: Der Modus "Frontend-Sperre" ist aktiv!
-- Gelb: Der Modus "Backend-Sperre" ist aktiv!
+Über diesen Extension-Point kann ein Array mit Medien übergeben werden, die das Addon nicht sperren soll.
 
-## Search_it und Maintenance-Mode 
+## `search_it` und Wartungs-Modus
 
-Ist die Frontendsperre aktiviert, kann Search_it den Index nicht erstellen. 
-Bei aktivierter Sperre fügt man einfach die IP des Servers in den Frontendeinstellungen hinzu, schon kann search_it wieder crawlen. ;-) 
+Ist die Frontendsperre aktiviert, kann `search_it` den Index nicht erstellen.
+
+Dazu einfach die aktuelle IP des Servers, auf dem REDAXO installiert ist und von dem aus gecrawlt wird, als  Ausnahme hinzufügen. Schon kann `search_it` wieder crawlen. 🕵🏻
 
 ## Konsole
 
-Es wird die im Backend ausgewählte Sperrseite angezeigt. 
-Aktivieren der Frontendsperre 
+Es wird die im Backend ausgewählte Sperrseite angezeigt. Aktivieren der Frontendsperre
 
 Mit `maintenance:on` oder `frontend:off`
 
 Deaktivieren mit `maintenance:off` oder `frontend:on`
 
-
 ## Autor
 
-**Friends Of REDAXO**
+### FriendsOfREDAXO
 
-* http://www.redaxo.org
-* https://github.com/FriendsOfREDAXO
+* <http://www.redaxo.org>
+* <https://github.com/FriendsOfREDAXO>
 
-**Projekt-Lead**
+### Projekt-Lead
 
 [KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
 
 ## Credits
-Danke an: 
-[Christian Gehrke](https://github.com/chrison94)
 
-**Ursprung**
+Danke an:
 
-Basiert auf out5-Plugin: Wartungsarbeiten 
+* [Christian Gehrke](https://github.com/chrison94)
+* [Alexander Walther](https://github.com/alxndr-w)
 
-https://github.com/FriendsOfREDAXO/out5
+Maintenance basiert auf dem out5-Plugin: Wartungsarbeiten
+
+<https://github.com/FriendsOfREDAXO/out5>
 
 [concedra.de / Oliver Kreischer](http://concedra.de)
-

@@ -1,0 +1,83 @@
+// Ek paket
+
+maintenance_title = Bakım Modu
+maintenance_frontend_title = Web sitesi frontend
+maintenance_backend_title = REDAXO backend
+maintenance_docs_title = Dokümantasyon
+
+
+// Konsol komutları
+
+maintenance_command_off_description = Bakım modunu devre dışı bırak
+maintenance_command_on_description = Bakım modunu etkinleştir
+
+maintenance_mode_deactivated = Bakım modu devre dışı bırakıldı
+
+// Backend ayar sayfası
+
+maintenance_settings_backend_title = REDAXO backend için bakım modu ayarları
+
+maintenance_block_backend_label = Bakım modunu etkinleştir
+maintenance_block_backend_true = 🔴 Bakım modu etkin
+maintenance_block_backend_false = 🟢 Bakım modu devre dışı
+
+maintenance_redirect_backend_to_url_label = Yönlendirilecek URL (isteğe bağlı)
+maintenance_redirect_backend_to_url_notice = REDAXO backend bakım modundayken kullanıcıların yönlendirileceği URL'yi girin.
+
+// Frontend ayar sayfası
+
+maintenance_settings_frontend_title = Web sitesi frontend için bakım modu ayarları
+
+maintenance_general_title = Genel
+
+maintenance_block_frontend_label = Bakım modunu etkinleştir
+maintenance_block_frontend_false = 🟢 Bakım modu devre dışı
+maintenance_block_frontend_true = 🔴 Bakım modu etkin
+
+maintenance_block_frontend_rex_user_label = REDAXO kullanıcılarını da engelle
+maintenance_block_frontend_rex_user_false = 🆗 Yetkili REDAXO kullanıcılarına hala erişim izni ver
+maintenance_block_frontend_rex_user_true = 🚷 REDAXO kullanıcılarını da engelle
+maintenance_block_frontend_rex_user_notice = Etkinleştirilirse, yalnızca yöneticiler ve şifre veya bağlantı ile erişim izni olan kişiler frontend'e erişebilir.
+
+maintenance_type_label = Kimlik Doğrulama
+maintenance_type_notice = Erişim için kimlik doğrulama yöntemini seçin.
+
+maintenance_type_none = Kimlik doğrulama yok
+maintenance_type_password = 🔑 Şifre
+maintenance_type_url = 🔗 Gizli URL (varsayılan)
+
+maintenance_secret_label = Gizli
+maintenance_secret_notice = Siteye gizli URL veya şifre girişi aracılığıyla erişim için kullanılacak herhangi bir metni girin (örneğin, <code>{0}</code>).
+
+maintenance_redirect_frontend_to_url_label = Yönlendirilecek URL (isteğe bağlı)
+maintenance_redirect_frontend_to_url_notice = Web sitesi bakım modundayken ziyaretçilerin yönlendirileceği URL'yi girin.
+
+maintenance_block_frontend_session_label = Yetkili kullanıcıları engelle
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = İstenen yanıt başlığı
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (web sitesi geçici olarak kullanılamıyorsa önerilir)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Kaynağa erişim kalıcı olarak yasaktır)
+
+maintenance_announcement_title = Bakım Duyurusu
+
+maintenance_announcement_label = Metin
+maintenance_announcement_notice = Bakım penceresi bakım modunu etkinleştirdiğinde ziyaretçileri bilgilendirin. <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code> aracılığıyla çıktı alın.
+
+maintenance_announcement_start_date_label = Başlangıç tarihi
+maintenance_announcement_start_date_notice = Duyurunun <strong>gösterilmeye başlanacağı tarih</strong>. Web sitesi bakım moduna girdiği tarih değil. Mevcut sunucu saati: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Bitiş tarihi
+maintenance_announcement_end_date_notice = Duyurunun gösterileceği son tarih. Mevcut sunucu saati: <code>{0}</code>.
+
+maintenance_allowed_access_title = İstisnalar
+
+maintenance_allowed_ips_label = İzin verilen IP adresleri listesi
+maintenance_allowed_ips_notice = Frontend'e hala erişim izni olan IPv4 IP adres(ler)ini girin. Mevcut IP adresiniz: <code>{0}</code>.
+
+maintenance_allowed_domains_label = İzin verilen alan adları listesi
+maintenance_allowed_domains_notice = Engellenmeyecek alan adlarını girin.
+
+maintenance_allowed_yrewrite_domains_label = İzin verilen YRewrite alan adları listesi
+maintenance_allowed_yrewrite_domains_notice = Engellenmeyecek YRewrite alan adlarını girin.

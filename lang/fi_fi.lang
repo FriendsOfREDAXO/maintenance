@@ -1,0 +1,83 @@
+// Lisäpaketti
+
+maintenance_title = Huoltotila
+maintenance_frontend_title = Verkkosivuston frontend
+maintenance_backend_title = REDAXO-backend
+maintenance_docs_title = Dokumentaatio
+
+
+// Konsolikomennot
+
+maintenance_command_off_description = Poista huoltotila käytöstä
+maintenance_command_on_description = Ota huoltotila käyttöön
+
+maintenance_mode_deactivated = Huoltotila poistettu käytöstä
+
+// Backend-asetussivu
+
+maintenance_settings_backend_title = REDAXO-backendin huoltotilan asetukset
+
+maintenance_block_backend_label = Ota huoltotila käyttöön
+maintenance_block_backend_true = 🔴 Huoltotila käytössä
+maintenance_block_backend_false = 🟢 Huoltotila ei ole käytössä
+
+maintenance_redirect_backend_to_url_label = Uudelleenohjausosoite (valinnainen)
+maintenance_redirect_backend_to_url_notice = Anna URL, johon käyttäjät ohjataan, kun REDAXO-backend on huoltotilassa.
+
+// Frontend-asetussivu
+
+maintenance_settings_frontend_title = Verkkosivuston frontendin huoltotilan asetukset
+
+maintenance_general_title = Yleiset
+
+maintenance_block_frontend_label = Ota huoltotila käyttöön
+maintenance_block_frontend_false = 🟢 Huoltotila ei ole käytössä
+maintenance_block_frontend_true = 🔴 Huoltotila käytössä
+
+maintenance_block_frontend_rex_user_label = Estä myös REDAXO-käyttäjät
+maintenance_block_frontend_rex_user_false = 🆗 Valtuutetuilla REDAXO-käyttäjillä on edelleen pääsy
+maintenance_block_frontend_rex_user_true = 🚷 Estä myös REDAXO-käyttäjät
+maintenance_block_frontend_rex_user_notice = Jos tämä on käytössä, vain ylläpitäjillä ja salasanalla tai linkillä varustetuilla henkilöillä on pääsy frontend-puolelle.
+
+maintenance_type_label = Autentikointi
+maintenance_type_notice = Valitse pääsyn autentikointimenetelmä.
+
+maintenance_type_none = Ei autentikointia
+maintenance_type_password = 🔑 Salasana
+maintenance_type_url = 🔗 Salainen URL (oletus)
+
+maintenance_secret_label = Salaisuus
+maintenance_secret_notice = Anna teksti (salasana, koodisana, esim. <code>{0}</code>), jota käytetään pääsyyn sivustolle salaisen URL:n tai salasanasyötön kautta.
+
+maintenance_redirect_frontend_to_url_label = Uudelleenohjausosoite (valinnainen)
+maintenance_redirect_frontend_to_url_notice = Anna URL, johon vierailijat ohjataan, kun verkkosivusto on huoltotilassa.
+
+maintenance_block_frontend_session_label = Estä valtuutetut käyttäjät
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Haluttu vastausotsikko
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (suositellaan, jos verkkosivusto on tilapäisesti käyttökelvoton)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Pääsy resurssiin on pysyvästi kielletty)
+
+maintenance_announcement_title = Huoltoilmoitus
+
+maintenance_announcement_label = Teksti
+maintenance_announcement_notice = Ilmoita vierailijoille, kun huoltoikkuna aktivoi huoltotilan. Tulosta käyttäen <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+
+maintenance_announcement_start_date_label = Aloitus päivämäärä
+maintenance_announcement_start_date_notice = Päivämäärä, <strong>milloin ilmoitus alkaa näkyä</strong>. Ei siitä, milloin verkkosivusto siirtyy huoltotilaan. Nykyinen palvelimen aika: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Lopetus päivämäärä
+maintenance_announcement_end_date_notice = Päivämäärä, jolloin ilmoitus lopetetaan näyttämästä. Nykyinen palvelimen aika: <code>{0}</code>.
+
+maintenance_allowed_access_title = Poikkeukset
+
+maintenance_allowed_ips_label = Sallittujen IP-osoitteiden luettelo
+maintenance_allowed_ips_notice = Anna IPv4 IP-osoite(t), joilla on edelleen pääsy frontend-puolelle. Nykyinen IP-osoitteesi: <code>{0}</code>.
+
+maintenance_allowed_domains_label = Sallittujen verkkotunnusten luettelo
+maintenance_allowed_domains_notice = Anna verkkotunnukset, joita ei estetä.
+
+maintenance_allowed_yrewrite_domains_label = Sallittujen YRewrite-verkkotunnusten luettelo
+maintenance_allowed_yrewrite_domains_notice = Anna YRewrite-verkkotunnukset, joita ei estetä.

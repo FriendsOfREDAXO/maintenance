@@ -10,222 +10,144 @@
  * file that was distributed with this source code.
  */
 
+use FriendsOfREDAXO\Maintenance\MaintenanceUtil;
+
 $addon = rex_addon::get('maintenance');
-$maintenance_functions = new maintenance_functions();
-$content = '';
 
+$form = rex_config_form::factory($addon->getName());
 
+$form->addFieldset($addon->i18n('maintenance_general_title'));
 
-if (rex_post('config-submit', 'boolean')) {
-    $addon->setConfig(rex_post('config', [['url', 'string'],]));
-    $addon->setConfig(rex_post('config', [['secret', 'string'],]));
-    $addon->setConfig(rex_post('config', [['blockSession', 'string'],]));
-    $addon->setConfig(rex_post('config', [['ip', 'string'],]));
-    $addon->setConfig(rex_post('config', [['domains', 'string'],]));
-    $addon->setConfig(rex_post('config', [['frontend_aktiv', 'string'],]));
-    $addon->setConfig(rex_post('config', [['redirect_frontend', 'string'],]));
-    $addon->setConfig(rex_post('config', [['type', 'string'],]));
-    $addon->setConfig(rex_post('config', [['responsecode', 'string'],]));
-    $content .= rex_view::info('Änderung gespeichert');
-    rex_session('secret','');
+// Aktivierung/Deaktivierung des Wartungsmodus im Frontend
+$field = $form->addSelectField('block_frontend');
+$field->setLabel($addon->i18n('maintenance_block_frontend_label'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
+$select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
+
+// Umgehung der Wartung durch GET-Parameter (URL) oder Passwort
+$field = $form->addSelectField('authentification_mode');
+$field->setLabel($addon->i18n('maintenance_authentification_mode_label'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_authentification_mode_url'), 'URL');
+$select->addOption($addon->i18n('maintenance_authentification_mode_password'), 'password');
+
+// Blockere auch für angemeldete REDAXO-Benutzer das Frontend
+$field = $form->addSelectField('block_frontend_rex_user');
+$field->setLabel($addon->i18n('maintenance_block_frontend_rex_user_label'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0);
+$select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1);
+
+// Passwort zum Umgehen des Wartungsmodus
+$field = $form->addTextField('maintenance_secret');
+$field->setLabel($addon->i18n('maintenance_secret_label'));
+$field->setNotice($addon->i18n('maintenance_secret_notice', bin2hex(random_bytes(16))));
+$field->setAttribute('type', 'password');
+
+// Ziel der Umleitung
+$field = $form->addTextField('redirect_frontend_to_url');
+$field->setLabel($addon->i18n('maintenance_redirect_frontend_to_url_label'));
+$field->setNotice($addon->i18n('maintenance_redirect_frontend_to_url_notice'));
+$field->setAttribute('type', 'url');
+
+// Antwortcode
+$field = $form->addSelectField('http_response_code');
+$field->setLabel($addon->i18n('maintenance_http_response_code_label'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_http_response_code_503'), '503');
+$select->addOption($addon->i18n('maintenance_http_response_code_403'), '403');
+
+// Wartungsfenster-Ankündigung
+
+$form->addFieldset($addon->i18n('maintenance_announcement_title'));
+
+// Benachrichtigungstext
+$field = $form->addTextAreaField('announcement');
+$field->setLabel($addon->i18n('maintenance_announcement_label'));
+$field->setNotice($addon->i18n('maintenance_announcement_notice'));
+if(strval(rex_config::get('maintenance', 'editor')) !== '') { // @phpstan-ignore-line
+    $field->setAttribute('class', '###maintenance-settings-editor###');
 }
 
-$iplist = $addon->getConfig('ip');
-$ips = [];
-if (is_string($iplist)) {
-    $ips = explode(", ", $iplist);
-}
+// Start- und Endzeitpunkt der Wartungsankündigung
+$field = $form->addTextField('announcement_start_date');
+$field->setLabel($addon->i18n('maintenance_announcement_start_date_label'));
+$field->setNotice($addon->i18n('maintenance_announcement_start_date_notice', date('Y-m-d H:i:s')));
+$field->setAttribute('type', 'datetime-local');
 
+$field = $form->addTextField('announcement_end_date');
+$field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
+$field->setNotice($addon->i18n('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
+$field->setAttribute('type', 'datetime-local');
 
-$domainlist = $addon->getConfig('domains');
-$domains = [];
-if (is_string($domainlist)) {
-    $domains = explode(", ", $domainlist);
-}
+// Ausnahmeregeln
 
+$form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
 
-foreach ($ips as $ip) {
-    if ($maintenance_functions->CheckIp($ip) === false) {
-        echo rex_view::warning($addon->i18n('invalid_ip').': ' . $ip);
+// Erlaubte IP-Adressen
+$field = $form->addTextField('allowed_ips');
+$field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
+$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', \rex_server('REMOTE_ADDR', 'string', '')));
+$field->setAttribute('class', 'form-control');
+$field->setAttribute('data-maintenance', 'tokenfield');
+
+// Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
+if (\rex_addon::get('yrewrite')->isAvailable()) {
+    $field = $form->addSelectField('allowed_yrewrite_domains');
+    $field->setAttribute('multiple', 'multiple');
+
+    $field->setAttribute('size', count(\rex_yrewrite::getDomains()));
+    $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
+    $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
+    $select = $field->getSelect();
+    foreach (\rex_yrewrite::getDomains() as $key => $domain) {
+        $select->addOption($key, $key);
     }
+} else {
+    $field = $form->addSelectField('allowed_yrewrite_domains');
+
+    $field->setAttribute('disabled', 'disabled');
+    $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
+    $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
+    $select = $field->getSelect();
+    $select->addOption($addon->i18n('maintenance_yrewrite_not_installed'), '');
 }
 
-if (is_string($addon->getConfig('redirect_frontend'))) {
-    if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === true) {
-    }
-    if ($maintenance_functions->CheckUrl($addon->getConfig('redirect_frontend')) === false) {
-        $content .= rex_view::warning($addon->i18n('invalid_link'));
-        $addon->setConfig('redirect_frontend', '');
-    }
-}
-$content .= '
-<div class="rex-form">
-    <form action="' . rex_url::currentBackendPage() . '" method="post">
-        <fieldset>';
-
-$formElements = [];
-
-$n = [];
-$n['label'] = '<label for="frontend">' . $addon->i18n('deakt-front') . '</label>';
-$select = new rex_select();
-$select->setId('deakt-front');
-$select->setAttribute('class', 'form-control selectpicker');
-$select->setName('config[frontend_aktiv]');
-$select->addOption($addon->i18n('Frontend_entsperren'), 'Deaktivieren');
-$select->addOption($addon->i18n('Frontend_Sperren'), 'Aktivieren');
-
-
-$select->setSelected($addon->getConfig('frontend_aktiv'));
-$n['field'] = $select->get();
-$formElements[] = $n;
-
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/form.php');
-
-$content .= '<div id="showform">';
-
-$formElements = [];
-
-$n2 = [];
-$n2['label'] = '<label for="rex-maintenance-secret-secret-we-got-a-secret">' . $addon->i18n('secret') . '</label>';
-$n2['field'] = $addon->i18n("secret-secret") . '</br></br><input class="form-control" type="text" id="rex-maintenance-secret-secret-we-got-a-secret" name="config[secret]" value="' . rex_escape($addon->getConfig('secret')) . '"/>';
-
-$formElements[] = $n2;
-
-$n = [];
-$n['label'] = '<label for="type">' . $addon->i18n('type') . '</label>';
-$select = new rex_select();
-$select->setId('type');
-$select->setAttribute('class', 'form-control selectpicker');
-$select->setName('config[type]');
-$select->addOption($addon->i18n('type_url'), 'URL');
-$select->addOption($addon->i18n('type_pw'), 'PW');
-
-$select->setSelected($addon->getConfig('type'));
-$n['field'] = $select->get() . '</br>';
-
-$secretLink = '<i>' . $addon->i18n("secret-example") . ' ' . rex::getServer() . '?secret=EingetragenesWort</i>';
-if ($addon->getConfig('secret') !== null) {
-    $secretLink = '<i><a href="' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '" target="_blank">' . rex::getServer() . '?secret=' . rex_escape($addon->getConfig('secret')) . '</a></i>';
-}
-
-$n['field'] .= '<div id="type-default"><i>' . $addon->i18n('type_description') . '</i></div>';
-$n['field'] .= '<div id="type-url" style="display: none;"><i>' . $secretLink . '</i></div>';
-$n['field'] .= '<div id="type-pw" style="display: none;"><i>' . $addon->i18n('type_description_pw') . '</i></div>';
-$formElements[] = $n;
-
-$n1 = [];
-$n1['label'] = '<label for="rex-maintenance-ip">' . $addon->i18n('IP') . '</label>';
-$n1['field'] = $addon->i18n("ipErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-ip" name="config[ip]" value="' . rex_escape($addon->getConfig('ip')) . '"/><i>' . $addon->i18n("ipAkt") . rex_server('REMOTE_ADDR') . '</i><br/><i>' . $addon->i18n('ipServer') . rex_server('SERVER_ADDR') . '</i>';
-$formElements[] = $n1;
-
-
-$n = [];
-$n['label'] = '<label for="responsecode">' . $addon->i18n('responsecode') . '</label>';
-$select = new rex_select();
-$select->setId('responsecode');
-$select->setAttribute('class', 'form-control selectpicker');
-$select->setName('config[responsecode]');
-$select->addOption($addon->i18n('responsecode-503'), '503');
-$select->addOption($addon->i18n('responsecode-403'), '403');
-
-$select->setSelected($addon->getConfig('responsecode'));
-$n['field'] = $select->get() . '</br>';
-$formElements[] = $n;
-
-$n1 = [];
-$n1['label'] = '<label for="rex-maintenance-domains">' . $addon->i18n('domains') . '</label>';
-$n1['field'] = $addon->i18n("domainsErk") . '</br></br><input class="form-control test" type="text" id="rex-maintenance-domains" name="config[domains]" value="' . rex_escape($addon->getConfig('domains')) . '"/>';
-$formElements[] = $n1;
-
-
-$n = [];
-$n['label'] = '<label for="rex-maintenance-redirectUrl">' . $addon->i18n('redirectUrl') . '</label>';
-$n['field'] = '<input class="form-control" type="text" id="rex-maintenance-redirectUrl" name="config[redirect_frontend]" placeholder="https://example.com" value="' . rex_escape($addon->getConfig('redirect_frontend')) . '"/>';
-$formElements[] = $n;
-
-$n = [];
-$n['label'] = '<label for="blocken">' . $addon->i18n('blockSession') . '</label>';
-$select = new rex_select();
-$select->setId('blockSession');
-$select->setAttribute('class', 'form-control selectpicker');
-$select->setName('config[blockSession]');
-$select->addOption($addon->i18n('session_Inaktiv'), 'Inaktiv');
-$select->addOption($addon->i18n('session_Redakteure'), 'Redakteure');
-
-$select->setSelected($addon->getConfig('blockSession'));
-$n['field'] = $select->get() . '</br><i>Sollen Redakteure trotz Backend-Session aus dem Frontend ausgesperrt werden?</i>';
-$formElements[] = $n;
-
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/form.php');
-
-$content .= '
-        </div></fieldset>
-        <fieldset class="rex-form-action">
-        ';
-
-$formElements = [];
-
-$n = [];
-$n['field'] = '<div class="btn-toolbar"><button id="rex-maintenance-save" type="submit" name="config-submit" class="btn btn-save rex-form-aligned" value="1">Einstellungen speichern</button></div>';
-$formElements[] = $n;
-
-$fragment = new rex_fragment();
-$fragment->setVar('elements', $formElements, false);
-$content .= $fragment->parse('core/form/submit.php');
-
-$content .= '
-        </fieldset>
-
-    </form>
-</div>';
+// Erlaubte Domains
+$field = $form->addTextField('allowed_domains');
+$field->setLabel($addon->i18n('maintenance_allowed_domains_label'));
+$field->setNotice($addon->i18n('maintenance_allowed_domains_notice'));
+$field->setAttribute('class', 'form-control');
+$field->setAttribute('data-maintenance', 'tokenfield');
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
-$fragment->setVar('title', 'Maintenance-Settings');
-$fragment->setVar('body', $content, false);
-echo $fragment->parse('core/page/section.php');
-
+$fragment->setVar('title', $addon->i18n('maintenance_settings_frontend_title'));
+$fragment->setVar('body', $form->get(), false);
 ?>
-<script>
-    $('#showform').toggle(
-        $('#deakt-front').find("option[value='Aktivieren']").is(":checked")
-    );
 
+<div class="row">
+	<div class="col-lg-8">
+		<?= $fragment->parse('core/page/section.php') ?>
+	</div>
+	<div class="col-lg-4">
+		<?php
 
-    $('#deakt-front').change(function() {
-        if ($(this).val() === 'Aktivieren') {
-            $('#showform').slideDown();
-        } else {
-            $('#showform').slideUp();
-        }
-    });
+$copy = '';
+$url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+$copy .= '<div class="hidden" id="maintenance-mode-url"><code>'.$url.'</code></div>';
+$copy .= '
+<clipboard-copy for="maintenance-mode-url" class="input-group">
+  <input type="text" value="' .$url .'" readonly class="form-control">
+  <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+</clipboad-copy>';
 
-    if ($("#type option:selected").val() === 'PW') {
-        $('#type-default').hide();
-        $('#type-pw').show();
-        $('#type-url').hide();
-    }
-
-    if ($("#type option:selected").val() === 'URL') {
-        $('#type-default').hide();
-        $('#type-pw').hide();
-        $('#type-url').show();
-    }
-
-    $('#type').change(function() {
-        if ($(this).val() === 'URL') {
-            $('#type-default').hide();
-            $('#type-pw').hide();
-            $('#type-url').show();
-        }
-        if ($(this).val() === 'PW') {
-            $('#type-default').hide();
-            $('#type-pw').show();
-            $('#type-url').hide();
-        }
-    });
-</script>
+$fragment = new rex_fragment();
+$fragment->setVar('class', 'info', false);
+$fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
+$fragment->setVar('body', $copy, false);
+echo $fragment->parse('core/page/section.php');
+?>
+	</div>
+</div>

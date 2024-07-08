@@ -1,42 +1,85 @@
-//Config
-maintenance_title = Maintenance mode
-maintenance_Help = Hilfe
+// Addon-Package
 
-//Frontend
-maintenance_URL = Deaktiviere Webseite
-maintenance_IP = IP
-maintenance_invalid_ip: Ungültige IP
-maintenance_invalid_link: Ungültiger Link
-maintenance_domains = Domains ausschließen
-maintenance_domainsErk = Tragen Sie hier die Domains ein, die nicht gesperrt werden sollen. Enter-Taste um weitere Domains hinzuzufügen. (ohne www.)
-maintenance_deakt-front = Modus
-maintenance_redirectUrl = Weiterleitung zu (optional) 
-maintenance_ipErk = Tragen Sie hier die IP-Adressen ein, die weiterhin Zugriff auf das Frontend haben sollen. Drücken Sie nach der Eingabe einer IP-Adresse Enter um die nächste einzugeben
-maintenance_ipAkt = Ihre aktuelle IP:
-maintenance_ipServer = Aktuelle IP des Servers:
-maintenance_Frontend_Sperren = Frontend sperren
-maintenance_Eigene_Loesung = Nur Config-Wert setzen
-maintenance_Frontend_entsperren = Inaktiv
-maintenance_blockSession = Eingeloggte User ausperren
-maintenance_session_Inaktiv = Inaktiv
-maintenance_session_Redakteure = Redakteure zusätzlich ausperren
-maintenance_secret = Passwort
-maintenance_secret-secret = Tragen Sie hier ein beliebiges Wort ein, das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt wird.
-maintenance_secret-example = Beispiel:
-maintenance_type = Art des Seitenaufrufs
-maintenance_type_url = Aufruf per Geheim-URL mit Passwort-Parameter
-maintenance_type_pw = Aufruf per Passworteingabe durch den User
-maintenance_type_description = Aufruf per Geheim-URL: Die Seite kann mit einem Link geöffnet werden (Bsp.: https://www.domain.de/?secret=passwort)<br>Aufruf per Passwort: Der User muss vor Betreten der Seite einmalig das Passwort eingeben
-maintenance_type_description_pw = Der User muss vor Betreten der Seite einmalig das oben festgelegte Passwort eingeben.
-maintenance_pw-prompt = Passworteingabe
-maintenance_enter = Website betreten
-maintenance_responsecode = Gewünschter Response Code
-maintenance_responsecode-403 = 403 - HTTP_FORBIDDEN
-maintenance_responsecode-503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen)
+maintenance_title = Wartungsmodus
+maintenance_frontend_title = Website-Frontend
+maintenance_backend_title = REDAXO-Backend
+maintenance_docs_title = Hilfe
 
 
-//Backend
-maintenance_deakt-reda = Redakteure ausschließen?
+// Console-Commands
 
-perm_general_maintenance[] = Maintenance-Einstellungen verwalten
+maintenance_command_off_description = Schaltet den Wartungsmodus aus
+maintenance_command_on_description = Schaltet den Wartungsmodus ein
 
+maintenance_mode_deactivated = Wartungsmodus deaktiviert
+
+// Einstellungsseite Backend
+
+maintenance_settings_backend_title = Wartungsmodus-Einstellungen für das REDAXO-Backend
+
+maintenance_block_backend_label = Wartungsmodus aktivieren
+maintenance_block_backend_true = 🔴 Wartungsmodus aktiviert
+maintenance_block_backend_false = 🟢 Wartungsmodus deaktiviert
+
+maintenance_redirect_backend_to_url_label = Weiterleitung zu (optional)
+maintenance_redirect_backend_to_url_notice = URL angeben, zu der die Benutzer weitergeleitet werden, wenn das REDAXO-Backend im Wartungsmodus ist.
+
+// Einstellungsseite Frontend
+
+maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
+
+maintenance_general_title = Allgemein
+
+maintenance_block_frontend_label = Wartungsmodus aktivieren
+maintenance_block_frontend_false = 🟢 Wartungsmodus deaktiviert
+maintenance_block_frontend_true = 🔴 Wartungsmodus aktiviert
+
+maintenance_block_frontend_rex_user_label = REDAXO-Benutzer zusätzlich ausperren
+maintenance_block_frontend_rex_user_false = 🆗 Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
+maintenance_block_frontend_rex_user_rex_user = 🚷 Auch REDAXO-Benutzer ausperren
+maintenance_block_frontend_rex_user_notice = Wenn aktiviert, haben nur Administratoren und Personen mit Password oder Link Zugriff auf das Frontend.
+
+maintenance_authentification_mode_label = Authentifizierung
+maintenance_authentification_mode_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
+
+maintenance_authentification_mode_none = Keine Authentifizierung
+maintenance_authentification_mode_password = 🔑 Passwort
+maintenance_authentification_mode_url = 🔗 Geheim-URL (Standard)
+
+maintenance_secret_label = Passwort
+maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
+
+maintenance_redirect_frontend_to_url_label = Weiterleitung zu (optional)
+maintenance_redirect_frontend_to_url_notice = URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
+
+maintenance_block_frontend_session_label = Eingeloggte User ausperren
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Gewünschter Antwort-Header
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)
+
+maintenance_announcement_title = Ankündigung der Wartungsarbeiten
+
+maintenance_announcement_label = Text
+maintenance_announcement_notice = Besucher*innen mitteilen, wann das Wartungsfenster den Wartungsmodus gesetzt wird. Ausgabe über <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+
+maintenance_announcement_start_date_label = Startdatum
+maintenance_announcement_start_date_notice = Datum, <strong>ab wann die Ankündigung gezeigt werden soll</strong>. Nicht, ab wann die Website in den Wartungsmodus wechseln soll. Aktuelle Serverzeit: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Enddatum
+maintenance_announcement_end_date_notice = Datum, bis wann die Ankündigung gezeigt werden soll. Aktuelle Serverzeit: <code>{0}</code>.
+
+maintenance_allowed_access_title = Ausnahmen
+
+maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
+maintenance_allowed_ips_notice = IPv4-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Die aktuelle IP-Adresse lautet <code>{0}</code>.
+
+maintenance_allowed_domains_label = Liste erlaubter Domains
+maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werden sollen.
+
+maintenance_allowed_yrewrite_domains_label = Liste erlaubter YRewrite-Domains
+maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die nicht gesperrt werden sollen.
+
+maintenance_copy_url_title = URL kopieren

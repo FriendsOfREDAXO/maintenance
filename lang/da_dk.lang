@@ -1,0 +1,83 @@
+// Tilføjelse
+
+maintenance_title = Vedligeholdelsestilstand
+maintenance_frontend_title = Frontend af hjemmesiden
+maintenance_backend_title = Backend REDAXO
+maintenance_docs_title = Dokumentation
+
+
+// Konsolkommandoer
+
+maintenance_command_off_description = Deaktiver vedligeholdelsestilstand
+maintenance_command_on_description = Aktiver vedligeholdelsestilstand
+
+maintenance_mode_deactivated = Vedligeholdelsestilstand deaktiveret
+
+// Backend indstillinger side
+
+maintenance_settings_backend_title = Vedligeholdelsestilstandsindstillinger for REDAXO backend
+
+maintenance_block_backend_label = Aktiver vedligeholdelsestilstand
+maintenance_block_backend_true = 🔴 Vedligeholdelsestilstand aktiveret
+maintenance_block_backend_false = 🟢 Vedligeholdelsestilstand deaktiveret
+
+maintenance_redirect_backend_to_url_label = Omdirigerings-URL (valgfri)
+maintenance_redirect_backend_to_url_notice = Angiv URL'en, som brugere vil blive omdirigeret til, når REDAXO backend er i vedligeholdelsestilstand.
+
+// Frontend indstillinger side
+
+maintenance_settings_frontend_title = Vedligeholdelsestilstandsindstillinger for hjemmesidens frontend
+
+maintenance_general_title = Generelt
+
+maintenance_block_frontend_label = Aktiver vedligeholdelsestilstand
+maintenance_block_frontend_false = 🟢 Vedligeholdelsestilstand deaktiveret
+maintenance_block_frontend_true = 🔴 Vedligeholdelsestilstand aktiveret
+
+maintenance_block_frontend_rex_user_label = Bloker også REDAXO brugere
+maintenance_block_frontend_rex_user_false = 🆗 Tillad adgang for autoriserede REDAXO brugere
+maintenance_block_frontend_rex_user_true = 🚷 Bloker også REDAXO brugere
+maintenance_block_frontend_rex_user_notice = Hvis aktiveret, kun administratorer og personer med adgang via kode eller link kan få adgang til frontend.
+
+maintenance_type_label = Autentificeringstype
+maintenance_type_notice = Vælg metoden for adgangsautentificering.
+
+maintenance_type_none = Ingen autentificering
+maintenance_type_password = 🔑 Kodeord
+maintenance_type_url = 🔗 Hemmelig URL (standard)
+
+maintenance_secret_label = Hemmelighed
+maintenance_secret_notice = Indtast teksten (kodeord, hemmelig kode osv. <code>{0}</code>) der vil blive brugt til at få adgang til hjemmesiden via en hemmelig URL eller kodeordsindtastning.
+
+maintenance_redirect_frontend_to_url_label = Omdirigerings-URL (valgfri)
+maintenance_redirect_frontend_to_url_notice = Angiv URL'en, som besøgende vil blive omdirigeret til, når hjemmesiden er i vedligeholdelsestilstand.
+
+maintenance_block_frontend_session_label = Bloker autoriserede brugere
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Ønsket svarkode
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (anbefales hvis hjemmesiden er midlertidigt utilgængelig)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Adgang til ressourcen er permanent forbudt)
+
+maintenance_announcement_title = Vedligeholdelsesmeddelelse
+
+maintenance_announcement_label = Tekst
+maintenance_announcement_notice = Informer besøgende, når vedligeholdelsestilstanden aktiverer vedligeholdelsestilstanden. Brug <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code> for at vise.
+
+maintenance_announcement_start_date_label = Startdato
+maintenance_announcement_start_date_notice = Datoen hvor meddelelsen begynder at blive vist. Ikke når hjemmesiden går ind i vedligeholdelsestilstand. Nuværende servertid: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = Slutdato
+maintenance_announcement_end_date_notice = Datoen hvor meddelelsen stopper med at blive vist. Nuværende servertid: <code>{0}</code>.
+
+maintenance_allowed_access_title = Undtagelser
+
+maintenance_allowed_ips_label = Liste over tilladte IP-adresser
+maintenance_allowed_ips_notice = Indtast den(de) IP-adresse(r) IPv4, der fortsat vil have adgang til frontend. Din nuværende IP-adresse: <code>{0}</code>.
+
+maintenance_allowed_domains_label = Liste over tilladte domæner
+maintenance_allowed_domains_notice = Indtast de domæner, der ikke vil blive blokeret.
+
+maintenance_allowed_yrewrite_domains_label = Liste over tilladte YRewrite domæner
+maintenance_allowed_yrewrite_domains_notice = Indtast de YRewrite domæner, der ikke vil blive blokeret.

@@ -1,36 +1,83 @@
-//Config
-maintenance_title = Maintenance mode
-maintenance_Help = Help
+// Addon-Package
 
-//Frontend
-maintenance_URL = Disable website
-maintenance_IP = IP
-maintenance_domains = Exclude domains
-maintenance_domainsErk = Enter here the domains which should not be blocked. Press Enter to add more domains (without www.)
-maintenance_deakt-front = Mode
-maintenance_redirectUrl = Redirect-URL (optional)
-maintenance_ipErk = Enter the IP addresses that should still have access to the frontend. After entering an IP address, press Enter to enter the next IP address.
-maintenance_ipAkt = Current IP:
-maintenance_ipServer = Current Server IP:
-maintenance_Frontend_Sperren = Active
-maintenance_Eigene_Loesung = set config value only
-maintenance_Frontend_entsperren = Inactive
-maintenance_blockSession = Deny access to logged-in users
-maintenance_session_Inaktiv = inactive
-maintenance_session_Redakteure = Deny content editor access
-maintenance_secret = Secret-URL
-maintenance_secret-secret = Enter any word that you want to append to the link to access the page, even if it is locked.
-maintenance_secret-example = Example:
-maintenance_type = Access type
-maintenance_type_url = Access via secret URL with password parameter
-maintenance_type_pw = Access via user password entry
-maintenance_type_description = Access via secret URL: the website can be accessed using a secret link (ex. https://www.domain.com/?secret=password)<br>Access via password entry: the website can be accessed by entering a password upon the first visit
-maintenance_type_description_pw = to view the website users are required to enter the above password upon their first visit
-maintenance_pw-prompt = Password entry
-maintenance_enter = Enter website
+maintenance_title = Maintenance Mode
+maintenance_frontend_title = Website Frontend
+maintenance_backend_title = REDAXO Backend
+maintenance_docs_title = Documentation
 
 
-//Backend
-maintenance_deakt-reda = Exclude content editor role?
+// Console-Commands
 
-perm_general_maintenance[] = Update maintenance mode settings
+maintenance_command_off_description = Turns off maintenance mode
+maintenance_command_on_description = Turns on maintenance mode
+
+maintenance_mode_deactivated = Maintenance mode deactivated
+
+// Backend Settings Page
+
+maintenance_settings_backend_title = Maintenance Mode Settings for the REDAXO Backend
+
+maintenance_block_backend_label = Activate maintenance mode
+maintenance_block_backend_true = 🔴 Maintenance mode activated
+maintenance_block_backend_false = 🟢 Maintenance mode deactivated
+
+maintenance_redirect_backend_to_url_label = Redirect to (optional)
+maintenance_redirect_backend_to_url_notice = Specify the URL to which users will be redirected when the REDAXO backend is in maintenance mode.
+
+// Frontend Settings Page
+
+maintenance_settings_frontend_title = Maintenance Mode Settings for the Website Frontend
+
+maintenance_general_title = General
+
+maintenance_block_frontend_label = Activate maintenance mode
+maintenance_block_frontend_false = 🟢 Maintenance mode deactivated
+maintenance_block_frontend_true = 🔴 Maintenance mode activated
+
+maintenance_block_frontend_rex_user_label = Lock out REDAXO users as well
+maintenance_block_frontend_rex_user_false = 🆗 Logged-in REDAXO users still have access
+maintenance_block_frontend_rex_user_true = 🚷 Lock out REDAXO users as well
+maintenance_block_frontend_rex_user_notice = If activated, only administrators and people with a password or link will have access to the frontend.
+
+maintenance_authentification_mode_label = Authentication
+maintenance_authentification_mode_notice = Choose the authentication method to gain access.
+
+maintenance_authentification_mode_none = No Authentication
+maintenance_authentification_mode_password = 🔑 Password
+maintenance_authentification_mode_url = 🔗 Secret URL (default)
+
+maintenance_secret_label = Password
+maintenance_secret_notice = Enter any text here (password, passphrase, e.g., <code>{0}</code>) that should be used to access the site via secret URL or password entry.
+
+maintenance_redirect_frontend_to_url_label = Redirect to (optional)
+maintenance_redirect_frontend_to_url_notice = Specify the URL to which visitors will be redirected when the website is in maintenance mode.
+
+maintenance_block_frontend_session_label = Lock out logged-in users
+maintenance_block_frontend_session_notice =
+
+
+maintenance_http_response_code_label = Desired Response Header
+maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (recommended if the website is temporarily unavailable)
+maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Access to a resource is permanently forbidden)
+
+maintenance_announcement_title = Maintenance Announcement
+
+maintenance_announcement_label = Text
+maintenance_announcement_notice = Inform visitors when the maintenance window will set the maintenance mode. Output via <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+
+maintenance_announcement_start_date_label = Start Date
+maintenance_announcement_start_date_notice = Date from <strong>when the announcement should be shown</strong>. Not from when the website will switch to maintenance mode. Current server time: <code>{0}</code>.
+
+maintenance_announcement_end_date_label = End Date
+maintenance_announcement_end_date_notice = Date until when the announcement should be shown. Current server time: <code>{0}</code>.
+
+maintenance_allowed_access_title = Exceptions
+
+maintenance_allowed_ips_label = List of allowed IP addresses
+maintenance_allowed_ips_notice = Enter IPv4 address(es) that should still have access to the frontend. The current IP address is <code>{0}</code>.
+
+maintenance_allowed_domains_label = List of allowed domains
+maintenance_allowed_domains_notice = Enter domains that should not be blocked.
+
+maintenance_allowed_yrewrite_domains_label = List of allowed YRewrite domains
+maintenance_allowed_yrewrite_domains_notice = Enter YRewrite domains that should not be blocked.
