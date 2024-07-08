@@ -99,7 +99,10 @@ class Maintenance
         }
 
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
-        if ($addon->getConfig('authentification_mode') === 'URL' && $maintenance_secret === strval($addon->getConfig('maintenance_secret'))) { // @phpstan-ignore-line
+        $authentification_mode = $addon->getConfig('authentification_mode');
+        $config_secret = strval($addon->getConfig('maintenance_secret'));
+
+        if (($authentification_mode === 'URL' || $authentification_mode === 'password') && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);
             return true;
         }
@@ -140,8 +143,7 @@ class Maintenance
         }
 
         // Wenn die YRewrite installiert und Domain erlaubt ist, Anfrage nicht sperren
-        if (rex_addon::get('yrewrite')->isAvailable())
-        {
+        if (rex_addon::get('yrewrite')->isAvailable()) {
             if (self::isYrewriteDomainAllowed()) {
                 return;
             }
