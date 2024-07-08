@@ -138,9 +138,12 @@ class Maintenance
             return;
         }
 
-        // Wenn die YRewrite-Domain erlaubt ist, Anfrage nicht sperren
-        if (self::isYrewriteDomainAllowed()) {
-            return;
+        // Wenn die YRewrite installiert und Domain erlaubt ist, Anfrage nicht sperren
+        if (rex_addon::get('yrewrite')->isAvailable())
+        {
+            if (self::isYrewriteDomainAllowed()) {
+                return;
+            }
         }
 
         // Wenn die Host erlaubt ist, Anfrage nicht sperren
