@@ -89,7 +89,7 @@ Danke an:
 
 * [Thorben](https://github.com/eaCe)
 * [Christian Gehrke](https://github.com/chrison94)
-* [Oliver Kreischer]([http://concedra.de)](https://github.com/olien)
+* [Oliver Kreischer](https://github.com/olien)
 * u.v.a
 
 
