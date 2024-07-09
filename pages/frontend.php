@@ -91,6 +91,8 @@ $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
 $field->setNotice($addon->i18n('maintenance_allowed_ips_notice', \rex_server('REMOTE_ADDR', 'string', '')));
 $field->setAttribute('class', 'form-control');
 $field->setAttribute('data-maintenance', 'tokenfield');
+$field->setAttribute('data-beautify', 'false');
+
 
 // Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
 if (\rex_addon::get('yrewrite')->isAvailable()) {
@@ -120,6 +122,8 @@ $field->setLabel($addon->i18n('maintenance_allowed_domains_label'));
 $field->setNotice($addon->i18n('maintenance_allowed_domains_notice'));
 $field->setAttribute('class', 'form-control');
 $field->setAttribute('data-maintenance', 'tokenfield');
+$field->setAttribute('data-beautify', 'false');
+
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
