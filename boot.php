@@ -13,35 +13,32 @@
 if (rex::isSetup()) {
     return;
 }
+rex_extension::register('PACKAGES_INCLUDED', function () {
+    $addon = rex_addon::get('maintenance');
 
-$addon = rex_addon::get('maintenance');
+    if (rex::isFrontend() && boolval($addon->getConfig('block_frontend'))) {
 
-
-
-if(rex::isFrontend() && boolval($addon->getConfig('block_frontend'))) {
-
-    \FriendsOfREDAXO\Maintenance\Maintenance::checkFrontend();
-
-}
-if(rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
-    \FriendsOfREDAXO\Maintenance\Maintenance::checkBackend();
-}
-
-if(rex::isBackend()) {
-    \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
-    rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
-    rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
-    rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
-
-    rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
-
-    // Easter Egg: Editor festlegen
-    if ('maintenance/frontend' === rex_be_controller::getCurrentPage()) {
-        rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
-            $suchmuster = 'class="###maintenance-settings-editor###"';
-            $ersetzen = strval(rex_config::get('maintenance', 'editor')); // @phpstan-ignore-line
-            $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject())); // @phpstan-ignore-line
-        });
+        \FriendsOfREDAXO\Maintenance\Maintenance::checkFrontend();
+    }
+    if (rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
+        \FriendsOfREDAXO\Maintenance\Maintenance::checkBackend();
     }
 
-}
+    if (rex::isBackend()) {
+        \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
+        rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
+        rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
+        rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
+
+        rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
+
+        // Easter Egg: Editor festlegen
+        if ('maintenance/frontend' === rex_be_controller::getCurrentPage()) {
+            rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
+                $suchmuster = 'class="###maintenance-settings-editor###"';
+                $ersetzen = strval(rex_config::get('maintenance', 'editor')); // @phpstan-ignore-line
+                $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject())); // @phpstan-ignore-line
+            });
+        }
+    }
+});

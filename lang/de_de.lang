@@ -50,7 +50,7 @@ maintenance_secret_label = Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
 
 maintenance_redirect_frontend_to_url_label = Weiterleitung zu (optional)
-maintenance_redirect_frontend_to_url_notice = URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
+maintenance_redirect_frontend_to_url_notice = Nur bei Geheim-URL: URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
 
 maintenance_block_frontend_session_label = Eingeloggte User ausperren
 maintenance_block_frontend_session_notice =

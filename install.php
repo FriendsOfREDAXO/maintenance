@@ -23,11 +23,14 @@ if (array_key_exists('setup_addons', $data) && !in_array('maintenance', $data['s
 
 /* Eigene IP-Adresse in die erlaubten IP-Adressen hinzufügen, sofern nicht bereits vorhanden */
 $allowed_ips = strval($addon->getConfig('allowed_ips')); // @phpstan-ignore-line
-$allowed_ips = explode(',', $allowed_ips);
+$allowed_ips = array_filter(explode(',', $allowed_ips)); // Leere Elemente entfernen
 $ip = rex_server('REMOTE_ADDR', 'string', '');
+
 if (!in_array($ip, $allowed_ips, true)) {
     $allowed_ips[] = $ip;
     $addon->setConfig('allowed_ips', implode(',', $allowed_ips));
+} else {
+    $addon->setConfig('allowed_ips', implode(',', $allowed_ips)); // Sicherstellen, dass keine leeren Werte enthalten sind
 }
 
 /* Bei Installation standardmäßig ein zufälliges Secret generieren */

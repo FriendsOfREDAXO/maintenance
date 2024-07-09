@@ -17,6 +17,17 @@ use rex_addon;
 use rex_article;
 use rex_clang;
 use rex_response;
+use rex_yrewrite;
+use rex_session;
+use rex_request;
+use rex_unset_session;
+use rex_backend_login;
+use rex_user;
+use rex_login;
+use rex_server;
+use rex_extension;
+use rex_extension_point;
+use rex_fragment;
 
 class Maintenance
 {
@@ -31,6 +42,7 @@ class Maintenance
         }
         return null;
     }
+    
     /** @api */
     public function checkIp(string $ip): ?bool
     {
@@ -44,7 +56,7 @@ class Maintenance
     /** @api */
     public static function isIpAllowed(): bool
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
         $ip = rex_server('REMOTE_ADDR', 'string', '');
         $allowedIps = strval($addon->getConfig('allowed_ips')); // @phpstan-ignore-line
 
@@ -59,9 +71,9 @@ class Maintenance
     /** @api */
     public static function isHostAllowed(): bool
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
         $host = rex_server('HTTP_HOST', 'string', '');
-        $allowedHosts = strval($addon->getConfig('allowed_hosts', false)); // @phpstan-ignore-line
+        $allowedHosts = strval($addon->getConfig('allowed_yrewrite_domains', false)); // @phpstan-ignore-line
 
         if ($allowedHosts !== '') {
             $allowedHostsArray = explode(',', $allowedHosts);
@@ -74,13 +86,13 @@ class Maintenance
     /** @api */
     public static function isYrewriteDomainAllowed(): bool
     {
-        $addon = \rex_addon::get('maintenance');
-        if ($ydomain = \rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
+        $addon = rex_addon::get('maintenance');
+        if ($ydomain = rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
             $yrewrite_domain = $ydomain->getHost();
-            $allowedDomains = strval($addon->getConfig('allowed_domains')); // @phpstan-ignore-line
+            $allowedDomains = strval($addon->getConfig('allowed_yrewrite_domains')); // @phpstan-ignore-line
 
             if ($allowedDomains !== '') {
-                $allowedDomainsArray = explode(',', $allowedDomains);
+                $allowedDomainsArray = explode('|', $allowedDomains);
                 return in_array($yrewrite_domain, $allowedDomainsArray, true);
             }
         }
@@ -91,10 +103,10 @@ class Maintenance
     /** @api */
     public static function isSecretAllowed(): bool
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
 
         // Bereits mit richtigem Secret eingeloggt
-        if (\rex_session('maintenance_secret', 'string', '') === strval($addon->getConfig('maintenance_secret'))) { // @phpstan-ignore-line
+        if (rex_session('maintenance_secret', 'string', '') === strval($addon->getConfig('maintenance_secret'))) { // @phpstan-ignore-line
             return true;
         }
 
@@ -107,24 +119,24 @@ class Maintenance
             return true;
         }
 
-        \rex_unset_session('maintenance_secret');
+        rex_unset_session('maintenance_secret');
         return false;
     }
 
     /** @api */
     public static function isUserAllowed(): bool
     {
-        $addon = \rex_addon::get('maintenance');
-        \rex_backend_login::createUser();
+        $addon = rex_addon::get('maintenance');
+        rex_backend_login::createUser();
         $user = rex::getUser();
 
         // Admins dürfen sich immer einloggen
-        if ($user instanceof \rex_user && $user->isAdmin()) {
+        if ($user instanceof rex_user && $user->isAdmin()) {
             return true;
         }
 
         // Eingeloggte REDAXO-Benutzer dürfen sich einloggen, wenn es in den Einstellungen erlaubt ist
-        if ($user instanceof \rex_user && boolval($addon->getConfig('allow_logged_in_users'))) {
+        if ($user instanceof rex_user && boolval($addon->getConfig('allow_logged_in_users'))) {
             return true;
         }
 
@@ -133,9 +145,9 @@ class Maintenance
 
     public static function checkFrontend(): void
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
 
-        \rex_login::startSession();
+        rex_login::startSession();
 
         // Wenn die IP-Adresse erlaubt ist, Anfrage nicht sperren
         if (self::isIpAllowed()) {
@@ -173,7 +185,7 @@ class Maintenance
         // EP zum Erlauben von Medien-Dateien
         $media = rex_get('rex_media_file', 'string', '');
         $media_unblock = [];
-        $media_unblocklist = \rex_extension::registerPoint(new \rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
+        $media_unblocklist = rex_extension::registerPoint(new rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
         // @phpstan-ignore-next-line
         if (in_array($media, $media_unblocklist, true)) {
             return;
@@ -183,8 +195,7 @@ class Maintenance
         $redirect_url = strval($addon->getConfig('redirect_frontend_to_url')); // @phpstan-ignore-line
         $responsecode = strval($addon->getConfig('http_response_code')); // @phpstan-ignore-line
 
-
-        $mpage = new \rex_fragment();
+        $mpage = new rex_fragment();
         if (strval($addon->getConfig('authentification_mode')) === 'password') { // @phpstan-ignore-line
             exit($mpage->parse('maintenance/frontend_password.php'));
         } elseif ($redirect_url !== '') {
@@ -197,14 +208,13 @@ class Maintenance
 
     public static function checkBackend(): void
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
          
-                
-        if (rex::getUser() instanceof \rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
+        if (rex::getUser() instanceof rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
             if (strval($addon->getConfig('redirect_backend_to_url'))) { // @phpstan-ignore-line
                 rex_response::sendRedirect(strval($addon->getConfig('redirect_backend_to_url')));  // @phpstan-ignore-line
             }
-            $mpage = new \rex_fragment();
+            $mpage = new rex_fragment();
             header('HTTP/1.1 ' . strval($addon->getConfig('http_response_code'))); // @phpstan-ignore-line
             exit($mpage->parse('maintenance/backend.php'));
         }
@@ -212,7 +222,7 @@ class Maintenance
 
     public static function setIndicators(): void
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
         $page = $addon->getProperty('page');
 
         if (boolval($addon->getConfig('block_backend'))) {
@@ -238,7 +248,7 @@ class Maintenance
     /** @api */
     public static function getAnnouncement(): string
     {
-        $addon = \rex_addon::get('maintenance');
+        $addon = rex_addon::get('maintenance');
 
         if (strval($addon->getConfig('announcement_start_date')) !== '') {  // @phpstan-ignore-line
             $start = strtotime(strval($addon->getConfig('announcement_start_date'))); // @phpstan-ignore-line
