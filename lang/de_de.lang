@@ -62,6 +62,9 @@ maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine 
 
 maintenance_announcement_title = Ankündigung der Wartungsarbeiten
 
+maintenance_editor_label = Editor
+maintenance_editor_notice = Editor anhand Attribute für das obige Textfeld "Ankündigung der Wartungsarbeiten" festlegen, z.B. <code>class="form-control redactor-editor--default"</code> für Redactor, passende Attribute auch für TinyMCE, CKEditor, etc.
+
 maintenance_announcement_label = Text
 maintenance_announcement_notice = Besucher*innen mitteilen, wann das Wartungsfenster den Wartungsmodus gesetzt wird. Ausgabe über <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
 
@@ -74,7 +77,7 @@ maintenance_announcement_end_date_notice = Datum, bis wann die Ankündigung geze
 maintenance_allowed_access_title = Ausnahmen
 
 maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
-maintenance_allowed_ips_notice = IPv4-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Die aktuelle IP-Adresse lautet <code>{0}</code>.
+maintenance_allowed_ips_notice = IP-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Die aktuelle IP-Adresse lautet <code>{0}</code>.
 
 maintenance_allowed_domains_label = Liste erlaubter Domains
 maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werden sollen.

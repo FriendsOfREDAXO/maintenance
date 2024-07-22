@@ -74,7 +74,7 @@ maintenance_announcement_end_date_notice = Datoen hvor meddelelsen stopper med a
 maintenance_allowed_access_title = Undtagelser
 
 maintenance_allowed_ips_label = Liste over tilladte IP-adresser
-maintenance_allowed_ips_notice = Indtast den(de) IP-adresse(r) IPv4, der fortsat vil have adgang til frontend. Din nuværende IP-adresse: <code>{0}</code>.
+maintenance_allowed_ips_notice = Indtast den(de) IP-adresse(r) IP, der fortsat vil have adgang til frontend. Din nuværende IP-adresse: <code>{0}</code>.
 
 maintenance_allowed_domains_label = Liste over tilladte domæner
 maintenance_allowed_domains_notice = Indtast de domæner, der ikke vil blive blokeret.
