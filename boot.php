@@ -32,7 +32,6 @@ rex_extension::register('PACKAGES_INCLUDED', function () {
 
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
 
-        // Easter Egg: Editor festlegen
         if ('maintenance/frontend' === rex_be_controller::getCurrentPage()) {
             rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
                 $suchmuster = 'class="###maintenance-settings-editor###"';

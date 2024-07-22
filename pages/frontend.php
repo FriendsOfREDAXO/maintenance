@@ -105,6 +105,11 @@ if (strval(rex_config::get('maintenance', 'editor')) !== '') { // @phpstan-ignor
     $field->setAttribute('class', '###maintenance-settings-editor###');
 }
 
+// Editor festlegen für Benachrichtigungstext
+$field = $form->addTextField('editor');
+$field->setLabel($addon->i18n('maintenance_editor_label'));
+$field->setNotice($addon->i18n('maintenance_editor_notice'));
+
 // Start- und Endzeitpunkt der Wartungsankündigung
 $field = $form->addTextField('announcement_start_date');
 $field->setLabel($addon->i18n('maintenance_announcement_start_date_label'));
@@ -124,26 +129,26 @@ $fragment->setVar('body', $form->get(), false);
 ?>
 
 <div class="row">
-    <div class="col-lg-8">
-        <?= $fragment->parse('core/page/section.php') ?>
-    </div>
-    <div class="col-lg-4">
-        <?php
+	<div class="col-lg-8">
+		<?= $fragment->parse('core/page/section.php') ?>
+	</div>
+	<div class="col-lg-4">
+		<?php
 
         $copy = '';
-        $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-        $copy .= '<div class="hidden" id="maintenance-mode-url"><code>' . $url . '</code></div>';
-        $copy .= '
+$url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+$copy .= '<div class="hidden" id="maintenance-mode-url"><code>' . $url . '</code></div>';
+$copy .= '
 <clipboard-copy for="maintenance-mode-url" class="input-group">
   <input type="text" value="' . $url . '" readonly class="form-control">
   <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
 </clipboad-copy>';
 
-        $fragment = new rex_fragment();
-        $fragment->setVar('class', 'info', false);
-        $fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
-        $fragment->setVar('body', $copy, false);
-        echo $fragment->parse('core/page/section.php');
-        ?>
-    </div>
+$fragment = new rex_fragment();
+$fragment->setVar('class', 'info', false);
+$fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
+$fragment->setVar('body', $copy, false);
+echo $fragment->parse('core/page/section.php');
+?>
+	</div>
 </div>
