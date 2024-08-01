@@ -133,16 +133,39 @@ $fragment->setVar('body', $form->get(), false);
 		<?= $fragment->parse('core/page/section.php') ?>
 	</div>
 	<div class="col-lg-4">
+
+
 		<?php
 
-        $copy = '';
+        $copy = '<ul class="list-group">';
 $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-$copy .= '<div class="hidden" id="maintenance-mode-url"><code>' . $url . '</code></div>';
+$copy .= '<li class="list-group-item"><label for="maintenance-mode-url">REDAXO config.yml</label>
+<div class="hidden" id="maintenance-mode-url"><code>' . $url . '</code></div>';
 $copy .= '
 <clipboard-copy for="maintenance-mode-url" class="input-group">
   <input type="text" value="' . $url . '" readonly class="form-control">
   <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
-</clipboad-copy>';
+</clipboad-copy></li>';
+
+// Ebenfalls für alle YRewrite-Domains ausgeben
+
+if (\rex_addon::get('yrewrite')->isAvailable() && count(\rex_yrewrite::getDomains()) > 1) {
+    foreach (\rex_yrewrite::getDomains() as $key => $domain) {
+        if($key == 'default') {
+            continue;
+        }
+        $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+        $copy .= '<li class="list-group-item"><label for="maintenance-mode-url-'.$key.'">YRewrite '. $key . '</label>';
+        $copy .= '<div class="hidden" id="maintenance-mode-url-' . $key . '"><code>' . $url . '</code></div>';
+        $copy .= '
+        <clipboard-copy for="maintenance-mode-url-'.$key.'" class="input-group">
+          <input type="text" value="' . $url . '" readonly class="form-control">
+          <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+        </clipboad-copy></li>';
+    }
+}
+
+$copy .= '</ul>';
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'info', false);
