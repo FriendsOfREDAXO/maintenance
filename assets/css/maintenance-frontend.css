@@ -60,7 +60,7 @@ body {
     border-radius: 30px;
     border: none;
     font-size: 1em;
-    }
+}
 
 .maintenance-pw-btn {
     margin: 1em 1em 1em 1em;
@@ -70,5 +70,17 @@ body {
     color: #ffffff;
     border: none;
     font-size: 1em;
-    cursor: default;
+    cursor: pointer;
+}	
+
+.maintenance-btn {
+    display: inline-block;
+    text-decoration: none;
+    margin: 1em 1em 1em 1em;
+    padding: 1em 1em 1em 1em;
+    background: #5b98d7;
+    border-radius: 10px;
+    color: #ffffff;
+    border: none;
+    font-size: 1em;
     }	

@@ -17,6 +17,7 @@
         // Subfragment announcement.php ausgeben
         echo $this->subfragment('maintenance/announcement.php');
         echo $this->subfragment('maintenance/login.php');
+        echo $this->subfragment('maintenance/reload.php');
         ?>
     </div>
 </body>
