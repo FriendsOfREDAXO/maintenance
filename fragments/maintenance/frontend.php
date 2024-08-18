@@ -46,10 +46,18 @@
 <body>
     <div class="maintenance-container">
         <div class="maintenance-error">
-            <p class="maintenance-error-title">Maintenance<br>Wartung</p>
+            <p class="maintenance-error-title">Maintenance<br><span lang="de">Wartung</span></p>
             <p class="maintenance-error-message">This website is temporarily unavailable</p>
-            <p class="maintenance-error-message">Diese Website ist temporär nicht erreichbar</p>
+            <p class="maintenance-error-message" lang="de">Diese Website ist temporär nicht erreichbar</p>
         </div>
+        <?php
+        // Vergleiche, ob der aktuelle Zeitpunkt innerhalb des Wartungszeitraums liegt
+        if (rex_config::get('maintenance', 'announcement', '') !== '' && rex_config::get('maintenance', 'announcement_start_date') <= date('Y-m-d H:i:s') && rex_config::get('maintenance', 'announcement_end_date') >= date('Y-m-d H:i:s')) {
+            ?>
+            <div class="maintenance-announcement">
+                <?php echo rex_config::get('maintenance', 'announcement', ''); ?>
+            </div>
+        <?php } ?>
     </div>
 </body>
 </html>
