@@ -86,3 +86,5 @@ maintenance_allowed_yrewrite_domains_label = Liste erlaubter YRewrite-Domains
 maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die nicht gesperrt werden sollen.
 
 maintenance_copy_url_title = URL kopieren
+
+maintenance_preview_title = Vorschau
