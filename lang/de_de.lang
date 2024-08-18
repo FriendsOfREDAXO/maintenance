@@ -88,3 +88,4 @@ maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die ni
 maintenance_copy_url_title = URL kopieren
 
 maintenance_preview_title = Vorschau
+maintenance_preview = Vorschau in neuem Fenster anzeigen
