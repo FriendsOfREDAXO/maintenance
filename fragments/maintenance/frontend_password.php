@@ -24,13 +24,13 @@
             line-height: 1.5;
             text-align: center;
         }
-        .maintenance-error a {
+        .maintenance-login a {
             color: #666;
         }
-        .maintenance-error a:hover {
+        .maintenance-login a:hover {
             color: #111;
         }
-        .maintenance-error-title {
+        .maintenance-login-title {
             margin: 0;
             font-size: 40px;
             font-weight: 700;
@@ -38,7 +38,7 @@
             text-shadow: 0 4px 2px rgba(255, 255, 255, 1);
             line-height: 1.2em;
         }
-        .maintenance-error-message {
+        .maintenance-login-message {
             padding: 0 20px;
         }
 		
@@ -65,8 +65,8 @@
 </head>
 <body>
     <div class="maintenance-container">
-        <div class="maintenance-error">
-            <p class="maintenance-error-title">Login</p>
+        <div class="maintenance-login">
+            <p class="maintenance-login-title">Login</p>
             <form action="<?= rex_url::base(); ?>" method="post">
             <input name="maintenance_secret" class="maintenance-pw-input" type="password" placeholder="**********"/><br>
             <button type="submit" class="maintenance-pw-btn">Enter</button>
@@ -75,4 +75,3 @@
     </div>
 </body>
 </html>
-
