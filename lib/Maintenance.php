@@ -106,7 +106,7 @@ class Maintenance
         $addon = rex_addon::get('maintenance');
 
         // Bereits mit richtigem Secret eingeloggt
-        if (rex_session('maintenance_secret', 'string', '') === strval($addon->getConfig('maintenance_secret'))) { // @phpstan-ignore-line
+        if (rex_session('maintenance_secret', 'string', '') !== '' && rex_session('maintenance_secret', 'string', '') === strval($addon->getConfig('maintenance_secret'))) { // @phpstan-ignore-line
             return true;
         }
 
