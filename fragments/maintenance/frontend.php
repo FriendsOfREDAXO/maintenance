@@ -51,13 +51,17 @@
             <p class="maintenance-error-message" lang="de">Diese Website ist temporär nicht erreichbar</p>
         </div>
         <?php
-        // Vergleiche, ob der aktuelle Zeitpunkt innerhalb des Wartungszeitraums liegt
-        if (rex_config::get('maintenance', 'announcement', '') !== '' && rex_config::get('maintenance', 'announcement_start_date') <= date('Y-m-d H:i:s') && rex_config::get('maintenance', 'announcement_end_date') >= date('Y-m-d H:i:s')) {
-            ?>
-            <div class="maintenance-announcement">
-                <?php echo rex_config::get('maintenance', 'announcement', ''); ?>
-            </div>
-        <?php } ?>
+            $announcement = rex_config::get('maintenance', 'announcement', '');
+            $start_date = rex_config::get('maintenance', 'announcement_start_date');
+            $end_date = rex_config::get('maintenance', 'announcement_end_date');
+            $current_date = date('Y-m-d H:i:s');
+
+            if ($announcement !== '' && $start_date <= $current_date && $end_date >= $current_date) {
+                ?>
+                <div class="maintenance-announcement">
+                    <?php echo $announcement; ?>
+                </div>
+            <?php } ?>
     </div>
 </body>
 </html>
