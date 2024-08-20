@@ -136,7 +136,16 @@ $fragment->setVar('body', $form->get(), false);
 
 
 		<?php
+/* Vorschau des Wartungsmodus */
+$preview = '<a target="_blank" href="' . rex_url::backendPage('maintenance/preview') . '" class="btn btn-primary">' . rex_i18n::msg('maintenance_preview') . '</a>';
 
+$fragment = new rex_fragment();
+$fragment->setVar('class', 'info', false);
+$fragment->setVar('title', rex_i18n::msg('maintenance_preview_title'), false);
+$fragment->setVar('body', $preview, false);
+echo $fragment->parse('core/page/section.php');
+
+/* Kopieren der URL für den Wartungsmodus */
         $copy = '<ul class="list-group">';
 $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
 $copy .= '<li class="list-group-item"><label for="maintenance-mode-url">REDAXO config.yml</label>
@@ -172,6 +181,7 @@ $fragment->setVar('class', 'info', false);
 $fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
 $fragment->setVar('body', $copy, false);
 echo $fragment->parse('core/page/section.php');
+
 ?>
 	</div>
 </div>

@@ -17,6 +17,10 @@ page:
         backend:
             title: translate:maintenance_backend_title
             icon: rex-icon fa-user-gear
+        preview:
+            title: translate:maintenance_preview_title
+            icon: rex-icon fa-eye
+            hidden: true
         help:
             title: translate:maintenance_docs_title
             subPath: README.md
