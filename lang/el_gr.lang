@@ -74,7 +74,7 @@ maintenance_announcement_end_date_notice = Η ημερομηνία που η α�
 maintenance_allowed_access_title = Εξαιρέσεις
 
 maintenance_allowed_ips_label = Λίστα επιτρεπόμενων διευθύνσεων IP
-maintenance_allowed_ips_notice = Εισάγετε την(τις) διεύθυνση(εις) IP που θα συνεχίσουν να έχουν πρόσβαση στο frontend. Η τρέχουσα διεύθυνση IP σας: <code>{0}</code>.
+maintenance_allowed_ips_notice = Εισάγετε την(τις) διεύθυνση(εις) IP που θα συνεχίσουν να έχουν πρόσβαση στο frontend. Η τρέχουσα διεύθυνση IP σας: <code>{0}</code>
 
 maintenance_allowed_domains_label = Λίστα επιτρεπόμενων τομέων
 maintenance_allowed_domains_notice = Εισάγετε τους τομείς που δεν θα αποκλειστούν.
