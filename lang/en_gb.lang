@@ -74,7 +74,7 @@ maintenance_announcement_end_date_notice = Date until when the announcement shou
 maintenance_allowed_access_title = Exceptions
 
 maintenance_allowed_ips_label = List of allowed IP addresses
-maintenance_allowed_ips_notice = Enter IP address(es) that should still have access to the frontend. The current IP address is <code>{0}</code>.
+maintenance_allowed_ips_notice = Enter IP address(es) that should still have access to the frontend. The current IP address is <code>{0}</code>, the IP address of the server is <code>{1}</code>.
 
 maintenance_allowed_domains_label = List of allowed domains
 maintenance_allowed_domains_notice = Enter domains that should not be blocked.
