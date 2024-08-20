@@ -196,9 +196,7 @@ class Maintenance
         $responsecode = strval($addon->getConfig('http_response_code')); // @phpstan-ignore-line
 
         $mpage = new rex_fragment();
-        if (strval($addon->getConfig('authentification_mode')) === 'password') { // @phpstan-ignore-line
-            exit($mpage->parse('maintenance/frontend_password.php'));
-        } elseif ($redirect_url !== '') {
+        if ($redirect_url !== '') {
             rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
             rex_response::sendRedirect($redirect_url);
         }

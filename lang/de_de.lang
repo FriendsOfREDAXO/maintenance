@@ -77,7 +77,7 @@ maintenance_announcement_end_date_notice = Datum, bis wann die Ankündigung geze
 maintenance_allowed_access_title = Ausnahmen
 
 maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
-maintenance_allowed_ips_notice = IP-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Die aktuelle IP-Adresse lautet <code>{0}</code>.
+maintenance_allowed_ips_notice = IP-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Deine aktuelle IP-Adresse lautet <code>{0}</code>, die des Servers lautet <code>{1}</code>.
 
 maintenance_allowed_domains_label = Liste erlaubter Domains
 maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werden sollen.
@@ -86,3 +86,6 @@ maintenance_allowed_yrewrite_domains_label = Liste erlaubter YRewrite-Domains
 maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die nicht gesperrt werden sollen.
 
 maintenance_copy_url_title = URL kopieren
+
+maintenance_preview_title = Vorschau
+maintenance_preview = Vorschau in neuem Fenster anzeigen
