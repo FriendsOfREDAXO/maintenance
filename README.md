@@ -12,7 +12,7 @@ Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von 
 * Optionales Sperren des Frontends auch für REDAXO-Benutzer (außer Admins)
 * Optionale Weiterleitung zu einer festgelegten URL, z.B. REDAXO-Login
 * Festlegen des HTTP-Statuscodes (z.B. 503 Service Unavailable)
-* Anpassen der Sperrseite durch eigenes Fragment (`maintenance_page.php`)
+* Anpassen der Sperrseite durch eigenes Fragment (`maintenance/frontend.php`)
 * Definieren von Ausnahmen, die dennoch Zugriff erhalten, z.B. für
   * IP-Adressen
   * Hosts
@@ -42,16 +42,17 @@ Eine für Nutzer*innen hilfreiche Meldung ist beispielsweise:
 
 Standardmäßig wird eine einfache HTML-Seite angezeigt, die den Wartungsmodus anzeigt.
 
-Diese kann durch eine eigene HTML-Seite ersetzt werden. Dazu muss im Projekt-AddOn ein Ordner `fragments` angelegt werden. In diesem Ordner kann eine Datei `maintenance_page.php` mit eigenem HTML-Code erstellt werden.
+Diese kann durch eine eigene HTML-Seite ersetzt werden. Dazu muss im Projekt-AddOn ein Ordner `fragments/maintenance` angelegt werden. In diesem Ordner kann eine Datei `frontend.php` mit eigenem HTML-Code erstellt werden. D.h. `/src/addons/maintenance/fragments/maintenance/frontend.php`
 
 So kann bspw. eigener Text, Logo oder komplett andere Gestaltung erfolgen.
 
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
 
-Das AddOn-Symbol erhält bei Aktivierung einer der Wartungsmodi eine Farbkennung.
+Der Menüeintrag erhält bei Aktivierung einer der Wartungsmodi ein zusätzliches Tag.
 
 * Standard: Alle Funktionen sind deaktiviert.
-* Rot: Der Wartungsmodus ist für Frontend und/oder Backend aktiv!
+* `F` in rotem Tag: Der Wartungsmodus ist für das Frontend aktiv.
+* `B` in blauem Tag: Der Wartungsmodus ist für das Backend aktiv.
 
 ## Extensionpoint MAINTENANCE_MEDIA_UNBLOCK_LIST
 
