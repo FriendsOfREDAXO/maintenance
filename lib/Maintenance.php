@@ -114,7 +114,7 @@ class Maintenance
         $authentification_mode = $addon->getConfig('authentification_mode');
         $config_secret = strval($addon->getConfig('maintenance_secret'));
 
-        if (($authentification_mode === 'URL' || $authentification_mode === 'password') && $maintenance_secret === $config_secret) {
+        if (($authentification_mode === 'URL' || $authentification_mode === 'password') && $maintenance_secret === $config_secret && rex_session('maintenance_secret', 'string', '') !== '') {
             rex_set_session('maintenance_secret', $maintenance_secret);
             return true;
         }
