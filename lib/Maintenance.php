@@ -42,7 +42,7 @@ class Maintenance
         }
         return null;
     }
-    
+
     /** @api */
     public function checkIp(string $ip): ?bool
     {
@@ -104,17 +104,17 @@ class Maintenance
     public static function isSecretAllowed(): bool
     {
         $addon = rex_addon::get('maintenance');
+        $config_secret = strval($addon->getConfig('maintenance_secret'));
 
         // Bereits mit richtigem Secret eingeloggt
-        if (rex_session('maintenance_secret', 'string', '') !== '' && rex_session('maintenance_secret', 'string', '') === strval($addon->getConfig('maintenance_secret'))) { // @phpstan-ignore-line
+        if ($config_secret != '' && rex_session('maintenance_secret', 'string', '') === $config_secret) { // @phpstan-ignore-line
             return true;
         }
 
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
         $authentification_mode = $addon->getConfig('authentification_mode');
-        $config_secret = strval($addon->getConfig('maintenance_secret'));
 
-        if (($authentification_mode === 'URL' || $authentification_mode === 'password') && $maintenance_secret === $config_secret && rex_session('maintenance_secret', 'string', '') !== '') {
+        if (($authentification_mode === 'URL' || $authentification_mode === 'password') && $config_secret != '' && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);
             return true;
         }
@@ -207,7 +207,7 @@ class Maintenance
     public static function checkBackend(): void
     {
         $addon = rex_addon::get('maintenance');
-         
+
         if (rex::getUser() instanceof rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
             if (strval($addon->getConfig('redirect_backend_to_url'))) { // @phpstan-ignore-line
                 rex_response::sendRedirect(strval($addon->getConfig('redirect_backend_to_url')));  // @phpstan-ignore-line
