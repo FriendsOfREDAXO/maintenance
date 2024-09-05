@@ -1,5 +1,7 @@
 <?php
 
+use FriendsOfREDAXO\Maintenance\Maintenance;
+
 /**
  * This file is part of the maintenance package.
  *
@@ -13,19 +15,18 @@
 if (rex::isSetup()) {
     return;
 }
-rex_extension::register('PACKAGES_INCLUDED', function () {
+rex_extension::register('PACKAGES_INCLUDED', static function () {
     $addon = rex_addon::get('maintenance');
 
-    if (rex::isFrontend() && boolval($addon->getConfig('block_frontend'))) {
-
-        \FriendsOfREDAXO\Maintenance\Maintenance::checkFrontend();
+    if (rex::isFrontend() && (bool) $addon->getConfig('block_frontend')) {
+        Maintenance::checkFrontend();
     }
-    if (rex::isBackend() && boolval($addon->getConfig('block_backend'))) {
-        \FriendsOfREDAXO\Maintenance\Maintenance::checkBackend();
+    if (rex::isBackend() && (bool) $addon->getConfig('block_backend')) {
+        Maintenance::checkBackend();
     }
 
     if (rex::isBackend()) {
-        \FriendsOfREDAXO\Maintenance\Maintenance::setIndicators();
+        Maintenance::setIndicators();
         rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
         rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
         rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
@@ -35,7 +36,7 @@ rex_extension::register('PACKAGES_INCLUDED', function () {
         if ('maintenance/frontend' === rex_be_controller::getCurrentPage()) {
             rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
                 $suchmuster = 'class="###maintenance-settings-editor###"';
-                $ersetzen = strval(rex_config::get('maintenance', 'editor')); // @phpstan-ignore-line
+                $ersetzen = (string) rex_config::get('maintenance', 'editor'); // @phpstan-ignore-line
                 $ep->setSubject(str_replace($suchmuster, $ersetzen, $ep->getSubject())); // @phpstan-ignore-line
             });
         }

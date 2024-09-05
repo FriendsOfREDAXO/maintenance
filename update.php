@@ -1,4 +1,5 @@
 <?php
+
 $addon = rex_addon::get('maintenance');
 
 // Upgrade from 2.x to 3.x
@@ -12,7 +13,7 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
     }
 
     if ($addon->hasConfig('frontend_aktiv')) {
-        $addon->setConfig('block_frontend', $addon->getConfig('frontend_aktiv') === 'Deaktivieren' ? 0 : 1);
+        $addon->setConfig('block_frontend', 'Deaktivieren' === $addon->getConfig('frontend_aktiv') ? 0 : 1);
     }
 
     if ($addon->hasConfig('redirect_frontend')) {
@@ -24,15 +25,15 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
     }
 
     if ($addon->hasConfig('backend_aktiv')) {
-        $addon->setConfig('block_backend', $addon->getConfig('backend_aktiv') === '1' ? 1 : 0);
+        $addon->setConfig('block_backend', '1' === $addon->getConfig('backend_aktiv') ? 1 : 0);
     }
 
     if ($addon->hasConfig('blockSession')) {
-        $addon->setConfig('block_frontend_rex_user', $addon->getConfig('blockSession') === 'Inaktiv' ? 0 : 1);
+        $addon->setConfig('block_frontend_rex_user', 'Inaktiv' === $addon->getConfig('blockSession') ? 0 : 1);
     }
 
     if ($addon->hasConfig('type')) {
-        $addon->setConfig('authentification_mode', $addon->getConfig('type') === 'Password' ? 'password' : 'URL');
+        $addon->setConfig('authentification_mode', 'Password' === $addon->getConfig('type') ? 'password' : 'URL');
     }
 
     if ($addon->hasConfig('secret')) {
