@@ -7,3 +7,7 @@ fragments/.DS_Store
 /playwright-report/
 /playwright/.cache/
 /screens/
+/.idea
+/composer.lock
+/.php-cs-fixer.cache
+/vendor
