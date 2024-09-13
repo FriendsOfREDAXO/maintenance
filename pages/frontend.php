@@ -10,8 +10,6 @@
  * file that was distributed with this source code.
  */
 
-use FriendsOfREDAXO\Maintenance\MaintenanceUtil;
-
 $addon = rex_addon::get('maintenance');
 
 $form = rex_config_form::factory($addon->getName());
@@ -65,14 +63,13 @@ $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
 // Erlaubte IP-Adressen
 $field = $form->addTextField('allowed_ips');
 $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', \rex_server('REMOTE_ADDR', 'string', ''), \rex_server('SERVER_ADDR', 'string', '')));
+$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', rex_server('REMOTE_ADDR', 'string', ''), rex_server('SERVER_ADDR', 'string', '')));
 $field->setAttribute('class', 'form-control');
 $field->setAttribute('data-maintenance', 'tokenfield');
 $field->setAttribute('data-beautify', 'false');
 
-
 // Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
-if (\rex_addon::get('yrewrite')->isAvailable() && count(\rex_yrewrite::getDomains()) > 1) {
+if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 1) {
     $field = $form->addSelectField('allowed_yrewrite_domains');
     $field->setAttribute('multiple', 'multiple');
 
@@ -81,7 +78,7 @@ if (\rex_addon::get('yrewrite')->isAvailable() && count(\rex_yrewrite::getDomain
     $field->setLabel($addon->i18n('maintenance_allowed_yrewrite_domains_label'));
     $field->setNotice($addon->i18n('maintenance_allowed_yrewrite_domains_notice'));
     $select = $field->getSelect();
-    foreach (\rex_yrewrite::getDomains() as $key => $domain) {
+    foreach (rex_yrewrite::getDomains() as $key => $domain) {
         $select->addOption($key, $key);
     }
 }
@@ -101,7 +98,7 @@ $form->addFieldset($addon->i18n('maintenance_announcement_title'));
 $field = $form->addTextAreaField('announcement');
 $field->setLabel($addon->i18n('maintenance_announcement_label'));
 $field->setNotice($addon->i18n('maintenance_announcement_notice'));
-if (strval(rex_config::get('maintenance', 'editor')) !== '') { // @phpstan-ignore-line
+if ('' !== (string) rex_config::get('maintenance', 'editor')) { // @phpstan-ignore-line
     $field->setAttribute('class', '###maintenance-settings-editor###');
 }
 
@@ -120,7 +117,6 @@ $field = $form->addTextField('announcement_end_date');
 $field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
 $field->setNotice($addon->i18n('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
 $field->setAttribute('type', 'datetime-local');
-
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit');
@@ -158,16 +154,16 @@ $copy .= '
 
 // Ebenfalls für alle YRewrite-Domains ausgeben
 
-if (\rex_addon::get('yrewrite')->isAvailable() && count(\rex_yrewrite::getDomains()) > 1) {
-    foreach (\rex_yrewrite::getDomains() as $key => $domain) {
-        if($key == 'default') {
+if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 1) {
+    foreach (rex_yrewrite::getDomains() as $key => $domain) {
+        if ('default' == $key) {
             continue;
         }
         $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-        $copy .= '<li class="list-group-item"><label for="maintenance-mode-url-'.$key.'">YRewrite '. $key . '</label>';
+        $copy .= '<li class="list-group-item"><label for="maintenance-mode-url-' . $key . '">YRewrite ' . $key . '</label>';
         $copy .= '<div class="hidden" id="maintenance-mode-url-' . $key . '"><code>' . $url . '</code></div>';
         $copy .= '
-        <clipboard-copy for="maintenance-mode-url-'.$key.'" class="input-group">
+        <clipboard-copy for="maintenance-mode-url-' . $key . '" class="input-group">
           <input type="text" value="' . $url . '" readonly class="form-control">
           <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
         </clipboad-copy></li>';
