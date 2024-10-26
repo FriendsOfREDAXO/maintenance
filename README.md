@@ -79,7 +79,7 @@ Deaktivieren mit `maintenance:off` oder `frontend:on`
 * <http://www.redaxo.org>
 * <https://github.com/FriendsOfREDAXO>
 
-### Projekt-Team
+## Projekt-Team
 
 * [Alexander Walther](https://github.com/alxndr-w)
 * [KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
