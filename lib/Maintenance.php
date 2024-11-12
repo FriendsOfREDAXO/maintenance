@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of the maintenance package.
  *
@@ -9,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace FriendsOfREDAXO\Maintenance;
 
 use rex;
@@ -24,9 +22,7 @@ use rex_login;
 use rex_response;
 use rex_user;
 use rex_yrewrite;
-
 use function in_array;
-
 use const FILTER_VALIDATE_IP;
 use const FILTER_VALIDATE_URL;
 
@@ -58,7 +54,7 @@ class Maintenance
     {
         $addon = rex_addon::get('maintenance');
         $ip = rex_server('REMOTE_ADDR', 'string', '');
-        $allowedIps = (string) $addon->getConfig('allowed_ips'); // @phpstan-ignore-line
+        $allowedIps = (string) $addon->getConfig('allowed_ips');
 
         if ('' !== $allowedIps) {
             $allowedIpsArray = explode(',', $allowedIps);
@@ -73,7 +69,7 @@ class Maintenance
     {
         $addon = rex_addon::get('maintenance');
         $host = rex_server('HTTP_HOST', 'string', '');
-        $allowedHosts = (string) $addon->getConfig('allowed_yrewrite_domains', false); // @phpstan-ignore-line
+        $allowedHosts = (string) $addon->getConfig('allowed_domains');
 
         if ('' !== $allowedHosts) {
             $allowedHostsArray = explode(',', $allowedHosts);
@@ -89,7 +85,7 @@ class Maintenance
         $addon = rex_addon::get('maintenance');
         if ($ydomain = rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
             $yrewrite_domain = $ydomain->getHost();
-            $allowedDomains = (string) $addon->getConfig('allowed_yrewrite_domains'); // @phpstan-ignore-line
+            $allowedDomains = (string) $addon->getConfig('allowed_yrewrite_domains');
 
             if ('' !== $allowedDomains) {
                 $allowedDomainsArray = explode('|', $allowedDomains);
@@ -106,14 +102,15 @@ class Maintenance
         $addon = rex_addon::get('maintenance');
         $config_secret = (string) $addon->getConfig('maintenance_secret');
 
-        // Bereits mit richtigem Secret eingeloggt
-        if ('' != $config_secret && rex_session('maintenance_secret', 'string', '') === $config_secret) { // @phpstan-ignore-line
+        // Prüfen ob bereits mit richtigem Secret eingeloggt
+        if ('' != $config_secret && rex_session('maintenance_secret', 'string', '') === $config_secret) {
             return true;
         }
 
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
         $authentification_mode = $addon->getConfig('authentification_mode');
 
+        // Prüfen ob korrektes Secret per URL oder Passwort übergeben wurde
         if (('URL' === $authentification_mode || 'password' === $authentification_mode) && '' != $config_secret && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);
             return true;
@@ -130,13 +127,16 @@ class Maintenance
         rex_backend_login::createUser();
         $user = rex::getUser();
 
-        // Admins dürfen sich immer einloggen
+        // Admins haben immer Zugriff, unabhängig von Einstellungen
         if ($user instanceof rex_user && $user->isAdmin()) {
             return true;
         }
 
-        // Eingeloggte REDAXO-Benutzer dürfen sich einloggen, wenn es in den Einstellungen erlaubt ist
-        if ($user instanceof rex_user && (bool) $addon->getConfig('allow_logged_in_users')) {
+        // Prüfen ob der REDAXO-Benutzer gesperrt werden soll
+        $block_frontend_rex_user = (bool) $addon->getConfig('block_frontend_rex_user');
+        
+        // Wenn Benutzer eingeloggt ist und nicht gesperrt werden soll, dann Zugriff erlauben
+        if ($user instanceof rex_user && !$block_frontend_rex_user) {
             return true;
         }
 
@@ -171,7 +171,7 @@ class Maintenance
             return;
         }
 
-        // Wenn eingeloggte REDAXO-Benutzer erlaubt sind, oder der Benutzer Admin ist, Anfrage nicht sperren
+        // Wenn der Benutzer zugelassen ist (Admin oder nicht-gesperrter Redakteur), Anfrage nicht sperren
         if (self::isUserAllowed()) {
             return;
         }
@@ -186,14 +186,13 @@ class Maintenance
         $media = rex_get('rex_media_file', 'string', '');
         $media_unblock = [];
         $media_unblocklist = rex_extension::registerPoint(new rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
-        // @phpstan-ignore-next-line
         if (in_array($media, $media_unblocklist, true)) {
             return;
         }
 
         // Alles, was bis hier hin nicht erlaubt wurde, blockieren wie in den Einstellungen gewählt
-        $redirect_url = (string) $addon->getConfig('redirect_frontend_to_url'); /** @phpstan-ignore-line */
-        $responsecode = (string) $addon->getConfig('http_response_code'); /** @phpstan-ignore-line */
+        $redirect_url = (string) $addon->getConfig('redirect_frontend_to_url');
+        $responsecode = (string) $addon->getConfig('http_response_code');
 
         $mpage = new rex_fragment();
         if ('' !== $redirect_url) {
@@ -209,11 +208,11 @@ class Maintenance
         $addon = rex_addon::get('maintenance');
 
         if (rex::getUser() instanceof rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
-            if ((string) $addon->getConfig('redirect_backend_to_url')) { // @phpstan-ignore-line
-                rex_response::sendRedirect((string) $addon->getConfig('redirect_backend_to_url'));  // @phpstan-ignore-line
+            if ((string) $addon->getConfig('redirect_backend_to_url')) {
+                rex_response::sendRedirect((string) $addon->getConfig('redirect_backend_to_url'));
             }
             $mpage = new rex_fragment();
-            header('HTTP/1.1 ' . (string) $addon->getConfig('http_response_code')); // @phpstan-ignore-line
+            header('HTTP/1.1 ' . (string) $addon->getConfig('http_response_code'));
             exit($mpage->parse('maintenance/backend.php'));
         }
     }
@@ -248,12 +247,12 @@ class Maintenance
     {
         $addon = rex_addon::get('maintenance');
 
-        if ('' !== (string) $addon->getConfig('announcement_start_date')) {  /** @phpstan-ignore-line */
-            $start = strtotime((string) $addon->getConfig('announcement_start_date')); /** @phpstan-ignore-line */
-            $end = strtotime((string) $addon->getConfig('announcement_end_date')); /** @phpstan-ignore-line */
+        if ('' !== (string) $addon->getConfig('announcement_start_date')) {
+            $start = strtotime((string) $addon->getConfig('announcement_start_date'));
+            $end = strtotime((string) $addon->getConfig('announcement_end_date'));
             $now = time();
             if ($now >= $start && $now <= $end) {
-                return (string) $addon->getConfig('announcement'); // @phpstan-ignore-line
+                return (string) $addon->getConfig('announcement');
             }
         }
 
