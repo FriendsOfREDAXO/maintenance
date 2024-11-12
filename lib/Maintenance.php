@@ -1,13 +1,5 @@
 <?php
-/**
- * This file is part of the maintenance package.
- *
- * @author (c) Friends Of REDAXO
- * @author <friendsof@redaxo.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+
 namespace FriendsOfREDAXO\Maintenance;
 
 use rex;
@@ -26,9 +18,26 @@ use function in_array;
 use const FILTER_VALIDATE_IP;
 use const FILTER_VALIDATE_URL;
 
+/**
+ * Class Maintenance
+ * @package FriendsOfREDAXO\Maintenance
+ */
 class Maintenance
 {
-    /** @api */
+    /** @var rex_addon */
+    private static rex_addon $addon;
+
+    public function __construct()
+    {
+        self::$addon = rex_addon::get('maintenance');
+    }
+
+    /**
+     * Checks if a URL is valid
+     * @param string $url
+     * @return bool|null
+     * @api
+     */
     public function checkUrl(string $url): ?bool
     {
         if ('' !== $url) {
@@ -40,7 +49,12 @@ class Maintenance
         return null;
     }
 
-    /** @api */
+    /**
+     * Checks if an IP address is valid
+     * @param string $ip
+     * @return bool|null
+     * @api
+     */
     public function checkIp(string $ip): ?bool
     {
         if ('' !== $ip && false === filter_var($ip, FILTER_VALIDATE_IP)) {
@@ -49,12 +63,15 @@ class Maintenance
         return true;
     }
 
-    /** @api */
+    /**
+     * Checks if the current IP is allowed
+     * @return bool
+     * @api
+     */
     public static function isIpAllowed(): bool
     {
-        $addon = rex_addon::get('maintenance');
         $ip = rex_server('REMOTE_ADDR', 'string', '');
-        $allowedIps = (string) $addon->getConfig('allowed_ips');
+        $allowedIps = (string) self::getConfig('allowed_ips', '');
 
         if ('' !== $allowedIps) {
             $allowedIpsArray = explode(',', $allowedIps);
@@ -64,12 +81,15 @@ class Maintenance
         return false;
     }
 
-    /** @api */
+    /**
+     * Checks if the current host is allowed
+     * @return bool
+     * @api
+     */
     public static function isHostAllowed(): bool
     {
-        $addon = rex_addon::get('maintenance');
         $host = rex_server('HTTP_HOST', 'string', '');
-        $allowedHosts = (string) $addon->getConfig('allowed_domains');
+        $allowedHosts = (string) self::getConfig('allowed_domains', '');
 
         if ('' !== $allowedHosts) {
             $allowedHostsArray = explode(',', $allowedHosts);
@@ -79,13 +99,16 @@ class Maintenance
         return false;
     }
 
-    /** @api */
+    /**
+     * Checks if the current YRewrite domain is allowed
+     * @return bool
+     * @api
+     */
     public static function isYrewriteDomainAllowed(): bool
     {
-        $addon = rex_addon::get('maintenance');
         if ($ydomain = rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
             $yrewrite_domain = $ydomain->getHost();
-            $allowedDomains = (string) $addon->getConfig('allowed_yrewrite_domains');
+            $allowedDomains = (string) self::getConfig('allowed_yrewrite_domains', '');
 
             if ('' !== $allowedDomains) {
                 $allowedDomainsArray = explode('|', $allowedDomains);
@@ -96,22 +119,25 @@ class Maintenance
         return false;
     }
 
-    /** @api */
+    /**
+     * Checks if the maintenance secret is valid
+     * @return bool
+     * @api
+     */
     public static function isSecretAllowed(): bool
     {
-        $addon = rex_addon::get('maintenance');
-        $config_secret = (string) $addon->getConfig('maintenance_secret');
+        $config_secret = (string) self::getConfig('maintenance_secret', '');
 
         // Prüfen ob bereits mit richtigem Secret eingeloggt
-        if ('' != $config_secret && rex_session('maintenance_secret', 'string', '') === $config_secret) {
+        if ('' !== $config_secret && rex_session('maintenance_secret', 'string', '') === $config_secret) {
             return true;
         }
 
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
-        $authentification_mode = $addon->getConfig('authentification_mode');
+        $authentification_mode = (string) self::getConfig('authentification_mode', '');
 
         // Prüfen ob korrektes Secret per URL oder Passwort übergeben wurde
-        if (('URL' === $authentification_mode || 'password' === $authentification_mode) && '' != $config_secret && $maintenance_secret === $config_secret) {
+        if (('URL' === $authentification_mode || 'password' === $authentification_mode) && '' !== $config_secret && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);
             return true;
         }
@@ -120,10 +146,13 @@ class Maintenance
         return false;
     }
 
-    /** @api */
+    /**
+     * Checks if the current user is allowed
+     * @return bool
+     * @api
+     */
     public static function isUserAllowed(): bool
     {
-        $addon = rex_addon::get('maintenance');
         rex_backend_login::createUser();
         $user = rex::getUser();
 
@@ -133,7 +162,7 @@ class Maintenance
         }
 
         // Prüfen ob der REDAXO-Benutzer gesperrt werden soll
-        $block_frontend_rex_user = (bool) $addon->getConfig('block_frontend_rex_user');
+        $block_frontend_rex_user = (bool) self::getConfig('block_frontend_rex_user', false);
         
         // Wenn Benutzer eingeloggt ist und nicht gesperrt werden soll, dann Zugriff erlauben
         if ($user instanceof rex_user && !$block_frontend_rex_user) {
@@ -143,10 +172,12 @@ class Maintenance
         return false;
     }
 
+    /**
+     * Checks frontend access and shows maintenance page if necessary
+     * @return void
+     */
     public static function checkFrontend(): void
     {
-        $addon = rex_addon::get('maintenance');
-
         rex_login::startSession();
 
         // Wenn die IP-Adresse erlaubt ist, Anfrage nicht sperren
@@ -154,14 +185,12 @@ class Maintenance
             return;
         }
 
-        // Wenn die YRewrite installiert und Domain erlaubt ist, Anfrage nicht sperren
-        if (rex_addon::get('yrewrite')->isAvailable()) {
-            if (self::isYrewriteDomainAllowed()) {
-                return;
-            }
+        // Wenn YRewrite installiert und Domain erlaubt ist, Anfrage nicht sperren
+        if (rex_addon::get('yrewrite')->isAvailable() && self::isYrewriteDomainAllowed()) {
+            return;
         }
 
-        // Wenn die Host erlaubt ist, Anfrage nicht sperren
+        // Wenn der Host erlaubt ist, Anfrage nicht sperren
         if (self::isHostAllowed()) {
             return;
         }
@@ -191,71 +220,108 @@ class Maintenance
         }
 
         // Alles, was bis hier hin nicht erlaubt wurde, blockieren wie in den Einstellungen gewählt
-        $redirect_url = (string) $addon->getConfig('redirect_frontend_to_url');
-        $responsecode = (string) $addon->getConfig('http_response_code');
+        $redirect_url = (string) self::getConfig('redirect_frontend_to_url', '');
+        $responsecode = (int) self::getConfig('http_response_code', 503);
 
         $mpage = new rex_fragment();
         if ('' !== $redirect_url) {
             rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
             rex_response::sendRedirect($redirect_url);
         }
+        
         header('HTTP/1.1 ' . $responsecode);
         exit($mpage->parse('maintenance/frontend.php'));
     }
 
+    /**
+     * Checks backend access and shows maintenance page if necessary
+     * @return void
+     */
     public static function checkBackend(): void
     {
-        $addon = rex_addon::get('maintenance');
-
         if (rex::getUser() instanceof rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
-            if ((string) $addon->getConfig('redirect_backend_to_url')) {
-                rex_response::sendRedirect((string) $addon->getConfig('redirect_backend_to_url'));
+            $redirect_url = (string) self::getConfig('redirect_backend_to_url', '');
+            if ('' !== $redirect_url) {
+                rex_response::sendRedirect($redirect_url);
             }
             $mpage = new rex_fragment();
-            header('HTTP/1.1 ' . (string) $addon->getConfig('http_response_code'));
+            $responsecode = (int) self::getConfig('http_response_code', 503);
+            header('HTTP/1.1 ' . $responsecode);
             exit($mpage->parse('maintenance/backend.php'));
         }
     }
 
+    /**
+     * Sets maintenance mode indicators in backend
+     * @return void
+     */
     public static function setIndicators(): void
     {
-        $addon = rex_addon::get('maintenance');
-        $page = $addon->getProperty('page');
+        $page = self::$addon->getProperty('page');
 
-        if ((bool) $addon->getConfig('block_backend')) {
+        if (self::getBoolConfig('block_backend', false)) {
             $page['title'] .= ' <span class="label label-info pull-right">B</span>';
             $page['icon'] .= ' fa-toggle-on block_backend';
-            $addon->setProperty('page', $page);
+            self::$addon->setProperty('page', $page);
         }
 
-        if ((bool) $addon->getConfig('block_frontend')) {
+        if (self::getBoolConfig('block_frontend', false)) {
             $page['title'] .= ' <span class="label label-danger pull-right">F</span>';
             $page['icon'] .= ' fa-toggle-on block_frontend';
         }
 
-        $addon->setProperty('page', $page);
+        self::$addon->setProperty('page', $page);
     }
 
-    /** @api */
+    /**
+     * Shows maintenance announcement
+     * @return void
+     * @api
+     */
     public static function showAnnouncement(): void
     {
         echo self::getAnnouncement();
     }
 
-    /** @api */
+    /**
+     * Gets maintenance announcement if within announcement period
+     * @return string
+     * @api
+     */
     public static function getAnnouncement(): string
     {
-        $addon = rex_addon::get('maintenance');
-
-        if ('' !== (string) $addon->getConfig('announcement_start_date')) {
-            $start = strtotime((string) $addon->getConfig('announcement_start_date'));
-            $end = strtotime((string) $addon->getConfig('announcement_end_date'));
+        $start_date = (string) self::getConfig('announcement_start_date', '');
+        if ('' !== $start_date) {
+            $start = strtotime($start_date);
+            $end = strtotime((string) self::getConfig('announcement_end_date', ''));
             $now = time();
-            if ($now >= $start && $now <= $end) {
-                return (string) $addon->getConfig('announcement');
+            if ($start && $end && $now >= $start && $now <= $end) {
+                return (string) self::getConfig('announcement', '');
             }
         }
 
         return '';
+    }
+
+    /**
+     * Gets config value with type casting
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    private static function getConfig(string $key, mixed $default = null): mixed 
+    {
+        return self::$addon->getConfig($key, $default);
+    }
+
+    /**
+     * Gets boolean config value
+     * @param string $key
+     * @param bool $default
+     * @return bool
+     */
+    private static function getBoolConfig(string $key, bool $default = false): bool
+    {
+        return (bool) self::getConfig($key, $default);
     }
 }
