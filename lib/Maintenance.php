@@ -24,11 +24,18 @@ use const FILTER_VALIDATE_URL;
  */
 class Maintenance
 {
-    /** @var rex_addon */
-    private static rex_addon $addon;
+    /** @var rex_addon|null */
+    private static ?rex_addon $addon = null;
 
-    static {
-        self::$addon = rex_addon::get('maintenance');
+    /**
+     * Gets the addon instance
+     */
+    private static function addon(): rex_addon
+    {
+        if (self::$addon === null) {
+            self::$addon = rex_addon::get('maintenance');
+        }
+        return self::$addon;
     }
 
     /**
@@ -256,12 +263,12 @@ class Maintenance
      */
     public static function setIndicators(): void
     {
-        $page = self::$addon->getProperty('page');
+        $page = self::addon()->getProperty('page');
 
         if (self::getBoolConfig('block_backend', false)) {
             $page['title'] .= ' <span class="label label-info pull-right">B</span>';
             $page['icon'] .= ' fa-toggle-on block_backend';
-            self::$addon->setProperty('page', $page);
+            self::addon()->setProperty('page', $page);
         }
 
         if (self::getBoolConfig('block_frontend', false)) {
@@ -269,7 +276,7 @@ class Maintenance
             $page['icon'] .= ' fa-toggle-on block_frontend';
         }
 
-        self::$addon->setProperty('page', $page);
+        self::addon()->setProperty('page', $page);
     }
 
     /**
@@ -310,7 +317,7 @@ class Maintenance
      */
     private static function getConfig(string $key, mixed $default = null): mixed 
     {
-        return self::$addon->getConfig($key, $default);
+        return self::addon()->getConfig($key, $default);
     }
 
     /**
