@@ -14,17 +14,18 @@ use rex_login;
 use rex_response;
 use rex_user;
 use rex_yrewrite;
+
 use function in_array;
+
 use const FILTER_VALIDATE_IP;
 use const FILTER_VALIDATE_URL;
 
 /**
- * Class Maintenance
+ * Class Maintenance.
  * @package FriendsOfREDAXO\Maintenance
  */
 class Maintenance
 {
-    /** @var rex_addon */
     private static rex_addon $addon;
 
     public function __construct()
@@ -33,9 +34,7 @@ class Maintenance
     }
 
     /**
-     * Checks if a URL is valid
-     * @param string $url
-     * @return bool|null
+     * Checks if a URL is valid.
      * @api
      */
     public function checkUrl(string $url): ?bool
@@ -50,9 +49,7 @@ class Maintenance
     }
 
     /**
-     * Checks if an IP address is valid
-     * @param string $ip
-     * @return bool|null
+     * Checks if an IP address is valid.
      * @api
      */
     public function checkIp(string $ip): ?bool
@@ -64,8 +61,7 @@ class Maintenance
     }
 
     /**
-     * Checks if the current IP is allowed
-     * @return bool
+     * Checks if the current IP is allowed.
      * @api
      */
     public static function isIpAllowed(): bool
@@ -82,8 +78,7 @@ class Maintenance
     }
 
     /**
-     * Checks if the current host is allowed
-     * @return bool
+     * Checks if the current host is allowed.
      * @api
      */
     public static function isHostAllowed(): bool
@@ -100,8 +95,7 @@ class Maintenance
     }
 
     /**
-     * Checks if the current YRewrite domain is allowed
-     * @return bool
+     * Checks if the current YRewrite domain is allowed.
      * @api
      */
     public static function isYrewriteDomainAllowed(): bool
@@ -120,8 +114,7 @@ class Maintenance
     }
 
     /**
-     * Checks if the maintenance secret is valid
-     * @return bool
+     * Checks if the maintenance secret is valid.
      * @api
      */
     public static function isSecretAllowed(): bool
@@ -147,8 +140,7 @@ class Maintenance
     }
 
     /**
-     * Checks if the current user is allowed
-     * @return bool
+     * Checks if the current user is allowed.
      * @api
      */
     public static function isUserAllowed(): bool
@@ -163,7 +155,7 @@ class Maintenance
 
         // Prüfen ob der REDAXO-Benutzer gesperrt werden soll
         $block_frontend_rex_user = (bool) self::getConfig('block_frontend_rex_user', false);
-        
+
         // Wenn Benutzer eingeloggt ist und nicht gesperrt werden soll, dann Zugriff erlauben
         if ($user instanceof rex_user && !$block_frontend_rex_user) {
             return true;
@@ -173,8 +165,7 @@ class Maintenance
     }
 
     /**
-     * Checks frontend access and shows maintenance page if necessary
-     * @return void
+     * Checks frontend access and shows maintenance page if necessary.
      */
     public static function checkFrontend(): void
     {
@@ -228,14 +219,13 @@ class Maintenance
             rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
             rex_response::sendRedirect($redirect_url);
         }
-        
+
         header('HTTP/1.1 ' . $responsecode);
         exit($mpage->parse('maintenance/frontend.php'));
     }
 
     /**
-     * Checks backend access and shows maintenance page if necessary
-     * @return void
+     * Checks backend access and shows maintenance page if necessary.
      */
     public static function checkBackend(): void
     {
@@ -252,8 +242,7 @@ class Maintenance
     }
 
     /**
-     * Sets maintenance mode indicators in backend
-     * @return void
+     * Sets maintenance mode indicators in backend.
      */
     public static function setIndicators(): void
     {
@@ -274,8 +263,7 @@ class Maintenance
     }
 
     /**
-     * Shows maintenance announcement
-     * @return void
+     * Shows maintenance announcement.
      * @api
      */
     public static function showAnnouncement(): void
@@ -284,8 +272,7 @@ class Maintenance
     }
 
     /**
-     * Gets maintenance announcement if within announcement period
-     * @return string
+     * Gets maintenance announcement if within announcement period.
      * @api
      */
     public static function getAnnouncement(): string
@@ -304,21 +291,15 @@ class Maintenance
     }
 
     /**
-     * Gets config value with type casting
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
+     * Gets config value with type casting.
      */
-    private static function getConfig(string $key, mixed $default = null): mixed 
+    private static function getConfig(string $key, mixed $default = null): mixed
     {
         return self::$addon->getConfig($key, $default);
     }
 
     /**
-     * Gets boolean config value
-     * @param string $key
-     * @param bool $default
-     * @return bool
+     * Gets boolean config value.
      */
     private static function getBoolConfig(string $key, bool $default = false): bool
     {
