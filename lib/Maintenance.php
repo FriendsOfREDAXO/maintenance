@@ -127,7 +127,7 @@ class Maintenance
     {
         $config_secret = (string) self::getConfig('maintenance_secret', '');
 
-        // Prüfen ob bereits mit richtigem Secret eingeloggt
+        // Check if already logged in with the correct secret
         if ('' !== $config_secret && rex_session('maintenance_secret', 'string', '') === $config_secret) {
             return true;
         }
@@ -135,7 +135,7 @@ class Maintenance
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
         $authentification_mode = (string) self::getConfig('authentification_mode', '');
 
-        // Prüfen ob korrektes Secret per URL oder Passwort übergeben wurde
+        // Check if the correct secret is passed via URL or password
         if (('URL' === $authentification_mode || 'password' === $authentification_mode) && '' !== $config_secret && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);
             return true;
@@ -154,15 +154,15 @@ class Maintenance
         rex_backend_login::createUser();
         $user = rex::getUser();
 
-        // Admins haben immer Zugriff, unabhängig von Einstellungen
+        // Admins always have access, regardless of settings
         if ($user instanceof rex_user && $user->isAdmin()) {
             return true;
         }
 
-        // Prüfen ob der REDAXO-Benutzer gesperrt werden soll
+        // Check if the REDAXO user should be blocked
         $block_frontend_rex_user = (bool) self::getConfig('block_frontend_rex_user', false);
 
-        // Wenn Benutzer eingeloggt ist und nicht gesperrt werden soll, dann Zugriff erlauben
+        // If the user is logged in and should not be blocked, allow access
         if ($user instanceof rex_user && !$block_frontend_rex_user) {
             return true;
         }
@@ -177,38 +177,38 @@ class Maintenance
     {
         rex_login::startSession();
 
-        // Wenn die IP-Adresse erlaubt ist, Anfrage nicht sperren
+        // If the IP address is allowed, do not block the request
         if (self::isIpAllowed()) {
             return;
         }
 
-        // Wenn YRewrite installiert und Domain erlaubt ist, Anfrage nicht sperren
+        // If YRewrite is installed and the domain is allowed, do not block the request
         if (rex_addon::get('yrewrite')->isAvailable() && self::isYrewriteDomainAllowed()) {
             return;
         }
 
-        // Wenn der Host erlaubt ist, Anfrage nicht sperren
+        // If the host is allowed, do not block the request
         if (self::isHostAllowed()) {
             return;
         }
 
-        // Wenn das Secret / Passwort stimmt, Anfrage nicht sperren
+        // If the secret/password is correct, do not block the request
         if (self::isSecretAllowed()) {
             return;
         }
 
-        // Wenn der Benutzer zugelassen ist (Admin oder nicht-gesperrter Redakteur), Anfrage nicht sperren
+        // If the user is allowed (admin or non-blocked editor), do not block the request
         if (self::isUserAllowed()) {
             return;
         }
 
-        // Wenn die Sitemap angefordert wird, Anfrage nicht sperren
+        // If the sitemap is requested, do not block the request
         $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
         if (true === str_contains($REQUEST_URI, 'sitemap.xml')) {
             return;
         }
 
-        // EP zum Erlauben von Medien-Dateien
+        // EP to allow media files
         $media = rex_get('rex_media_file', 'string', '');
         $media_unblock = [];
         $media_unblocklist = rex_extension::registerPoint(new rex_extension_point('MAINTENANCE_MEDIA_UNBLOCK_LIST', $media_unblock));
@@ -216,7 +216,7 @@ class Maintenance
             return;
         }
 
-        // Alles, was bis hier hin nicht erlaubt wurde, blockieren wie in den Einstellungen gewählt
+        // Block everything that has not been allowed so far as chosen in the settings
         $redirect_url = (string) self::getConfig('redirect_frontend_to_url', '');
         $responsecode = (int) self::getConfig('http_response_code', 503);
 
