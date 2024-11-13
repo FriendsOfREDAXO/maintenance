@@ -31,7 +31,7 @@ class Maintenance
     /**
      * Gets the addon instance.
      */
-    private static function addon(): rex_addon
+    private static function getAddOn(): rex_addon
     {
         if (null === self::$addon) {
             self::$addon = rex_addon::get('maintenance');
@@ -252,12 +252,12 @@ class Maintenance
      */
     public static function setIndicators(): void
     {
-        $page = self::addon()->getProperty('page');
+        $page = self::getAddOn()->getProperty('page');
 
         if (self::getBoolConfig('block_backend', false)) {
             $page['title'] .= ' <span class="label label-info pull-right">B</span>';
             $page['icon'] .= ' fa-toggle-on block_backend';
-            self::addon()->setProperty('page', $page);
+            self::getAddOn()->setProperty('page', $page);
         }
 
         if (self::getBoolConfig('block_frontend', false)) {
@@ -265,7 +265,7 @@ class Maintenance
             $page['icon'] .= ' fa-toggle-on block_frontend';
         }
 
-        self::addon()->setProperty('page', $page);
+        self::getAddOn()->setProperty('page', $page);
     }
 
     /**
@@ -301,7 +301,7 @@ class Maintenance
      */
     private static function getConfig(string $key, mixed $default = null): mixed
     {
-        return self::addon()->getConfig($key, $default);
+        return self::getAddOn()->getConfig($key, $default);
     }
 
     /**
