@@ -30,10 +30,14 @@ requires:
     redaxo: ^5.17.0
     php:
         version: '>=8.2'
-        
+
 console_commands:
-       maintenance:frontend_disable: rex_maintenance_command_on
-       maintenance:frontend_enable: rex_maintenance_command_off
+       maintenance:activate: rex_maintenance_command_activate
+       maintenance:deactivate: rex_maintenance_command_deactivate
+       maintenance:on: rex_maintenance_command_activate
+       maintenance:off: rex_maintenance_command_deactivate
+       frontend:off: rex_maintenance_command_activate
+       frontend:on: rex_maintenance_command_deactivate
 
 default_config:
       http_response_code: 503 # 503, 403
