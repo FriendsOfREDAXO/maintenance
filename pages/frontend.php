@@ -24,10 +24,16 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
 $select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
 
+// Passwort zum Umgehen des Wartungsmodus - für alle Benutzer verfügbar
+$field = $form->addTextField('maintenance_secret');
+$field->setLabel($addon->i18n('maintenance_secret_label'));
+$field->setNotice($addon->i18n('maintenance_secret_notice', bin2hex(random_bytes(16))));
+$field->setAttribute('type', 'password');
+
 if ($isAdmin) {
     // Erlaubte IP-Adressen - nur für Admins
     $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
-
+    
     $field = $form->addTextField('allowed_ips');
     $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
     $field->setNotice($addon->i18n('maintenance_allowed_ips_notice', rex_server('REMOTE_ADDR', 'string', ''), rex_server('SERVER_ADDR', 'string', '')));
@@ -41,7 +47,7 @@ if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains(
     if (!$isAdmin) {
         $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
     }
-
+    
     $field = $form->addSelectField('allowed_yrewrite_domains');
     $field->setAttribute('multiple', 'multiple');
     $field->setAttribute('class', 'form-control selectpicker');
@@ -77,12 +83,6 @@ if ($isAdmin) {
     $select = $field->getSelect();
     $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0);
     $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1);
-
-    // Passwort zum Umgehen des Wartungsmodus
-    $field = $form->addTextField('maintenance_secret');
-    $field->setLabel($addon->i18n('maintenance_secret_label'));
-    $field->setNotice($addon->i18n('maintenance_secret_notice', bin2hex(random_bytes(16))));
-    $field->setAttribute('type', 'password');
 
     // Ziel der Umleitung
     $field = $form->addTextField('redirect_frontend_to_url');
@@ -184,5 +184,5 @@ $fragment->setVar('body', $form->get(), false);
         echo $fragment->parse('core/page/section.php');
         ?>
     </div>
-    <?php endif ?>
+    <?php endif; ?>
 </div>
