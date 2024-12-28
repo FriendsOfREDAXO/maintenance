@@ -6,7 +6,7 @@ title: translate:maintenance_title
 
 page:
     title: translate:maintenance_title
-    perm: admin[]
+    perm: maintenance[]  # Grundlegendes Recht für den Zugriff auf das Addon
     prio: 81
     block: system
     icon: 'maintenance rex-icon fa-toggle-off'
@@ -23,17 +23,23 @@ page:
             title: translate:maintenance_preview_title
             icon: rex-icon fa-eye
             hidden: true
+            perm: maintenance[frontend]
         help:
             title: translate:maintenance_docs_title
             subPath: README.md
             icon: rex-icon fa-question-circle
             itemClass: pull-right
-            perm: maintenance[frontend]
+            perm: maintenance[]
 
 requires:
     redaxo: ^5.17.0
     php:
         version: '>=8.2'
+
+# Definition der verfügbaren Rechte für die Rollenverwaltung
+permissions:
+    maintenance[]: translate:maintenance[] # Grundlegendes Recht
+    maintenance[frontend]: translate:maintenance[frontend] # Recht für Frontend-Einstellungen
 
 console_commands:
        maintenance:activate: rex_maintenance_command_activate
