@@ -24,19 +24,24 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
 $select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
 
-// Ausnahmeregeln - für alle Benutzer verfügbar
-$form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
+if ($isAdmin) {
+    // Erlaubte IP-Adressen - nur für Admins
+    $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
+    
+    $field = $form->addTextField('allowed_ips');
+    $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
+    $field->setNotice($addon->i18n('maintenance_allowed_ips_notice', rex_server('REMOTE_ADDR', 'string', ''), rex_server('SERVER_ADDR', 'string', '')));
+    $field->setAttribute('class', 'form-control');
+    $field->setAttribute('data-maintenance', 'tokenfield');
+    $field->setAttribute('data-beautify', 'false');
+}
 
-// Erlaubte IP-Adressen
-$field = $form->addTextField('allowed_ips');
-$field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_ips_notice', rex_server('REMOTE_ADDR', 'string', ''), rex_server('SERVER_ADDR', 'string', '')));
-$field->setAttribute('class', 'form-control');
-$field->setAttribute('data-maintenance', 'tokenfield');
-$field->setAttribute('data-beautify', 'false');
-
-// Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen
+// Wenn YRewrite installiert, dann erlaubte YRewrite-Domains auswählen - für alle Benutzer
 if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 1) {
+    if (!$isAdmin) {
+        $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
+    }
+    
     $field = $form->addSelectField('allowed_yrewrite_domains');
     $field->setAttribute('multiple', 'multiple');
     $field->setAttribute('class', 'form-control selectpicker');
@@ -49,16 +54,16 @@ if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains(
     }
 }
 
-// Erlaubte Domains
-$field = $form->addTextField('allowed_domains');
-$field->setLabel($addon->i18n('maintenance_allowed_domains_label'));
-$field->setNotice($addon->i18n('maintenance_allowed_domains_notice'));
-$field->setAttribute('class', 'form-control');
-$field->setAttribute('data-maintenance', 'tokenfield');
-$field->setAttribute('data-beautify', 'false');
-
 // Ab hier nur für Admins sichtbare Optionen
 if ($isAdmin) {
+    // Erlaubte Domains
+    $field = $form->addTextField('allowed_domains');
+    $field->setLabel($addon->i18n('maintenance_allowed_domains_label'));
+    $field->setNotice($addon->i18n('maintenance_allowed_domains_notice'));
+    $field->setAttribute('class', 'form-control');
+    $field->setAttribute('data-maintenance', 'tokenfield');
+    $field->setAttribute('data-beautify', 'false');
+
     // Umgehung der Wartung durch GET-Parameter (URL) oder Passwort
     $field = $form->addSelectField('authentification_mode');
     $field->setLabel($addon->i18n('maintenance_authentification_mode_label'));
