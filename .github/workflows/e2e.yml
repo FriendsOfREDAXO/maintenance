@@ -1,0 +1,84 @@
+name: e2e tests
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # for Git to git apply
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: gd, intl, pdo_mysql
+          coverage: none # disable xdebug, pcov
+
+      # credits https://blog.markvincze.com/download-artifacts-from-a-latest-github-release-in-sh-and-powershell/
+      - name: Download latest REDAXO release
+        run: |
+          LATEST_RELEASE=$(curl -L -s -H 'Accept: application/json' https://github.com/redaxo/redaxo/releases/latest)
+          REDAXO_VERSION=$(echo $LATEST_RELEASE | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/')
+          echo "Downloaded REDAXO $REDAXO_VERSION"
+          curl -Ls -o redaxo.zip https://github.com/redaxo/redaxo/releases/download/$REDAXO_VERSION/redaxo_$REDAXO_VERSION.zip
+          unzip -oq redaxo.zip -d redaxo_cms
+          rm redaxo.zip
+
+      - name: Init database
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -uroot -h127.0.0.1 -proot -e 'create database redaxo5;'
+
+      - name: Setup REDAXO
+        run: |
+          php redaxo_cms/redaxo/bin/console setup:run -n --lang=de_de --agree-license --db-host=127.0.0.1 --db-name=redaxo5 --db-password=root --db-createdb=no --db-setup=normal --admin-username=admin --admin-password=adminpassword --error-email=test@redaxo.invalid --ansi
+          php redaxo_cms/redaxo/bin/console config:set --type boolean debug.enabled true
+          php redaxo_cms/redaxo/bin/console config:set --type boolean debug.throw_always_exception true
+
+      - name: Create user, update config
+        run: |
+          php redaxo_cms/redaxo/bin/console user:create nightwatch_username nightwatch_password --admin --ansi
+          php redaxo_cms/redaxo/bin/console config:set error_email 'test@redaxo.invalid' --ansi
+          php redaxo_cms/redaxo/bin/console config:set server 'http://localhost:8000/' --ansi
+
+      # copy Addon files, ignore some directories...
+      # install phpmailer
+      # install the addon
+      # if the addon name does not match the repository name, ${{ github.event.repository.name }} must be replaced with the addon name
+      - name: Copy and install Addons
+        run: |
+          rsync -av --exclude='vendor' --exclude='.github' --exclude='.git' --exclude='redaxo_cms' './' 'redaxo_cms/redaxo/src/addons/${{ github.event.repository.name }}'
+          redaxo_cms/redaxo/bin/console package:install '${{ github.event.repository.name }}'
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Setup Webserver and install node modules
+        working-directory: redaxo_cms/redaxo/src/addons/${{ github.event.repository.name }}
+        run: |
+          php -S 127.0.0.1:8000 -t ../../../../ &
+          npm install
+          sudo apt-get install xvfb
+
+      - name: Run e2e tests
+        working-directory: redaxo_cms/redaxo/src/addons/${{ github.event.repository.name }}
+#        continue-on-error: true
+        run: |
+          export LAUNCH_URL='http://localhost:8000/';
+          xvfb-run npm test
