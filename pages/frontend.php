@@ -33,7 +33,7 @@ $field->setAttribute('type', 'password');
 if ($isAdmin) {
     // Erlaubte IP-Adressen - nur für Admins
     $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
-    
+
     $field = $form->addTextField('allowed_ips');
     $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
     $field->setNotice($addon->i18n('maintenance_allowed_ips_notice', rex_server('REMOTE_ADDR', 'string', ''), rex_server('SERVER_ADDR', 'string', '')));
@@ -47,7 +47,7 @@ if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains(
     if (!$isAdmin) {
         $form->addFieldset($addon->i18n('maintenance_allowed_access_title'));
     }
-    
+
     $field = $form->addSelectField('allowed_yrewrite_domains');
     $field->setAttribute('multiple', 'multiple');
     $field->setAttribute('class', 'form-control selectpicker');
@@ -184,5 +184,5 @@ $fragment->setVar('body', $form->get(), false);
         echo $fragment->parse('core/page/section.php');
         ?>
     </div>
-    <?php endif; ?>
+    <?php endif ?>
 </div>
