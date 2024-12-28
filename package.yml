@@ -6,7 +6,7 @@ title: translate:maintenance_title
 
 page:
     title: translate:maintenance_title
-    perm: maintenance[]
+    perm: admin[]
     prio: 81
     block: system
     icon: 'maintenance rex-icon fa-toggle-off'
@@ -14,9 +14,11 @@ page:
         frontend:
             title: translate:maintenance_frontend_title
             icon: rex-icon fa-user
+            perm: maintenance[frontend]
         backend:
             title: translate:maintenance_backend_title
             icon: rex-icon fa-user-gear
+            perm: admin[]
         preview:
             title: translate:maintenance_preview_title
             icon: rex-icon fa-eye
@@ -26,6 +28,8 @@ page:
             subPath: README.md
             icon: rex-icon fa-question-circle
             itemClass: pull-right
+            perm: maintenance[frontend]
+
 requires:
     redaxo: ^5.17.0
     php:
