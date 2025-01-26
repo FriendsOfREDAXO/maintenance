@@ -1,4 +1,5 @@
 <?php
+
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -8,7 +9,7 @@ class rex_maintenance_command_deactivate extends rex_console_command
     {
         // @phpstan-ignore-next-line
         $this->setAliases(['frontend:on'])
-            ->$this->setAliases(['maintenance:off'])
+            ->setAliases(['maintenance:off'])
             ->setDescription(rex_i18n::msg('maintenance_command_off_description'));
     }
 

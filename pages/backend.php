@@ -10,8 +10,6 @@
  * file that was distributed with this source code.
  */
 
-use FriendsOfREDAXO\Maintenance\MaintenanceUtil;
-
 $addon = rex_addon::get('maintenance');
 
 $form = rex_config_form::factory($addon->getName());

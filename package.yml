@@ -1,12 +1,12 @@
 package: maintenance
-version: '3.0.0-beta1'
+version: '3.2.2'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/maintenance
 title: translate:maintenance_title
 
 page:
     title: translate:maintenance_title
-    perm: maintenance[]
+    perm: maintenance[]  # Grundlegendes Recht für den Zugriff auf das Addon
     prio: 81
     block: system
     icon: 'maintenance rex-icon fa-toggle-off'
@@ -14,22 +14,40 @@ page:
         frontend:
             title: translate:maintenance_frontend_title
             icon: rex-icon fa-user
+            perm: maintenance[frontend]
         backend:
             title: translate:maintenance_backend_title
             icon: rex-icon fa-user-gear
+            perm: admin[]
+        preview:
+            title: translate:maintenance_preview_title
+            icon: rex-icon fa-eye
+            hidden: true
+            perm: maintenance[frontend]
         help:
             title: translate:maintenance_docs_title
             subPath: README.md
             icon: rex-icon fa-question-circle
             itemClass: pull-right
+            perm: maintenance[]
+
 requires:
     redaxo: ^5.17.0
     php:
         version: '>=8.2'
-        
+
+# Definition der verfügbaren Rechte für die Rollenverwaltung
+permissions:
+    maintenance[]: translate:maintenance[] # Grundlegendes Recht
+    maintenance[frontend]: translate:maintenance[frontend] # Recht für Frontend-Einstellungen
+
 console_commands:
-       maintenance:frontend_disable: rex_maintenance_command_on
-       maintenance:frontend_enable: rex_maintenance_command_off
+       maintenance:activate: rex_maintenance_command_activate
+       maintenance:deactivate: rex_maintenance_command_deactivate
+       maintenance:on: rex_maintenance_command_activate
+       maintenance:off: rex_maintenance_command_deactivate
+       frontend:off: rex_maintenance_command_activate
+       frontend:on: rex_maintenance_command_deactivate
 
 default_config:
       http_response_code: 503 # 503, 403
