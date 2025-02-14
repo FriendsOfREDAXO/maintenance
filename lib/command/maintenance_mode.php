@@ -5,19 +5,19 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class rex_maintenance_toggle_command extends rex_console_command
+class rex_maintenance_mode_command extends rex_console_command
 {
     
     #[Override]
     protected function configure(): void
     {
         $this
-            ->setName('maintenance:toggle')
-            ->setDescription(rex_i18n::msg('maintenance_command_description'))
+            ->setName('maintenance:mode')
+            ->setDescription(rex_i18n::msg('maintenance_mode_command_description'))
             ->addArgument(
                 "state",
                 InputArgument::OPTIONAL,
-                rex_i18n::msg('maintenance_command_mode_description'),
+                rex_i18n::msg('maintenance_mode_command_state_description'),
             );
     }
 
@@ -42,14 +42,13 @@ class rex_maintenance_toggle_command extends rex_console_command
         {
             $io->info(rex_i18n::msg('maintenance_mode_already_deactivated'));
             return Command::FAILURE;
-        }
-        
+        }        
         
         if ($state === "on")
         {
             $addon->setConfig('block_frontend', 1);
             $io->success(rex_i18n::msg('maintenance_mode_activated'));
-            return Command::SUCCESS;
+            return Command::SUCCESS;            
         } elseif ($state === "off") {
             $addon->setConfig('block_frontend', 0);
             $io->success(rex_i18n::msg('maintenance_mode_deactivated'));

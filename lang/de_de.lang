@@ -8,8 +8,8 @@ maintenance_docs_title = Hilfe
 
 // Console-Commands
 
-maintenance_command_description = Schaltet den Wartungsmodus ein, oder aus
-maintenance_command_mode_description = Wartungsmodus einstellen: „ein“ oder “aus“
+maintenance_mode_command_description = Schaltet den Wartungsmodus ein, oder aus
+maintenance_mode_command_state_description = Wartungsmodus einstellen: „ein“ oder “aus“
 
 maintenance_mode_activated = Wartungsmodus Aktiviert
 maintenance_mode_deactivated = Wartungsmodus deaktiviert

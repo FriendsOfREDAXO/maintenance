@@ -42,7 +42,7 @@ permissions:
     maintenance[frontend]: translate:maintenance[frontend] # Recht für Frontend-Einstellungen
 
 console_commands:
-       maintenance:toggle: rex_maintenance_toggle_command
+       maintenance:mode: rex_maintenance_mode_command
 
 default_config:
       http_response_code: 503 # 503, 403

@@ -71,13 +71,13 @@ Es wird die im Backend ausgewählte Sperrseite angezeigt.
 Aktivieren des Wartungsmodus:
 
 ```bash
-php redaxo/bin/console maintenance:toggle on
+php redaxo/bin/console maintenance:mode on
 ```
 
 Deaktivieren des Wartungsmodus:
 
 ```bash
-php redaxo/bin/console maintenance:toggle off
+php redaxo/bin/console maintenance:mode off
 ```
 
 ## Autor
