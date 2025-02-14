@@ -8,10 +8,14 @@ maintenance_docs_title = Documentation
 
 // Console-Commands
 
-maintenance_command_off_description = Turns off maintenance mode
-maintenance_command_on_description = Turns on maintenance mode
+maintenance_mode_command_description = Turns the maintenance mode on or off
+maintenance_mode_command_state_description = Set maintenance mode: on or off
 
+maintenance_mode_activated = Maintenance mode activated
 maintenance_mode_deactivated = Maintenance mode deactivated
+maintenance_mode_already_activated = Maintenance mode is already activated
+maintenance_mode_already_deactivated = Maintenance mode is already deactivated
+maintenance_mode_invalid = Invalid argument! Use "on" or "off"
 
 // Backend Settings Page
 

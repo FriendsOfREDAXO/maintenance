@@ -66,11 +66,19 @@ Dazu einfach die aktuelle IP des Servers, auf dem REDAXO installiert ist und von
 
 ## Konsole
 
-Es wird die im Backend ausgewählte Sperrseite angezeigt. Aktivieren der Frontendsperre
+Es wird die im Backend ausgewählte Sperrseite angezeigt.
 
-Mit `maintenance:on` oder `frontend:off`
+Aktivieren des Wartungsmodus:
 
-Deaktivieren mit `maintenance:off` oder `frontend:on`
+```bash
+php redaxo/bin/console maintenance:mode on
+```
+
+Deaktivieren des Wartungsmodus:
+
+```bash
+php redaxo/bin/console maintenance:mode off
+```
 
 ## Autor
 

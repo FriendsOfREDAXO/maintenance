@@ -8,10 +8,14 @@ maintenance_docs_title = Hilfe
 
 // Console-Commands
 
-maintenance_command_off_description = Schaltet den Wartungsmodus aus
-maintenance_command_on_description = Schaltet den Wartungsmodus ein
+maintenance_mode_command_description = Schaltet den Wartungsmodus ein, oder aus
+maintenance_mode_command_state_description = Wartungsmodus einstellen: ein oder aus
 
+maintenance_mode_activated = Wartungsmodus Aktiviert
 maintenance_mode_deactivated = Wartungsmodus deaktiviert
+maintenance_mode_already_activated = Der Wartungsmodus ist bereits aktiviert
+maintenance_mode_already_deactivated = Der Wartungsmodus ist bereits deaktiviert
+maintenance_mode_invalid = Ungültiges Argument! Benutze „on“ oder „off“
 
 // Einstellungsseite Backend
 
