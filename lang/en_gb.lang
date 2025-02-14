@@ -9,7 +9,7 @@ maintenance_docs_title = Documentation
 // Console-Commands
 
 maintenance_mode_command_description = Turns the maintenance mode on or off
-maintenance_mode_command_state_description = Set maintenance mode: "on" or "off"
+maintenance_mode_command_state_description = Set maintenance mode: on or off
 
 maintenance_mode_activated = Maintenance mode activated
 maintenance_mode_deactivated = Maintenance mode deactivated
