@@ -14,7 +14,7 @@ $addon = rex_addon::get('maintenance');
 
 $form = rex_config_form::factory($addon->getName());
 
-// Überschrift für denn Wartungsmodus
+// Überschrift für den Wartungsmodus
 $field = $form->addTextField('maintenance_backend_headline');
 $field->setLabel($addon->i18n('maintenance_backend_headline_label'));
 $field->setNotice($addon->i18n('maintenance_backend_headline_notice'));
