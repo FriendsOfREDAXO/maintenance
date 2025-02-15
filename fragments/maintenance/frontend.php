@@ -12,7 +12,7 @@
 <body>
     <div class="maintenance-container">
         <div class="maintenance-error">
-            <p class="maintenance-error-title"><?= $maintenanceFrontendHeadline ?></span></p>
+            <p class="maintenance-error-title"><?= $maintenanceFrontendHeadline ?></p>
             <p class="maintenance-error-message">This website is temporarily unavailable.</p>
             <p class="maintenance-error-message" lang="de">Diese Website ist vorübergehend nicht erreichbar.</p>
         </div>
