@@ -3,7 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?= rex::getServerName() ?> - Maintenance</title>
+    <title>
+        <?php
+            if (rex_addon::get('yrewrite')->isAvailable() && rex_yrewrite::getCurrentDomain()->getName() !== '') {
+                echo rex_yrewrite::getCurrentDomain()->getName();
+            } else {
+                echo rex::getServerName();
+            }
+         ?> - Maintenance
+    </title>
     <style type="text/css">
         html, body {
             height: 100%;
