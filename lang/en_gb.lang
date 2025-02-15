@@ -19,6 +19,9 @@ maintenance_mode_invalid = Invalid argument! Use "on" or "off"
 
 // Backend Settings Page
 
+maintenance_backend_headline_label = Backend Headline  
+maintenance_backend_headline_notice = Enter any headline for the maintenance mode screen in the backend. The default headline is: "Maintenance / Wartung". 
+
 maintenance_settings_backend_title = Maintenance Mode Settings for the REDAXO Backend
 
 maintenance_block_backend_label = Activate maintenance mode
@@ -29,6 +32,9 @@ maintenance_redirect_backend_to_url_label = Redirect to (optional)
 maintenance_redirect_backend_to_url_notice = Specify the URL to which users will be redirected when the REDAXO backend is in maintenance mode.
 
 // Frontend Settings Page
+
+maintenance_frontend_headline_label = Frontend Headline  
+maintenance_frontend_headline_notice = Enter any headline for the maintenance mode screen in the frontend. The default headline is: "Maintenance / Wartung".
 
 maintenance_settings_frontend_title = Maintenance Mode Settings for the Website Frontend
 
