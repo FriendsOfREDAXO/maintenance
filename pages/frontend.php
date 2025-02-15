@@ -17,6 +17,11 @@ $form = rex_config_form::factory($addon->getName());
 
 $form->addFieldset($addon->i18n('maintenance_general_title'));
 
+// Überschrift für denn Wartungsmodus
+$field = $form->addTextField('maintenance_frontend_headline');
+$field->setLabel($addon->i18n('maintenance_frontend_headline_label'));
+$field->setNotice($addon->i18n('maintenance_frontend_headline_notice'));
+
 // Aktivierung/Deaktivierung des Wartungsmodus im Frontend - für alle Benutzer verfügbar
 $field = $form->addSelectField('block_frontend');
 $field->setLabel($addon->i18n('maintenance_block_frontend_label'));

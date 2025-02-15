@@ -1,3 +1,6 @@
+<?php
+    $maintenanceBackendHeadline = rex_config::get('maintenance', 'maintenance_backend_headline', 'Maintenance / Wartung');
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +49,7 @@
 <body>
     <div class="maintenance-container">
         <div class="maintenance-error">
-            <p class="maintenance-error-title">Maintenance<br>Wartung</p>
+            <p class="maintenance-error-title"><?= $maintenanceBackendHeadline ?></p>
             <p class="maintenance-error-message">Backend access has been blocked, please contact your administrator.</p>
             <p class="maintenance-error-message">Der Backend-Zugang wurde gesperrt, bitte kontaktieren Sie ihren Administrator.</p>
         </div>
