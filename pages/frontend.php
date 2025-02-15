@@ -22,6 +22,12 @@ $field = $form->addTextField('maintenance_frontend_headline');
 $field->setLabel($addon->i18n('maintenance_frontend_headline_label'));
 $field->setNotice($addon->i18n('maintenance_frontend_headline_notice'));
 
+// Automatische Aktualisierung der Seite
+$field = $form->addInputField('number', 'maintenance_frontend_update_interval');
+$field->setLabel($addon->i18n('maintenance_update_interval_field_label'));
+$field->setNotice($addon->i18n('maintenance_update_interval_field_notice'));
+$field->setAttribute('class', 'form-control');
+
 // Aktivierung/Deaktivierung des Wartungsmodus im Frontend - für alle Benutzer verfügbar
 $field = $form->addSelectField('block_frontend');
 $field->setLabel($addon->i18n('maintenance_block_frontend_label'));

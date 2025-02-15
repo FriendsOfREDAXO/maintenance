@@ -5,6 +5,8 @@ maintenance_frontend_title = Website Frontend
 maintenance_backend_title = REDAXO Backend
 maintenance_docs_title = Documentation
 
+maintenance_update_interval_field_label = Update interval
+maintenance_update_interval_field_notice = Enter the number of seconds after which the page is automatically reloaded. Set 0 to deactivate the automatic refresh. Default value: 60 seconds
 
 // Console-Commands
 
