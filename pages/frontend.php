@@ -126,7 +126,7 @@ if ($isAdmin) {
 
     $field = $form->addTextField('announcement_end_date');
     $field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
-    $field->setNotice($addon->i18n('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
+    $field->setNotice(rex_i18n::rawMsg('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
     $field->setAttribute('type', 'datetime-local');
 }
 

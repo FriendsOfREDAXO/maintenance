@@ -79,7 +79,7 @@ maintenance_announcement_start_date_label = Start Date
 maintenance_announcement_start_date_notice = Date from <strong>when the announcement should be shown</strong>. Not from when the website will switch to maintenance mode. Current server time: <code>{0}</code>.
 
 maintenance_announcement_end_date_label = End Date
-maintenance_announcement_end_date_notice = Date until when the announcement should be shown. Current server time: <code>{0}</code>.
+maintenance_announcement_end_date_notice = Date <strong>until when the announcement should be shown</strong>. Current server time: <code>{0}</code>.
 
 maintenance_allowed_access_title = Exceptions
 
