@@ -82,7 +82,7 @@ maintenance_announcement_start_date_label = Startdatum
 maintenance_announcement_start_date_notice = Datum, <strong>ab wann die Ankündigung gezeigt werden soll</strong>. Nicht, ab wann die Website in den Wartungsmodus wechseln soll. Aktuelle Serverzeit: <code>{0}</code>.
 
 maintenance_announcement_end_date_label = Enddatum
-maintenance_announcement_end_date_notice = Datum, bis wann die Ankündigung gezeigt werden soll. Aktuelle Serverzeit: <code>{0}</code>.
+maintenance_announcement_end_date_notice = Datum, <strong>bis wann die Ankündigung gezeigt werden soll</strong>. Aktuelle Serverzeit: <code>{0}</code>.
 
 maintenance_allowed_access_title = Ausnahmen
 

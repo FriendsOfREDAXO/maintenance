@@ -121,12 +121,12 @@ if ($isAdmin) {
     // Start- und Endzeitpunkt der Wartungsankündigung
     $field = $form->addTextField('announcement_start_date');
     $field->setLabel($addon->i18n('maintenance_announcement_start_date_label'));
-    $field->setNotice($addon->i18n('maintenance_announcement_start_date_notice', date('Y-m-d H:i:s')));
+    $field->setNotice(rex_i18n::rawMsg('maintenance_announcement_start_date_notice', date('Y-m-d H:i:s')));
     $field->setAttribute('type', 'datetime-local');
 
     $field = $form->addTextField('announcement_end_date');
     $field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
-    $field->setNotice($addon->i18n('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
+    $field->setNotice(rex_i18n::rawMsg('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
     $field->setAttribute('type', 'datetime-local');
 }
 
