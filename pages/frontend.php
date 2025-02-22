@@ -17,6 +17,11 @@ $form = rex_config_form::factory($addon->getName());
 
 $form->addFieldset($addon->i18n('maintenance_general_title'));
 
+// Überschrift für den Wartungsmodus
+$field = $form->addTextField('maintenance_frontend_headline');
+$field->setLabel($addon->i18n('maintenance_frontend_headline_label'));
+$field->setNotice($addon->i18n('maintenance_frontend_headline_notice'));
+
 // Aktivierung/Deaktivierung des Wartungsmodus im Frontend - für alle Benutzer verfügbar
 $field = $form->addSelectField('block_frontend');
 $field->setLabel($addon->i18n('maintenance_block_frontend_label'));
@@ -116,12 +121,12 @@ if ($isAdmin) {
     // Start- und Endzeitpunkt der Wartungsankündigung
     $field = $form->addTextField('announcement_start_date');
     $field->setLabel($addon->i18n('maintenance_announcement_start_date_label'));
-    $field->setNotice($addon->i18n('maintenance_announcement_start_date_notice', date('Y-m-d H:i:s')));
+    $field->setNotice(rex_i18n::rawMsg('maintenance_announcement_start_date_notice', date('Y-m-d H:i:s')));
     $field->setAttribute('type', 'datetime-local');
 
     $field = $form->addTextField('announcement_end_date');
     $field->setLabel($addon->i18n('maintenance_announcement_end_date_label'));
-    $field->setNotice($addon->i18n('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
+    $field->setNotice(rex_i18n::rawMsg('maintenance_announcement_end_date_notice', date('Y-m-d H:i:s')));
     $field->setAttribute('type', 'datetime-local');
 }
 

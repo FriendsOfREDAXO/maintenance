@@ -55,6 +55,8 @@ default_config:
       redirect_backend_to_url: '' # `https://example.com/maintenance.html`
       secret: ''
       editor: 'class="form-control redactor-editor--default"'
+      maintenance_frontend_headline: 'Maintenance / Wartung'
+      maintenance_backend_headline: 'Maintenance / Wartung'
 
 installer_ignore:
     - .git
