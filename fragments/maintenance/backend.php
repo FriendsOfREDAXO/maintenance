@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
         <?php
-            if (rex_addon::get('yrewrite')->isAvailable() && rex_yrewrite::getCurrentDomain()->getName() !== '') {
+            if (rex_addon::get('yrewrite')->isAvailable() && rex_yrewrite::getCurrentDomain() !== null && rex_yrewrite::getCurrentDomain()->getName() !== '') {
                 echo rex_yrewrite::getCurrentDomain()->getName();
             } else {
                 echo rex::getServerName();
