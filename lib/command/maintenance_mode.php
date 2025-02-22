@@ -7,7 +7,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class rex_maintenance_mode_command extends rex_console_command
 {
-    
     #[Override]
     protected function configure(): void
     {
@@ -26,29 +25,26 @@ class rex_maintenance_mode_command extends rex_console_command
     {
         $io = $this->getStyle($input, $output);
         $io->title(rex_i18n::msg('maintenance_title'));
-        
+
         $state = $input->getArgument('state');
 
         $addon = rex_addon::get('maintenance');
         $currentBlockFrontendConfiguration = $addon->getConfig();
 
-        if ($currentBlockFrontendConfiguration['block_frontend'] === 1 && $state === "on")
-        {
+        if ($currentBlockFrontendConfiguration['block_frontend'] === 1 && $state === "on") {
             $io->info(rex_i18n::msg('maintenance_mode_already_activated'));
             return Command::FAILURE;
         }
 
-        if ($currentBlockFrontendConfiguration['block_frontend'] === 0 && $state === "off")
-        {
+        if ($currentBlockFrontendConfiguration['block_frontend'] === 0 && $state === "off") {
             $io->info(rex_i18n::msg('maintenance_mode_already_deactivated'));
             return Command::FAILURE;
-        }        
-        
-        if ($state === "on")
-        {
+        }
+
+        if ($state === "on") {
             $addon->setConfig('block_frontend', 1);
             $io->success(rex_i18n::msg('maintenance_mode_activated'));
-            return Command::SUCCESS;            
+            return Command::SUCCESS;
         } elseif ($state === "off") {
             $addon->setConfig('block_frontend', 0);
             $io->success(rex_i18n::msg('maintenance_mode_deactivated'));
