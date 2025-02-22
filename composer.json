@@ -1,7 +1,6 @@
 {
   "require-dev": {
-    "redaxo/php-cs-fixer-config": "^2.0",
-    "friendsofphp/php-cs-fixer": "^3.14"
+    "redaxo/php-cs-fixer-config": "^2.13"
   },
   "replace": {
     "psr/log": "*",

@@ -14,7 +14,7 @@ class rex_maintenance_mode_command extends rex_console_command
             ->setName('maintenance:mode')
             ->setDescription(rex_i18n::msg('maintenance_mode_command_description'))
             ->addArgument(
-                "state",
+                'state',
                 InputArgument::OPTIONAL,
                 rex_i18n::msg('maintenance_mode_command_state_description'),
             );
@@ -31,27 +31,27 @@ class rex_maintenance_mode_command extends rex_console_command
         $addon = rex_addon::get('maintenance');
         $currentBlockFrontendConfiguration = $addon->getConfig();
 
-        if ($currentBlockFrontendConfiguration['block_frontend'] === 1 && $state === "on") {
+        if (1 === $currentBlockFrontendConfiguration['block_frontend'] && 'on' === $state) {
             $io->info(rex_i18n::msg('maintenance_mode_already_activated'));
             return Command::FAILURE;
         }
 
-        if ($currentBlockFrontendConfiguration['block_frontend'] === 0 && $state === "off") {
+        if (0 === $currentBlockFrontendConfiguration['block_frontend'] && 'off' === $state) {
             $io->info(rex_i18n::msg('maintenance_mode_already_deactivated'));
             return Command::FAILURE;
         }
 
-        if ($state === "on") {
+        if ('on' === $state) {
             $addon->setConfig('block_frontend', 1);
             $io->success(rex_i18n::msg('maintenance_mode_activated'));
             return Command::SUCCESS;
-        } elseif ($state === "off") {
+        }
+        if ('off' === $state) {
             $addon->setConfig('block_frontend', 0);
             $io->success(rex_i18n::msg('maintenance_mode_deactivated'));
             return Command::SUCCESS;
-        } else {
-            $io->error(rex_i18n::msg('maintenance_mode_invalid'));
-            return Command::INVALID;
         }
+        $io->error(rex_i18n::msg('maintenance_mode_invalid'));
+        return Command::INVALID;
     }
 }
