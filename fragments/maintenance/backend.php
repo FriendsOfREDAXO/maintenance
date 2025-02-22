@@ -10,7 +10,7 @@
             } else {
                 echo rex::getServerName();
             }
-         ?> - Maintenance
+        ?> - Maintenance
     </title>
     <style type="text/css">
         html, body {

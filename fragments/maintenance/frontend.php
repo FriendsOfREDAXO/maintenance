@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
         <?php
-            if (rex_addon::get('yrewrite')->isAvailable() && rex_yrewrite::getCurrentDomain()->getName() !== '') {
+            if (rex_addon::get('yrewrite')->isAvailable() && rex_yrewrite::getCurrentDomain()?->getName() !== null) {
                 echo rex_yrewrite::getCurrentDomain()->getName();
             } else {
                 echo rex::getServerName();
             }
-         ?> - Maintenance
+        ?> - Maintenance
     </title>
     <link rel="stylesheet" href="<?= rex_url::addonAssets('maintenance', 'css/maintenance-frontend.css') ?>" />
 </head>
