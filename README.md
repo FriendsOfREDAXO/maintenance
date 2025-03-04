@@ -91,6 +91,7 @@ php redaxo/bin/console maintenance:mode off
 
 * [Alexander Walther](https://github.com/alxndr-w)
 * [KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
+* [Simon Krull](https://github.com/crydotsnake)
 
 ## Credits
 
