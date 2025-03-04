@@ -57,6 +57,8 @@ default_config:
       editor: 'class="form-control redactor-editor--default"'
       maintenance_frontend_headline: 'Maintenance / Wartung'
       maintenance_backend_headline: 'Maintenance / Wartung'
+      maintenance_frontend_update_interval: 60
+      maintenance_backend_update_interval: 60
 
 installer_ignore:
     - .git

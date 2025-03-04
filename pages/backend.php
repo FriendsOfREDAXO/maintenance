@@ -19,6 +19,12 @@ $field = $form->addTextField('maintenance_backend_headline');
 $field->setLabel($addon->i18n('maintenance_backend_headline_label'));
 $field->setNotice($addon->i18n('maintenance_backend_headline_notice'));
 
+// Automatische Aktualisierung der Seite
+$field = $form->addInputField('number', 'maintenance_backend_update_interval');
+$field->setLabel($addon->i18n('maintenance_update_interval_field_label'));
+$field->setNotice($addon->i18n('maintenance_update_interval_field_notice'));
+$field->setAttribute('class', 'form-control');
+
 $field = $form->addSelectField('block_backend');
 $field->setLabel($addon->i18n('maintenance_block_backend_label'));
 $select = $field->getSelect();

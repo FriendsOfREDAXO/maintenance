@@ -1,11 +1,13 @@
 <?php
     $maintenanceBackendHeadline = rex_config::get('maintenance', 'maintenance_backend_headline', 'Maintenance / Wartung');
+    $maintenanceBackendUpdateIntervalNumber = rex_config::get('maintenance', 'maintenance_backend_update_interval', 60);
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="refresh" content="<?= $maintenanceBackendUpdateIntervalNumber > 0 ? $maintenanceBackendUpdateIntervalNumber : '' ?>">
     <title>
         <?php
             if (rex_addon::get('yrewrite')->isAvailable() && null !== rex_yrewrite::getCurrentDomain()?->getName()) {
@@ -64,4 +66,3 @@
     </div>
 </body>
 </html>'
-

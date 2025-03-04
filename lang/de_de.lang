@@ -5,6 +5,8 @@ maintenance_frontend_title = Website-Frontend
 maintenance_backend_title = REDAXO-Backend
 maintenance_docs_title = Hilfe
 
+maintenance_update_interval_field_label = Aktualisierungsintervall
+maintenance_update_interval_field_notice = Geben Sie die Sekunden ein, nach denen die Seite automatisch neu geladen werden soll. Setzen Sie 0, um die automatische Aktualisierung zu deaktivieren. Standardwert: 60 Sekunden
 
 // Console-Commands
 
