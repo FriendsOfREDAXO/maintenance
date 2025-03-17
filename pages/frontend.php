@@ -161,11 +161,10 @@ $fragment->setVar('body', $form->get(), false);
         /* Kopieren der URL für den Wartungsmodus */
         $copy = '<ul class="list-group">';
         $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-        $copy .= '<li class="list-group-item"><label for="maintenance-mode-url">REDAXO config.yml</label>
-        <div class="hidden" id="maintenance-mode-url"><code>' . $url . '</code></div>';
+        $copy .= '<li class="list-group-item"><label for="maintenance-mode-url">REDAXO config.yml</label>';
         $copy .= '
         <clipboard-copy for="maintenance-mode-url" class="input-group">
-          <input type="text" value="' . $url . '" readonly class="form-control">
+          <input id="maintenance-mode-url" type="text" value="' . $url . '" readonly class="form-control">
           <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
         </clipboad-copy></li>';
 
@@ -177,10 +176,9 @@ $fragment->setVar('body', $form->get(), false);
                 }
                 $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
                 $copy .= '<li class="list-group-item"><label for="maintenance-mode-url-' . $key . '">YRewrite ' . $key . '</label>';
-                $copy .= '<div class="hidden" id="maintenance-mode-url-' . $key . '"><code>' . $url . '</code></div>';
                 $copy .= '
                 <clipboard-copy for="maintenance-mode-url-' . $key . '" class="input-group">
-                  <input type="text" value="' . $url . '" readonly class="form-control">
+                  <input id="maintenance-mode-url-' . $key . '" type="text" value="' . $url . '" readonly class="form-control">
                   <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
                 </clipboad-copy></li>';
             }
