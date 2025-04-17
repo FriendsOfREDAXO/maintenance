@@ -50,3 +50,16 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
     $addon->removeConfig('type');
     $addon->removeConfig('secret');
 }
+
+// Leerer String ('') und 'URL' werden beide als gültige URL-Authentifizierung betrachtet
+$authentification_mode = $addon->getConfig('authentification_mode', '');
+if (!in_array($authentification_mode, ['URL', 'password'], true)) {
+    // Wenn kein gültiger Modus gesetzt ist, standardmäßig auf URL setzen
+    $addon->setConfig('authentification_mode', 'URL');
+}
+
+// Überprüfen, ob ein maintenance_secret existiert
+if (!$addon->hasConfig('maintenance_secret') || '' === $addon->getConfig('maintenance_secret')) {
+    // Falls kein Secret vorhanden, ein neues generieren
+    $addon->setConfig('maintenance_secret', bin2hex(random_bytes(16)));
+}
