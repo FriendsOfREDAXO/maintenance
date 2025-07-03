@@ -90,15 +90,15 @@ php redaxo/bin/console maintenance:mode off
 ## Projekt-Team
 
 * [Alexander Walther](https://github.com/alxndr-w)
-* [KLXM Crossmedia / Thomas Skerbis](https://klxm.de)
 * [Simon Krull](https://github.com/crydotsnake)
 
 ## Credits
 
 Danke an:
 
+* [KLXM Crossmedia / Thomas Skerbis](https://klxm.de) // former lead
+* [Christian Gehrke](https://github.com/chrison94) // first version
 * [Thorben](https://github.com/eaCe)
-* [Christian Gehrke](https://github.com/chrison94)
 * [Oliver Kreischer](https://github.com/olien)
 * u.v.a
 
