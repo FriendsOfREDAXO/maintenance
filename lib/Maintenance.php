@@ -207,13 +207,15 @@ class Maintenance
 
         // If the sitemap is requested, do not block the request
         $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
-        if (true === str_contains($REQUEST_URI, 'sitemap.xml')) {
-            return;
-        }
         
-        // If YDeploy is used, do not block the request
-        $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
-        if (true === str_contains($REQUEST_URI, '_clear_cache/_clear_cache.php')) {
+        $allowedUris = [
+            '/_clear_cache/_clear_cache.php',
+            '/sitemap.xml',
+        ];
+        
+        // Wartungsmodus nur für exakte Pfade ausnehmen:
+        if (in_array($REQUEST_URI, $allowedUris, true)) {
+            // Wartungsmodus NICHT aktiv – Anfrage zulassen
             return;
         }
 
