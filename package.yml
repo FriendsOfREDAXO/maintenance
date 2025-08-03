@@ -57,6 +57,10 @@ default_config:
       editor: 'class="form-control redactor-editor--default"'
       maintenance_frontend_headline: 'Maintenance / Wartung'
       maintenance_backend_headline: 'Maintenance / Wartung'
+      maintenance_frontend_text_en: 'This website is temporarily unavailable.'
+      maintenance_frontend_text_de: 'Diese Website ist vorübergehend nicht erreichbar.'
+      maintenance_backend_text_en: 'Backend access has been blocked, please contact your administrator.'
+      maintenance_backend_text_de: 'Der Backend-Zugang wurde gesperrt, bitte kontaktieren Sie ihren Administrator.'
       maintenance_frontend_update_interval: 60
       maintenance_backend_update_interval: 60
 
