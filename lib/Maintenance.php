@@ -210,7 +210,7 @@ class Maintenance
         if (true === str_contains($REQUEST_URI, 'sitemap.xml')) {
             return;
         }
-        
+
         // If YDeploy is used, do not block the request
         $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
         if (true === str_contains($REQUEST_URI, '_clear_cache/_clear_cache.php')) {
