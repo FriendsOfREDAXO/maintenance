@@ -213,7 +213,7 @@ class Maintenance
             '/sitemap.xml',
         ];
 
-        // Wartungsmodus nur für exakte Pfade ausnehmen:
+        // Exclude maintenance mode only for exact paths:
         if (in_array($REQUEST_URI, $allowedUris, true)) {
             // Wartungsmodus NICHT aktiv – Anfrage zulassen
             return;
