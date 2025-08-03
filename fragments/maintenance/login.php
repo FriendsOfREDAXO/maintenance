@@ -1,5 +1,5 @@
 <?php
-if ('password' === rex_config::get('maintenance', 'authentification_mode', '')) { ?>
+if ('password' === rex_config::get('maintenance', 'authentification_mode', '') && '' !== rex_config::get('maintenance', 'maintenance_secret', '')) { ?>
 <div class="maintenance-login">
     <form action="<?= rex_url::base() ?>" method="post">
     <label for="maintenance_secret">Access-Code</label>

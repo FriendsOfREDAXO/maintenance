@@ -58,7 +58,7 @@ maintenance_authentification_mode_none = Keine Authentifizierung
 maintenance_authentification_mode_password = 🔑 Passwort
 maintenance_authentification_mode_url = 🔗 Geheim-URL (Standard)
 
-maintenance_secret_label = Passwort
+maintenance_secret_label = Passwort / Geheim-URL-Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
 
 maintenance_redirect_frontend_to_url_label = Weiterleitung zu (optional)
@@ -97,7 +97,7 @@ maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werde
 maintenance_allowed_yrewrite_domains_label = Liste erlaubter YRewrite-Domains
 maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die nicht gesperrt werden sollen.
 
-maintenance_copy_url_title = URL kopieren
+maintenance_copy_url_title = Geheim-URL kopieren
 
 maintenance_preview_title = Vorschau
 maintenance_preview = Vorschau in neuem Fenster anzeigen

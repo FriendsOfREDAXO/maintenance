@@ -159,38 +159,40 @@ $fragment->setVar('body', $form->get(), false);
         echo $fragment->parse('core/page/section.php');
 
         /* Kopieren der URL für den Wartungsmodus */
-        $copy = '<ul class="list-group">';
-        $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-        $copy .= '<li class="list-group-item"><label for="maintenance-mode-url">REDAXO config.yml</label>';
-        $copy .= '
-        <clipboard-copy for="maintenance-mode-url" class="input-group">
-          <input id="maintenance-mode-url" type="text" value="' . $url . '" readonly class="form-control">
-          <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
-        </clipboad-copy></li>';
+        if ('URL' === rex_config::get('maintenance', 'authentification_mode', '') && '' !== rex_config::get('maintenance', 'maintenance_secret', '')) {
+            $copy = '<ul class="list-group">';
+            $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+            $copy .= '<li class="list-group-item"><label for="maintenance-mode-url">REDAXO config.yml</label>';
+            $copy .= '
+            <clipboard-copy for="maintenance-mode-url" class="input-group">
+              <input id="maintenance-mode-url" type="text" value="' . $url . '" readonly class="form-control">
+              <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+            </clipboad-copy></li>';
 
-        // Ebenfalls für alle YRewrite-Domains ausgeben
-        if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 1) {
-            foreach (rex_yrewrite::getDomains() as $key => $domain) {
-                if ('default' == $key) {
-                    continue;
+            // Ebenfalls für alle YRewrite-Domains ausgeben
+            if (rex_addon::get('yrewrite')->isAvailable() && count(rex_yrewrite::getDomains()) > 1) {
+                foreach (rex_yrewrite::getDomains() as $key => $domain) {
+                    if ('default' == $key) {
+                        continue;
+                    }
+                    $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+                    $copy .= '<li class="list-group-item"><label for="maintenance-mode-url-' . $key . '">YRewrite ' . $key . '</label>';
+                    $copy .= '
+                    <clipboard-copy for="maintenance-mode-url-' . $key . '" class="input-group">
+                      <input id="maintenance-mode-url-' . $key . '" type="text" value="' . $url . '" readonly class="form-control">
+                      <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+                    </clipboad-copy></li>';
                 }
-                $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-                $copy .= '<li class="list-group-item"><label for="maintenance-mode-url-' . $key . '">YRewrite ' . $key . '</label>';
-                $copy .= '
-                <clipboard-copy for="maintenance-mode-url-' . $key . '" class="input-group">
-                  <input id="maintenance-mode-url-' . $key . '" type="text" value="' . $url . '" readonly class="form-control">
-                  <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
-                </clipboad-copy></li>';
             }
+
+            $copy .= '</ul>';
+
+            $fragment = new rex_fragment();
+            $fragment->setVar('class', 'info', false);
+            $fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
+            $fragment->setVar('body', $copy, false);
+            echo $fragment->parse('core/page/section.php');
         }
-
-        $copy .= '</ul>';
-
-        $fragment = new rex_fragment();
-        $fragment->setVar('class', 'info', false);
-        $fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
-        $fragment->setVar('body', $copy, false);
-        echo $fragment->parse('core/page/section.php');
         ?>
     </div>
     <?php endif ?>
