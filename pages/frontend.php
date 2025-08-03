@@ -22,6 +22,16 @@ $field = $form->addTextField('maintenance_frontend_headline');
 $field->setLabel($addon->i18n('maintenance_frontend_headline_label'));
 $field->setNotice($addon->i18n('maintenance_frontend_headline_notice'));
 
+// Text für den Wartungsmodus (Englisch)
+$field = $form->addTextField('maintenance_frontend_text_en');
+$field->setLabel($addon->i18n('maintenance_frontend_text_en_label'));
+$field->setNotice($addon->i18n('maintenance_frontend_text_en_notice'));
+
+// Text für den Wartungsmodus (Deutsch)
+$field = $form->addTextField('maintenance_frontend_text_de');
+$field->setLabel($addon->i18n('maintenance_frontend_text_de_label'));
+$field->setNotice($addon->i18n('maintenance_frontend_text_de_notice'));
+
 // Automatische Aktualisierung der Seite
 $field = $form->addInputField('number', 'maintenance_frontend_update_interval');
 $field->setLabel($addon->i18n('maintenance_update_interval_field_label'));

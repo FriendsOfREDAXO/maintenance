@@ -1,5 +1,7 @@
 <?php
     $maintenanceFrontendHeadline = rex_config::get('maintenance', 'maintenance_frontend_headline', 'Maintenance / Wartung');
+    $maintenanceFrontendTextEn = rex_config::get('maintenance', 'maintenance_frontend_text_en', 'This website is temporarily unavailable.');
+    $maintenanceFrontendTextDe = rex_config::get('maintenance', 'maintenance_frontend_text_de', 'Diese Website ist vorübergehend nicht erreichbar.');
     $maintenanceFrontendUpdateIntervalNumber = rex_config::get('maintenance', 'maintenance_frontend_update_interval', 60);
 ?>
 <!doctype html>
@@ -23,8 +25,8 @@
     <div class="maintenance-container">
         <div class="maintenance-error">
             <p class="maintenance-error-title"><?= $maintenanceFrontendHeadline ?></p>
-            <p class="maintenance-error-message">This website is temporarily unavailable.</p>
-            <p class="maintenance-error-message" lang="de">Diese Website ist vorübergehend nicht erreichbar.</p>
+            <p class="maintenance-error-message"><?= $maintenanceFrontendTextEn ?></p>
+            <p class="maintenance-error-message" lang="de"><?= $maintenanceFrontendTextDe ?></p>
         </div>
         <?php
         // Subfragment announcement.php ausgeben

@@ -24,6 +24,12 @@ maintenance_mode_invalid = Invalid argument! Use "on" or "off"
 maintenance_backend_headline_label = Backend Headline  
 maintenance_backend_headline_notice = Enter any headline for the maintenance mode screen in the backend. The default headline is: "Maintenance / Wartung". 
 
+maintenance_backend_text_en_label = Backend Text (English)
+maintenance_backend_text_en_notice = Enter the English text that will be displayed to administrators during backend maintenance.
+
+maintenance_backend_text_de_label = Backend Text (German)
+maintenance_backend_text_de_notice = Enter the German text that will be displayed to administrators during backend maintenance. 
+
 maintenance_settings_backend_title = Maintenance Mode Settings for the REDAXO Backend
 
 maintenance_block_backend_label = Activate maintenance mode
@@ -37,6 +43,12 @@ maintenance_redirect_backend_to_url_notice = Specify the URL to which users will
 
 maintenance_frontend_headline_label = Frontend Headline  
 maintenance_frontend_headline_notice = Enter any headline for the maintenance mode screen in the frontend. The default headline is: "Maintenance / Wartung".
+
+maintenance_frontend_text_en_label = Frontend Text (English)
+maintenance_frontend_text_en_notice = Enter the English text that will be displayed to visitors during maintenance.
+
+maintenance_frontend_text_de_label = Frontend Text (German)
+maintenance_frontend_text_de_notice = Enter the German text that will be displayed to visitors during maintenance.
 
 maintenance_settings_frontend_title = Maintenance Mode Settings for the Website Frontend
 
