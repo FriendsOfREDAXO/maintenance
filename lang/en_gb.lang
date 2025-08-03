@@ -46,6 +46,11 @@ maintenance_block_frontend_label = Activate maintenance mode
 maintenance_block_frontend_false = 🟢 Maintenance mode deactivated
 maintenance_block_frontend_true = 🔴 Maintenance mode activated
 
+maintenance_permanent_lock_mode_label = Permanent Lock Mode
+maintenance_permanent_lock_mode_false = 🟢 Show standard maintenance page
+maintenance_permanent_lock_mode_true = 🔒 Minimal lock page (permanent)
+maintenance_permanent_lock_mode_notice = When activated, a minimal lock page without maintenance messages is displayed. Ideal for permanently locked staging sites.
+
 maintenance_block_frontend_rex_user_label = Lock out REDAXO users as well
 maintenance_block_frontend_rex_user_false = 🆗 Logged-in REDAXO users still have access
 maintenance_block_frontend_rex_user_true = 🚷 Lock out REDAXO users as well
@@ -93,3 +98,11 @@ maintenance_allowed_domains_notice = Enter domains that should not be blocked.
 
 maintenance_allowed_yrewrite_domains_label = List of allowed YRewrite domains
 maintenance_allowed_yrewrite_domains_notice = Enter YRewrite domains that should not be blocked.
+
+maintenance_editor_label = Editor
+maintenance_editor_notice = Define editor using attributes for the above "Maintenance Announcement" text field, e.g., <code>class="form-control redactor-editor--default"</code> for Redactor, suitable attributes also for TinyMCE, CKEditor, etc.
+
+maintenance_copy_url_title = Copy URL
+
+maintenance_preview_title = Preview
+maintenance_preview = Show preview in new window

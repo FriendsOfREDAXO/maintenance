@@ -46,6 +46,11 @@ maintenance_block_frontend_label = Wartungsmodus aktivieren
 maintenance_block_frontend_false = 🟢 Wartungsmodus deaktiviert
 maintenance_block_frontend_true = 🔴 Wartungsmodus aktiviert
 
+maintenance_permanent_lock_mode_label = Permanent-Sperrmodus
+maintenance_permanent_lock_mode_false = 🟢 Standard-Wartungsseite anzeigen
+maintenance_permanent_lock_mode_true = 🔒 Minimale Sperrseite (permanent)
+maintenance_permanent_lock_mode_notice = Wenn aktiviert, wird eine minimale Sperrseite ohne Wartungshinweise angezeigt. Ideal für permanent gesperrte Staging-Seiten.
+
 maintenance_block_frontend_rex_user_label = REDAXO-Benutzer zusätzlich ausperren
 maintenance_block_frontend_rex_user_false = 🆗 Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
 maintenance_block_frontend_rex_user_rex_user = 🚷 Auch REDAXO-Benutzer ausperren

@@ -35,6 +35,14 @@ $select = $field->getSelect();
 $select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
 $select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
 
+// Permanent lock mode option - for all users available
+$field = $form->addSelectField('permanent_lock_mode');
+$field->setLabel($addon->i18n('maintenance_permanent_lock_mode_label'));
+$field->setNotice($addon->i18n('maintenance_permanent_lock_mode_notice'));
+$select = $field->getSelect();
+$select->addOption($addon->i18n('maintenance_permanent_lock_mode_false'), 0);
+$select->addOption($addon->i18n('maintenance_permanent_lock_mode_true'), 1);
+
 // Passwort zum Umgehen des Wartungsmodus - für alle Benutzer verfügbar
 $field = $form->addTextField('maintenance_secret');
 $field->setLabel($addon->i18n('maintenance_secret_label'));

@@ -51,6 +51,7 @@ default_config:
       block_frontend: 0
       block_frontend_rex_user: 0
       block_backend: 0
+      permanent_lock_mode: 0  # 0 = normal maintenance, 1 = permanent lock with minimal content
       redirect_frontend_to_url: '' # `https://example.com/maintenance.html`
       redirect_backend_to_url: '' # `https://example.com/maintenance.html`
       secret: ''

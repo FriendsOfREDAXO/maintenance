@@ -228,6 +228,7 @@ class Maintenance
         // Block everything that has not been allowed so far as chosen in the settings
         $redirect_url = (string) self::getConfig('redirect_frontend_to_url', '');
         $responsecode = (int) self::getConfig('http_response_code', 503);
+        $permanent_lock_mode = (bool) self::getConfig('permanent_lock_mode', false);
 
         $mpage = new rex_fragment();
         if ('' !== $redirect_url) {
@@ -236,7 +237,10 @@ class Maintenance
         }
 
         header('HTTP/1.1 ' . $responsecode);
-        exit($mpage->parse('maintenance/frontend.php'));
+        
+        // Use minimal permanent fragment or regular maintenance fragment
+        $fragment = $permanent_lock_mode ? 'maintenance/permanent.php' : 'maintenance/frontend.php';
+        exit($mpage->parse($fragment));
     }
 
     /**
