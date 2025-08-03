@@ -215,7 +215,7 @@ class Maintenance
 
         // Exclude maintenance mode only for exact paths:
         if (in_array($REQUEST_URI, $allowedUris, true)) {
-            // Wartungsmodus NICHT aktiv – Anfrage zulassen
+            // Maintenance mode NOT active – allow request
             return;
         }
 
