@@ -58,7 +58,7 @@ maintenance_authentification_mode_none = No Authentication
 maintenance_authentification_mode_password = 🔑 Password
 maintenance_authentification_mode_url = 🔗 Secret URL (default)
 
-maintenance_secret_label = Password
+maintenance_secret_label = Password / Secret URL Password
 maintenance_secret_notice = Enter any text here (password, passphrase, e.g., <code>{0}</code>) that should be used to access the site via secret URL or password entry.
 
 maintenance_redirect_frontend_to_url_label = Redirect to (optional)
@@ -93,3 +93,8 @@ maintenance_allowed_domains_notice = Enter domains that should not be blocked.
 
 maintenance_allowed_yrewrite_domains_label = List of allowed YRewrite domains
 maintenance_allowed_yrewrite_domains_notice = Enter YRewrite domains that should not be blocked.
+
+maintenance_copy_url_title = Copy Secret URL
+
+maintenance_preview_title = Preview
+maintenance_preview = Show preview in new window
