@@ -185,7 +185,8 @@ class Maintenance
     private static function is2FARequiredAndNotCompleted(): bool
     {
         // Check if 2factor_auth addon is available and active
-        if (!rex_addon::get('2factor_auth')->isAvailable()) {
+        // Check if 2factor_auth addon exists and is available
+        if (!rex_addon::exists('2factor_auth') || !rex_addon::get('2factor_auth')->isAvailable()) {
             return false;
         }
 
