@@ -240,7 +240,7 @@ class Maintenance
 
         // If the sitemap is requested, do not block the request
         $REQUEST_URI = rex_server('REQUEST_URI', 'string', '');
-      
+
         $allowedUris = [
             '/_clear_cache/_clear_cache.php',
             '/sitemap.xml',
