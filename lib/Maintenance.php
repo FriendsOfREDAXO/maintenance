@@ -181,7 +181,6 @@ class Maintenance
 
     /**
      * Checks if 2FA is required and not completed.
-     * @api
      */
     private static function is2FARequiredAndNotCompleted(): bool
     {
