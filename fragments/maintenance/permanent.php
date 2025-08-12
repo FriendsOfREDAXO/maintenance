@@ -1,6 +1,6 @@
 <?php
     $responsecode = (int) rex_config::get('maintenance', 'http_response_code', 503);
-    
+
     // For permanent lock mode, we provide minimal content to avoid revealing CMS details
     // The HTTP status code should already be set before this fragment is called
 ?>
@@ -47,11 +47,11 @@
 <body>
     <div class="error-container">
         <h1 class="error-code"><?= $responsecode ?></h1>
-        <?php if ($responsecode === 403): ?>
+        <?php if (403 === $responsecode): ?>
             <p class="error-message">Access Forbidden</p>
         <?php else: ?>
             <p class="error-message">Service Unavailable</p>
-        <?php endif; ?>
+        <?php endif ?>
     </div>
 </body>
 </html>

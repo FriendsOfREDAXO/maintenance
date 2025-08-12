@@ -239,7 +239,7 @@ class Maintenance
         }
 
         header('HTTP/1.1 ' . $responsecode);
-        
+
         // Use minimal permanent fragment or regular maintenance fragment
         $fragment = $permanent_lock_mode ? 'maintenance/permanent.php' : 'maintenance/frontend.php';
         exit($mpage->parse($fragment));
