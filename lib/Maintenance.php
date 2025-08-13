@@ -2,6 +2,7 @@
 
 namespace FriendsOfREDAXO\Maintenance;
 
+use FriendsOfREDAXO\TwoFactorAuth\one_time_password;
 use rex;
 use rex_addon;
 use rex_article;
@@ -14,6 +15,7 @@ use rex_login;
 use rex_response;
 use rex_user;
 use rex_yrewrite;
+use Throwable;
 
 use function in_array;
 
@@ -165,9 +167,40 @@ class Maintenance
         // Check if the REDAXO user should be blocked
         $block_frontend_rex_user = (bool) self::getConfig('block_frontend_rex_user', false);
 
-        // If the user is logged in and should not be blocked, allow access
+        // If the user is logged in and should not be blocked, check 2FA requirements
         if ($user instanceof rex_user && !$block_frontend_rex_user) {
+            // Check if 2factor_auth addon is active and user has 2FA enabled
+            if (self::is2FARequiredAndNotCompleted()) {
+                return false;
+            }
             return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if 2FA is required and not completed.
+     */
+    private static function is2FARequiredAndNotCompleted(): bool
+    {
+        // Check if 2factor_auth addon is available and active
+        // Check if 2factor_auth addon exists and is available
+        if (!rex_addon::exists('2factor_auth') || !rex_addon::get('2factor_auth')->isAvailable()) {
+            return false;
+        }
+
+        // Check if the user has 2FA enabled and if OTP verification is required
+        try {
+            $otp = one_time_password::getInstance();
+
+            // If 2FA is enabled for the user but not verified, deny access
+            if ($otp->isEnabled() && !$otp->isVerified()) {
+                return true;
+            }
+        } catch (Throwable $e) {
+            // If there's any error with 2FA checking, allow access (fail-safe)
+            return false;
         }
 
         return false;
