@@ -24,6 +24,12 @@ maintenance_mode_invalid = Ungültiges Argument! Benutze „on“ oder „off“
 maintenance_backend_headline_label = Backend-Überschrift  
 maintenance_backend_headline_notice = Geben Sie eine beliebige Überschrift für die Wartungsmodusmaske im Backend ein. Die Standardüberschrift lautet: "Maintenance / Wartung".
 
+maintenance_backend_text_en_label = Backend-Text (Englisch)
+maintenance_backend_text_en_notice = Geben Sie den englischen Text ein, der Administratoren während der Backend-Wartung angezeigt wird.
+
+maintenance_backend_text_de_label = Backend-Text (Deutsch)
+maintenance_backend_text_de_notice = Geben Sie den deutschen Text ein, der Administratoren während der Backend-Wartung angezeigt wird.
+
 maintenance_settings_backend_title = Wartungsmodus-Einstellungen für das REDAXO-Backend
 
 maintenance_block_backend_label = Wartungsmodus aktivieren
@@ -37,6 +43,12 @@ maintenance_redirect_backend_to_url_notice = URL angeben, zu der die Benutzer we
 
 maintenance_frontend_headline_label = Frontend-Überschrift  
 maintenance_frontend_headline_notice = Geben Sie eine beliebige Überschrift für die Wartungsmodusmaske im Frontend ein. Die Standardüberschrift lautet: "Maintenance / Wartung".  
+
+maintenance_frontend_text_en_label = Frontend-Text (Englisch)
+maintenance_frontend_text_en_notice = Geben Sie den englischen Text ein, der Besuchern während der Wartung angezeigt wird.
+
+maintenance_frontend_text_de_label = Frontend-Text (Deutsch)
+maintenance_frontend_text_de_notice = Geben Sie den deutschen Text ein, der Besuchern während der Wartung angezeigt wird.  
 
 maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
 
