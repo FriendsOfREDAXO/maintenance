@@ -1,7 +1,7 @@
 <?php
     $maintenanceBackendHeadline = rex_config::get('maintenance', 'maintenance_backend_headline', 'Maintenance / Wartung');
-    $maintenanceBackendTextEn = rex_config::get('maintenance', 'maintenance_backend_text_en', 'Backend access has been blocked, please contact your administrator.');
-    $maintenanceBackendTextDe = rex_config::get('maintenance', 'maintenance_backend_text_de', 'Der Backend-Zugang wurde gesperrt, bitte kontaktieren Sie ihren Administrator.');
+    $maintenanceBackendTextEn = rex_config::get('maintenance', 'maintenance_backend_text_en', rex_i18n::msg('maintenance_backend_default_text_en'));
+    $maintenanceBackendTextDe = rex_config::get('maintenance', 'maintenance_backend_text_de', rex_i18n::msg('maintenance_backend_default_text_de'));
     $maintenanceBackendUpdateIntervalNumber = rex_config::get('maintenance', 'maintenance_backend_update_interval', 60);
 ?>
 <!doctype html>

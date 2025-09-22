@@ -1,7 +1,7 @@
 <?php
     $maintenanceFrontendHeadline = rex_config::get('maintenance', 'maintenance_frontend_headline', 'Maintenance / Wartung');
-    $maintenanceFrontendTextEn = rex_config::get('maintenance', 'maintenance_frontend_text_en', 'This website is temporarily unavailable.');
-    $maintenanceFrontendTextDe = rex_config::get('maintenance', 'maintenance_frontend_text_de', 'Diese Website ist vorübergehend nicht erreichbar.');
+    $maintenanceFrontendTextEn = rex_config::get('maintenance', 'maintenance_frontend_text_en', rex_i18n::msg('maintenance_frontend_default_text_en'));
+    $maintenanceFrontendTextDe = rex_config::get('maintenance', 'maintenance_frontend_text_de', rex_i18n::msg('maintenance_frontend_default_text_de'));
     $maintenanceFrontendUpdateIntervalNumber = rex_config::get('maintenance', 'maintenance_frontend_update_interval', 60);
 ?>
 <!doctype html>

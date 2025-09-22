@@ -50,6 +50,12 @@ maintenance_frontend_text_en_notice = Geben Sie den englischen Text ein, der Bes
 maintenance_frontend_text_de_label = Frontend-Text (Deutsch)
 maintenance_frontend_text_de_notice = Geben Sie den deutschen Text ein, der Besuchern während der Wartung angezeigt wird.  
 
+maintenance_frontend_default_text_en = This website is temporarily unavailable.
+maintenance_frontend_default_text_de = Diese Website ist vorübergehend nicht erreichbar.
+
+maintenance_backend_default_text_en = Backend access has been blocked, please contact your administrator.
+maintenance_backend_default_text_de = Der Backend-Zugang wurde gesperrt, bitte kontaktieren Sie ihren Administrator.
+
 maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
 
 maintenance_general_title = Allgemein
