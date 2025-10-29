@@ -87,7 +87,7 @@ $fragment->setVar('body', $form->get(), false);
     </div>
 </div>
 
-<script type="text/javascript">
+<script nonce="<?= rex_response::getNonce() ?>">
 $(document).on('rex:ready', function() {
     // Funktion zum Hinzufügen einer IP-Adresse zum Whitelist-Feld
     function addIpToWhitelist(ip) {
