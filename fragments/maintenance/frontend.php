@@ -66,8 +66,10 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
         }
         
         .maintenance-container {
-            max-width: 600px;
+            max-width: 450px;
+            width: 100%;
             padding: 2rem;
+            padding-top: 4rem;
             background-color: var(--card-bg);
             border-radius: 8px;
             box-shadow: var(--shadow);
@@ -333,6 +335,7 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
             .maintenance-container {
                 width: 90%;
                 padding: 1.5rem;
+                padding-top: 3.5rem;
             }
             
             .maintenance-title {
@@ -340,27 +343,18 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
             }
             
             .language-switcher {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin-bottom: 1rem;
-                text-align: center;
+                top: 1rem;
+                right: 1rem;
             }
             
             .language-button {
-                min-width: 140px;
+                min-width: 120px;
                 font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
             }
             
             .language-menu {
-                right: auto;
-                left: 50%;
-                transform: translateX(-50%) translateY(-10px);
-                min-width: 140px;
-            }
-            
-            .language-menu.active {
-                transform: translateX(-50%) translateY(0);
+                min-width: 120px;
             }
         }
     </style>
