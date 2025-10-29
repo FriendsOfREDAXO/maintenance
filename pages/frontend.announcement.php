@@ -59,7 +59,7 @@ $fragment->setVar('body', $form->get(), false);
 use FriendsOfREDAXO\Maintenance\Maintenance;
 Maintenance::showAnnouncement();
 ?>';
-        
+
         $info = '<div class="alert alert-info">';
         $info .= '<h4><i class="rex-icon fa-info-circle"></i> ' . $addon->i18n('maintenance_announcement_info_title') . '</h4>';
         $info .= '<p>' . $addon->i18n('maintenance_announcement_info_text') . '</p>';

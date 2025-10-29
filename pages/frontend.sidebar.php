@@ -78,7 +78,7 @@ if ('maintenance/frontend/advanced' === $currentPage) {
         $addIp = '<button class="btn btn-default btn-block" data-add-ip="' . htmlspecialchars($currentIp) . '">';
         $addIp .= '<i class="rex-icon fa-plus"></i> ' . $addon->i18n('maintenance_add_my_ip') . ' (' . htmlspecialchars($currentIp) . ')';
         $addIp .= '</button>';
-        
+
         $fragment = new rex_fragment();
         $fragment->setVar('class', 'info', false);
         $fragment->setVar('title', $addon->i18n('maintenance_my_ip_title'), false);
