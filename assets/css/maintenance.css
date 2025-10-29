@@ -22,7 +22,8 @@
 	75% { transform: rotate(3deg); }
 }
 
-.block_frontend .label-danger {
+/* Target the F badge in the navigation when frontend maintenance is active */
+#rex-page-maintenance .label-danger {
 	animation: wobble 3s ease-in-out infinite;
 	display: inline-block;
 }
