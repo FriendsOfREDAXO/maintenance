@@ -51,17 +51,22 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
     $addon->removeConfig('secret');
 }
 
+// Migration von 'authentification_mode' zu 'authentication_mode' (Rechtschreibkorrektur)
+// Prüfe zuerst, ob die alte falsche Schreibweise existiert
+if ($addon->hasConfig('authentification_mode')) {
+    // Wenn die neue korrekte Schreibweise noch nicht existiert, übernehme den Wert
+    if (!$addon->hasConfig('authentication_mode')) {
+        $addon->setConfig('authentication_mode', $addon->getConfig('authentification_mode'));
+    }
+    // Entferne in jedem Fall die alte falsche Schreibweise
+    $addon->removeConfig('authentification_mode');
+}
+
 // Leerer String ('') und 'URL' werden beide als gültige URL-Authentifizierung betrachtet
 $authentication_mode = $addon->getConfig('authentication_mode', '');
 if (!in_array($authentication_mode, ['URL', 'password'], true)) {
     // Wenn kein gültiger Modus gesetzt ist, standardmäßig auf URL setzen
     $addon->setConfig('authentication_mode', 'URL');
-}
-
-// Migration von 'authentification_mode' zu 'authentication_mode' (Rechtschreibkorrektur)
-if ($addon->hasConfig('authentification_mode') && !$addon->hasConfig('authentication_mode')) {
-    $addon->setConfig('authentication_mode', $addon->getConfig('authentification_mode'));
-    $addon->removeConfig('authentification_mode');
 }
 
 // Überprüfen, ob ein maintenance_secret existiert
