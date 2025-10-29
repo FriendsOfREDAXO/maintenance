@@ -1,7 +1,8 @@
 // Addon-Package
 
-maintenance_title = Wartungsmodus
+maintenance_title = Wartung
 maintenance_frontend_title = Website-Frontend
+maintenance_frontend_general_title = Wartung
 maintenance_backend_title = REDAXO-Backend
 maintenance_docs_title = Hilfe
 
@@ -10,59 +11,65 @@ maintenance_update_interval_field_notice = Geben Sie die Sekunden ein, nach dene
 
 // Console-Commands
 
-maintenance_mode_command_description = Schaltet den Wartungsmodus ein, oder aus
-maintenance_mode_command_state_description = Wartungsmodus einstellen: ein oder aus
+maintenance_mode_command_description = Schaltet die Wartung ein, oder aus
+maintenance_mode_command_state_description = Wartung einstellen: ein oder aus
 
-maintenance_mode_activated = Wartungsmodus Aktiviert
-maintenance_mode_deactivated = Wartungsmodus deaktiviert
-maintenance_mode_already_activated = Der Wartungsmodus ist bereits aktiviert
-maintenance_mode_already_deactivated = Der Wartungsmodus ist bereits deaktiviert
+maintenance_mode_activated = Wartung Aktiviert
+maintenance_mode_deactivated = Wartung deaktiviert
+maintenance_mode_already_activated = Die Wartung ist bereits aktiviert
+maintenance_mode_already_deactivated = Die Wartung ist bereits deaktiviert
 maintenance_mode_invalid = Ungültiges Argument! Benutze „on“ oder „off“
 
 // Einstellungsseite Backend
 
 maintenance_backend_headline_label = Backend-Überschrift  
-maintenance_backend_headline_notice = Geben Sie eine beliebige Überschrift für die Wartungsmodusmaske im Backend ein. Die Standardüberschrift lautet: "Maintenance / Wartung".
+maintenance_backend_headline_notice = Geben Sie eine beliebige Überschrift für die Wartungsmaske im Backend ein. Die Standardüberschrift lautet: "Maintenance / Wartung".
 
-maintenance_settings_backend_title = Wartungsmodus-Einstellungen für das REDAXO-Backend
+maintenance_settings_backend_title = Wartungs-Einstellungen für das REDAXO-Backend
 
-maintenance_block_backend_label = Wartungsmodus aktivieren
-maintenance_block_backend_true = 🔴 Wartungsmodus aktiviert
-maintenance_block_backend_false = 🟢 Wartungsmodus deaktiviert
+maintenance_block_backend_label = Wartung aktivieren
+maintenance_block_backend_true = Wartung aktiviert
+maintenance_block_backend_false = Wartung deaktiviert
 
 maintenance_redirect_backend_to_url_label = Weiterleitung zu (optional)
-maintenance_redirect_backend_to_url_notice = URL angeben, zu der die Benutzer weitergeleitet werden, wenn das REDAXO-Backend im Wartungsmodus ist.
+maintenance_redirect_backend_to_url_notice = URL angeben, zu der die Benutzer weitergeleitet werden, wenn das REDAXO-Backend in Wartung ist.
 
 // Einstellungsseite Frontend
 
 maintenance_frontend_headline_label = Frontend-Überschrift  
-maintenance_frontend_headline_notice = Geben Sie eine beliebige Überschrift für die Wartungsmodusmaske im Frontend ein. Die Standardüberschrift lautet: "Maintenance / Wartung".  
+maintenance_frontend_headline_notice = Geben Sie eine beliebige Überschrift für die Wartungsmaske im Frontend ein. Die Standardüberschrift lautet: "Maintenance / Wartung".  
 
-maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Website-Frontend
+maintenance_text_en_label = Wartungstext (Englisch)
+maintenance_text_en_notice = Text, der Besuchern auf Englisch angezeigt wird.
+
+maintenance_text_de_label = Wartungstext (Deutsch)
+maintenance_text_de_notice = Text, der Besuchern auf Deutsch angezeigt wird.
+
+maintenance_settings_frontend_title = Wartungs-Einstellungen für das Website-Frontend
 
 maintenance_general_title = Allgemein
 
-maintenance_block_frontend_label = Wartungsmodus aktivieren
-maintenance_block_frontend_false = 🟢 Wartungsmodus deaktiviert
-maintenance_block_frontend_true = 🔴 Wartungsmodus aktiviert
+maintenance_block_frontend_label = Wartung aktivieren
+maintenance_block_frontend_false = Wartung deaktiviert
+maintenance_block_frontend_true = Wartung aktiviert
 
 maintenance_block_frontend_rex_user_label = REDAXO-Benutzer zusätzlich ausperren
-maintenance_block_frontend_rex_user_false = 🆗 Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
-maintenance_block_frontend_rex_user_rex_user = 🚷 Auch REDAXO-Benutzer ausperren
+maintenance_block_frontend_rex_user_false = Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
+maintenance_block_frontend_rex_user_rex_user = Auch REDAXO-Benutzer ausperren
 maintenance_block_frontend_rex_user_notice = Wenn aktiviert, haben nur Administratoren und Personen mit Password oder Link Zugriff auf das Frontend.
 
 maintenance_authentification_mode_label = Authentifizierung
 maintenance_authentification_mode_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
 
 maintenance_authentification_mode_none = Keine Authentifizierung
-maintenance_authentification_mode_password = 🔑 Passwort
-maintenance_authentification_mode_url = 🔗 Geheim-URL (Standard)
+maintenance_authentification_mode_password = Passwort
+maintenance_authentification_mode_url = Geheim-URL (Standard)
 
 maintenance_secret_label = Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
 
-maintenance_redirect_frontend_to_url_label = Weiterleitung zu (optional)
-maintenance_redirect_frontend_to_url_notice = Nur bei Geheim-URL: URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website im Wartungsmodus ist.
+maintenance_redirect_frontend_to_url = Weiterleitungs-URL
+maintenance_redirect_frontend_to_url_notice = Nur bei Geheim-URL: URL angeben, zu der die Besucher weitergeleitet werden, wenn die Website in Wartung ist.
 
 maintenance_block_frontend_session_label = Eingeloggte User ausperren
 maintenance_block_frontend_session_notice =
@@ -78,10 +85,12 @@ maintenance_editor_label = Editor
 maintenance_editor_notice = Editor anhand Attribute für das obige Textfeld "Ankündigung der Wartungsarbeiten" festlegen, z.B. <code>class="form-control redactor-editor--default"</code> für Redactor, passende Attribute auch für TinyMCE, CKEditor, etc.
 
 maintenance_announcement_label = Text
-maintenance_announcement_notice = Besucher*innen mitteilen, wann das Wartungsfenster den Wartungsmodus gesetzt wird. Ausgabe über <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
+maintenance_announcement_title = Wartungsankündigung
+maintenance_announcement_notice = Besucher*innen mitteilen, wann das Wartungsfenster die Wartung gesetzt wird. Ausgabe über <code>\FriendsOfRedaxo\Maintenance\Maintenance::showAnnouncement()</code>.
 
 maintenance_announcement_start_date_label = Startdatum
-maintenance_announcement_start_date_notice = Datum, <strong>ab wann die Ankündigung gezeigt werden soll</strong>. Nicht, ab wann die Website in den Wartungsmodus wechseln soll. Aktuelle Serverzeit: <code>{0}</code>.
+maintenance_announcement_start_date = Ankündigung ab
+maintenance_announcement_start_date_notice = Datum, <strong>ab wann die Ankündigung gezeigt werden soll</strong>. Nicht, ab wann die Website in Wartung wechseln soll. Aktuelle Serverzeit: <code>{0}</code>.
 
 maintenance_announcement_end_date_label = Enddatum
 maintenance_announcement_end_date_notice = Datum, <strong>bis wann die Ankündigung gezeigt werden soll</strong>. Aktuelle Serverzeit: <code>{0}</code>.
@@ -89,7 +98,8 @@ maintenance_announcement_end_date_notice = Datum, <strong>bis wann die Ankündig
 maintenance_allowed_access_title = Ausnahmen
 
 maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
-maintenance_allowed_ips_notice = IP-Adresse(n) ein, die weiterhin Zugriff auf das Frontend haben soll(en). Deine aktuelle IP-Adresse lautet <code>{0}</code>, die des Servers lautet <code>{1}</code>.
+maintenance_allowed_ips_notice = IP-Adresse(n) eingeben, die weiterhin Zugriff auf das Frontend haben soll(en).
+maintenance_add_ip_hint = hinzufügen
 
 maintenance_allowed_domains_label = Liste erlaubter Domains
 maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werden sollen.
@@ -101,3 +111,41 @@ maintenance_copy_url_title = URL kopieren
 
 maintenance_preview_title = Vorschau
 maintenance_preview = Vorschau in neuem Fenster anzeigen
+
+// Domain-Verwaltung
+
+maintenance_domains_title = YRewrite-Domains
+maintenance_domains_management = Domain-Verwaltung
+maintenance_domain = Domain
+maintenance_maintenance_active = Wartung
+maintenance_domain_inactive = Inaktiv
+maintenance_domain_active = Aktiv
+maintenance_lock_all_domains = Alle Domains sperren
+maintenance_domains_notice = Hier können Sie die Wartung für einzelne YRewrite-Domains aktivieren oder deaktivieren. Diese Einstellung überschreibt die allgemeine Frontend-Einstellung für die jeweilige Domain.
+maintenance_yrewrite_not_available = Das YRewrite-AddOn ist nicht installiert oder aktiviert. Die Domain-Verwaltung ist nicht verfügbar.
+maintenance_settings_saved = Die Einstellungen wurden gespeichert.
+maintenance_yes = Ja
+maintenance_no = Nein
+maintenance_save = Speichern
+
+// Erweiterte Einstellungen
+
+maintenance_advanced_title = Einstellungen
+maintenance_settings_title = Einstellungen
+maintenance_advanced_settings_title = Erweiterte Einstellungen
+maintenance_editor_settings_title = Editor-Einstellungen
+maintenance_access_control_title = Zugriffskontrolle
+maintenance_authentication_title = Authentifizierung
+maintenance_http_settings_title = HTTP-Einstellungen
+maintenance_admin_only = Nur für Administratoren verfügbar
+maintenance_announcement_settings = Ankündigung
+maintenance_announcement_info_title = Verwendung
+maintenance_announcement_info_text = Die Wartungsankündigung kann im Template mit der folgenden Funktion ausgegeben werden
+maintenance_announcement_usage = Code-Beispiel
+
+// Quick Links
+
+maintenance_quick_links = Schnellzugriff
+maintenance_advanced_settings = Erweiterte Einstellungen
+maintenance_domain_settings = Domain-Verwaltung
+maintenance_bypass_url_default = Bypass-URL (Standard-Domain)

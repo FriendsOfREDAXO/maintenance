@@ -122,6 +122,36 @@ class Maintenance
     }
 
     /**
+     * Checks if the current YRewrite domain is in maintenance mode.
+     * @api
+     */
+    public static function isDomainInMaintenance(): bool
+    {
+        // Check if all domains are locked globally
+        $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
+        if ($allDomainsLocked) {
+            return true;
+        }
+
+        // Check individual domain status
+        if (!rex_addon::get('yrewrite')->isAvailable()) {
+            return false;
+        }
+
+        if ($ydomain = rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
+            $domainName = $ydomain->getName();
+            $domainStatus = (array) self::getConfig('domain_status', []);
+            
+            // Check if this specific domain is in maintenance mode
+            if (isset($domainStatus[$domainName]) && $domainStatus[$domainName]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Checks if the maintenance secret is valid.
      * @api
      */
@@ -212,6 +242,14 @@ class Maintenance
     public static function checkFrontend(): void
     {
         rex_login::startSession();
+
+        // Check if the current domain is in maintenance mode (new domain-based logic)
+        $domainInMaintenance = self::isDomainInMaintenance();
+        
+        // If domain is NOT in maintenance, allow access
+        if (!$domainInMaintenance) {
+            return;
+        }
 
         // If the IP address is allowed, do not block the request
         if (self::isIpAllowed()) {
@@ -307,6 +345,17 @@ class Maintenance
         if (self::getBoolConfig('block_frontend', false)) {
             $page['title'] .= ' <span class="label label-danger pull-right">F</span>';
             $page['icon'] .= ' fa-toggle-on block_frontend';
+        }
+
+        // Check for domain-based maintenance
+        $domainStatus = (array) self::getConfig('domain_status', []);
+        $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
+        $activeDomains = array_filter($domainStatus);
+        
+        if ($allDomainsLocked || !empty($activeDomains)) {
+            $count = $allDomainsLocked ? 'All' : count($activeDomains);
+            $page['title'] .= ' <span class="label label-warning pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
+            $page['icon'] .= ' fa-sitemap';
         }
 
         self::getAddOn()->setProperty('page', $page);

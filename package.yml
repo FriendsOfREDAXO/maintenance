@@ -15,10 +15,27 @@ page:
             title: translate:maintenance_frontend_title
             icon: rex-icon fa-user
             perm: maintenance[frontend]
+            subpages:
+                index:
+                    title: translate:maintenance_frontend_general_title
+                    icon: rex-icon fa-sliders
+                    perm: maintenance[frontend]
+                advanced:
+                    title: translate:maintenance_settings_title
+                    icon: rex-icon fa-cog
+                    perm: admin[]
+                announcement:
+                    title: translate:maintenance_announcement_title
+                    icon: rex-icon fa-bullhorn
+                    perm: admin[]
         backend:
             title: translate:maintenance_backend_title
             icon: rex-icon fa-user-gear
             perm: admin[]
+        domains:
+            title: translate:maintenance_domains_title
+            icon: rex-icon fa-sitemap
+            perm: maintenance[frontend]
         preview:
             title: translate:maintenance_preview_title
             icon: rex-icon fa-eye
@@ -47,6 +64,7 @@ console_commands:
 default_config:
       http_response_code: 503 # 503, 403
       allowed_ips: ''
+      allowed_yrewrite_domains: ''
       authentification_mode: 'URL'  # `URL`, `password`
       block_frontend: 0
       block_frontend_rex_user: 0
@@ -54,11 +72,15 @@ default_config:
       redirect_frontend_to_url: '' # `https://example.com/maintenance.html`
       redirect_backend_to_url: '' # `https://example.com/maintenance.html`
       secret: ''
-      editor: 'class="form-control redactor-editor--default"'
+      editor: 'class="form-control cke5-editor" data-profile="default"'
       maintenance_frontend_headline: 'Maintenance / Wartung'
+      maintenance_text_en: 'This website is temporarily unavailable.'
+      maintenance_text_de: 'Diese Website ist vorübergehend nicht erreichbar.'
       maintenance_backend_headline: 'Maintenance / Wartung'
       maintenance_frontend_update_interval: 60
       maintenance_backend_update_interval: 60
+      domain_status: []
+      all_domains_locked: false
 
 installer_ignore:
     - .git

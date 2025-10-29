@@ -18,7 +18,13 @@ if (rex::isSetup()) {
 rex_extension::register('PACKAGES_INCLUDED', static function () {
     $addon = rex_addon::get('maintenance');
 
-    if (rex::isFrontend() && (bool) $addon->getConfig('block_frontend')) {
+    // Check domain-based maintenance or global frontend maintenance
+    $domainInMaintenance = false;
+    if (rex::isFrontend() && rex_addon::get('yrewrite')->isAvailable()) {
+        $domainInMaintenance = Maintenance::isDomainInMaintenance();
+    }
+
+    if (rex::isFrontend() && ((bool) $addon->getConfig('block_frontend') || $domainInMaintenance)) {
         Maintenance::checkFrontend();
     }
     if (rex::isBackend() && (bool) $addon->getConfig('block_backend')) {
@@ -32,8 +38,11 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
         rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
+        rex_view::addCssFile($addon->getAssetsUrl('css/maintenance-icons.css'));
 
-        if ('maintenance/frontend' === rex_be_controller::getCurrentPage()) {
+        if ('maintenance/frontend' === rex_be_controller::getCurrentPage() 
+            || 'maintenance/frontend/index' === rex_be_controller::getCurrentPage()
+            || 'maintenance/frontend/announcement' === rex_be_controller::getCurrentPage()) {
             rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
                 $suchmuster = 'class="###maintenance-settings-editor###"';
                 $ersetzen = (string) rex_config::get('maintenance', 'editor'); // @phpstan-ignore-line

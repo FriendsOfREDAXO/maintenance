@@ -1,0 +1,97 @@
+/**
+ * Maintenance AddOn - Icon Styles
+ * Font Awesome Icons als Ersatz für Emojis
+ */
+
+/* Select-Optionen mit Icons */
+.rex-page-maintenance select option[value="1"] {
+    font-weight: bold;
+}
+
+/* Status-Indikatoren für aktivierte/deaktivierte Zustände */
+.maintenance-status-active::before {
+    font-family: 'FontAwesome';
+    content: '\f06d'; /* fa-fire */
+    color: #d9534f;
+    margin-right: 5px;
+}
+
+.maintenance-status-inactive::before {
+    font-family: 'FontAwesome';
+    content: '\f058'; /* fa-check-circle */
+    color: #5cb85c;
+    margin-right: 5px;
+}
+
+.maintenance-status-ok::before {
+    font-family: 'FontAwesome';
+    content: '\f00c'; /* fa-check */
+    color: #5cb85c;
+    margin-right: 5px;
+}
+
+.maintenance-status-blocked::before {
+    font-family: 'FontAwesome';
+    content: '\f05e'; /* fa-ban */
+    color: #d9534f;
+    margin-right: 5px;
+}
+
+/* Icon für Passwort-Authentifizierung */
+.maintenance-auth-password::before {
+    font-family: 'FontAwesome';
+    content: '\f084'; /* fa-key */
+    margin-right: 5px;
+}
+
+/* Icon für URL-Authentifizierung */
+.maintenance-auth-url::before {
+    font-family: 'FontAwesome';
+    content: '\f0c1'; /* fa-link */
+    margin-right: 5px;
+}
+
+/* Wartungsmodus Backend Labels mit Icons versehen */
+.rex-page-maintenance .form-group label[for*="block_backend"] + .rex-select-style option:first-child::before,
+.rex-page-maintenance .form-group label[for*="block_frontend"] + .rex-select-style option:first-child::before {
+    font-family: 'FontAwesome';
+    content: '\f058 '; /* fa-check-circle (grün) */
+}
+
+.rex-page-maintenance .form-group label[for*="block_backend"] + .rex-select-style option:last-child::before,
+.rex-page-maintenance .form-group label[for*="block_frontend"] + .rex-select-style option:last-child::before {
+    font-family: 'FontAwesome';
+    content: '\f06d '; /* fa-fire (rot) */
+}
+
+/* Bootstrap Select Pills für bessere Übersichtlichkeit */
+.maintenance-select-pill {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 85%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.maintenance-select-pill.active {
+    background-color: #d9534f;
+    color: white;
+}
+
+.maintenance-select-pill.inactive {
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Domain-Tabelle Styling */
+.rex-page-maintenance table.table td {
+    vertical-align: middle;
+}
+
+.rex-page-maintenance table.table .text-muted {
+    font-size: 0.9em;
+}

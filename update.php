@@ -63,3 +63,31 @@ if (!$addon->hasConfig('maintenance_secret') || '' === $addon->getConfig('mainte
     // Falls kein Secret vorhanden, ein neues generieren
     $addon->setConfig('maintenance_secret', bin2hex(random_bytes(16)));
 }
+
+// Migration der alten allowed_yrewrite_domains zu neuem domain_status System
+if ($addon->hasConfig('allowed_yrewrite_domains') && !$addon->hasConfig('domain_status')) {
+    $oldAllowedDomains = (string) $addon->getConfig('allowed_yrewrite_domains', '');
+    
+    if ('' !== $oldAllowedDomains && rex_addon::get('yrewrite')->isAvailable()) {
+        // Die alten allowed_yrewrite_domains waren eine Whitelist (erlaubte Domains)
+        // Im neuen System bedeutet: Domains die NICHT in der Whitelist sind, sollten gesperrt sein
+        $allowedDomainsArray = explode('|', $oldAllowedDomains);
+        $allowedDomainsArray = array_filter(array_map('trim', $allowedDomainsArray));
+        
+        $domainStatus = [];
+        foreach (rex_yrewrite::getDomains() as $domain) {
+            $domainName = $domain->getName();
+            if ($domainName !== 'default') {
+                // Domain ist gesperrt, wenn sie NICHT in der Whitelist war
+                $domainStatus[$domainName] = !in_array($domain->getHost(), $allowedDomainsArray, true);
+            }
+        }
+        
+        if (!empty($domainStatus)) {
+            $addon->setConfig('domain_status', $domainStatus);
+        }
+    }
+    
+    // Alte Konfiguration kann entfernt werden (bleibt aber zur Kompatibilität)
+    // $addon->removeConfig('allowed_yrewrite_domains');
+}
