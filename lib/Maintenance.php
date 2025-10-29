@@ -245,16 +245,16 @@ class Maintenance
     {
         $addon = self::getAddOn();
         $now = time();
-        
+
         $scheduledStart = (string) self::getConfig('scheduled_start', '');
         $scheduledEnd = (string) self::getConfig('scheduled_end', '');
-        
+
         // Parse scheduled times
         $startTime = '' !== $scheduledStart ? strtotime($scheduledStart) : false;
         $endTime = '' !== $scheduledEnd ? strtotime($scheduledEnd) : false;
-        
+
         $blockFrontend = self::getBoolConfig('block_frontend', false);
-        
+
         // Auto-activate: If we're past start time and before end time, enable maintenance
         if (false !== $startTime && $now >= $startTime) {
             if (false === $endTime || $now < $endTime) {
@@ -264,7 +264,7 @@ class Maintenance
                 }
             }
         }
-        
+
         // Auto-deactivate: If we're past end time, disable maintenance
         if (false !== $endTime && $now >= $endTime) {
             if ($blockFrontend) {

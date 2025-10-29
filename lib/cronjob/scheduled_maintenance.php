@@ -23,12 +23,12 @@ class rex_cronjob_scheduled_maintenance extends rex_cronjob
     {
         // Call the scheduled maintenance checker
         Maintenance::checkScheduledMaintenance();
-        
+
         $addon = rex_addon::get('maintenance');
         $scheduledStart = (string) $addon->getConfig('scheduled_start', '');
         $scheduledEnd = (string) $addon->getConfig('scheduled_end', '');
         $blockFrontend = (bool) $addon->getConfig('block_frontend', false);
-        
+
         // Log what happened
         if ('' !== $scheduledStart || '' !== $scheduledEnd) {
             if ($blockFrontend) {
@@ -39,7 +39,7 @@ class rex_cronjob_scheduled_maintenance extends rex_cronjob
         } else {
             $this->setMessage('Keine geplante Wartung konfiguriert');
         }
-        
+
         return true;
     }
 
