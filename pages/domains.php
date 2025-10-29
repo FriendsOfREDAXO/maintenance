@@ -30,22 +30,22 @@ if (rex_post('save', 'bool')) {
     // Globale Option für alle Domains speichern
     $allDomainsLocked = rex_post('all_domains_locked', 'bool', false);
     $addon->setConfig('all_domains_locked', $allDomainsLocked);
-    
+
     // Nur wenn nicht alle Domains gesperrt sind, individuelle Einstellungen speichern
     if (!$allDomainsLocked) {
         // Einstellungen speichern
         $domainStatus = [];
         foreach ($domains as $domain) {
             $name = $domain->getName();
-            if ($name !== 'default') {
+            if ('default' !== $name) {
                 $domainStatus[$name] = rex_post('domain_' . md5($name), 'bool', false);
             }
         }
-        
+
         // Konfiguration speichern
         $addon->setConfig('domain_status', $domainStatus);
     }
-    
+
     // Erfolgsmeldung
     echo rex_view::success($addon->i18n('maintenance_settings_saved'));
 }
@@ -75,7 +75,7 @@ $content .= '<tbody>';
 
 foreach ($domains as $domain) {
     $name = $domain->getName();
-    if ($name !== 'default') {
+    if ('default' !== $name) {
         $content .= '<tr>';
         $content .= '<td><strong>' . htmlspecialchars($name) . '</strong><br><small class="text-muted">' . htmlspecialchars($domain->getUrl()) . '</small></td>';
         $content .= '<td>';
@@ -116,7 +116,7 @@ $fragment->setVar('body', $notice . $content, false);
         <?= $fragment->parse('core/page/section.php') ?>
     </div>
     <div class="col-lg-4">
-        <?php include __DIR__ . '/frontend.sidebar.php'; ?>
+        <?php include __DIR__ . '/frontend.sidebar.php' ?>
     </div>
 </div>
 

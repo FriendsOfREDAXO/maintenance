@@ -61,9 +61,9 @@ $fragment->setVar('body', $form->get(), false);
         $info .= '<p><strong>' . $addon->i18n('maintenance_announcement_usage') . ':</strong></p>';
         $info .= '<pre><code>&lt;?php<br>use FriendsOfREDAXO\Maintenance\Maintenance;<br>Maintenance::showAnnouncement();<br>?&gt;</code></pre>';
         $info .= '</div>';
-        
+
         echo $info;
-        
+
         /* Sidebar-Panel einbinden */
         include __DIR__ . '/frontend.sidebar.php';
         ?>

@@ -76,7 +76,7 @@ $fragment->setVar('body', $form->get(), false);
         <?= $fragment->parse('core/page/section.php') ?>
     </div>
     <div class="col-lg-4">
-        <?php include __DIR__ . '/frontend.sidebar.php'; ?>
+        <?php include __DIR__ . '/frontend.sidebar.php' ?>
     </div>
 </div>
 

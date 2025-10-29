@@ -2,7 +2,7 @@
 
 /**
  * Sidebar-Panel für Frontend-Seiten des Maintenance AddOns
- * Zeigt Vorschau, Bypass-URLs und Quick-Links
+ * Zeigt Vorschau, Bypass-URLs und Quick-Links.
  */
 
 $addon = rex_addon::get('maintenance');
@@ -44,12 +44,12 @@ if ($yrewriteAvailable && count(rex_yrewrite::getDomains()) > 1) {
         if ('default' == $key) {
             continue;
         }
-        
+
         // Domain nur anzeigen, wenn:
         // - Alle Domains gesperrt sind ODER
         // - Diese spezifische Domain gesperrt ist
-        $isDomainLocked = $allDomainsLocked || (isset($domainStatus[$key]) && $domainStatus[$key] == 1);
-        
+        $isDomainLocked = $allDomainsLocked || (isset($domainStatus[$key]) && 1 == $domainStatus[$key]);
+
         if ($isDomainLocked) {
             $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
             $copy .= '<li class="list-group-item">';
@@ -76,24 +76,24 @@ $quickLinks = '<div class="btn-group-vertical btn-block">';
 
 // Link zur Hauptseite (Allgemeine Einstellungen)
 $currentPage = rex_be_controller::getCurrentPage();
-if ($currentPage !== 'maintenance/frontend/index' && $currentPage !== 'maintenance/frontend') {
+if ('maintenance/frontend/index' !== $currentPage && 'maintenance/frontend' !== $currentPage) {
     $quickLinks .= '<a href="' . rex_url::backendPage('maintenance/frontend') . '" class="btn btn-default">';
     $quickLinks .= '<i class="rex-icon fa-sliders"></i> ' . $addon->i18n('maintenance_frontend_general_title') . '</a>';
 }
 
 if (rex::getUser()->isAdmin()) {
-    if ($currentPage !== 'maintenance/frontend/advanced') {
+    if ('maintenance/frontend/advanced' !== $currentPage) {
         $quickLinks .= '<a href="' . rex_url::backendPage('maintenance/frontend/advanced') . '" class="btn btn-default">';
         $quickLinks .= '<i class="rex-icon fa-cog"></i> ' . $addon->i18n('maintenance_settings_title') . '</a>';
     }
-    
-    if ($currentPage !== 'maintenance/frontend/announcement') {
+
+    if ('maintenance/frontend/announcement' !== $currentPage) {
         $quickLinks .= '<a href="' . rex_url::backendPage('maintenance/frontend/announcement') . '" class="btn btn-default">';
         $quickLinks .= '<i class="rex-icon fa-bullhorn"></i> ' . $addon->i18n('maintenance_announcement_settings') . '</a>';
     }
 }
 
-if (rex_addon::get('yrewrite')->isAvailable() && $currentPage !== 'maintenance/domains') {
+if (rex_addon::get('yrewrite')->isAvailable() && 'maintenance/domains' !== $currentPage) {
     $quickLinks .= '<a href="' . rex_url::backendPage('maintenance/domains') . '" class="btn btn-default">';
     $quickLinks .= '<i class="rex-icon fa-sitemap"></i> ' . $addon->i18n('maintenance_domain_settings') . '</a>';
 }

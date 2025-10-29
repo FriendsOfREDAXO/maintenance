@@ -40,7 +40,7 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance-icons.css'));
 
-        if ('maintenance/frontend' === rex_be_controller::getCurrentPage() 
+        if ('maintenance/frontend' === rex_be_controller::getCurrentPage()
             || 'maintenance/frontend/index' === rex_be_controller::getCurrentPage()
             || 'maintenance/frontend/announcement' === rex_be_controller::getCurrentPage()) {
             rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {

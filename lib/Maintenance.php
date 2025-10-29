@@ -17,6 +17,7 @@ use rex_user;
 use rex_yrewrite;
 use Throwable;
 
+use function count;
 use function in_array;
 
 use const FILTER_VALIDATE_IP;
@@ -141,7 +142,7 @@ class Maintenance
         if ($ydomain = rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
             $domainName = $ydomain->getName();
             $domainStatus = (array) self::getConfig('domain_status', []);
-            
+
             // Check if this specific domain is in maintenance mode
             if (isset($domainStatus[$domainName]) && $domainStatus[$domainName]) {
                 return true;
@@ -245,7 +246,7 @@ class Maintenance
 
         // Check if the current domain is in maintenance mode (new domain-based logic)
         $domainInMaintenance = self::isDomainInMaintenance();
-        
+
         // If domain is NOT in maintenance, allow access
         if (!$domainInMaintenance) {
             return;
@@ -351,7 +352,7 @@ class Maintenance
         $domainStatus = (array) self::getConfig('domain_status', []);
         $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
         $activeDomains = array_filter($domainStatus);
-        
+
         if ($allDomainsLocked || !empty($activeDomains)) {
             $count = $allDomainsLocked ? 'All' : count($activeDomains);
             $page['title'] .= ' <span class="label label-warning pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
