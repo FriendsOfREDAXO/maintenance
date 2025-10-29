@@ -98,7 +98,7 @@ maintenance_add_my_ip = Meine IP zur Whitelist hinzufügen
 maintenance_announcement_title = Ankündigung der Wartungsarbeiten
 
 maintenance_editor_label = Editor
-maintenance_editor_notice = Editor anhand Attribute für das obige Textfeld "Ankündigung der Wartungsarbeiten" festlegen, z.B. <code>class="form-control redactor-editor--default"</code> für Redactor, passende Attribute auch für TinyMCE, CKEditor, etc.
+maintenance_editor_notice = Editor anhand Attribute für das Textfeld "Ankündigung der Wartungsarbeiten" festlegen, z.B. <code>class="form-control redactor-editor--default"</code> für Redactor, passende Attribute auch für TinyMCE, CKEditor, etc.
 
 maintenance_announcement_label = Text
 maintenance_announcement_title = Wartungsankündigung
