@@ -368,7 +368,7 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
                         <path d="M2 12h20"></path>
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                     </svg>
-                    <span id="language-text">Language</span>
+                    <span id="language-text"><?= rex_i18n::msg('maintenance_language') ?></span>
                 </button>
                 <div class="language-menu" id="language-menu">
                     <button class="language-option active" data-lang="en">
