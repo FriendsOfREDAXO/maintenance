@@ -404,8 +404,8 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
         
         <h1 class="maintenance-title">
             <?php if ($multilanguageEnabled): ?>
-                <span class="maintenance-text" data-lang="en">Maintenance</span>
-                <span class="maintenance-text" data-lang="de">Wartung</span>
+                <span class="maintenance-text <?= '' === $maintenanceTextEn ? '' : '' ?>" data-lang="en">Maintenance</span>
+                <span class="maintenance-text <?= '' !== $maintenanceTextDe ? 'active' : '' ?>" data-lang="de">Wartung</span>
             <?php else: ?>
                 <?= rex_escape($maintenanceFrontendHeadline) ?>
             <?php endif ?>
