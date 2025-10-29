@@ -112,8 +112,12 @@ maintenance_announcement_end_date_notice = Datum, <strong>bis wann die Ankündig
 maintenance_allowed_access_title = Ausnahmen
 
 maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
-maintenance_allowed_ips_notice = IP-Adresse(n) eingeben, die weiterhin Zugriff auf das Frontend haben soll(en).
+maintenance_allowed_ips_notice = IP-Adresse(n) eingeben, die weiterhin Zugriff auf das Frontend haben soll(en). Mehrere IPs mit Komma trennen.
 maintenance_add_ip_hint = hinzufügen
+maintenance_your_ip = Ihre IP
+maintenance_server_ip = Server-IP
+maintenance_add_ip = Hinzufügen
+maintenance_add_server_ip = Server-IP hinzufügen
 
 maintenance_allowed_domains_label = Liste erlaubter Domains
 maintenance_allowed_domains_notice = Domains eintragen, die nicht gesperrt werden sollen.

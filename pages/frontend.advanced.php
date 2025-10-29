@@ -31,29 +31,33 @@ $field->setNotice($addon->i18n('maintenance_editor_notice'));
 // Zugriffskontrolle
 $form->addFieldset($addon->i18n('maintenance_access_control_title'));
 
-// Erlaubte IP-Adressen
+// Liste der erlaubten IP-Adressen
 $field = $form->addTextField('allowed_ips');
 $field->setLabel($addon->i18n('maintenance_allowed_ips_label'));
-
-$remoteAddr = rex_server('REMOTE_ADDR', 'string', '');
-$serverAddr = rex_server('SERVER_ADDR', 'string', '');
-
-$ipButtons = '';
-if ($remoteAddr) {
-    $ipButtons .= '<button type="button" class="btn btn-xs btn-default" data-add-ip="' . rex_escape($remoteAddr) . '">';
-    $ipButtons .= '<i class="fa fa-plus"></i> ' . rex_escape($remoteAddr) . ' ' . $addon->i18n('maintenance_add_ip_hint');
-    $ipButtons .= '</button> ';
-}
-if ($serverAddr && $serverAddr !== $remoteAddr) {
-    $ipButtons .= '<button type="button" class="btn btn-xs btn-default" data-add-ip="' . rex_escape($serverAddr) . '">';
-    $ipButtons .= '<i class="fa fa-plus"></i> ' . rex_escape($serverAddr) . ' ' . $addon->i18n('maintenance_add_ip_hint');
-    $ipButtons .= '</button>';
-}
-
-$field->setNotice($ipButtons . '<br>' . $addon->i18n('maintenance_allowed_ips_notice'));
 $field->setAttribute('class', 'form-control');
-$field->setAttribute('data-maintenance', 'tokenfield');
-$field->setAttribute('data-beautify', 'false');
+$field->setAttribute('id', 'maintenance-allowed-ips');
+
+// Aktuelle IP-Adresse anzeigen
+$clientIp = rex_server('REMOTE_ADDR', 'string', '');
+$serverIp = rex_server('SERVER_ADDR', 'string', '');
+
+// IP-Adressen als formatierte Liste mit Buttons
+$notice = '<div class="ip-addresses">';
+$notice .= '<div class="ip-address-row"><span class="ip-label">' . $addon->i18n('maintenance_your_ip') . ':</span> <code class="ip-code">' . $clientIp . '</code>';
+$notice .= ' <button class="btn btn-xs btn-primary" type="button" id="maintenance-add-ip"><i class="rex-icon fa-plus"></i> ' . $addon->i18n('maintenance_add_ip') . '</button></div>';
+if ($serverIp && $serverIp !== $clientIp) {
+    $notice .= '<div class="ip-address-row"><span class="ip-label">' . $addon->i18n('maintenance_server_ip') . ':</span> <code class="ip-code">' . $serverIp . '</code>';
+    $notice .= ' <button class="btn btn-xs btn-primary" type="button" id="maintenance-add-server-ip"><i class="rex-icon fa-plus"></i> ' . $addon->i18n('maintenance_add_server_ip') . '</button></div>';
+}
+$notice .= '</div>';
+$notice .= '<div class="help-block" style="margin-top: 10px;">' . $addon->i18n('maintenance_allowed_ips_notice') . '</div>';
+$notice .= '<style>
+.ip-addresses { margin-top: 5px; }
+.ip-address-row { margin-bottom: 5px; display: flex; align-items: center; }
+.ip-label { min-width: 120px; }
+.ip-code { margin: 0 10px; display: inline-block; min-width: 100px; }
+</style>';
+$field->setNotice($notice);
 
 // HTTP-Einstellungen
 $form->addFieldset($addon->i18n('maintenance_http_settings_title'));
@@ -87,61 +91,44 @@ $fragment->setVar('body', $form->get(), false);
 </div>
 
 <script nonce="<?= rex_response::getNonce() ?>">
-jQuery(function($) {
-    // Warte bis Tokenfield initialisiert ist
-    function waitForTokenfield(callback, maxAttempts = 20) {
-        var attempts = 0;
-        var interval = setInterval(function() {
-            var $tokenfield = $('[name="config[maintenance][allowed_ips]"]');
-            if ($tokenfield.data('bs.tokenfield') || attempts >= maxAttempts) {
-                clearInterval(interval);
-                callback($tokenfield);
-            }
-            attempts++;
-        }, 100);
-    }
-
-    // IP per Klick zur Tokenfield-Liste hinzufügen
-    $(document).on('click', '[data-add-ip]', function(e) {
-        e.preventDefault();
-        var ip = $(this).data('add-ip');
-        var $button = $(this);
+$(document).on('rex:ready', function() {
+    // Funktion zum Hinzufügen einer IP-Adresse zum Whitelist-Feld
+    function addIpToWhitelist(ip) {
+        var ipField = $('#maintenance-allowed-ips');
         
-        waitForTokenfield(function($tokenfield) {
-            if (!$tokenfield.length) {
-                console.error('Tokenfield not found');
-                return;
-            }
-
-            // Hole aktuelle Tokens
-            var tokens = [];
-            if ($tokenfield.data('bs.tokenfield')) {
-                tokens = $tokenfield.tokenfield('getTokens');
-            } else {
-                var currentValue = $tokenfield.val();
-                tokens = currentValue ? currentValue.split(',').map(function(s) { return s.trim(); }).filter(Boolean) : [];
-            }
+        if (ipField.val().trim() === '') {
+            // Wenn das Feld leer ist, einfach die IP hinzufügen
+            ipField.val(ip);
+        } else {
+            // IP-Adressen als Array verarbeiten und alle Leerzeichen entfernen
+            var ips = ipField.val().split(',').map(function(ip) {
+                return ip.trim();
+            }).filter(function(ip) {
+                // Leere Einträge filtern
+                return ip !== '';
+            });
             
-            // Prüfen, ob IP bereits existiert
-            if (tokens.indexOf(ip) === -1) {
-                tokens.push(ip);
-                
-                // Tokenfield aktualisieren
-                if ($tokenfield.data('bs.tokenfield')) {
-                    $tokenfield.tokenfield('setTokens', tokens);
-                } else {
-                    $tokenfield.val(tokens.join(', '));
-                }
-                
-                // Button-Feedback
-                $button.prop('disabled', true).addClass('btn-success').removeClass('btn-default btn-xs')
-                    .html('<i class="fa fa-check"></i> ' + ip + ' <?= $addon->i18n('maintenance_ip_added') ?>');
-            } else {
-                // IP existiert bereits
-                $button.prop('disabled', true).addClass('btn-warning').removeClass('btn-default btn-xs')
-                    .html('<i class="fa fa-info-circle"></i> IP bereits vorhanden');
+            // Prüfen, ob IP bereits enthalten ist
+            if (ips.indexOf(ip) === -1) {
+                ips.push(ip);
+                // Saubere Komma-getrennte Liste ohne unnötige Leerzeichen
+                ipField.val(ips.join(','));
             }
-        });
+        }
+    }
+    
+    // Client-IP-Adresse hinzufügen
+    $('#maintenance-add-ip').on('click', function(e) {
+        e.preventDefault();
+        var currentIp = '<?= rex_server('REMOTE_ADDR', 'string', '') ?>';
+        addIpToWhitelist(currentIp);
+    });
+    
+    // Server-IP-Adresse hinzufügen
+    $('#maintenance-add-server-ip').on('click', function(e) {
+        e.preventDefault();
+        var serverIp = '<?= rex_server('SERVER_ADDR', 'string', '') ?>';
+        addIpToWhitelist(serverIp);
     });
 });
 </script>

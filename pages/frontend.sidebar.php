@@ -72,22 +72,6 @@ $fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
 $fragment->setVar('body', $copy, false);
 $sidebarContent .= $fragment->parse('core/page/section.php');
 
-/* Eigene IP hinzufügen */
-if ('maintenance/frontend/advanced' === $currentPage) {
-    $currentIp = rex_server('REMOTE_ADDR', 'string', '');
-    if ('' !== $currentIp) {
-        $addIp = '<button class="btn btn-default btn-block" data-add-ip="' . htmlspecialchars($currentIp) . '">';
-        $addIp .= '<i class="rex-icon fa-plus"></i> ' . $addon->i18n('maintenance_add_my_ip') . ' (' . htmlspecialchars($currentIp) . ')';
-        $addIp .= '</button>';
-
-        $fragment = new rex_fragment();
-        $fragment->setVar('class', 'info', false);
-        $fragment->setVar('title', $addon->i18n('maintenance_my_ip_title'), false);
-        $fragment->setVar('body', $addIp, false);
-        $sidebarContent .= $fragment->parse('core/page/section.php');
-    }
-}
-
 /* Quick Links */
 $quickLinks = '<div class="btn-group-vertical btn-block">';
 
