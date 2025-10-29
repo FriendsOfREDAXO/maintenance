@@ -176,7 +176,7 @@ php redaxo/bin/console maintenance:mode off
 
 ## Autor
 
-**Thomas Skerbis** – [KLXM Crossmedia](https://klxm.de)
+[FriendsOfREDAXO](https://github.com/FriendsOfREDAXO)
 
 ## Projekt-Lead
 
