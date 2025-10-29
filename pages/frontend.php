@@ -33,8 +33,8 @@ $field = $form->addSelectField('block_frontend');
 $field->setLabel($addon->i18n('maintenance_block_frontend_label'));
 $field->setAttribute('class', 'form-control selectpicker');
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_frontend_false'), 0, null, null, ['data-icon' => 'rex-icon fa-circle-xmark']);
-$select->addOption($addon->i18n('maintenance_block_frontend_true'), 1, null, null, ['data-icon' => 'rex-icon fa-circle-check']);
+$select->addOption($addon->i18n('maintenance_block_frontend_false'), 0, null, null, ['data-content' => '<i class="rex-icon fa-circle-xmark"></i> ' . $addon->i18n('maintenance_block_frontend_false')]);
+$select->addOption($addon->i18n('maintenance_block_frontend_true'), 1, null, null, ['data-content' => '<i class="rex-icon fa-circle-check"></i> ' . $addon->i18n('maintenance_block_frontend_true')]);
 
 // Passwort zum Umgehen des Wartungsmodus - für alle Benutzer verfügbar
 $field = $form->addTextField('maintenance_secret');
@@ -87,16 +87,16 @@ if ($isAdmin) {
     $field->setLabel($addon->i18n('maintenance_authentification_mode_label'));
     $field->setAttribute('class', 'form-control selectpicker');
     $select = $field->getSelect();
-    $select->addOption($addon->i18n('maintenance_authentification_mode_url'), 'URL', null, null, ['data-icon' => 'rex-icon fa-link']);
-    $select->addOption($addon->i18n('maintenance_authentification_mode_password'), 'password', null, null, ['data-icon' => 'rex-icon fa-key']);
+    $select->addOption($addon->i18n('maintenance_authentification_mode_url'), 'URL', null, null, ['data-content' => '<i class="rex-icon fa-link"></i> ' . $addon->i18n('maintenance_authentification_mode_url')]);
+    $select->addOption($addon->i18n('maintenance_authentification_mode_password'), 'password', null, null, ['data-content' => '<i class="rex-icon fa-key"></i> ' . $addon->i18n('maintenance_authentification_mode_password')]);
 
     // Blockere auch für angemeldete REDAXO-Benutzer das Frontend
     $field = $form->addSelectField('block_frontend_rex_user');
     $field->setLabel($addon->i18n('maintenance_block_frontend_rex_user_label'));
     $field->setAttribute('class', 'form-control selectpicker');
     $select = $field->getSelect();
-    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0, null, null, ['data-icon' => 'rex-icon fa-user-check']);
-    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1, null, null, ['data-icon' => 'rex-icon fa-user-lock']);
+    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0, null, null, ['data-content' => '<i class="rex-icon fa-user-check"></i> ' . $addon->i18n('maintenance_block_frontend_rex_user_false')]);
+    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1, null, null, ['data-content' => '<i class="rex-icon fa-user-lock"></i> ' . $addon->i18n('maintenance_block_frontend_rex_user_rex_user')]);
 
     // Ziel der Umleitung
     $field = $form->addTextField('redirect_frontend_to_url');
@@ -109,8 +109,8 @@ if ($isAdmin) {
     $field->setLabel($addon->i18n('maintenance_http_response_code_label'));
     $field->setAttribute('class', 'form-control selectpicker');
     $select = $field->getSelect();
-    $select->addOption($addon->i18n('maintenance_http_response_code_503'), '503', null, null, ['data-icon' => 'rex-icon fa-clock']);
-    $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403', null, null, ['data-icon' => 'rex-icon fa-ban']);
+    $select->addOption($addon->i18n('maintenance_http_response_code_503'), '503', null, null, ['data-content' => '<i class="rex-icon fa-clock"></i> ' . $addon->i18n('maintenance_http_response_code_503')]);
+    $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403', null, null, ['data-content' => '<i class="rex-icon fa-ban"></i> ' . $addon->i18n('maintenance_http_response_code_403')]);
 
     // Wartungsfenster-Ankündigung
     $form->addFieldset($addon->i18n('maintenance_announcement_title'));

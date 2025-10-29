@@ -29,8 +29,8 @@ $field = $form->addSelectField('block_backend');
 $field->setLabel($addon->i18n('maintenance_block_backend_label'));
 $field->setAttribute('class', 'form-control selectpicker');
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_backend_true'), 1, null, null, ['data-icon' => 'rex-icon fa-circle-check']);
-$select->addOption($addon->i18n('maintenance_block_backend_false'), 0, null, null, ['data-icon' => 'rex-icon fa-circle-xmark']);
+$select->addOption($addon->i18n('maintenance_block_backend_true'), 1, null, null, ['data-content' => '<i class="rex-icon fa-circle-check"></i> ' . $addon->i18n('maintenance_block_backend_true')]);
+$select->addOption($addon->i18n('maintenance_block_backend_false'), 0, null, null, ['data-content' => '<i class="rex-icon fa-circle-xmark"></i> ' . $addon->i18n('maintenance_block_backend_false')]);
 
 $field = $form->addTextField('redirect_backend_to_url');
 $field->setLabel($addon->i18n('maintenance_redirect_backend_to_url_label'));
