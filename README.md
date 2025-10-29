@@ -25,33 +25,29 @@ Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von 
 
 Die **zeitgesteuerte Wartung** ermöglicht es, den Wartungsmodus automatisch zu einem bestimmten Zeitpunkt zu aktivieren und zu deaktivieren:
 
-* **Request-basiert**: Wird bei jedem Seitenaufruf geprüft (keine Cronjob-Konfiguration nötig)
-* **Optional per Cronjob**: Für präzisere Steuerung kann der Cronjob "Geplante Wartung prüfen" eingerichtet werden
+* **Cronjob-basiert**: Die Ausführung erfolgt ausschließlich über den Cronjob "Geplante Wartung prüfen"
 * **Automatische Bereinigung**: Nach erfolgreicher Deaktivierung werden die geplanten Zeiten automatisch gelöscht
 
 **Verwendung:**
 
-1. In den Frontend-Einstellungen unter "Zeitgesteuerte Wartung":
+1. **Cronjob einrichten** (erforderlich):
+   - Im REDAXO-Backend zu **System > Cronjobs** navigieren
+   - Auf **"+"** klicken, um einen neuen Cronjob zu erstellen
+   - Folgende Einstellungen vornehmen:
+     - **Name**: z.B. "Geplante Wartung prüfen"
+     - **Typ**: `Geplante Wartung prüfen` (aus Dropdown wählen)
+     - **Ausführungsart**: z.B. "Jede Minute" oder "Alle 5 Minuten"
+     - **Umgebung**: "Frontend, Backend, Skript"
+   - Speichern
+
+2. In den Frontend-Einstellungen unter "Zeitgesteuerte Wartung":
    - **Startzeitpunkt** eingeben (z.B. `2025-12-31 02:00:00`)
    - **Endzeitpunkt** eingeben (z.B. `2025-12-31 06:00:00`)
-2. Speichern - der Wartungsmodus wird zur konfigurierten Zeit automatisch aktiviert und deaktiviert
+3. Speichern - der Wartungsmodus wird zur konfigurierten Zeit automatisch aktiviert und deaktiviert
 
 **Format**: `YYYY-MM-DD HH:MM:SS` (z.B. `2025-12-31 23:59:59`)
 
-#### Cronjob für präzise Zeitsteuerung
-
-Für minutengenaue Steuerung kann optional ein Cronjob eingerichtet werden:
-
-1. Im REDAXO-Backend zu **System > Cronjobs** navigieren
-2. Auf **"+"** klicken, um einen neuen Cronjob zu erstellen
-3. Folgende Einstellungen vornehmen:
-   - **Name**: z.B. "Geplante Wartung prüfen"
-   - **Typ**: `Geplante Wartung prüfen` (aus Dropdown wählen)
-   - **Ausführungsart**: z.B. "Jede Minute" oder "Alle 5 Minuten"
-   - **Umgebung**: "Frontend, Backend, Skript"
-4. Speichern
-
-**Hinweis**: Der Cronjob ist optional. Auch ohne Cronjob wird die zeitgesteuerte Wartung bei jedem Frontend-Aufruf automatisch geprüft und aktiviert/deaktiviert. Der Cronjob sorgt nur für präziseres Timing, wenn die Website gerade nicht aufgerufen wird.
+**Wichtig**: Ohne eingerichteten Cronjob funktioniert die zeitgesteuerte Wartung nicht!
 
 ### Sperren des REDAXO-Backends
 

@@ -283,9 +283,6 @@ class Maintenance
     {
         rex_login::startSession();
 
-        // Check scheduled maintenance (auto-enable/disable based on time)
-        self::checkScheduledMaintenance();
-
         // Check if the current domain is in maintenance mode (new domain-based logic)
         $domainInMaintenance = self::isDomainInMaintenance();
         $blockFrontend = self::getBoolConfig('block_frontend', false);

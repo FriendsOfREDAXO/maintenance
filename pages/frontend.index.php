@@ -74,8 +74,25 @@ $field->setAttribute('type', 'url');
 // Scheduled Maintenance
 $form->addFieldset($addon->i18n('maintenance_scheduled_title'));
 
-// Info-Text für geplante Wartung
-$field = $form->addRawField('<p class="help-block">' . $addon->i18n('maintenance_scheduled_info') . '</p>');
+// Info-Text für geplante Wartung mit Cronjob-Hinweis
+$cronjobInstalled = false;
+if (rex_addon::get('cronjob')->isAvailable()) {
+    $sql = rex_sql::factory();
+    $sql->setQuery('SELECT id FROM ' . rex::getTable('cronjob') . ' WHERE type = :type LIMIT 1', ['type' => 'rex_cronjob_scheduled_maintenance']);
+    $cronjobInstalled = $sql->getRows() > 0;
+}
+
+$infoHtml = '<div class="alert alert-info">';
+$infoHtml .= '<p>' . $addon->i18n('maintenance_scheduled_info') . '</p>';
+if (!$cronjobInstalled) {
+    $infoHtml .= '<p><strong><i class="rex-icon fa-exclamation-triangle"></i> ' . $addon->i18n('maintenance_scheduled_cronjob_missing') . '</strong><br>';
+    $infoHtml .= '<a href="' . rex_url::backendPage('cronjob/cronjobs', ['func' => 'add']) . '" class="btn btn-primary btn-xs">';
+    $infoHtml .= '<i class="rex-icon fa-plus"></i> ' . $addon->i18n('maintenance_scheduled_cronjob_create') . '</a></p>';
+} else {
+    $infoHtml .= '<p class="text-success"><i class="rex-icon fa-check"></i> ' . $addon->i18n('maintenance_scheduled_cronjob_active') . '</p>';
+}
+$infoHtml .= '</div>';
+$field = $form->addRawField($infoHtml);
 
 // Geplanter Start
 $field = $form->addTextField('scheduled_start');

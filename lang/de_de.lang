@@ -166,7 +166,7 @@ maintenance_announcement_usage = Code-Beispiel
 // Scheduled Maintenance
 
 maintenance_scheduled_title = Zeitgesteuerte Wartung
-maintenance_scheduled_info = Automatische Aktivierung und Deaktivierung des Wartungsmodus zu festgelegten Zeiten
+maintenance_scheduled_info = Die zeitgesteuerte Wartung aktiviert und deaktiviert den Wartungsmodus automatisch zu den konfigurierten Zeiten. Die Ausführung erfolgt ausschließlich über einen Cronjob.
 maintenance_scheduled_start_label = Startzeitpunkt
 maintenance_scheduled_start_notice = Wartungsmodus wird automatisch aktiviert (Format: YYYY-MM-DD HH:MM:SS)
 maintenance_scheduled_end_label = Endzeitpunkt
@@ -175,6 +175,9 @@ maintenance_scheduled_active = Geplante Wartung aktiv
 maintenance_scheduled_starts_at = Startet am
 maintenance_scheduled_ends_at = Endet am
 maintenance_scheduled_example = Beispiel: 2025-12-31 02:00:00
+maintenance_scheduled_cronjob_missing = Cronjob für zeitgesteuerte Wartung ist nicht eingerichtet! Ohne Cronjob funktioniert die zeitgesteuerte Wartung nicht.
+maintenance_scheduled_cronjob_create = Cronjob jetzt erstellen
+maintenance_scheduled_cronjob_active = Cronjob ist eingerichtet und aktiv
 
 // Quick Links
 
