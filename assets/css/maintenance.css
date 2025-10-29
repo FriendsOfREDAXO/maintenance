@@ -9,3 +9,8 @@
 [data-maintenance="custom"] {
 	color: #d75452;
 }
+
+/* Purple label for domain-based maintenance */
+.label-purple {
+	background-color: #9b59b6;
+}

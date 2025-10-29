@@ -398,13 +398,14 @@ class Maintenance
             $page['icon'] .= ' fa-toggle-on block_frontend';
             
             // Check for domain-based maintenance - nur wenn Frontend-Wartung aktiv
+            // Badge nur für einzelne Domains, nicht wenn alle gesperrt sind
             $domainStatus = (array) self::getConfig('domain_status', []);
             $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
             $activeDomains = array_filter($domainStatus);
 
-            if ($allDomainsLocked || !empty($activeDomains)) {
-                $count = $allDomainsLocked ? 'All' : count($activeDomains);
-                $page['title'] .= ' <span class="label label-warning pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
+            if (!$allDomainsLocked && !empty($activeDomains)) {
+                $count = count($activeDomains);
+                $page['title'] .= ' <span class="label label-purple pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
                 $page['icon'] .= ' fa-sitemap';
             }
         }
