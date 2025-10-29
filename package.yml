@@ -71,7 +71,7 @@ default_config:
       block_backend: 0
       redirect_frontend_to_url: '' # `https://example.com/maintenance.html`
       redirect_backend_to_url: '' # `https://example.com/maintenance.html`
-      secret: ''
+      maintenance_secret: ''
       editor: 'class="form-control cke5-editor" data-profile="default"'
       maintenance_frontend_headline: 'Maintenance / Wartung'
       maintenance_text_en: 'This website is temporarily unavailable.'

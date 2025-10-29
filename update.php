@@ -37,7 +37,7 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
     }
 
     if ($addon->hasConfig('secret')) {
-        $addon->setConfig('maintenance_secret', $addon->getConfig('maintenance_secret'));
+        $addon->setConfig('maintenance_secret', $addon->getConfig('secret'));
     }
 
     $addon->removeConfig('responsecode');
