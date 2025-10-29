@@ -12,9 +12,6 @@
 
 $addon = rex_addon::get('maintenance');
 
-// Load page-specific assets
-rex_view::addJsFile($addon->getAssetsUrl('js/domains.js'));
-
 // Wenn YRewrite nicht installiert oder verfügbar ist, Hinweis anzeigen
 if (!rex_addon::exists('yrewrite') || !rex_addon::get('yrewrite')->isAvailable()) {
     echo rex_view::info($addon->i18n('maintenance_yrewrite_not_available'));
@@ -122,3 +119,15 @@ $fragment->setVar('body', $notice . $content, false);
         <?php include __DIR__ . '/frontend.sidebar.php' ?>
     </div>
 </div>
+
+<script nonce="<?= rex_response::getNonce() ?>">
+$(document).on('rex:ready', function() {
+    $('#all-domains-locked').on('change', function() {
+        if ($(this).val() == '1') {
+            $('#individual-domains').slideUp();
+        } else {
+            $('#individual-domains').slideDown();
+        }
+    });
+});
+</script>
