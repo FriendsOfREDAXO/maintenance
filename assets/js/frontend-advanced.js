@@ -33,7 +33,7 @@ $(document).on('rex:ready', function() {
     }
     
     // Client-IP-Adresse hinzufügen
-    $(document).on('click', '#maintenance-add-ip', function(e) {
+    $('#maintenance-add-ip').on('click', function(e) {
         e.preventDefault();
         var currentIp = $(this).data('ip');
         if (currentIp) {
@@ -42,7 +42,7 @@ $(document).on('rex:ready', function() {
     });
     
     // Server-IP-Adresse hinzufügen
-    $(document).on('click', '#maintenance-add-server-ip', function(e) {
+    $('#maintenance-add-server-ip').on('click', function(e) {
         e.preventDefault();
         var serverIp = $(this).data('ip');
         if (serverIp) {
