@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Huoltotila poistettu käytöstä
 maintenance_settings_backend_title = REDAXO-backendin huoltotilan asetukset
 
 maintenance_block_backend_label = Ota huoltotila käyttöön
-maintenance_block_backend_true = 🔴 Huoltotila käytössä
-maintenance_block_backend_false = 🟢 Huoltotila ei ole käytössä
+maintenance_block_backend_true = Huoltotila käytössä
+maintenance_block_backend_false = Huoltotila ei ole käytössä
 
 maintenance_redirect_backend_to_url_label = Uudelleenohjausosoite (valinnainen)
 maintenance_redirect_backend_to_url_notice = Anna URL, johon käyttäjät ohjataan, kun REDAXO-backend on huoltotilassa.

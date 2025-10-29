@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Maintenance désactivée
 maintenance_settings_backend_title = Paramètres du mode maintenance pour le backend REDAXO
 
 maintenance_block_backend_label = Activer le mode maintenance
-maintenance_block_backend_true = 🔴 Mode maintenance activé
-maintenance_block_backend_false = 🟢 Mode maintenance désactivé
+maintenance_block_backend_true = Mode maintenance activé
+maintenance_block_backend_false = Mode maintenance désactivé
 
 maintenance_redirect_backend_to_url_label = Rediriger vers (optionnel)
 maintenance_redirect_backend_to_url_notice = Spécifiez l'URL vers laquelle les utilisateurs seront redirigés lorsque le backend REDAXO est en mode maintenance.

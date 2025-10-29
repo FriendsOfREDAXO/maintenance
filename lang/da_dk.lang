@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Vedligeholdelsestilstand deaktiveret
 maintenance_settings_backend_title = Vedligeholdelsestilstandsindstillinger for REDAXO backend
 
 maintenance_block_backend_label = Aktiver vedligeholdelsestilstand
-maintenance_block_backend_true = 🔴 Vedligeholdelsestilstand aktiveret
-maintenance_block_backend_false = 🟢 Vedligeholdelsestilstand deaktiveret
+maintenance_block_backend_true = Vedligeholdelsestilstand aktiveret
+maintenance_block_backend_false = Vedligeholdelsestilstand deaktiveret
 
 maintenance_redirect_backend_to_url_label = Omdirigerings-URL (valgfri)
 maintenance_redirect_backend_to_url_notice = Angiv URL'en, som brugere vil blive omdirigeret til, når REDAXO backend er i vedligeholdelsestilstand.

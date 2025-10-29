@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Modul de întreținere dezactivat
 maintenance_settings_backend_title = Setările modului de întreținere pentru backend-ul REDAXO
 
 maintenance_block_backend_label = Activează modul de întreținere
-maintenance_block_backend_true = 🔴 Modul de întreținere activat
-maintenance_block_backend_false = 🟢 Modul de întreținere dezactivat
+maintenance_block_backend_true = Modul de întreținere activat
+maintenance_block_backend_false = Modul de întreținere dezactivat
 
 maintenance_redirect_backend_to_url_label = URL de redirecționare (opțional)
 maintenance_redirect_backend_to_url_notice = Introduceți URL-ul către care utilizatorii vor fi redirecționați când backend-ul REDAXO este în modul de întreținere.

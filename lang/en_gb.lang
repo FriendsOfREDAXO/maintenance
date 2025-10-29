@@ -27,8 +27,8 @@ maintenance_backend_headline_notice = Enter any headline for the maintenance mod
 maintenance_settings_backend_title = Maintenance Mode Settings for the REDAXO Backend
 
 maintenance_block_backend_label = Activate maintenance mode
-maintenance_block_backend_true = 🔴 Maintenance mode activated
-maintenance_block_backend_false = 🟢 Maintenance mode deactivated
+maintenance_block_backend_true = Maintenance mode activated
+maintenance_block_backend_false = Maintenance mode deactivated
 
 maintenance_redirect_backend_to_url_label = Redirect to (optional)
 maintenance_redirect_backend_to_url_notice = Specify the URL to which users will be redirected when the REDAXO backend is in maintenance mode.

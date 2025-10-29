@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Tryb konserwacji wyłączony
 maintenance_settings_backend_title = Ustawienia trybu konserwacji dla backendu REDAXO
 
 maintenance_block_backend_label = Włącz tryb konserwacji
-maintenance_block_backend_true = 🔴 Tryb konserwacji włączony
-maintenance_block_backend_false = 🟢 Tryb konserwacji wyłączony
+maintenance_block_backend_true = Tryb konserwacji włączony
+maintenance_block_backend_false = Tryb konserwacji wyłączony
 
 maintenance_redirect_backend_to_url_label = URL przekierowania (opcjonalnie)
 maintenance_redirect_backend_to_url_notice = Podaj URL, na który użytkownicy będą przekierowani, gdy backend REDAXO jest w trybie konserwacji.

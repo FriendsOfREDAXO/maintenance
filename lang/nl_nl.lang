@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Onderhoudsmodus gedeactiveerd
 maintenance_settings_backend_title = Instellingen voor de onderhoudsmodus voor het REDAXO-backend
 
 maintenance_block_backend_label = Onderhoudsmodus activeren
-maintenance_block_backend_true = 🔴 Onderhoudsmodus geactiveerd
-maintenance_block_backend_false = 🟢 Onderhoudsmodus gedeactiveerd
+maintenance_block_backend_true = Onderhoudsmodus geactiveerd
+maintenance_block_backend_false = Onderhoudsmodus gedeactiveerd
 
 maintenance_redirect_backend_to_url_label = Omleiden naar (optioneel)
 maintenance_redirect_backend_to_url_notice = Geef de URL op waarnaar gebruikers worden omgeleid wanneer het REDAXO-backend in onderhoudsmodus is.

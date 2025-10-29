@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Underhållsläge inaktiverat
 maintenance_settings_backend_title = Inställningar för REDAXO-backends underhållsläge
 
 maintenance_block_backend_label = Aktivera underhållsläge
-maintenance_block_backend_true = 🔴 Underhållsläge aktiverat
-maintenance_block_backend_false = 🟢 Underhållsläge inaktiverat
+maintenance_block_backend_true = Underhållsläge aktiverat
+maintenance_block_backend_false = Underhållsläge inaktiverat
 
 maintenance_redirect_backend_to_url_label = Omdirigerings-URL (valfri)
 maintenance_redirect_backend_to_url_notice = Ange URL dit användare ska omdirigeras när REDAXO-backend är i underhållsläge.

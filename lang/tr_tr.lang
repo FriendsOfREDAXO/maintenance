@@ -18,8 +18,8 @@ maintenance_mode_deactivated = Bakım modu devre dışı bırakıldı
 maintenance_settings_backend_title = REDAXO backend için bakım modu ayarları
 
 maintenance_block_backend_label = Bakım modunu etkinleştir
-maintenance_block_backend_true = 🔴 Bakım modu etkin
-maintenance_block_backend_false = 🟢 Bakım modu devre dışı
+maintenance_block_backend_true = Bakım modu etkin
+maintenance_block_backend_false = Bakım modu devre dışı
 
 maintenance_redirect_backend_to_url_label = Yönlendirilecek URL (isteğe bağlı)
 maintenance_redirect_backend_to_url_notice = REDAXO backend bakım modundayken kullanıcıların yönlendirileceği URL'yi girin.
