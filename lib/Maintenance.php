@@ -166,11 +166,11 @@ class Maintenance
         }
 
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
-        $authentification_mode = (string) self::getConfig('authentification_mode', '');
+        $authentication_mode = (string) self::getConfig('authentication_mode', '');
 
         // Authentifizierung prüfen - für URL-Parameter und auch bei leerem Modus
-        $authentification_mode = (string) self::getConfig('authentification_mode', '');
-        if (('' === $authentification_mode || 'URL' === $authentification_mode || 'password' === $authentification_mode)
+        $authentication_mode = (string) self::getConfig('authentication_mode', '');
+        if (('' === $authentication_mode || 'URL' === $authentication_mode || 'password' === $authentication_mode)
             && '' !== $config_secret
             && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);

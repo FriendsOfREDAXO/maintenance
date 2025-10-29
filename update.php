@@ -33,7 +33,7 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
     }
 
     if ($addon->hasConfig('type')) {
-        $addon->setConfig('authentification_mode', 'Password' === $addon->getConfig('type') ? 'password' : 'URL');
+        $addon->setConfig('authentication_mode', 'Password' === $addon->getConfig('type') ? 'password' : 'URL');
     }
 
     if ($addon->hasConfig('secret')) {
@@ -52,10 +52,16 @@ if (rex_version::compare($addon->getVersion(), '3.0.0-dev', '<')) {
 }
 
 // Leerer String ('') und 'URL' werden beide als gültige URL-Authentifizierung betrachtet
-$authentification_mode = $addon->getConfig('authentification_mode', '');
-if (!in_array($authentification_mode, ['URL', 'password'], true)) {
+$authentication_mode = $addon->getConfig('authentication_mode', '');
+if (!in_array($authentication_mode, ['URL', 'password'], true)) {
     // Wenn kein gültiger Modus gesetzt ist, standardmäßig auf URL setzen
-    $addon->setConfig('authentification_mode', 'URL');
+    $addon->setConfig('authentication_mode', 'URL');
+}
+
+// Migration von 'authentification_mode' zu 'authentication_mode' (Rechtschreibkorrektur)
+if ($addon->hasConfig('authentification_mode') && !$addon->hasConfig('authentication_mode')) {
+    $addon->setConfig('authentication_mode', $addon->getConfig('authentification_mode'));
+    $addon->removeConfig('authentification_mode');
 }
 
 // Überprüfen, ob ein maintenance_secret existiert
@@ -68,7 +74,7 @@ if (!$addon->hasConfig('maintenance_secret') || '' === $addon->getConfig('mainte
 if ($addon->hasConfig('allowed_yrewrite_domains') && !$addon->hasConfig('domain_status')) {
     $oldAllowedDomains = (string) $addon->getConfig('allowed_yrewrite_domains', '');
 
-    if ('' !== $oldAllowedDomains && rex_addon::get('yrewrite')->isAvailable()) {
+    if ('' !== $oldAllowedDomains && rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable()) {
         // Die alten allowed_yrewrite_domains waren eine Whitelist (erlaubte Domains)
         // Im neuen System bedeutet: Domains die NICHT in der Whitelist sind, sollten gesperrt sein
         $allowedDomainsArray = explode('|', $oldAllowedDomains);

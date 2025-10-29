@@ -65,7 +65,7 @@ default_config:
       http_response_code: 503 # 503, 403
       allowed_ips: ''
       allowed_yrewrite_domains: ''
-      authentification_mode: 'URL'  # `URL`, `password`
+      authentication_mode: 'URL'  # `URL`, `password`
       block_frontend: 0
       block_frontend_rex_user: 0
       block_backend: 0

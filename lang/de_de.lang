@@ -58,12 +58,12 @@ maintenance_block_frontend_rex_user_false = Eingeloggte REDAXO-Benutzer haben we
 maintenance_block_frontend_rex_user_rex_user = Auch REDAXO-Benutzer ausperren
 maintenance_block_frontend_rex_user_notice = Wenn aktiviert, haben nur Administratoren und Personen mit Password oder Link Zugriff auf das Frontend.
 
-maintenance_authentification_mode_label = Authentifizierung
-maintenance_authentification_mode_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
+maintenance_authentication_mode_label = Authentifizierung
+maintenance_authentication_mode_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
 
-maintenance_authentification_mode_none = Keine Authentifizierung
-maintenance_authentification_mode_password = Passwort
-maintenance_authentification_mode_url = Geheim-URL (Standard)
+maintenance_authentication_mode_none = Keine Authentifizierung
+maintenance_authentication_mode_password = Passwort
+maintenance_authentication_mode_url = Geheim-URL (Standard)
 
 maintenance_secret_label = Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.
@@ -78,6 +78,8 @@ maintenance_block_frontend_session_notice =
 maintenance_http_response_code_label = Gewünschter Antwort-Header
 maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
 maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)
+
+maintenance_ip_added = hinzugefügt
 
 maintenance_announcement_title = Ankündigung der Wartungsarbeiten
 

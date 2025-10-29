@@ -102,7 +102,7 @@ jQuery(function($) {
                     $tokenfield.tokenfield('setTokens', tokens);
                 }
                 
-                $(this).prop('disabled', true).addClass('btn-success').html('<i class="fa fa-check"></i> ' + ip + ' hinzugefügt');
+                $(this).prop('disabled', true).addClass('btn-success').html('<i class="fa fa-check"></i> ' + ip + ' <?= $addon->i18n('maintenance_ip_added') ?>');
             }
         }
     });
