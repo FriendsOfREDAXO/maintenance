@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Inställningar för webbplatsens frontends
 maintenance_general_title = Allmänt
 
 maintenance_block_frontend_label = Aktivera underhållsläge
-maintenance_block_frontend_false = 🟢 Underhållsläge inaktiverat
-maintenance_block_frontend_true = 🔴 Underhållsläge aktiverat
+maintenance_block_frontend_false = Underhållsläge inaktiverat
+maintenance_block_frontend_true = Underhållsläge aktiverat
 
 maintenance_block_frontend_rex_user_label = Blockera även REDAXO-användare
-maintenance_block_frontend_rex_user_false = 🆗 Tillåt fortfarande åtkomst för auktoriserade REDAXO-användare
-maintenance_block_frontend_rex_user_true = 🚷 Blockera även REDAXO-användare
+maintenance_block_frontend_rex_user_false = Tillåt fortfarande åtkomst för auktoriserade REDAXO-användare
+maintenance_block_frontend_rex_user_true = Blockera även REDAXO-användare
 maintenance_block_frontend_rex_user_notice = Om aktiverat, endast administratörer och personer med tillgång via lösenord eller länk kan nå frontenden.
 
 maintenance_type_label = Autentisering
 maintenance_type_notice = Välj metod för åtkomstautentisering.
 
 maintenance_type_none = Ingen autentisering
-maintenance_type_password = 🔑 Lösenord
-maintenance_type_url = 🔗 Hemlig URL (standard)
+maintenance_type_password = Lösenord
+maintenance_type_url = Hemlig URL (standard)
 
 maintenance_secret_label = Hemlighet
 maintenance_secret_notice = Ange texten (lösenord, kodord, etc. <code>{0}</code>) som ska användas för åtkomst till webbplatsen via hemlig URL eller lösenordsinmatning.

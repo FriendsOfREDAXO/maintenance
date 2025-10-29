@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Ustawienia trybu konserwacji dla frontendu
 maintenance_general_title = Ogólne
 
 maintenance_block_frontend_label = Włącz tryb konserwacji
-maintenance_block_frontend_false = 🟢 Tryb konserwacji wyłączony
-maintenance_block_frontend_true = 🔴 Tryb konserwacji włączony
+maintenance_block_frontend_false = Tryb konserwacji wyłączony
+maintenance_block_frontend_true = Tryb konserwacji włączony
 
 maintenance_block_frontend_rex_user_label = Zablokuj również użytkowników REDAXO
-maintenance_block_frontend_rex_user_false = 🆗 Nadal zezwalaj na dostęp autoryzowanym użytkownikom REDAXO
-maintenance_block_frontend_rex_user_true = 🚷 Zablokuj również użytkowników REDAXO
+maintenance_block_frontend_rex_user_false = Nadal zezwalaj na dostęp autoryzowanym użytkownikom REDAXO
+maintenance_block_frontend_rex_user_true = Zablokuj również użytkowników REDAXO
 maintenance_block_frontend_rex_user_notice = Jeśli włączone, tylko administratorzy i osoby z dostępem przez hasło lub link mogą uzyskać dostęp do frontendu.
 
 maintenance_type_label = Autentykacja
 maintenance_type_notice = Wybierz metodę autentykacji dostępu.
 
 maintenance_type_none = Brak autentykacji
-maintenance_type_password = 🔑 Hasło
-maintenance_type_url = 🔗 Tajny URL (domyślnie)
+maintenance_type_password = Hasło
+maintenance_type_url = Tajny URL (domyślnie)
 
 maintenance_secret_label = Sekret
 maintenance_secret_notice = Wprowadź tekst (hasło, kod, itp. <code>{0}</code>), który będzie używany do dostępu do strony przez tajny URL lub wprowadzenie hasła.

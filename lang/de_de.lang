@@ -43,20 +43,20 @@ maintenance_settings_frontend_title = Wartungsmodus-Einstellungen für das Websi
 maintenance_general_title = Allgemein
 
 maintenance_block_frontend_label = Wartungsmodus aktivieren
-maintenance_block_frontend_false = 🟢 Wartungsmodus deaktiviert
-maintenance_block_frontend_true = 🔴 Wartungsmodus aktiviert
+maintenance_block_frontend_false = Wartungsmodus deaktiviert
+maintenance_block_frontend_true = Wartungsmodus aktiviert
 
 maintenance_block_frontend_rex_user_label = REDAXO-Benutzer zusätzlich ausperren
-maintenance_block_frontend_rex_user_false = 🆗 Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
-maintenance_block_frontend_rex_user_rex_user = 🚷 Auch REDAXO-Benutzer ausperren
+maintenance_block_frontend_rex_user_false = Eingeloggte REDAXO-Benutzer haben weiterhin Zugriff
+maintenance_block_frontend_rex_user_rex_user = Auch REDAXO-Benutzer ausperren
 maintenance_block_frontend_rex_user_notice = Wenn aktiviert, haben nur Administratoren und Personen mit Password oder Link Zugriff auf das Frontend.
 
 maintenance_authentification_mode_label = Authentifizierung
 maintenance_authentification_mode_notice = Authentifizierungsmethode auswählen, um Zugriff zu erhalten.
 
 maintenance_authentification_mode_none = Keine Authentifizierung
-maintenance_authentification_mode_password = 🔑 Passwort
-maintenance_authentification_mode_url = 🔗 Geheim-URL (Standard)
+maintenance_authentification_mode_password = Passwort
+maintenance_authentification_mode_url = Geheim-URL (Standard)
 
 maintenance_secret_label = Passwort
 maintenance_secret_notice = Tragen Sie hier einen beliebigen Text ein (Passwort, Passphrase, z.B. <code>{0}</code>), das zum Aufrufen der Seite per Geheim-URL oder Passwort-Eingabe genutzt werden soll.

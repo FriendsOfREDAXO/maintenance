@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Web sitesi frontend için bakım modu ayar
 maintenance_general_title = Genel
 
 maintenance_block_frontend_label = Bakım modunu etkinleştir
-maintenance_block_frontend_false = 🟢 Bakım modu devre dışı
-maintenance_block_frontend_true = 🔴 Bakım modu etkin
+maintenance_block_frontend_false = Bakım modu devre dışı
+maintenance_block_frontend_true = Bakım modu etkin
 
 maintenance_block_frontend_rex_user_label = REDAXO kullanıcılarını da engelle
-maintenance_block_frontend_rex_user_false = 🆗 Yetkili REDAXO kullanıcılarına hala erişim izni ver
-maintenance_block_frontend_rex_user_true = 🚷 REDAXO kullanıcılarını da engelle
+maintenance_block_frontend_rex_user_false = Yetkili REDAXO kullanıcılarına hala erişim izni ver
+maintenance_block_frontend_rex_user_true = REDAXO kullanıcılarını da engelle
 maintenance_block_frontend_rex_user_notice = Etkinleştirilirse, yalnızca yöneticiler ve şifre veya bağlantı ile erişim izni olan kişiler frontend'e erişebilir.
 
 maintenance_type_label = Kimlik Doğrulama
 maintenance_type_notice = Erişim için kimlik doğrulama yöntemini seçin.
 
 maintenance_type_none = Kimlik doğrulama yok
-maintenance_type_password = 🔑 Şifre
-maintenance_type_url = 🔗 Gizli URL (varsayılan)
+maintenance_type_password = Şifre
+maintenance_type_url = Gizli URL (varsayılan)
 
 maintenance_secret_label = Gizli
 maintenance_secret_notice = Siteye gizli URL veya şifre girişi aracılığıyla erişim için kullanılacak herhangi bir metni girin (örneğin, <code>{0}</code>).

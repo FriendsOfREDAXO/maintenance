@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Paramètres du mode maintenance pour le fr
 maintenance_general_title = Général
 
 maintenance_block_frontend_label = Activer le mode maintenance
-maintenance_block_frontend_false = 🟢 Mode maintenance désactivé
-maintenance_block_frontend_true = 🔴 Mode maintenance activé
+maintenance_block_frontend_false = Mode maintenance désactivé
+maintenance_block_frontend_true = Mode maintenance activé
 
 maintenance_block_frontend_rex_user_label = Exclure également les utilisateurs REDAXO
-maintenance_block_frontend_rex_user_false = 🆗 Les utilisateurs REDAXO connectés ont toujours accès
-maintenance_block_frontend_rex_user_true = 🚷 Exclure également les utilisateurs REDAXO
+maintenance_block_frontend_rex_user_false = Les utilisateurs REDAXO connectés ont toujours accès
+maintenance_block_frontend_rex_user_true = Exclure également les utilisateurs REDAXO
 maintenance_block_frontend_rex_user_notice = Si activé, seuls les administrateurs et les personnes ayant un mot de passe ou un lien auront accès au frontend.
 
 maintenance_type_label = Authentification
 maintenance_type_notice = Choisissez la méthode d'authentification pour accéder.
 
 maintenance_type_none = Aucune authentification
-maintenance_type_password = 🔑 Mot de passe
-maintenance_type_url = 🔗 URL secrète (par défaut)
+maintenance_type_password = Mot de passe
+maintenance_type_url = URL secrète (par défaut)
 
 maintenance_secret_label = Mot de passe
 maintenance_secret_notice = Entrez ici n'importe quel texte (mot de passe, phrase secrète, par exemple, <code>{0}</code>) qui devrait être utilisé pour accéder au site via une URL secrète ou une saisie de mot de passe.

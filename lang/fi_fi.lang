@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Verkkosivuston frontendin huoltotilan aset
 maintenance_general_title = Yleiset
 
 maintenance_block_frontend_label = Ota huoltotila käyttöön
-maintenance_block_frontend_false = 🟢 Huoltotila ei ole käytössä
-maintenance_block_frontend_true = 🔴 Huoltotila käytössä
+maintenance_block_frontend_false = Huoltotila ei ole käytössä
+maintenance_block_frontend_true = Huoltotila käytössä
 
 maintenance_block_frontend_rex_user_label = Estä myös REDAXO-käyttäjät
-maintenance_block_frontend_rex_user_false = 🆗 Valtuutetuilla REDAXO-käyttäjillä on edelleen pääsy
-maintenance_block_frontend_rex_user_true = 🚷 Estä myös REDAXO-käyttäjät
+maintenance_block_frontend_rex_user_false = Valtuutetuilla REDAXO-käyttäjillä on edelleen pääsy
+maintenance_block_frontend_rex_user_true = Estä myös REDAXO-käyttäjät
 maintenance_block_frontend_rex_user_notice = Jos tämä on käytössä, vain ylläpitäjillä ja salasanalla tai linkillä varustetuilla henkilöillä on pääsy frontend-puolelle.
 
 maintenance_type_label = Autentikointi
 maintenance_type_notice = Valitse pääsyn autentikointimenetelmä.
 
 maintenance_type_none = Ei autentikointia
-maintenance_type_password = 🔑 Salasana
-maintenance_type_url = 🔗 Salainen URL (oletus)
+maintenance_type_password = Salasana
+maintenance_type_url = Salainen URL (oletus)
 
 maintenance_secret_label = Salaisuus
 maintenance_secret_notice = Anna teksti (salasana, koodisana, esim. <code>{0}</code>), jota käytetään pääsyyn sivustolle salaisen URL:n tai salasanasyötön kautta.

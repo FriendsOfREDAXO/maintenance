@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Instellingen voor de onderhoudsmodus voor 
 maintenance_general_title = Algemeen
 
 maintenance_block_frontend_label = Onderhoudsmodus activeren
-maintenance_block_frontend_false = 🟢 Onderhoudsmodus gedeactiveerd
-maintenance_block_frontend_true = 🔴 Onderhoudsmodus geactiveerd
+maintenance_block_frontend_false = Onderhoudsmodus gedeactiveerd
+maintenance_block_frontend_true = Onderhoudsmodus geactiveerd
 
 maintenance_block_frontend_rex_user_label = Ook REDAXO-gebruikers blokkeren
-maintenance_block_frontend_rex_user_false = 🆗 Geautoriseerde REDAXO-gebruikers hebben nog steeds toegang
-maintenance_block_frontend_rex_user_true = 🚷 Ook REDAXO-gebruikers blokkeren
+maintenance_block_frontend_rex_user_false = Geautoriseerde REDAXO-gebruikers hebben nog steeds toegang
+maintenance_block_frontend_rex_user_true = Ook REDAXO-gebruikers blokkeren
 maintenance_block_frontend_rex_user_notice = Indien geactiveerd, hebben alleen beheerders en personen met een wachtwoord of link toegang tot de frontend.
 
 maintenance_type_label = Authenticatie
 maintenance_type_notice = Kies de authenticatiemethode voor toegang.
 
 maintenance_type_none = Geen authenticatie
-maintenance_type_password = 🔑 Wachtwoord
-maintenance_type_url = 🔗 Geheime URL (standaard)
+maintenance_type_password = Wachtwoord
+maintenance_type_url = Geheime URL (standaard)
 
 maintenance_secret_label = Geheim
 maintenance_secret_notice = Voer elke tekst in (wachtwoord, codewoord, bijvoorbeeld, <code>{0}</code>) die zal worden gebruikt voor toegang tot de site via de geheime URL of wachtwoordinvoer.

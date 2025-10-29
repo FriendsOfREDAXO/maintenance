@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Innstillinger for vedlikeholdsmodus for ne
 maintenance_general_title = Generelt
 
 maintenance_block_frontend_label = Aktiver vedlikeholdsmodus
-maintenance_block_frontend_false = 🟢 Vedlikeholdsmodus deaktivert
-maintenance_block_frontend_true = 🔴 Vedlikeholdsmodus aktivert
+maintenance_block_frontend_false = Vedlikeholdsmodus deaktivert
+maintenance_block_frontend_true = Vedlikeholdsmodus aktivert
 
 maintenance_block_frontend_rex_user_label = Blokker også REDAXO-brukere
-maintenance_block_frontend_rex_user_false = 🆗 Tillat tilgang for autoriserte REDAXO-brukere
-maintenance_block_frontend_rex_user_true = 🚷 Blokker også REDAXO-brukere
+maintenance_block_frontend_rex_user_false = Tillat tilgang for autoriserte REDAXO-brukere
+maintenance_block_frontend_rex_user_true = Blokker også REDAXO-brukere
 maintenance_block_frontend_rex_user_notice = Hvis aktivert, bare administratorer og personer med tilgang via passord eller link kan få tilgang til frontend.
 
 maintenance_type_label = Autentisering
 maintenance_type_notice = Velg autentiseringsmetode for tilgang.
 
 maintenance_type_none = Ingen autentisering
-maintenance_type_password = 🔑 Passord
-maintenance_type_url = 🔗 Hemmelig URL (standard)
+maintenance_type_password = Passord
+maintenance_type_url = Hemmelig URL (standard)
 
 maintenance_secret_label = Hemmelighet
 maintenance_secret_notice = Angi teksten (passord, hemmelig kode, etc. <code>{0}</code>) som vil bli brukt for tilgang til nettstedet via hemmelig URL eller ved å oppgi passord.

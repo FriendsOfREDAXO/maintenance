@@ -31,20 +31,20 @@ maintenance_settings_frontend_title = Setările modului de întreținere pentru 
 maintenance_general_title = General
 
 maintenance_block_frontend_label = Activează modul de întreținere
-maintenance_block_frontend_false = 🟢 Modul de întreținere dezactivat
-maintenance_block_frontend_true = 🔴 Modul de întreținere activat
+maintenance_block_frontend_false = Modul de întreținere dezactivat
+maintenance_block_frontend_true = Modul de întreținere activat
 
 maintenance_block_frontend_rex_user_label = Blochează și utilizatorii REDAXO
-maintenance_block_frontend_rex_user_false = 🆗 Permite accesul utilizatorilor REDAXO autorizați
-maintenance_block_frontend_rex_user_true = 🚷 Blochează și utilizatorii REDAXO
+maintenance_block_frontend_rex_user_false = Permite accesul utilizatorilor REDAXO autorizați
+maintenance_block_frontend_rex_user_true = Blochează și utilizatorii REDAXO
 maintenance_block_frontend_rex_user_notice = Dacă este activat, doar administratorii și persoanele cu acces prin parolă sau link pot accesa frontend-ul.
 
 maintenance_type_label = Autentificare
 maintenance_type_notice = Alegeți metoda de autentificare pentru acces.
 
 maintenance_type_none = Fără autentificare
-maintenance_type_password = 🔑 Parolă
-maintenance_type_url = 🔗 URL secret (implicit)
+maintenance_type_password = Parolă
+maintenance_type_url = URL secret (implicit)
 
 maintenance_secret_label = Secret
 maintenance_secret_notice = Introduceți textul (parola, codul secret, etc. <code>{0}</code>) care va fi folosit pentru accesul la site prin URL secret sau introducerea parolei.
