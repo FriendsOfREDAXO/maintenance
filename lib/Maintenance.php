@@ -396,17 +396,17 @@ class Maintenance
         if (self::getBoolConfig('block_frontend', false)) {
             $page['title'] .= ' <span class="label label-danger pull-right">F</span>';
             $page['icon'] .= ' fa-toggle-on block_frontend';
-        }
+            
+            // Check for domain-based maintenance - nur wenn Frontend-Wartung aktiv
+            $domainStatus = (array) self::getConfig('domain_status', []);
+            $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
+            $activeDomains = array_filter($domainStatus);
 
-        // Check for domain-based maintenance
-        $domainStatus = (array) self::getConfig('domain_status', []);
-        $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
-        $activeDomains = array_filter($domainStatus);
-
-        if ($allDomainsLocked || !empty($activeDomains)) {
-            $count = $allDomainsLocked ? 'All' : count($activeDomains);
-            $page['title'] .= ' <span class="label label-warning pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
-            $page['icon'] .= ' fa-sitemap';
+            if ($allDomainsLocked || !empty($activeDomains)) {
+                $count = $allDomainsLocked ? 'All' : count($activeDomains);
+                $page['title'] .= ' <span class="label label-warning pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
+                $page['icon'] .= ' fa-sitemap';
+            }
         }
 
         self::getAddOn()->setProperty('page', $page);

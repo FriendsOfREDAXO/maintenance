@@ -19,58 +19,62 @@ $fragment->setVar('title', rex_i18n::msg('maintenance_preview_title'), false);
 $fragment->setVar('body', $preview, false);
 $sidebarContent .= $fragment->parse('core/page/section.php');
 
-/* Kopieren der URL für den Wartungsmodus */
-$copy = '<ul class="list-group">';
+/* Kopieren der URL für den Wartungsmodus - nur wenn Frontend-Wartung aktiv */
+$frontendActive = rex_config::get('maintenance', 'block_frontend', false);
 
-// Prüfen, ob YRewrite verfügbar ist
-$yrewriteAvailable = rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable();
-$allDomainsLocked = rex_config::get('maintenance', 'all_domains_locked', false);
-$domainStatus = rex_config::get('maintenance', 'domain_status', []);
+if ($frontendActive) {
+    $copy = '<ul class="list-group">';
 
-// Standard-Domain immer anzeigen, wenn Frontend-Wartung aktiv ist oder alle Domains gesperrt sind
-if (rex_config::get('maintenance', 'block_frontend') || $allDomainsLocked) {
-    $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-    $copy .= '<li class="list-group-item">';
-    $copy .= '<label for="maintenance-mode-url">' . $addon->i18n('maintenance_bypass_url_default') . '</label>';
-    $copy .= '
-    <clipboard-copy for="maintenance-mode-url" class="input-group">
-      <input id="maintenance-mode-url" type="text" value="' . $url . '" readonly class="form-control">
-      <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
-    </clipboard-copy></li>';
-}
+    // Prüfen, ob YRewrite verfügbar ist
+    $yrewriteAvailable = rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable();
+    $allDomainsLocked = rex_config::get('maintenance', 'all_domains_locked', false);
+    $domainStatus = rex_config::get('maintenance', 'domain_status', []);
 
-// YRewrite-Domains nur anzeigen, wenn sie gesperrt sind
-if ($yrewriteAvailable && count(rex_yrewrite::getDomains()) > 1) {
-    foreach (rex_yrewrite::getDomains() as $key => $domain) {
-        if ('default' == $key) {
-            continue;
-        }
+    // Standard-Domain immer anzeigen, wenn Frontend-Wartung aktiv ist oder alle Domains gesperrt sind
+    if ($frontendActive || $allDomainsLocked) {
+        $url = '' . rex::getServer() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+        $copy .= '<li class="list-group-item">';
+        $copy .= '<label for="maintenance-mode-url">' . $addon->i18n('maintenance_bypass_url_default') . '</label>';
+        $copy .= '
+        <clipboard-copy for="maintenance-mode-url" class="input-group">
+          <input id="maintenance-mode-url" type="text" value="' . $url . '" readonly class="form-control">
+          <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+        </clipboard-copy></li>';
+    }
 
-        // Domain nur anzeigen, wenn:
-        // - Alle Domains gesperrt sind ODER
-        // - Diese spezifische Domain gesperrt ist
-        $isDomainLocked = $allDomainsLocked || (isset($domainStatus[$key]) && 1 == $domainStatus[$key]);
+    // YRewrite-Domains nur anzeigen, wenn sie gesperrt sind
+    if ($yrewriteAvailable && count(rex_yrewrite::getDomains()) > 1) {
+        foreach (rex_yrewrite::getDomains() as $key => $domain) {
+            if ('default' == $key) {
+                continue;
+            }
 
-        if ($isDomainLocked) {
-            $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
-            $copy .= '<li class="list-group-item">';
-            $copy .= '<label for="maintenance-mode-url-' . $key . '">YRewrite: ' . htmlspecialchars($key) . '</label>';
-            $copy .= '
-            <clipboard-copy for="maintenance-mode-url-' . $key . '" class="input-group">
-              <input id="maintenance-mode-url-' . $key . '" type="text" value="' . $url . '" readonly class="form-control">
-              <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
-            </clipboard-copy></li>';
+            // Domain nur anzeigen, wenn:
+            // - Alle Domains gesperrt sind ODER
+            // - Diese spezifische Domain gesperrt ist
+            $isDomainLocked = $allDomainsLocked || (isset($domainStatus[$key]) && 1 == $domainStatus[$key]);
+
+            if ($isDomainLocked) {
+                $url = $domain->getUrl() . '?maintenance_secret=' . rex_config::get('maintenance', 'maintenance_secret');
+                $copy .= '<li class="list-group-item">';
+                $copy .= '<label for="maintenance-mode-url-' . $key . '">YRewrite: ' . htmlspecialchars($key) . '</label>';
+                $copy .= '
+                <clipboard-copy for="maintenance-mode-url-' . $key . '" class="input-group">
+                  <input id="maintenance-mode-url-' . $key . '" type="text" value="' . $url . '" readonly class="form-control">
+                  <span class="input-group-addon"><i class="rex-icon fa-clone"></i></span>
+                </clipboard-copy></li>';
+            }
         }
     }
+
+    $copy .= '</ul>';
+
+    $fragment = new rex_fragment();
+    $fragment->setVar('class', 'info', false);
+    $fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
+    $fragment->setVar('body', $copy, false);
+    $sidebarContent .= $fragment->parse('core/page/section.php');
 }
-
-$copy .= '</ul>';
-
-$fragment = new rex_fragment();
-$fragment->setVar('class', 'info', false);
-$fragment->setVar('title', rex_i18n::msg('maintenance_copy_url_title'), false);
-$fragment->setVar('body', $copy, false);
-$sidebarContent .= $fragment->parse('core/page/section.php');
 
 /* Quick Links */
 $quickLinks = '<div class="btn-group-vertical btn-block">';
