@@ -14,3 +14,15 @@
 .label-purple {
 	background-color: #9b59b6;
 }
+
+/* Wobble animation for Frontend badge */
+@keyframes wobble {
+	0%, 100% { transform: rotate(0deg); }
+	25% { transform: rotate(-3deg); }
+	75% { transform: rotate(3deg); }
+}
+
+.block_frontend .label-danger {
+	animation: wobble 3s ease-in-out infinite;
+	display: inline-block;
+}
