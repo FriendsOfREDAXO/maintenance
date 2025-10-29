@@ -66,40 +66,93 @@ Dazu einfach die aktuelle IP des Servers, auf dem REDAXO installiert ist und von
 
 ## Konsole
 
-Es wird die im Backend ausgewählte Sperrseite angezeigt.
+Das Addon bietet verschiedene Konsolen-Befehle zur Verwaltung des Wartungsmodus:
 
-Aktivieren des Wartungsmodus:
+### Status anzeigen
+
+Zeigt den aktuellen Status aller Wartungsmodi an:
+
+```bash
+php redaxo/bin/console maintenance:mode status
+```
+
+### Frontend-Wartungsmodus
+
+Aktivieren:
+```bash
+php redaxo/bin/console maintenance:mode frontend on
+```
+
+Deaktivieren:
+```bash
+php redaxo/bin/console maintenance:mode frontend off
+```
+
+### Backend-Wartungsmodus
+
+Aktivieren:
+```bash
+php redaxo/bin/console maintenance:mode backend on
+```
+
+Deaktivieren:
+```bash
+php redaxo/bin/console maintenance:mode backend off
+```
+
+### Alle Modi gleichzeitig
+
+Alle Wartungsmodi (Frontend, Backend und alle Domains) aktivieren:
+```bash
+php redaxo/bin/console maintenance:mode all on
+```
+
+Alle Wartungsmodi deaktivieren:
+```bash
+php redaxo/bin/console maintenance:mode all off
+```
+
+### Domain-spezifische Wartung (YRewrite)
+
+Einzelne Domain sperren:
+```bash
+php redaxo/bin/console maintenance:mode domain example.com --lock
+```
+
+Einzelne Domain entsperren:
+```bash
+php redaxo/bin/console maintenance:mode domain example.com --unlock
+```
+
+### Legacy-Unterstützung
+
+Die alten Befehle funktionieren weiterhin (steuern nur den Frontend-Modus):
 
 ```bash
 php redaxo/bin/console maintenance:mode on
-```
-
-Deaktivieren des Wartungsmodus:
-
-```bash
 php redaxo/bin/console maintenance:mode off
 ```
 
 ## Autor
 
-### FriendsOfREDAXO
+**Thomas Skerbis** – [KLXM Crossmedia](https://klxm.de)
 
-* <http://www.redaxo.org>
-* <https://github.com/FriendsOfREDAXO>
+## Projekt-Lead
+
+* [Thomas Skerbis](https://github.com/skerbis)
 
 ## Projekt-Team
 
-* [Alexander Walther](https://github.com/alxndr-w)
 * [Simon Krull](https://github.com/crydotsnake)
 
 ## Credits
 
 Danke an:
 
-* [KLXM Crossmedia / Thomas Skerbis](https://klxm.de) // former lead
 * [Christian Gehrke](https://github.com/chrison94) // first version
 * [Thorben](https://github.com/eaCe)
 * [Oliver Kreischer](https://github.com/olien)
+* [Alexander Walther](https://www.alexplus.de)
 * u.v.a
 
 
