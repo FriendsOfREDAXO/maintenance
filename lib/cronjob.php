@@ -19,7 +19,7 @@ use FriendsOfREDAXO\Maintenance\Maintenance;
  */
 class rex_cronjob_scheduled_maintenance extends rex_cronjob
 {
-    public function execute(): bool
+    public function execute()
     {
         // Call the scheduled maintenance checker
         Maintenance::checkScheduledMaintenance();
@@ -43,12 +43,12 @@ class rex_cronjob_scheduled_maintenance extends rex_cronjob
         return true;
     }
 
-    public function getTypeName(): string
+    public function getTypeName()
     {
         return rex_i18n::msg('maintenance_cronjob_scheduled_name');
     }
 
-    public function getParamFields(): array
+    public function getParamFields()
     {
         return [];
     }
