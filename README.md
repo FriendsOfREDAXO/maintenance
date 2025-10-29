@@ -38,6 +38,21 @@ Die **zeitgesteuerte Wartung** ermöglicht es, den Wartungsmodus automatisch zu 
 
 **Format**: `YYYY-MM-DD HH:MM:SS` (z.B. `2025-12-31 23:59:59`)
 
+#### Cronjob für präzise Zeitsteuerung
+
+Für minutengenaue Steuerung kann optional ein Cronjob eingerichtet werden:
+
+1. Im REDAXO-Backend zu **System > Cronjobs** navigieren
+2. Auf **"+"** klicken, um einen neuen Cronjob zu erstellen
+3. Folgende Einstellungen vornehmen:
+   - **Name**: z.B. "Geplante Wartung prüfen"
+   - **Typ**: `Geplante Wartung prüfen` (aus Dropdown wählen)
+   - **Ausführungsart**: z.B. "Jede Minute" oder "Alle 5 Minuten"
+   - **Umgebung**: "Frontend, Backend, Skript"
+4. Speichern
+
+**Hinweis**: Der Cronjob ist optional. Auch ohne Cronjob wird die zeitgesteuerte Wartung bei jedem Frontend-Aufruf automatisch geprüft und aktiviert/deaktiviert. Der Cronjob sorgt nur für präziseres Timing, wenn die Website gerade nicht aufgerufen wird.
+
 ### Sperren des REDAXO-Backends
 
 * Sperren des REDAXO-Backends für alle Benutzer (außer Admins)
