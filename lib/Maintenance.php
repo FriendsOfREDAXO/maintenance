@@ -246,9 +246,10 @@ class Maintenance
 
         // Check if the current domain is in maintenance mode (new domain-based logic)
         $domainInMaintenance = self::isDomainInMaintenance();
+        $blockFrontend = self::getBoolConfig('block_frontend', false);
 
-        // If domain is NOT in maintenance, allow access
-        if (!$domainInMaintenance) {
+        // If neither frontend blocking nor domain-based maintenance is active, allow access
+        if (!$blockFrontend && !$domainInMaintenance) {
             return;
         }
 
