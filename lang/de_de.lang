@@ -90,6 +90,8 @@ maintenance_silent_mode_enable = Nur HTTP-Status senden, keine Inhalte anzeigen
 maintenance_silent_mode_notice = Ideal für Staging-Umgebungen: Sendet nur den HTTP-Status-Code ohne HTML-Inhalt. Verhindert Rückschlüsse auf das verwendete CMS und zeigt keine Wartungsmeldungen an.
 
 maintenance_ip_added = hinzugefügt
+maintenance_my_ip_title = Meine IP-Adresse
+maintenance_add_my_ip = Meine IP zur Whitelist hinzufügen
 
 maintenance_announcement_title = Ankündigung der Wartungsarbeiten
 
@@ -120,6 +122,8 @@ maintenance_allowed_yrewrite_domains_label = Liste erlaubter YRewrite-Domains
 maintenance_allowed_yrewrite_domains_notice = YRewrite-Domains eintragen, die nicht gesperrt werden sollen.
 
 maintenance_copy_url_title = URL kopieren
+maintenance_copy = Kopieren
+maintenance_copied = Kopiert!
 
 maintenance_preview_title = Vorschau
 maintenance_preview = Vorschau in neuem Fenster anzeigen

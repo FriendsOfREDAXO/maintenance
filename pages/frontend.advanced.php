@@ -86,13 +86,14 @@ $fragment->setVar('body', $form->get(), false);
     </div>
 </div>
 
-<script>
+<script nonce="<?= rex_response::getNonce() ?>">
 jQuery(function($) {
     // IP per Klick zur Tokenfield-Liste hinzufügen
-    $('[data-add-ip]').on('click', function(e) {
+    $(document).on('click', '[data-add-ip]', function(e) {
         e.preventDefault();
         var ip = $(this).data('add-ip');
         var $tokenfield = $('[name="config[maintenance][allowed_ips]"]');
+        var $button = $(this);
         
         if ($tokenfield.length) {
             var currentValue = $tokenfield.val();
@@ -101,14 +102,28 @@ jQuery(function($) {
             // Prüfen, ob IP bereits existiert
             if (tokens.indexOf(ip) === -1) {
                 tokens.push(ip);
-                $tokenfield.val(tokens.join(', '));
+                var newValue = tokens.join(', ');
+                $tokenfield.val(newValue);
                 
                 // Tokenfield aktualisieren, falls bereits initialisiert
                 if ($tokenfield.data('bs.tokenfield')) {
                     $tokenfield.tokenfield('setTokens', tokens);
+                } else {
+                    // Falls Tokenfield noch nicht initialisiert ist, warten und dann aktualisieren
+                    setTimeout(function() {
+                        if ($tokenfield.data('bs.tokenfield')) {
+                            $tokenfield.tokenfield('setTokens', tokens);
+                        }
+                    }, 100);
                 }
                 
-                $(this).prop('disabled', true).addClass('btn-success').html('<i class="fa fa-check"></i> ' + ip + ' <?= $addon->i18n('maintenance_ip_added') ?>');
+                // Button-Feedback
+                $button.prop('disabled', true).addClass('btn-success').removeClass('btn-default')
+                    .html('<i class="fa fa-check"></i> ' + ip + ' <?= $addon->i18n('maintenance_ip_added') ?>');
+            } else {
+                // IP existiert bereits
+                $button.prop('disabled', true).addClass('btn-warning').removeClass('btn-default')
+                    .html('<i class="fa fa-info-circle"></i> IP bereits vorhanden');
             }
         }
     });
