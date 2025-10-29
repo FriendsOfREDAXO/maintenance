@@ -31,9 +31,10 @@ $field->setAttribute('class', 'form-control');
 // Aktivierung/Deaktivierung des Wartungsmodus im Frontend - für alle Benutzer verfügbar
 $field = $form->addSelectField('block_frontend');
 $field->setLabel($addon->i18n('maintenance_block_frontend_label'));
+$field->setAttribute('class', 'form-control selectpicker');
 $select = $field->getSelect();
-$select->addOption($addon->i18n('maintenance_block_frontend_false'), 0);
-$select->addOption($addon->i18n('maintenance_block_frontend_true'), 1);
+$select->addOption($addon->i18n('maintenance_block_frontend_false'), 0, null, null, ['data-icon' => 'rex-icon fa-circle-xmark']);
+$select->addOption($addon->i18n('maintenance_block_frontend_true'), 1, null, null, ['data-icon' => 'rex-icon fa-circle-check']);
 
 // Passwort zum Umgehen des Wartungsmodus - für alle Benutzer verfügbar
 $field = $form->addTextField('maintenance_secret');
@@ -84,16 +85,18 @@ if ($isAdmin) {
     // Umgehung der Wartung durch GET-Parameter (URL) oder Passwort
     $field = $form->addSelectField('authentification_mode');
     $field->setLabel($addon->i18n('maintenance_authentification_mode_label'));
+    $field->setAttribute('class', 'form-control selectpicker');
     $select = $field->getSelect();
-    $select->addOption($addon->i18n('maintenance_authentification_mode_url'), 'URL');
-    $select->addOption($addon->i18n('maintenance_authentification_mode_password'), 'password');
+    $select->addOption($addon->i18n('maintenance_authentification_mode_url'), 'URL', null, null, ['data-icon' => 'rex-icon fa-link']);
+    $select->addOption($addon->i18n('maintenance_authentification_mode_password'), 'password', null, null, ['data-icon' => 'rex-icon fa-key']);
 
     // Blockere auch für angemeldete REDAXO-Benutzer das Frontend
     $field = $form->addSelectField('block_frontend_rex_user');
     $field->setLabel($addon->i18n('maintenance_block_frontend_rex_user_label'));
+    $field->setAttribute('class', 'form-control selectpicker');
     $select = $field->getSelect();
-    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0);
-    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1);
+    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_false'), 0, null, null, ['data-icon' => 'rex-icon fa-user-check']);
+    $select->addOption($addon->i18n('maintenance_block_frontend_rex_user_rex_user'), 1, null, null, ['data-icon' => 'rex-icon fa-user-lock']);
 
     // Ziel der Umleitung
     $field = $form->addTextField('redirect_frontend_to_url');
@@ -104,9 +107,10 @@ if ($isAdmin) {
     // Antwortcode
     $field = $form->addSelectField('http_response_code');
     $field->setLabel($addon->i18n('maintenance_http_response_code_label'));
+    $field->setAttribute('class', 'form-control selectpicker');
     $select = $field->getSelect();
-    $select->addOption($addon->i18n('maintenance_http_response_code_503'), '503');
-    $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403');
+    $select->addOption($addon->i18n('maintenance_http_response_code_503'), '503', null, null, ['data-icon' => 'rex-icon fa-clock']);
+    $select->addOption($addon->i18n('maintenance_http_response_code_403'), '403', null, null, ['data-icon' => 'rex-icon fa-ban']);
 
     // Wartungsfenster-Ankündigung
     $form->addFieldset($addon->i18n('maintenance_announcement_title'));
