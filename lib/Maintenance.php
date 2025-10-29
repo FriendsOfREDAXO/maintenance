@@ -253,6 +253,14 @@ class Maintenance
             return;
         }
 
+        // Silent mode check early: Only send HTTP status, no further processing
+        $silentMode = (bool) self::getConfig('silent_mode', false);
+        if ($silentMode) {
+            $responsecode = (int) self::getConfig('http_response_code', 503);
+            header('HTTP/1.1 ' . $responsecode);
+            exit;
+        }
+
         // If the IP address is allowed, do not block the request
         if (self::isIpAllowed()) {
             return;
@@ -303,7 +311,6 @@ class Maintenance
         // Block everything that has not been allowed so far as chosen in the settings
         $redirect_url = (string) self::getConfig('redirect_frontend_to_url', '');
         $responsecode = (int) self::getConfig('http_response_code', 503);
-        $silentMode = (bool) self::getConfig('silent_mode', false);
 
         // Redirect if configured
         if ('' !== $redirect_url) {
@@ -311,13 +318,7 @@ class Maintenance
             rex_response::sendRedirect($redirect_url);
         }
 
-        // Silent mode: Only send HTTP status, no content
-        if ($silentMode) {
-            header('HTTP/1.1 ' . $responsecode);
-            exit;
-        }
-
-        // Regular mode: Show maintenance page
+        // Show maintenance page
         $mpage = new rex_fragment();
         header('HTTP/1.1 ' . $responsecode);
         exit($mpage->parse('maintenance/frontend.php'));

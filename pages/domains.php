@@ -12,8 +12,8 @@
 
 $addon = rex_addon::get('maintenance');
 
-// Wenn YRewrite nicht verfügbar ist, Hinweis anzeigen
-if (!rex_addon::get('yrewrite')->isAvailable()) {
+// Wenn YRewrite nicht installiert oder verfügbar ist, Hinweis anzeigen
+if (!rex_addon::exists('yrewrite') || !rex_addon::get('yrewrite')->isAvailable()) {
     echo rex_view::info($addon->i18n('maintenance_yrewrite_not_available'));
     return;
 }

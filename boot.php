@@ -18,13 +18,7 @@ if (rex::isSetup()) {
 rex_extension::register('PACKAGES_INCLUDED', static function () {
     $addon = rex_addon::get('maintenance');
 
-    // Check domain-based maintenance or global frontend maintenance
-    $domainInMaintenance = false;
-    if (rex::isFrontend() && rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable()) {
-        $domainInMaintenance = Maintenance::isDomainInMaintenance();
-    }
-
-    if (rex::isFrontend() && ((bool) $addon->getConfig('block_frontend') || $domainInMaintenance)) {
+    if (rex::isFrontend() && ((bool) $addon->getConfig('block_frontend') || Maintenance::isDomainInMaintenance())) {
         Maintenance::checkFrontend();
     }
     if (rex::isBackend() && (bool) $addon->getConfig('block_backend')) {
