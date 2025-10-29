@@ -71,6 +71,40 @@ $field->setLabel($addon->i18n('maintenance_redirect_frontend_to_url_label'));
 $field->setNotice($addon->i18n('maintenance_redirect_frontend_to_url_notice'));
 $field->setAttribute('type', 'url');
 
+// Scheduled Maintenance
+$form->addFieldset($addon->i18n('maintenance_scheduled_title'));
+
+// Info-Text für geplante Wartung
+$field = $form->addRawField('<p class="help-block">' . $addon->i18n('maintenance_scheduled_info') . '</p>');
+
+// Geplanter Start
+$field = $form->addTextField('scheduled_start');
+$field->setLabel($addon->i18n('maintenance_scheduled_start_label'));
+$field->setNotice($addon->i18n('maintenance_scheduled_start_notice') . '<br><small>' . $addon->i18n('maintenance_scheduled_example') . '</small>');
+$field->setAttribute('placeholder', '2025-12-31 02:00:00');
+
+// Geplantes Ende
+$field = $form->addTextField('scheduled_end');
+$field->setLabel($addon->i18n('maintenance_scheduled_end_label'));
+$field->setNotice($addon->i18n('maintenance_scheduled_end_notice') . '<br><small>' . $addon->i18n('maintenance_scheduled_example') . '</small>');
+$field->setAttribute('placeholder', '2025-12-31 06:00:00');
+
+// Aktuellen Status anzeigen
+$scheduledStart = (string) $addon->getConfig('scheduled_start', '');
+$scheduledEnd = (string) $addon->getConfig('scheduled_end', '');
+if ('' !== $scheduledStart || '' !== $scheduledEnd) {
+    $statusHtml = '<div class="alert alert-info">';
+    $statusHtml .= '<strong>' . $addon->i18n('maintenance_scheduled_active') . '</strong><br>';
+    if ('' !== $scheduledStart) {
+        $statusHtml .= $addon->i18n('maintenance_scheduled_starts_at') . ': <code>' . rex_escape($scheduledStart) . '</code><br>';
+    }
+    if ('' !== $scheduledEnd) {
+        $statusHtml .= $addon->i18n('maintenance_scheduled_ends_at') . ': <code>' . rex_escape($scheduledEnd) . '</code>';
+    }
+    $statusHtml .= '</div>';
+    $field = $form->addRawField($statusHtml);
+}
+
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);
 $fragment->setVar('title', $addon->i18n('maintenance_settings_frontend_title'), false);

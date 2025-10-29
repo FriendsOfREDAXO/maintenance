@@ -238,11 +238,53 @@ class Maintenance
     }
 
     /**
+     * Checks and applies scheduled maintenance mode (automatic activation/deactivation).
+     * Called on every request to check if maintenance should be auto-enabled or auto-disabled.
+     */
+    public static function checkScheduledMaintenance(): void
+    {
+        $addon = self::getAddOn();
+        $now = time();
+        
+        $scheduledStart = (string) self::getConfig('scheduled_start', '');
+        $scheduledEnd = (string) self::getConfig('scheduled_end', '');
+        
+        // Parse scheduled times
+        $startTime = '' !== $scheduledStart ? strtotime($scheduledStart) : false;
+        $endTime = '' !== $scheduledEnd ? strtotime($scheduledEnd) : false;
+        
+        $blockFrontend = self::getBoolConfig('block_frontend', false);
+        
+        // Auto-activate: If we're past start time and before end time, enable maintenance
+        if (false !== $startTime && $now >= $startTime) {
+            if (false === $endTime || $now < $endTime) {
+                // Should be in maintenance mode
+                if (!$blockFrontend) {
+                    $addon->setConfig('block_frontend', true);
+                }
+            }
+        }
+        
+        // Auto-deactivate: If we're past end time, disable maintenance
+        if (false !== $endTime && $now >= $endTime) {
+            if ($blockFrontend) {
+                $addon->setConfig('block_frontend', false);
+                // Clear scheduled times after successful deactivation
+                $addon->setConfig('scheduled_start', '');
+                $addon->setConfig('scheduled_end', '');
+            }
+        }
+    }
+
+    /**
      * Checks frontend access and shows maintenance page if necessary.
      */
     public static function checkFrontend(): void
     {
         rex_login::startSession();
+
+        // Check scheduled maintenance (auto-enable/disable based on time)
+        self::checkScheduledMaintenance();
 
         // Check if the current domain is in maintenance mode (new domain-based logic)
         $domainInMaintenance = self::isDomainInMaintenance();

@@ -19,6 +19,24 @@ Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von 
   * Hosts
   * YRewrite-Domains (neu in Version 3.0.0)
 * Meldung und Zeitraum zur Ankündigung eines Wartungsfensters definieren (neu in Version 3.0.0)
+* **Zeitgesteuerte Wartung**: Automatische Aktivierung/Deaktivierung zu festgelegten Zeiten (neu in Version 3.5.0)
+
+### Zeitgesteuerte Wartung
+
+Die **zeitgesteuerte Wartung** ermöglicht es, den Wartungsmodus automatisch zu einem bestimmten Zeitpunkt zu aktivieren und zu deaktivieren:
+
+* **Request-basiert**: Wird bei jedem Seitenaufruf geprüft (keine Cronjob-Konfiguration nötig)
+* **Optional per Cronjob**: Für präzisere Steuerung kann der Cronjob "Geplante Wartung prüfen" eingerichtet werden
+* **Automatische Bereinigung**: Nach erfolgreicher Deaktivierung werden die geplanten Zeiten automatisch gelöscht
+
+**Verwendung:**
+
+1. In den Frontend-Einstellungen unter "Zeitgesteuerte Wartung":
+   - **Startzeitpunkt** eingeben (z.B. `2025-12-31 02:00:00`)
+   - **Endzeitpunkt** eingeben (z.B. `2025-12-31 06:00:00`)
+2. Speichern - der Wartungsmodus wird zur konfigurierten Zeit automatisch aktiviert und deaktiviert
+
+**Format**: `YYYY-MM-DD HH:MM:SS` (z.B. `2025-12-31 23:59:59`)
 
 ### Sperren des REDAXO-Backends
 

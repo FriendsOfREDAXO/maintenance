@@ -18,7 +18,13 @@ maintenance_mode_activated = Wartung Aktiviert
 maintenance_mode_deactivated = Wartung deaktiviert
 maintenance_mode_already_activated = Die Wartung ist bereits aktiviert
 maintenance_mode_already_deactivated = Die Wartung ist bereits deaktiviert
-maintenance_mode_invalid = Ungültiges Argument! Benutze „on“ oder „off“
+maintenance_mode_invalid = Ungültiges Argument! Benutze „on" oder „off"
+
+// Cronjob
+
+maintenance_cronjob_scheduled_name = Geplante Wartung prüfen
+
+// Allgemein
 
 // Einstellungsseite Backend
 
@@ -148,6 +154,19 @@ maintenance_announcement_settings = Ankündigung
 maintenance_announcement_info_title = Verwendung
 maintenance_announcement_info_text = Die Wartungsankündigung kann im Template mit der folgenden Funktion ausgegeben werden
 maintenance_announcement_usage = Code-Beispiel
+
+// Scheduled Maintenance
+
+maintenance_scheduled_title = Zeitgesteuerte Wartung
+maintenance_scheduled_info = Automatische Aktivierung und Deaktivierung des Wartungsmodus zu festgelegten Zeiten
+maintenance_scheduled_start_label = Startzeitpunkt
+maintenance_scheduled_start_notice = Wartungsmodus wird automatisch aktiviert (Format: YYYY-MM-DD HH:MM:SS)
+maintenance_scheduled_end_label = Endzeitpunkt
+maintenance_scheduled_end_notice = Wartungsmodus wird automatisch deaktiviert und geplante Zeiten werden zurückgesetzt
+maintenance_scheduled_active = Geplante Wartung aktiv
+maintenance_scheduled_starts_at = Startet am
+maintenance_scheduled_ends_at = Endet am
+maintenance_scheduled_example = Beispiel: 2025-12-31 02:00:00
 
 // Quick Links
 
