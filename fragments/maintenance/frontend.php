@@ -370,7 +370,7 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
                         <path d="M2 12h20"></path>
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                     </svg>
-                    <span id="language-text">Language</span>
+                    <span id="language-text">Deutsch</span>
                 </button>
                 <div class="language-menu" id="language-menu">
                     <button class="language-option" data-lang="en">
@@ -462,12 +462,16 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
                     option.addEventListener('click', function(e) {
                         e.stopPropagation();
                         var selectedLang = this.getAttribute('data-lang');
+                        var langName = this.textContent.trim().replace(/^(EN|DE)\s*/, '');
                         
                         // Update button states
                         languageOptions.forEach(function(opt) {
                             opt.classList.remove('active');
                         });
                         this.classList.add('active');
+                        
+                        // Update button text
+                        document.getElementById('language-text').textContent = langName;
                         
                         // Update text visibility
                         langTexts.forEach(function(text) {
