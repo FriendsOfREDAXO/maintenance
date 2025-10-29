@@ -81,6 +81,7 @@ default_config:
       maintenance_backend_update_interval: 60
       domain_status: []
       all_domains_locked: false
+      silent_mode: false  # If true, only send HTTP status without content
 
 installer_ignore:
     - .git

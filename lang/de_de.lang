@@ -79,6 +79,10 @@ maintenance_http_response_code_label = Gewünschter Antwort-Header
 maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
 maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)
 
+maintenance_silent_mode_label = Silent Mode (Staging/Development)
+maintenance_silent_mode_enable = Nur HTTP-Status senden, keine Inhalte anzeigen
+maintenance_silent_mode_notice = Ideal für Staging-Umgebungen: Sendet nur den HTTP-Status-Code ohne HTML-Inhalt. Verhindert Rückschlüsse auf das verwendete CMS und zeigt keine Wartungsmeldungen an.
+
 maintenance_ip_added = hinzugefügt
 
 maintenance_announcement_title = Ankündigung der Wartungsarbeiten

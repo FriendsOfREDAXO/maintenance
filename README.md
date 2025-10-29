@@ -12,6 +12,7 @@ Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von 
 * Optionales Sperren des Frontends auch für REDAXO-Benutzer (außer Admins)
 * Optionale Weiterleitung zu einer festgelegten URL, z.B. REDAXO-Login
 * Festlegen des HTTP-Statuscodes (z.B. 503 Service Unavailable)
+* **Silent Mode**: Nur HTTP-Status ohne HTML-Content (ideal für Staging/Development)
 * Anpassen der Sperrseite durch eigenes Fragment (`maintenance/frontend.php`)
 * Definieren von Ausnahmen, die dennoch Zugriff erhalten, z.B. für
   * IP-Adressen
@@ -45,6 +46,17 @@ Standardmäßig wird eine einfache HTML-Seite angezeigt, die den Wartungsmodus a
 Diese kann durch eine eigene HTML-Seite ersetzt werden. Dazu muss im Projekt-AddOn ein Ordner `fragments/maintenance` angelegt werden. In diesem Ordner kann eine Datei `frontend.php` mit eigenem HTML-Code erstellt werden. D.h. `/src/addons/maintenance/fragments/maintenance/frontend.php`
 
 So kann bspw. eigener Text, Logo oder komplett andere Gestaltung erfolgen.
+
+### Silent Mode für Staging/Development-Umgebungen
+
+Der **Silent Mode** ist ideal für Staging-Systeme und Development-Umgebungen, die permanent gesperrt sein sollen:
+
+* Sendet nur den HTTP-Status-Code (z.B. 503 oder 403)
+* Zeigt **keine** HTML-Wartungsseite an
+* Verhindert Rückschlüsse auf das verwendete CMS
+* Perfekt für Produktiv-Vorschau-Systeme, die nur nach Login zugänglich sein sollen
+
+**Aktivierung:** In den erweiterten Einstellungen (Einstellungen) unter "HTTP-Einstellungen" die Option "Silent Mode" aktivieren.
 
 ## Anzeige des aktuellen Status im REDAXO-Hauptmenü
 
@@ -141,9 +153,6 @@ php redaxo/bin/console maintenance:mode off
 
 * [Thomas Skerbis](https://github.com/skerbis)
 
-## Projekt-Team
-
-* [Simon Krull](https://github.com/crydotsnake)
 
 ## Credits
 
@@ -153,6 +162,7 @@ Danke an:
 * [Thorben](https://github.com/eaCe)
 * [Oliver Kreischer](https://github.com/olien)
 * [Alexander Walther](https://www.alexplus.de)
+* [Simon Krull](https://github.com/crydotsnake)
 * u.v.a
 
 

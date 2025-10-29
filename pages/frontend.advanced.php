@@ -58,6 +58,12 @@ $field->setAttribute('data-beautify', 'false');
 // HTTP-Einstellungen
 $form->addFieldset($addon->i18n('maintenance_http_settings_title'));
 
+// Silent Mode (nur HTTP-Status, kein Content)
+$field = $form->addCheckboxField('silent_mode');
+$field->setLabel($addon->i18n('maintenance_silent_mode_label'));
+$field->addOption($addon->i18n('maintenance_silent_mode_enable'), 1);
+$field->setNotice($addon->i18n('maintenance_silent_mode_notice'));
+
 // Antwortcode
 $field = $form->addSelectField('http_response_code');
 $field->setLabel($addon->i18n('maintenance_http_response_code_label'));

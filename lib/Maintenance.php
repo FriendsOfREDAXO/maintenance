@@ -302,13 +302,22 @@ class Maintenance
         // Block everything that has not been allowed so far as chosen in the settings
         $redirect_url = (string) self::getConfig('redirect_frontend_to_url', '');
         $responsecode = (int) self::getConfig('http_response_code', 503);
+        $silentMode = (bool) self::getConfig('silent_mode', false);
 
-        $mpage = new rex_fragment();
+        // Redirect if configured
         if ('' !== $redirect_url) {
             rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
             rex_response::sendRedirect($redirect_url);
         }
 
+        // Silent mode: Only send HTTP status, no content
+        if ($silentMode) {
+            header('HTTP/1.1 ' . $responsecode);
+            exit;
+        }
+
+        // Regular mode: Show maintenance page
+        $mpage = new rex_fragment();
         header('HTTP/1.1 ' . $responsecode);
         exit($mpage->parse('maintenance/frontend.php'));
     }
