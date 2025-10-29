@@ -15,15 +15,14 @@
 	background-color: #9b59b6;
 }
 
-/* Wobble animation for Frontend badge */
-@keyframes wobble {
-	0%, 100% { transform: rotate(0deg); }
-	25% { transform: rotate(-3deg); }
-	75% { transform: rotate(3deg); }
+/* Pulse animation for Frontend badge */
+@keyframes pulse {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.7; transform: scale(1.05); }
 }
 
 /* Target the F badge in the main navigation */
 #rex-navi-page-maintenance .label-danger {
-	animation: wobble 3s ease-in-out infinite !important;
+	animation: pulse 2s ease-in-out infinite !important;
 	display: inline-block !important;
 }
