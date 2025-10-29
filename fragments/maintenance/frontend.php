@@ -393,7 +393,7 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
         <h1 class="maintenance-title"><?= rex_escape($maintenanceFrontendHeadline) ?></h1>
         
         <?php if ('' !== $maintenanceTextEn): ?>
-        <div class="maintenance-message maintenance-text <?= !$multilanguageEnabled || '' === $maintenanceTextDe ? 'active' : 'active' ?>" data-lang="en">
+        <div class="maintenance-message maintenance-text <?= !$multilanguageEnabled || '' === $maintenanceTextDe ? 'active' : '' ?>" data-lang="en">
             <?= nl2br(rex_escape($maintenanceTextEn)) ?>
         </div>
         <?php endif ?>
