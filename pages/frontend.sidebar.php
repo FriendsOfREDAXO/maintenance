@@ -6,6 +6,7 @@
  */
 
 $addon = rex_addon::get('maintenance');
+$currentPage = rex_be_controller::getCurrentPage();
 $sidebarContent = '';
 
 /* Vorschau des Wartungsmodus */
@@ -91,7 +92,6 @@ if ('maintenance/frontend/advanced' === $currentPage) {
 $quickLinks = '<div class="btn-group-vertical btn-block">';
 
 // Link zur Hauptseite (Allgemeine Einstellungen)
-$currentPage = rex_be_controller::getCurrentPage();
 if ('maintenance/frontend/index' !== $currentPage && 'maintenance/frontend' !== $currentPage) {
     $quickLinks .= '<a href="' . rex_url::backendPage('maintenance/frontend') . '" class="btn btn-default">';
     $quickLinks .= '<i class="rex-icon fa-sliders"></i> ' . $addon->i18n('maintenance_frontend_general_title') . '</a>';

@@ -88,44 +88,60 @@ $fragment->setVar('body', $form->get(), false);
 
 <script nonce="<?= rex_response::getNonce() ?>">
 jQuery(function($) {
+    // Warte bis Tokenfield initialisiert ist
+    function waitForTokenfield(callback, maxAttempts = 20) {
+        var attempts = 0;
+        var interval = setInterval(function() {
+            var $tokenfield = $('[name="config[maintenance][allowed_ips]"]');
+            if ($tokenfield.data('bs.tokenfield') || attempts >= maxAttempts) {
+                clearInterval(interval);
+                callback($tokenfield);
+            }
+            attempts++;
+        }, 100);
+    }
+
     // IP per Klick zur Tokenfield-Liste hinzufügen
     $(document).on('click', '[data-add-ip]', function(e) {
         e.preventDefault();
         var ip = $(this).data('add-ip');
-        var $tokenfield = $('[name="config[maintenance][allowed_ips]"]');
         var $button = $(this);
         
-        if ($tokenfield.length) {
-            var currentValue = $tokenfield.val();
-            var tokens = currentValue ? currentValue.split(',').map(function(s) { return s.trim(); }) : [];
+        waitForTokenfield(function($tokenfield) {
+            if (!$tokenfield.length) {
+                console.error('Tokenfield not found');
+                return;
+            }
+
+            // Hole aktuelle Tokens
+            var tokens = [];
+            if ($tokenfield.data('bs.tokenfield')) {
+                tokens = $tokenfield.tokenfield('getTokens');
+            } else {
+                var currentValue = $tokenfield.val();
+                tokens = currentValue ? currentValue.split(',').map(function(s) { return s.trim(); }).filter(Boolean) : [];
+            }
             
             // Prüfen, ob IP bereits existiert
             if (tokens.indexOf(ip) === -1) {
                 tokens.push(ip);
-                var newValue = tokens.join(', ');
-                $tokenfield.val(newValue);
                 
-                // Tokenfield aktualisieren, falls bereits initialisiert
+                // Tokenfield aktualisieren
                 if ($tokenfield.data('bs.tokenfield')) {
                     $tokenfield.tokenfield('setTokens', tokens);
                 } else {
-                    // Falls Tokenfield noch nicht initialisiert ist, warten und dann aktualisieren
-                    setTimeout(function() {
-                        if ($tokenfield.data('bs.tokenfield')) {
-                            $tokenfield.tokenfield('setTokens', tokens);
-                        }
-                    }, 100);
+                    $tokenfield.val(tokens.join(', '));
                 }
                 
                 // Button-Feedback
-                $button.prop('disabled', true).addClass('btn-success').removeClass('btn-default')
+                $button.prop('disabled', true).addClass('btn-success').removeClass('btn-default btn-xs')
                     .html('<i class="fa fa-check"></i> ' + ip + ' <?= $addon->i18n('maintenance_ip_added') ?>');
             } else {
                 // IP existiert bereits
-                $button.prop('disabled', true).addClass('btn-warning').removeClass('btn-default')
+                $button.prop('disabled', true).addClass('btn-warning').removeClass('btn-default btn-xs')
                     .html('<i class="fa fa-info-circle"></i> IP bereits vorhanden');
             }
-        }
+        });
     });
 });
 </script>
