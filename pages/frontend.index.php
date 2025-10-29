@@ -71,57 +71,6 @@ $field->setLabel($addon->i18n('maintenance_redirect_frontend_to_url_label'));
 $field->setNotice($addon->i18n('maintenance_redirect_frontend_to_url_notice'));
 $field->setAttribute('type', 'url');
 
-// Scheduled Maintenance
-$form->addFieldset($addon->i18n('maintenance_scheduled_title'));
-
-// Info-Text für geplante Wartung mit Cronjob-Hinweis
-$cronjobInstalled = false;
-if (rex_addon::get('cronjob')->isAvailable()) {
-    $sql = rex_sql::factory();
-    $sql->setQuery('SELECT id FROM ' . rex::getTable('cronjob') . ' WHERE type = :type LIMIT 1', ['type' => 'rex_cronjob_scheduled_maintenance']);
-    $cronjobInstalled = $sql->getRows() > 0;
-}
-
-$infoHtml = '<div class="alert alert-info">';
-$infoHtml .= '<p>' . $addon->i18n('maintenance_scheduled_info') . '</p>';
-if (!$cronjobInstalled) {
-    $infoHtml .= '<p><strong><i class="rex-icon fa-exclamation-triangle"></i> ' . $addon->i18n('maintenance_scheduled_cronjob_missing') . '</strong><br>';
-    $infoHtml .= '<a href="' . rex_url::backendPage('cronjob/cronjobs', ['func' => 'add']) . '" class="btn btn-primary btn-xs">';
-    $infoHtml .= '<i class="rex-icon fa-plus"></i> ' . $addon->i18n('maintenance_scheduled_cronjob_create') . '</a></p>';
-} else {
-    $infoHtml .= '<p class="text-success"><i class="rex-icon fa-check"></i> ' . $addon->i18n('maintenance_scheduled_cronjob_active') . '</p>';
-}
-$infoHtml .= '</div>';
-$field = $form->addRawField($infoHtml);
-
-// Geplanter Start
-$field = $form->addTextField('scheduled_start');
-$field->setLabel($addon->i18n('maintenance_scheduled_start_label'));
-$field->setNotice($addon->i18n('maintenance_scheduled_start_notice') . '<br><small>' . $addon->i18n('maintenance_scheduled_example') . '</small>');
-$field->setAttribute('placeholder', '2025-12-31 02:00:00');
-
-// Geplantes Ende
-$field = $form->addTextField('scheduled_end');
-$field->setLabel($addon->i18n('maintenance_scheduled_end_label'));
-$field->setNotice($addon->i18n('maintenance_scheduled_end_notice') . '<br><small>' . $addon->i18n('maintenance_scheduled_example') . '</small>');
-$field->setAttribute('placeholder', '2025-12-31 06:00:00');
-
-// Aktuellen Status anzeigen
-$scheduledStart = (string) $addon->getConfig('scheduled_start', '');
-$scheduledEnd = (string) $addon->getConfig('scheduled_end', '');
-if ('' !== $scheduledStart || '' !== $scheduledEnd) {
-    $statusHtml = '<div class="alert alert-info">';
-    $statusHtml .= '<strong>' . $addon->i18n('maintenance_scheduled_active') . '</strong><br>';
-    if ('' !== $scheduledStart) {
-        $statusHtml .= $addon->i18n('maintenance_scheduled_starts_at') . ': <code>' . rex_escape($scheduledStart) . '</code><br>';
-    }
-    if ('' !== $scheduledEnd) {
-        $statusHtml .= $addon->i18n('maintenance_scheduled_ends_at') . ': <code>' . rex_escape($scheduledEnd) . '</code>';
-    }
-    $statusHtml .= '</div>';
-    $field = $form->addRawField($statusHtml);
-}
-
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);
 $fragment->setVar('title', $addon->i18n('maintenance_settings_frontend_title'), false);

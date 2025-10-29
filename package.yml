@@ -24,9 +24,9 @@ page:
                     title: translate:maintenance_settings_title
                     icon: rex-icon fa-cog
                     perm: admin[]
-                announcement:
-                    title: translate:maintenance_announcement_title
-                    icon: rex-icon fa-bullhorn
+                scheduled:
+                    title: translate:maintenance_planning_title
+                    icon: rex-icon fa-calendar-alt
                     perm: admin[]
         backend:
             title: translate:maintenance_backend_title

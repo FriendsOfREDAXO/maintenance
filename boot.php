@@ -38,7 +38,7 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
 
         if ('maintenance/frontend' === rex_be_controller::getCurrentPage()
             || 'maintenance/frontend/index' === rex_be_controller::getCurrentPage()
-            || 'maintenance/frontend/announcement' === rex_be_controller::getCurrentPage()) {
+            || 'maintenance/frontend/scheduled' === rex_be_controller::getCurrentPage()) {
             rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
                 $suchmuster = 'class="###maintenance-settings-editor###"';
                 $ersetzen = (string) rex_config::get('maintenance', 'editor'); // @phpstan-ignore-line
