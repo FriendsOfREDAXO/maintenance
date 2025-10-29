@@ -59,10 +59,10 @@ permissions:
     maintenance[frontend]: translate:maintenance[frontend] # Recht für Frontend-Einstellungen
 
 console_commands:
-       maintenance:mode: rex_maintenance_mode_command
+    maintenance:mode: rex_maintenance_mode_command
 
 cronjobs:
-       - { class: rex_cronjob_scheduled_maintenance, interval: '{i}', environment: 'frontend|backend' }
+    - rex_cronjob_scheduled_maintenance
 
 default_config:
       http_response_code: 503 # 503, 403

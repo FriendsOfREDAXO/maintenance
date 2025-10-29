@@ -27,9 +27,6 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
 
     if (rex::isBackend()) {
         Maintenance::setIndicators();
-        rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
-        rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
-        rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance-icons.css'));
