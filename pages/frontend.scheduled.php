@@ -126,21 +126,21 @@ Maintenance::showAnnouncement();
         // Sidebar
         $sidebar = new rex_fragment();
         $sidebar->setVar('title', $addon->i18n('maintenance_quick_links'));
-        
+
         $content = '<ul class="list-group">';
         $content .= '<li class="list-group-item"><a href="' . rex_url::backendPage('maintenance/frontend') . '"><i class="rex-icon fa-sliders"></i> ' . $addon->i18n('maintenance_frontend_general_title') . '</a></li>';
         $content .= '<li class="list-group-item"><a href="' . rex_url::backendPage('maintenance/frontend/advanced') . '"><i class="rex-icon fa-cog"></i> ' . $addon->i18n('maintenance_advanced_settings') . '</a></li>';
-        
+
         if (rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable()) {
             $content .= '<li class="list-group-item"><a href="' . rex_url::backendPage('maintenance/domains') . '"><i class="rex-icon fa-sitemap"></i> ' . $addon->i18n('maintenance_domain_settings') . '</a></li>';
         }
-        
+
         if (rex_addon::get('cronjob')->isAvailable()) {
             $content .= '<li class="list-group-item"><a href="' . rex_url::backendPage('cronjob/cronjobs') . '"><i class="rex-icon fa-clock-o"></i> Cronjob-Verwaltung</a></li>';
         }
-        
+
         $content .= '</ul>';
-        
+
         $sidebar->setVar('body', $content, false);
         echo $sidebar->parse('core/page/section.php');
         ?>
