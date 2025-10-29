@@ -64,7 +64,7 @@ class rex_maintenance_mode_command extends rex_console_command
             case 'all':
                 return $this->toggleAll($io, $addon, $state);
 
-            // Legacy support: "on" and "off" as direct arguments
+                // Legacy support: "on" and "off" as direct arguments
             case 'on':
             case 'off':
                 return $this->toggleFrontend($io, $addon, $action);
@@ -83,7 +83,7 @@ class rex_maintenance_mode_command extends rex_console_command
         $domainStatus = $addon->getConfig('domain_status', []);
 
         $io->section('Current Status');
-        
+
         $io->text([
             'Frontend: ' . ($blockFrontend ? '<fg=red>LOCKED</>' : '<fg=green>Open</>'),
             'Backend: ' . ($blockBackend ? '<fg=red>LOCKED</>' : '<fg=green>Open</>'),
@@ -116,7 +116,7 @@ class rex_maintenance_mode_command extends rex_console_command
         }
 
         $currentState = $addon->getConfig('block_frontend', 0);
-        $newState = ($state === 'on') ? 1 : 0;
+        $newState = ('on' === $state) ? 1 : 0;
 
         if ($currentState === $newState) {
             $io->info('Frontend maintenance is already ' . $state);
@@ -136,7 +136,7 @@ class rex_maintenance_mode_command extends rex_console_command
         }
 
         $currentState = $addon->getConfig('block_backend', 0);
-        $newState = ($state === 'on') ? 1 : 0;
+        $newState = ('on' === $state) ? 1 : 0;
 
         if ($currentState === $newState) {
             $io->info('Backend maintenance is already ' . $state);
@@ -186,7 +186,7 @@ class rex_maintenance_mode_command extends rex_console_command
             return Command::INVALID;
         }
 
-        $newState = ($state === 'on') ? 1 : 0;
+        $newState = ('on' === $state) ? 1 : 0;
 
         $addon->setConfig('block_frontend', $newState);
         $addon->setConfig('block_backend', $newState);
