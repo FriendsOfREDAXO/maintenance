@@ -1,4 +1,4 @@
-# Wartungsmodus (Maintenance mode) für REDAXO 5.x
+# Wartung (Maintenance) für REDAXO 5.x
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/maintenance/assets/maintenance-3.png)
 
