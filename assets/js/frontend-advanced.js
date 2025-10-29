@@ -4,7 +4,12 @@
 $(document).on('rex:ready', function() {
     // Funktion zum Hinzufügen einer IP-Adresse zum Whitelist-Feld
     function addIpToWhitelist(ip) {
-        var ipField = $('#maintenance-allowed-ips');
+        var ipField = $('input[name="config[maintenance][allowed_ips]"]');
+        
+        if (!ipField.length) {
+            console.error('IP field not found');
+            return;
+        }
         
         if (ipField.val().trim() === '') {
             // Wenn das Feld leer ist, einfach die IP hinzufügen
@@ -28,16 +33,20 @@ $(document).on('rex:ready', function() {
     }
     
     // Client-IP-Adresse hinzufügen
-    $('#maintenance-add-ip').on('click', function(e) {
+    $(document).on('click', '#maintenance-add-ip', function(e) {
         e.preventDefault();
         var currentIp = $(this).data('ip');
-        addIpToWhitelist(currentIp);
+        if (currentIp) {
+            addIpToWhitelist(currentIp);
+        }
     });
     
     // Server-IP-Adresse hinzufügen
-    $('#maintenance-add-server-ip').on('click', function(e) {
+    $(document).on('click', '#maintenance-add-server-ip', function(e) {
         e.preventDefault();
         var serverIp = $(this).data('ip');
-        addIpToWhitelist(serverIp);
+        if (serverIp) {
+            addIpToWhitelist(serverIp);
+        }
     });
 });
