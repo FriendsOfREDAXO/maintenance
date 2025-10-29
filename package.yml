@@ -61,9 +61,6 @@ permissions:
 console_commands:
     maintenance:mode: rex_maintenance_mode_command
 
-cronjobs:
-    - rex_cronjob_scheduled_maintenance
-
 default_config:
       http_response_code: 503 # 503, 403
       allowed_ips: ''
