@@ -17,6 +17,7 @@ use rex_user;
 use rex_yrewrite;
 use Throwable;
 
+use function count;
 use function in_array;
 
 use const FILTER_VALIDATE_IP;
@@ -122,6 +123,36 @@ class Maintenance
     }
 
     /**
+     * Checks if the current YRewrite domain is in maintenance mode.
+     * @api
+     */
+    public static function isDomainInMaintenance(): bool
+    {
+        // Check if all domains are locked globally
+        $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
+        if ($allDomainsLocked) {
+            return true;
+        }
+
+        // Check individual domain status
+        if (!rex_addon::exists('yrewrite') || !rex_addon::get('yrewrite')->isAvailable()) {
+            return false;
+        }
+
+        if ($ydomain = rex_yrewrite::getDomainByArticleId(rex_article::getCurrentId(), rex_clang::getCurrentId())) {
+            $domainName = $ydomain->getName();
+            $domainStatus = (array) self::getConfig('domain_status', []);
+
+            // Check if this specific domain is in maintenance mode
+            if (isset($domainStatus[$domainName]) && $domainStatus[$domainName]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Checks if the maintenance secret is valid.
      * @api
      */
@@ -135,11 +166,11 @@ class Maintenance
         }
 
         $maintenance_secret = rex_request('maintenance_secret', 'string', '');
-        $authentification_mode = (string) self::getConfig('authentification_mode', '');
+        $authentication_mode = (string) self::getConfig('authentication_mode', '');
 
         // Authentifizierung prüfen - für URL-Parameter und auch bei leerem Modus
-        $authentification_mode = (string) self::getConfig('authentification_mode', '');
-        if (('' === $authentification_mode || 'URL' === $authentification_mode || 'password' === $authentification_mode)
+        $authentication_mode = (string) self::getConfig('authentication_mode', '');
+        if (('' === $authentication_mode || 'URL' === $authentication_mode || 'password' === $authentication_mode)
             && '' !== $config_secret
             && $maintenance_secret === $config_secret) {
             rex_set_session('maintenance_secret', $maintenance_secret);
@@ -207,11 +238,67 @@ class Maintenance
     }
 
     /**
+     * Checks and applies scheduled maintenance mode (automatic activation/deactivation).
+     * Called on every request to check if maintenance should be auto-enabled or auto-disabled.
+     */
+    public static function checkScheduledMaintenance(): void
+    {
+        $addon = self::getAddOn();
+        $now = time();
+
+        $scheduledStart = (string) self::getConfig('scheduled_start', '');
+        $scheduledEnd = (string) self::getConfig('scheduled_end', '');
+
+        // Parse scheduled times
+        $startTime = '' !== $scheduledStart ? strtotime($scheduledStart) : false;
+        $endTime = '' !== $scheduledEnd ? strtotime($scheduledEnd) : false;
+
+        $blockFrontend = self::getBoolConfig('block_frontend', false);
+
+        // Auto-activate: If we're past start time and before end time, enable maintenance
+        if (false !== $startTime && $now >= $startTime) {
+            if (false === $endTime || $now < $endTime) {
+                // Should be in maintenance mode
+                if (!$blockFrontend) {
+                    $addon->setConfig('block_frontend', true);
+                }
+            }
+        }
+
+        // Auto-deactivate: If we're past end time, disable maintenance
+        if (false !== $endTime && $now >= $endTime) {
+            if ($blockFrontend) {
+                $addon->setConfig('block_frontend', false);
+                // Clear scheduled times after successful deactivation
+                $addon->setConfig('scheduled_start', '');
+                $addon->setConfig('scheduled_end', '');
+            }
+        }
+    }
+
+    /**
      * Checks frontend access and shows maintenance page if necessary.
      */
     public static function checkFrontend(): void
     {
         rex_login::startSession();
+
+        // Check if the current domain is in maintenance mode (new domain-based logic)
+        $domainInMaintenance = self::isDomainInMaintenance();
+        $blockFrontend = self::getBoolConfig('block_frontend', false);
+
+        // If neither frontend blocking nor domain-based maintenance is active, allow access
+        if (!$blockFrontend && !$domainInMaintenance) {
+            return;
+        }
+
+        // Silent mode check early: Only send HTTP status, no further processing
+        $silentMode = (bool) self::getConfig('silent_mode', false);
+        if ($silentMode) {
+            $responsecode = (int) self::getConfig('http_response_code', 503);
+            header('HTTP/1.1 ' . $responsecode);
+            exit;
+        }
 
         // If the IP address is allowed, do not block the request
         if (self::isIpAllowed()) {
@@ -219,7 +306,7 @@ class Maintenance
         }
 
         // If YRewrite is installed and the domain is allowed, do not block the request
-        if (rex_addon::get('yrewrite')->isAvailable() && self::isYrewriteDomainAllowed()) {
+        if (rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable() && self::isYrewriteDomainAllowed()) {
             return;
         }
 
@@ -264,12 +351,14 @@ class Maintenance
         $redirect_url = (string) self::getConfig('redirect_frontend_to_url', '');
         $responsecode = (int) self::getConfig('http_response_code', 503);
 
-        $mpage = new rex_fragment();
+        // Redirect if configured
         if ('' !== $redirect_url) {
             rex_response::setStatus(rex_response::HTTP_MOVED_TEMPORARILY);
             rex_response::sendRedirect($redirect_url);
         }
 
+        // Show maintenance page
+        $mpage = new rex_fragment();
         header('HTTP/1.1 ' . $responsecode);
         exit($mpage->parse('maintenance/frontend.php'));
     }
@@ -307,6 +396,17 @@ class Maintenance
         if (self::getBoolConfig('block_frontend', false)) {
             $page['title'] .= ' <span class="label label-danger pull-right">F</span>';
             $page['icon'] .= ' fa-toggle-on block_frontend';
+        }
+
+        // Check for domain-based maintenance
+        $domainStatus = (array) self::getConfig('domain_status', []);
+        $allDomainsLocked = (bool) self::getConfig('all_domains_locked', false);
+        $activeDomains = array_filter($domainStatus);
+
+        if ($allDomainsLocked || !empty($activeDomains)) {
+            $count = $allDomainsLocked ? 'All' : count($activeDomains);
+            $page['title'] .= ' <span class="label label-warning pull-right" title="Domain-Wartung aktiv">D:' . $count . '</span>';
+            $page['icon'] .= ' fa-sitemap';
         }
 
         self::getAddOn()->setProperty('page', $page);

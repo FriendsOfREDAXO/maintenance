@@ -15,10 +15,15 @@ use FriendsOfREDAXO\Maintenance\Maintenance;
 if (rex::isSetup()) {
     return;
 }
+
+// Register cronjob type
+if (rex_addon::get('cronjob')->isAvailable()) {
+    rex_cronjob_manager::registerType(rex_cronjob_scheduled_maintenance::class);
+}
 rex_extension::register('PACKAGES_INCLUDED', static function () {
     $addon = rex_addon::get('maintenance');
 
-    if (rex::isFrontend() && (bool) $addon->getConfig('block_frontend')) {
+    if (rex::isFrontend() && ((bool) $addon->getConfig('block_frontend') || Maintenance::isDomainInMaintenance())) {
         Maintenance::checkFrontend();
     }
     if (rex::isBackend() && (bool) $addon->getConfig('block_backend')) {
@@ -27,13 +32,13 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
 
     if (rex::isBackend()) {
         Maintenance::setIndicators();
-        rex_view::addJsFile($addon->getAssetsUrl('dist/bootstrap-tokenfield.js'));
-        rex_view::addJsFile($addon->getAssetsUrl('dist/init_bootstrap-tokenfield.js'));
-        rex_view::addCssFile($addon->getAssetsUrl('dist/css/bootstrap-tokenfield.css'));
 
         rex_view::addCssFile($addon->getAssetsUrl('css/maintenance.css'));
+        rex_view::addCssFile($addon->getAssetsUrl('css/maintenance-icons.css'));
 
-        if ('maintenance/frontend' === rex_be_controller::getCurrentPage()) {
+        if ('maintenance/frontend' === rex_be_controller::getCurrentPage()
+            || 'maintenance/frontend/index' === rex_be_controller::getCurrentPage()
+            || 'maintenance/frontend/scheduled' === rex_be_controller::getCurrentPage()) {
             rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) {
                 $suchmuster = 'class="###maintenance-settings-editor###"';
                 $ersetzen = (string) rex_config::get('maintenance', 'editor'); // @phpstan-ignore-line

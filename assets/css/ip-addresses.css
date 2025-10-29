@@ -1,0 +1,22 @@
+/**
+ * IP Address Whitelist Styling
+ */
+.ip-addresses {
+    margin-top: 5px;
+}
+
+.ip-address-row {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.ip-label {
+    min-width: 120px;
+}
+
+.ip-code {
+    margin: 0 10px;
+    display: inline-block;
+    min-width: 100px;
+}
