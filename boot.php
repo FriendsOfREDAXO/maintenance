@@ -15,6 +15,11 @@ use FriendsOfREDAXO\Maintenance\Maintenance;
 if (rex::isSetup()) {
     return;
 }
+
+// Register cronjob type
+if (rex_addon::get('cronjob')->isAvailable()) {
+    rex_cronjob_manager::registerType(rex_cronjob_scheduled_maintenance::class);
+}
 rex_extension::register('PACKAGES_INCLUDED', static function () {
     $addon = rex_addon::get('maintenance');
 
