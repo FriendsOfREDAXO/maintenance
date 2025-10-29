@@ -135,7 +135,7 @@ class Maintenance
         }
 
         // Check individual domain status
-        if (!rex_addon::get('yrewrite')->isAvailable()) {
+        if (!rex_addon::exists('yrewrite') || !rex_addon::get('yrewrite')->isAvailable()) {
             return false;
         }
 
@@ -258,7 +258,7 @@ class Maintenance
         }
 
         // If YRewrite is installed and the domain is allowed, do not block the request
-        if (rex_addon::get('yrewrite')->isAvailable() && self::isYrewriteDomainAllowed()) {
+        if (rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable() && self::isYrewriteDomainAllowed()) {
             return;
         }
 

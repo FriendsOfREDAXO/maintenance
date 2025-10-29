@@ -22,7 +22,7 @@ $sidebarContent .= $fragment->parse('core/page/section.php');
 $copy = '<ul class="list-group">';
 
 // Prüfen, ob YRewrite verfügbar ist
-$yrewriteAvailable = rex_addon::get('yrewrite')->isAvailable();
+$yrewriteAvailable = rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable();
 $allDomainsLocked = rex_config::get('maintenance', 'all_domains_locked', false);
 $domainStatus = rex_config::get('maintenance', 'domain_status', []);
 
@@ -93,7 +93,7 @@ if (rex::getUser()->isAdmin()) {
     }
 }
 
-if (rex_addon::get('yrewrite')->isAvailable() && 'maintenance/domains' !== $currentPage) {
+if (rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable() && $currentPage !== 'maintenance/domains') {
     $quickLinks .= '<a href="' . rex_url::backendPage('maintenance/domains') . '" class="btn btn-default">';
     $quickLinks .= '<i class="rex-icon fa-sitemap"></i> ' . $addon->i18n('maintenance_domain_settings') . '</a>';
 }

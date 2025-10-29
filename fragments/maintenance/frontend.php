@@ -16,7 +16,7 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
     <meta http-equiv="refresh" content="<?= $maintenanceFrontendUpdateIntervalNumber > 0 ? $maintenanceFrontendUpdateIntervalNumber : '' ?>">
     <title>
         <?php
-            if (rex_addon::get('yrewrite')->isAvailable() && null !== rex_yrewrite::getCurrentDomain()?->getName()) {
+            if (rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable() && null !== rex_yrewrite::getCurrentDomain()?->getName()) {
                 echo rex_yrewrite::getCurrentDomain()->getName();
             } else {
                 echo rex::getServerName();
