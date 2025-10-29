@@ -186,10 +186,10 @@
             <p class="maintenance-error-title"><?= $maintenanceFrontendHeadline ?></p>
             
             <?php if ('' !== $maintenanceTextEn): ?>
-            <p class="maintenance-error-message maintenance-text active" data-lang="en"><?= nl2br(rex_escape($maintenanceTextEn)) ?></p>
+            <p class="maintenance-error-message maintenance-text <?= '' === $maintenanceTextDe ? 'active' : '' ?>" data-lang="en"><?= nl2br(rex_escape($maintenanceTextEn)) ?></p>
             <?php endif ?>
             <?php if ('' !== $maintenanceTextDe): ?>
-            <p class="maintenance-error-message maintenance-text" lang="de" data-lang="de"><?= nl2br(rex_escape($maintenanceTextDe)) ?></p>
+            <p class="maintenance-error-message maintenance-text active" lang="de" data-lang="de"><?= nl2br(rex_escape($maintenanceTextDe)) ?></p>
             <?php endif ?>
         </div>
         <?php
