@@ -14,10 +14,17 @@
 
 ## Was hat sich geändert?
 
+### UX-Verbesserungen
+- Einstellungen reorganisiert: Frontend > Planung, Frontend > Erweitert
 - IP-Whitelist vereinfacht: Click-to-Add-Buttons, komma-getrennte Liste
-- UI modernisiert: Sidebar mit Quick-Links, verbesserte Navigation
-- Performance optimiert: Weniger redundante Checks
-- Code-Qualität: PHP CS Fixer, externe Assets, REDAXO-Standards
+- Sidebar mit Quick-Links und Bypass-URLs (nur für gesperrte Domains)
+- Toggle-Buttons für Domain-Verwaltung
+- Moderne Card-basierte UI mit Dark Mode Support
+
+### Performance & Code-Qualität
+- YRewrite-Check nur einmal pro Request
+- Redundante Checks entfernt
+- PHP CS Fixer, externe Assets, REDAXO-Standards
 
 ## Was ist beim Update zu beachten?
 
