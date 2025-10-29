@@ -25,5 +25,5 @@
 /* Target the F badge in the main navigation */
 #rex-navi-page-maintenance .label-danger {
 	animation: wobble 3s ease-in-out infinite;
-	display: inline-block;
+	transform-origin: center center;
 }
