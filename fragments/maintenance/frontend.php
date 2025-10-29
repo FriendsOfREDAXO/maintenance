@@ -190,6 +190,14 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
             animation: slideInUp 0.6s ease 0.2s forwards;
         }
         
+        .maintenance-title .maintenance-text {
+            display: none;
+        }
+        
+        .maintenance-title .maintenance-text.active {
+            display: inline;
+        }
+        
         .maintenance-message {
             font-size: 1.1rem;
             margin-bottom: 2rem;
@@ -390,7 +398,30 @@ $multilanguageEnabled = ('' !== $maintenanceTextEn && '' !== $maintenanceTextDe)
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
         
-        <h1 class="maintenance-title"><?= rex_escape($maintenanceFrontendHeadline) ?></h1>
+        <?php
+        // Domain ermitteln
+        $domain = '';
+        if (rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable() && null !== rex_yrewrite::getCurrentDomain()?->getName()) {
+            $domain = rex_yrewrite::getCurrentDomain()->getName();
+        } else {
+            $domain = rex::getServerName();
+        }
+        ?>
+        
+        <h1 class="maintenance-title">
+            <?php if ($multilanguageEnabled): ?>
+                <span class="maintenance-text" data-lang="en">Maintenance</span>
+                <span class="maintenance-text" data-lang="de">Wartung</span>
+            <?php else: ?>
+                <?= rex_escape($maintenanceFrontendHeadline) ?>
+            <?php endif ?>
+        </h1>
+        
+        <?php if ($domain): ?>
+        <p style="color: var(--text-color); opacity: 0.7; font-size: 0.9rem; margin-top: -1rem; margin-bottom: 1.5rem;">
+            <?= rex_escape($domain) ?>
+        </p>
+        <?php endif ?>
         
         <?php if ('' !== $maintenanceTextEn): ?>
         <div class="maintenance-message maintenance-text <?= '' === $maintenanceTextDe ? 'active' : '' ?>" data-lang="en">
