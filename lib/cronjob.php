@@ -1,43 +1,47 @@
 <?php
 
 /**
- * This file is part of the maintenance package.
- *
- * @author (c) Friends Of REDAXO
- * @author <friendsof@redaxo.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-use FriendsOfREDAXO\Maintenance\Maintenance;
-
-/**
- * Cronjob to check and apply scheduled maintenance mode.
- * This is optional - the scheduled maintenance also works via request-based checking.
- * Use this cronjob for more precise timing (e.g., run every minute).
+ * @package redaxo\maintenance
  */
 class rex_cronjob_scheduled_maintenance extends rex_cronjob
 {
     public function execute()
     {
-        // Call the scheduled maintenance checker
-        Maintenance::checkScheduledMaintenance();
-
         $addon = rex_addon::get('maintenance');
-        $scheduledStart = (string) $addon->getConfig('scheduled_start', '');
-        $scheduledEnd = (string) $addon->getConfig('scheduled_end', '');
+        $scheduledStart = $addon->getConfig('scheduled_start', '');
+        $scheduledEnd = $addon->getConfig('scheduled_end', '');
+
+        if ('' === $scheduledStart && '' === $scheduledEnd) {
+            $this->setMessage('Keine geplante Wartung konfiguriert');
+            return true;
+        }
+
+        $now = time();
+        $start = $scheduledStart ? strtotime($scheduledStart) : null;
+        $end = $scheduledEnd ? strtotime($scheduledEnd) : null;
         $blockFrontend = (bool) $addon->getConfig('block_frontend', false);
 
-        // Log what happened
-        if ('' !== $scheduledStart || '' !== $scheduledEnd) {
-            if ($blockFrontend) {
-                $this->setMessage('Wartungsmodus ist aktiv (geplant bis: ' . $scheduledEnd . ')');
-            } else {
-                $this->setMessage('Wartungsmodus ist inaktiv (geplanter Start: ' . $scheduledStart . ')');
-            }
+        // Check if we should activate maintenance
+        if ($start && $end && $now >= $start && $now < $end && !$blockFrontend) {
+            $addon->setConfig('block_frontend', true);
+            $this->setMessage('Wartungsmodus aktiviert (bis: ' . $scheduledEnd . ')');
+            return true;
+        }
+
+        // Check if we should deactivate maintenance
+        if ($end && $now >= $end && $blockFrontend) {
+            $addon->setConfig('block_frontend', false);
+            $addon->setConfig('scheduled_start', '');
+            $addon->setConfig('scheduled_end', '');
+            $this->setMessage('Wartungsmodus deaktiviert (geplante Wartung beendet)');
+            return true;
+        }
+
+        // No change needed
+        if ($blockFrontend) {
+            $this->setMessage('Wartungsmodus läuft (bis: ' . $scheduledEnd . ')');
         } else {
-            $this->setMessage('Keine geplante Wartung konfiguriert');
+            $this->setMessage('Wartungsmodus inaktiv (geplanter Start: ' . $scheduledStart . ')');
         }
 
         return true;
