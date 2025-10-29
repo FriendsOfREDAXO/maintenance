@@ -1,5 +1,9 @@
 # Release Notes - Maintenance AddOn 4.0.0-beta1
 
+## Was ist beim Update zu beachten?
+
+**⚠️ Breaking Change:** Die manuelle Domain-Whitelist (`allowed_yrewrite_domains`) wurde entfernt. Domain-basierte Wartung läuft jetzt ausschließlich über die neue Seite *Maintenance > Domains*.
+
 ## Was ist neu?
 
 **Zeitgesteuerte Wartung** – Der Wartungsmodus kann jetzt automatisch zu bestimmten Zeiten aktiviert und deaktiviert werden (nur über Cronjob).
@@ -11,6 +15,15 @@
 **Mehrsprachige Sperrseite** – Language-Switcher (DE/EN) mit SessionStorage-Unterstützung.
 
 **Domain-Verwaltung** – YRewrite-Domains können jetzt direkt über *Maintenance > Domains* verwaltet werden (keine manuelle Eingabe mehr nötig).
+
+**Erweiterte Console-Kommandos** – Wartungsmodus kann jetzt granular über die Konsole gesteuert werden:
+```bash
+php redaxo/bin/console maintenance:mode status
+php redaxo/bin/console maintenance:mode frontend on|off
+php redaxo/bin/console maintenance:mode backend on|off
+php redaxo/bin/console maintenance:mode all on|off
+php redaxo/bin/console maintenance:mode domain example.com --lock|--unlock
+```
 
 ## Was hat sich geändert?
 
@@ -26,15 +39,9 @@
 - Redundante Checks entfernt
 - PHP CS Fixer, externe Assets, REDAXO-Standards
 
-## Was ist beim Update zu beachten?
-
-**⚠️ Breaking Change:** Die manuelle Domain-Whitelist (`allowed_yrewrite_domains`) wurde entfernt. Domain-basierte Wartung läuft jetzt ausschließlich über die neue Seite *Maintenance > Domains*.
-
 **Nach dem Update:**
 
-1. **Cache leeren** (Backend > System > Einstellungen)
-
-2. **Cronjob einrichten** (nur für zeitgesteuerte Wartung):
+**Cronjob einrichten** (nur für zeitgesteuerte Wartung):
    - System > Cronjobs > Neuen Cronjob erstellen
    - Typ: "Geplante Wartung prüfen"
    - Ausführungsart: "Jede Minute" oder "Alle 5 Minuten"
