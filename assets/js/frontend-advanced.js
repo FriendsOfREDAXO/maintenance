@@ -4,7 +4,7 @@
 $(document).on('rex:ready', function() {
     // Funktion zum Hinzufügen einer IP-Adresse zum Whitelist-Feld
     function addIpToWhitelist(ip) {
-        var ipField = $('input[name="config[maintenance][allowed_ips]"]');
+        var ipField = $('#maintenance-allowed-ips');
         
         if (!ipField.length) {
             console.error('IP field not found');
