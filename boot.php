@@ -20,7 +20,7 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
 
     // Check domain-based maintenance or global frontend maintenance
     $domainInMaintenance = false;
-    if (rex::isFrontend() && rex_addon::get('yrewrite')->isAvailable()) {
+    if (rex::isFrontend() && rex_addon::exists('yrewrite') && rex_addon::get('yrewrite')->isAvailable()) {
         $domainInMaintenance = Maintenance::isDomainInMaintenance();
     }
 
