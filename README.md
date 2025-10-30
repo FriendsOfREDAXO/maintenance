@@ -189,7 +189,7 @@ php redaxo/bin/console maintenance:mode off
 Danke an:
 
 * [Christian Gehrke](https://github.com/chrison94) // first version
-* [Joachim Doerr](https://github.com/joachomdoerr)
+* [Joachim Dörr](https://github.com/joachimdoerr)
 * [Thorben](https://github.com/eaCe)
 * [Oliver Kreischer](https://github.com/olien)
 * [Alexander Walther](https://www.alexplus.de)
