@@ -180,6 +180,7 @@ php redaxo/bin/console maintenance:mode off
 
 ## Projekt-Lead
 
+* [Simon Krull](https://github.com/crydotsnake)
 * [Thomas Skerbis](https://github.com/skerbis)
 
 
