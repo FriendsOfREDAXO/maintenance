@@ -368,7 +368,20 @@ class Maintenance
      */
     public static function checkBackend(): void
     {
-        if (rex::getUser() instanceof rex_user && !rex::getUser()->isAdmin() && !rex::getImpersonator()) {
+        // Allow access if current user is admin
+        $currentUser = rex::getUser();
+        if ($currentUser instanceof rex_user && $currentUser->isAdmin()) {
+            return;
+        }
+
+        // Allow access if impersonator exists and is admin
+        $impersonator = rex::getImpersonator();
+        if ($impersonator instanceof rex_user && $impersonator->isAdmin()) {
+            return;
+        }
+
+        // Block non-admin users (including impersonated non-admin users)
+        if ($currentUser instanceof rex_user) {
             $redirect_url = (string) self::getConfig('redirect_backend_to_url', '');
             if ('' !== $redirect_url) {
                 rex_response::sendRedirect($redirect_url);

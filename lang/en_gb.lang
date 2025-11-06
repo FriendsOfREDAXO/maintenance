@@ -97,3 +97,8 @@ maintenance_allowed_domains_notice = Enter domains that should not be blocked.
 
 maintenance_allowed_yrewrite_domains_label = List of allowed YRewrite domains
 maintenance_allowed_yrewrite_domains_notice = Enter YRewrite domains that should not be blocked.
+
+// Impersonate Mode Warnings
+maintenance_impersonate_warning_title = Maintenance mode active - User blocked
+maintenance_impersonate_warning_message = Backend maintenance mode is activated. The user {0} whose identity you have assumed would normally be locked out of the backend. You still have access as an administrator.
+maintenance_impersonate_ok = Got it

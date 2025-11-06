@@ -187,3 +187,8 @@ maintenance_quick_links = Schnellzugriff
 maintenance_advanced_settings = Erweiterte Einstellungen
 maintenance_domain_settings = Domain-Verwaltung
 maintenance_bypass_url_default = Bypass-URL (Standard-Domain)
+
+// Impersonate-Modus Warnungen
+maintenance_impersonate_warning_title = Wartungsmodus aktiv - Benutzer gesperrt
+maintenance_impersonate_warning_message = Der Backend-Wartungsmodus ist aktiviert. Der Benutzer {0}, dessen Identität Sie angenommen haben, wäre normalerweise vom Backend ausgesperrt. Sie haben als Administrator weiterhin Zugang.
+maintenance_impersonate_ok = Verstanden
