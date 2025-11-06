@@ -87,6 +87,9 @@ maintenance_http_response_code_label = Gewünschter Antwort-Header
 maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (empfohlen, wenn die Website temporär nicht verfügbar ist)
 maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Der Zugriff auf eine Ressource ist dauerhaft verboten)
 
+maintenance_retry_after_label = Retry-After Header (Sekunden)
+maintenance_retry_after_notice = Teilt Clients mit, nach wie vielen Sekunden sie es erneut versuchen sollen. 0 = kein Header, empfohlen: 3600 (1 Stunde)
+
 maintenance_silent_mode_label = Silent Mode (Staging/Development)
 maintenance_silent_mode_enable = Nur HTTP-Status senden, keine Inhalte anzeigen
 maintenance_silent_mode_notice = Ideal für Staging-Umgebungen: Sendet nur den HTTP-Status-Code ohne HTML-Inhalt. Verhindert Rückschlüsse auf das verwendete CMS und zeigt keine Wartungsmeldungen an.
@@ -187,6 +190,13 @@ maintenance_quick_links = Schnellzugriff
 maintenance_advanced_settings = Erweiterte Einstellungen
 maintenance_domain_settings = Domain-Verwaltung
 maintenance_bypass_url_default = Bypass-URL (Standard-Domain)
+
+// Backend-Wartungsseite
+maintenance_backend_maintenance = Backend-Wartung
+maintenance_backend_maintenance_message = Das REDAXO-Backend befindet sich im Wartungsmodus und ist vorübergehend nicht verfügbar.
+maintenance_contact_admin = Bitte kontaktieren Sie den Administrator für weitere Informationen.
+maintenance_back_to_website = Zurück zur Website
+maintenance_logout = Abmelden
 
 // Impersonate-Modus Warnungen
 maintenance_impersonate_warning_title = Wartungsmodus aktiv - Benutzer gesperrt

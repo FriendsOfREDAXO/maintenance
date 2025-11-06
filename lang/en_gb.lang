@@ -72,6 +72,9 @@ maintenance_http_response_code_label = Desired Response Header
 maintenance_http_response_code_503 = 503 - HTTP_SERVICE_UNAVAILABLE (recommended if the website is temporarily unavailable)
 maintenance_http_response_code_403 = 403 - HTTP_FORBIDDEN (Access to a resource is permanently forbidden)
 
+maintenance_retry_after_label = Retry-After Header (seconds)
+maintenance_retry_after_notice = Tells clients after how many seconds they should try again. 0 = no header, recommended: 3600 (1 hour)
+
 maintenance_announcement_title = Maintenance Announcement
 
 maintenance_announcement_label = Text
@@ -97,6 +100,13 @@ maintenance_allowed_domains_notice = Enter domains that should not be blocked.
 
 maintenance_allowed_yrewrite_domains_label = List of allowed YRewrite domains
 maintenance_allowed_yrewrite_domains_notice = Enter YRewrite domains that should not be blocked.
+
+// Backend Maintenance Page
+maintenance_backend_maintenance = Backend Maintenance
+maintenance_backend_maintenance_message = The REDAXO backend is in maintenance mode and temporarily unavailable.
+maintenance_contact_admin = Please contact the administrator for further information.
+maintenance_back_to_website = Back to website
+maintenance_logout = Logout
 
 // Impersonate Mode Warnings
 maintenance_impersonate_warning_title = Maintenance mode active - User blocked
