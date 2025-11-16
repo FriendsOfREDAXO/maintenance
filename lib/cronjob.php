@@ -3,6 +3,12 @@
 /**
  * @package redaxo\maintenance
  */
+
+// Nur laden wenn cronjob Addon existiert und verfügbar ist
+if (!rex_addon::exists('cronjob') || !rex_addon::get('cronjob')->isAvailable()) {
+    return;
+}
+
 class rex_cronjob_scheduled_maintenance extends rex_cronjob
 {
     public function execute()

@@ -16,7 +16,7 @@ if (rex::isSetup()) {
     return;
 }
 
-// Register cronjob type
+// Register cronjob type only if cronjob addon is available
 if (rex_addon::get('cronjob')->isAvailable()) {
     rex_cronjob_manager::registerType(rex_cronjob_scheduled_maintenance::class);
 }
