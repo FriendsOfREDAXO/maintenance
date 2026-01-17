@@ -360,16 +360,16 @@ class Maintenance
         // Show maintenance page
         $mpage = new rex_fragment();
         header('HTTP/1.1 ' . $responsecode);
-        
+
         // Retry-After Header setzen, wenn konfiguriert
         $retryAfter = (int) self::getConfig('retry_after', 0);
         if ($retryAfter > 0) {
             header('Retry-After: ' . $retryAfter);
         }
-        
+
         // Cache-Header setzen, damit die Seite nicht gecacht wird
         rex_response::sendCacheControl();
-        
+
         exit($mpage->parse('maintenance/frontend.php'));
     }
 
@@ -399,16 +399,16 @@ class Maintenance
             $mpage = new rex_fragment();
             $responsecode = (int) self::getConfig('http_response_code', 503);
             header('HTTP/1.1 ' . $responsecode);
-            
+
             // Retry-After Header setzen, wenn konfiguriert
             $retryAfter = (int) self::getConfig('retry_after', 0);
             if ($retryAfter > 0) {
                 header('Retry-After: ' . $retryAfter);
             }
-            
+
             // Cache-Header setzen, damit die Seite nicht gecacht wird
             rex_response::sendCacheControl();
-            
+
             exit($mpage->parse('maintenance/backend.php'));
         }
     }
@@ -429,7 +429,7 @@ class Maintenance
         if (self::getBoolConfig('block_frontend', false)) {
             $page['title'] .= ' <span class="label label-danger pull-right">F</span>';
             $page['icon'] .= ' fa-toggle-on block_frontend';
-            
+
             // Check for domain-based maintenance - nur wenn Frontend-Wartung aktiv
             // Badge nur für einzelne Domains, nicht wenn alle gesperrt sind
             $domainStatus = (array) self::getConfig('domain_status', []);
