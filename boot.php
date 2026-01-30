@@ -80,7 +80,7 @@ if (rex::isBackend()) {
         // Bootstrap 3 Modal für elegante Anzeige der Warnung
         // Anzeige erfolgt nur einmal pro Browser-Session (sessionStorage).
         $modalId = 'maintenance-impersonate-modal-' . uniqid();
-        
+
         $modalHtml = '
         <!-- Maintenance Impersonate Warning Modal -->
         <div class="modal fade" id="' . $modalId . '" tabindex="-1" role="dialog" aria-labelledby="' . $modalId . '-label">
@@ -103,7 +103,7 @@ if (rex::isBackend()) {
                 </div>
             </div>
         </div>';
-        
+
         $warningScript = '
         <script type="text/javascript" nonce="' . rex_response::getNonce() . '">
         (function(){
@@ -127,12 +127,12 @@ if (rex::isBackend()) {
             }
         })();
         </script>';
-        
+
         // Modal HTML und Script vor dem schließenden body-Tag einfügen
-        if (strpos($content, '</body>') !== false) {
+        if (str_contains($content, '</body>')) {
             $content = str_replace('</body>', $modalHtml . $warningScript . '</body>', $content);
         }
-        
+
         return $content;
     }, rex_extension::LATE);
 }

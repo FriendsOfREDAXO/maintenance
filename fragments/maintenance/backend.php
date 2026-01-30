@@ -1,6 +1,6 @@
 <?php
 /**
- * Backend-Wartungsseite
+ * Backend-Wartungsseite.
  */
 
 $addon = rex_addon::get('maintenance');
@@ -14,7 +14,7 @@ $maintenanceBackendUpdateIntervalNumber = rex_config::get('maintenance', 'mainte
     <meta name="robots" content="noindex, nofollow">
     <?php if ($maintenanceBackendUpdateIntervalNumber > 0): ?>
     <meta http-equiv="refresh" content="<?= $maintenanceBackendUpdateIntervalNumber ?>">
-    <?php endif; ?>
+    <?php endif ?>
     <title><?= rex::getServerName() ?> - <?= $addon->i18n('maintenance_backend_maintenance') ?></title>
     <style>
         :root {
@@ -125,7 +125,7 @@ $maintenanceBackendUpdateIntervalNumber = rex_config::get('maintenance', 'mainte
             <?php
             $logoutUrl = rex_url::backendController([
                 'rex_logout' => 1,
-                '_csrf_token' => rex_csrf_token::factory('backend_logout')->getValue()
+                '_csrf_token' => rex_csrf_token::factory('backend_logout')->getValue(),
             ]);
             ?>
             <a href="<?= $logoutUrl ?>" class="maintenance-button" style="margin-right: 1rem;"><?= $addon->i18n('maintenance_logout') ?></a>
