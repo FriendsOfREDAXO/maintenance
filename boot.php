@@ -16,12 +16,13 @@ if (rex::isSetup()) {
     return;
 }
 
-// Register cronjob type only if cronjob addon is available
-if (rex_addon::get('cronjob')->isAvailable()) {
-    rex_cronjob_manager::registerType(rex_cronjob_scheduled_maintenance::class);
-}
 rex_extension::register('PACKAGES_INCLUDED', static function () {
     $addon = rex_addon::get('maintenance');
+
+    // Register cronjob type only if cronjob addon is available AND its manager class has been loaded
+    if (rex_addon::get('cronjob')->isAvailable() && class_exists('rex_cronjob_manager')) {
+        rex_cronjob_manager::registerType(rex_cronjob_scheduled_maintenance::class);
+    }
 
     if (rex::isFrontend() && ((bool) $addon->getConfig('block_frontend') || Maintenance::isDomainInMaintenance())) {
         Maintenance::checkFrontend();
