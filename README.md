@@ -13,9 +13,10 @@ Das AddOn ermöglicht es Administratoren, das Frontend und/oder des Backend von 
 * **Silent Mode**: Nur HTTP-Status ohne HTML-Content (ideal für Staging/Development)
 * Anpassen der Sperrseite durch eigenes Fragment (`maintenance/frontend.php`)
 * Definieren von Ausnahmen, die dennoch Zugriff erhalten, z.B. für
-  * IP-Adressen
+  * IP-Adressen (einzelne IPs und CIDR-Bereiche, z.B. `192.168.1.0/24` oder `2001:db8::/32`, IPv4 und IPv6)
   * Hosts
   * YRewrite-Domains (neu in Version 3.0.0)
+* **Automatische search_it-Erkennung**: Der search_it-Crawler wird anhand des Absenders automatisch erkannt und darf crawlen (neu in Version 4.1.0)
 * Meldung und Zeitraum zur Ankündigung eines Wartungsfensters definieren (neu in Version 3.0.0)
 * **Zeitgesteuerte Wartung**: Automatische Aktivierung/Deaktivierung zu festgelegten Zeiten (neu in Version 3.5.0)
 
@@ -99,9 +100,9 @@ Der Menüeintrag erhält bei Aktivierung einer der Wartungsmodi ein zusätzliche
 
 ## `search_it` und Wartungs-Modus
 
-Ist die Frontendsperre aktiviert, kann `search_it` den Index nicht erstellen.
+Ist die Frontendsperre aktiviert, erkennt das Addon den `search_it`-Crawler automatisch und lässt ihn durch. Der Crawler sendet beim Indexieren den Parameter `search_it_build_index` und wird zusätzlich über die Absender-IP (Loopback oder Server-IP) verifiziert. Ein manueller Eintrag der Server-IP in der Whitelist ist **nicht mehr nötig**.
 
-Dazu einfach die aktuelle IP des Servers, auf dem REDAXO installiert ist und von dem aus gecrawlt wird, als  Ausnahme hinzufügen. Schon kann `search_it` wieder crawlen. 🕵🏻
+> **Sicherheitshinweis:** Der Bypass gilt nur für Requests, die vom Server selbst kommen (`127.0.0.1`, `::1` oder `SERVER_ADDR`). Externe Besucher können diesen Mechanismus nicht missbrauchen.
 
 ## Konsole
 

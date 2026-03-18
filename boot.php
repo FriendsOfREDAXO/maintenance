@@ -24,6 +24,10 @@ rex_extension::register('PACKAGES_INCLUDED', static function () {
         rex_cronjob_manager::registerType(rex_cronjob_scheduled_maintenance::class);
     }
 
+    // search_it: Der Crawler erkennt unsere Wartungsseite via checkFrontend() bereits korrekt:
+    // Requests mit ?search_it_build_index=do-it von localhost/Server-IP werden durchgelassen.
+    // Ein SEARCH_IT_INDEX_ARTICLE-Hook ist nicht nötig, da search_it diesen EP nicht selbst feuert.
+
     if (rex::isFrontend() && ((bool) $addon->getConfig('block_frontend') || Maintenance::isDomainInMaintenance())) {
         Maintenance::checkFrontend();
     }

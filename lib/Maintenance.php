@@ -58,12 +58,27 @@ class Maintenance
     }
 
     /**
-     * Checks if an IP address is valid.
+     * Checks if an IP address or CIDR range is valid.
+     * Supports both plain IPs ("192.168.1.1") and CIDR notation ("192.168.1.0/24", "2001:db8::/32").
      * @api
      */
     public function checkIp(string $ip): ?bool
     {
-        if ('' !== $ip && false === filter_var($ip, FILTER_VALIDATE_IP)) {
+        if ('' === $ip) {
+            return true;
+        }
+        if (str_contains($ip, '/')) {
+            [$subnet, $prefix] = explode('/', $ip, 2);
+            if (false === filter_var($subnet, FILTER_VALIDATE_IP)) {
+                return false;
+            }
+            $maxPrefix = str_contains($subnet, ':') ? 128 : 32;
+            if (!ctype_digit($prefix) || (int) $prefix < 0 || (int) $prefix > $maxPrefix) {
+                return false;
+            }
+            return true;
+        }
+        if (false === filter_var($ip, FILTER_VALIDATE_IP)) {
             return false;
         }
         return true;
@@ -71,6 +86,7 @@ class Maintenance
 
     /**
      * Checks if the current IP is allowed.
+     * Supports plain IPs and CIDR ranges (e.g. "192.168.1.0/24", "2001:db8::/32").
      * @api
      */
     public static function isIpAllowed(): bool
@@ -79,11 +95,55 @@ class Maintenance
         $allowedIps = (string) self::getConfig('allowed_ips', '');
 
         if ('' !== $allowedIps) {
-            $allowedIpsArray = explode(',', $allowedIps);
-            return in_array($ip, $allowedIpsArray, true);
+            $allowedIpsArray = array_map('trim', explode(',', $allowedIps));
+            foreach ($allowedIpsArray as $entry) {
+                if ('' !== $entry && self::isIpInCidr($ip, $entry)) {
+                    return true;
+                }
+            }
         }
 
         return false;
+    }
+
+    /**
+     * Checks if an IP address matches a single IP or a CIDR range.
+     * Supports IPv4 and IPv6.
+     */
+    private static function isIpInCidr(string $ip, string $cidr): bool
+    {
+        if (!str_contains($cidr, '/')) {
+            return $ip === $cidr;
+        }
+
+        [$subnet, $prefix] = explode('/', $cidr, 2);
+        $prefix = (int) $prefix;
+
+        // IPv6
+        if (str_contains($ip, ':')) {
+            $ipBin = inet_pton($ip);
+            $subnetBin = inet_pton($subnet);
+            if (false === $ipBin || false === $subnetBin || $prefix < 0 || $prefix > 128) {
+                return false;
+            }
+            $fullBytes = intdiv($prefix, 8);
+            $restBits = $prefix % 8;
+            $mask = str_repeat("\xff", $fullBytes);
+            if ($restBits > 0) {
+                $mask .= chr(0xff & (0xff << (8 - $restBits)));
+            }
+            $mask = str_pad($mask, 16, "\x00");
+            return ($ipBin & $mask) === ($subnetBin & $mask);
+        }
+
+        // IPv4
+        $ipLong = ip2long($ip);
+        $subnetLong = ip2long($subnet);
+        if (false === $ipLong || false === $subnetLong || $prefix < 0 || $prefix > 32) {
+            return false;
+        }
+        $maskLong = $prefix > 0 ? (~0 << (32 - $prefix)) : 0;
+        return ($ipLong & $maskLong) === ($subnetLong & $maskLong);
     }
 
     /**
@@ -238,6 +298,25 @@ class Maintenance
     }
 
     /**
+     * Detects whether the current request is a search_it indexer crawl.
+     * search_it adds ?search_it_build_index=do-it to URLs it crawls via rex_socket.
+     * These requests always originate from the server itself (loopback or server IP).
+     */
+    private static function isSearchItIndexer(): bool
+    {
+        $param = rex_get('search_it_build_index', 'string', '');
+        if ('' === $param) {
+            return false;
+        }
+
+        // Security: only trust requests from the server itself
+        $remoteAddr = rex_server('REMOTE_ADDR', 'string', '');
+        $serverAddr = rex_server('SERVER_ADDR', 'string', '');
+
+        return in_array($remoteAddr, ['127.0.0.1', '::1', $serverAddr], true);
+    }
+
+    /**
      * Checks and applies scheduled maintenance mode (automatic activation/deactivation).
      * Called on every request to check if maintenance should be auto-enabled or auto-disabled.
      */
@@ -298,6 +377,13 @@ class Maintenance
             $responsecode = (int) self::getConfig('http_response_code', 503);
             header('HTTP/1.1 ' . $responsecode);
             exit;
+        }
+
+        // Allow search_it indexer requests originating from the server itself.
+        // search_it crawls articles via HTTP socket with ?search_it_build_index=do-it.
+        // These requests come from loopback/server IP and must receive real content, not the maintenance page.
+        if (self::isSearchItIndexer()) {
+            return;
         }
 
         // If the IP address is allowed, do not block the request

@@ -117,7 +117,7 @@ maintenance_announcement_end_date_notice = Datum, <strong>bis wann die Ankündig
 maintenance_allowed_access_title = Ausnahmen
 
 maintenance_allowed_ips_label = Liste erlaubter IP-Adressen
-maintenance_allowed_ips_notice = IP-Adresse(n) eingeben, die weiterhin Zugriff auf das Frontend haben soll(en). Mehrere IPs mit Komma trennen.
+maintenance_allowed_ips_notice = IP-Adresse(n) eingeben, die weiterhin Zugriff auf das Frontend haben soll(en). Mehrere Einträge mit Komma trennen. Es werden einzelne IPs (<code>192.168.1.10</code>) sowie CIDR-Bereiche (<code>192.168.1.0/24</code>, <code>2001:db8::/32</code>) unterstützt.
 maintenance_add_ip_hint = hinzufügen
 maintenance_your_ip = Ihre IP
 maintenance_server_ip = Server-IP
