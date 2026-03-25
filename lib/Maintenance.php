@@ -17,6 +17,7 @@ use rex_user;
 use rex_yrewrite;
 use Throwable;
 
+use function chr;
 use function count;
 use function in_array;
 
@@ -130,7 +131,7 @@ class Maintenance
             $restBits = $prefix % 8;
             $mask = str_repeat("\xff", $fullBytes);
             if ($restBits > 0) {
-                $mask .= chr(0xff & (0xff << (8 - $restBits)));
+                $mask .= chr(0xFF & (0xFF << (8 - $restBits)));
             }
             $mask = str_pad($mask, 16, "\x00");
             return ($ipBin & $mask) === ($subnetBin & $mask);
